@@ -1,0 +1,1 @@
+<!DOCTYPE html><html lang="en">    <head></head>    <body>        <header id="header">Header</header>                <?php echo $content; ?>                <footer id="footer">footer</footer>    </body></html>
