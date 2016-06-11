@@ -6,18 +6,24 @@
  * The followings are the available columns in table 'admin_post':
  * @property integer $id
  * @property string $post_name
- * @property string $rfp_rfq
- * @property string $btob
- * @property string $btoc
- * @property string $quotes
- * @property integer $CB
- * @property integer $UB
- * @property string $DOC
- * @property string $DOU
+ * @property integer $static_content
+ * @property integer $dynamic_content
+ * @property integer $slider
+ * @property integer $gallery
+ * @property integer $contact_us
+ * @property integer $social_media
+ * @property integer $other
+ * @property integer $site_content
+ * @property integer $service
+ * @property integer $news
+ * @property integer $settings
+ * @property integer $status
+ * @property string $doc
+ * @property string $dou
+ * @property integer $cb
+ * @property integer $ub
  *
  * The followings are the available model relations:
- * @property AdminUsers $cB
- * @property AdminUsers $uB
  * @property AdminUsers[] $adminUsers
  */
 class AdminPost extends CActiveRecord
@@ -38,13 +44,12 @@ class AdminPost extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('post_name, rfp_rfq, btob, btoc, quotes, CB, UB, DOC, DOU', 'required'),
-			array('CB, UB', 'numerical', 'integerOnly'=>true),
-			array('post_name, rfp_rfq, btob, btoc', 'length', 'max'=>100),
-			array('quotes', 'length', 'max'=>200),
+			array('post_name, static_content, dynamic_content, slider, gallery, contact_us, social_media, other, site_content, service, news, settings, status, doc, dou, cb, ub', 'required'),
+			array('static_content, dynamic_content, slider, gallery, contact_us, social_media, other, site_content, service, news, settings, status, cb, ub', 'numerical', 'integerOnly'=>true),
+			array('post_name', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, post_name, rfp_rfq, btob, btoc, quotes, CB, UB, DOC, DOU', 'safe', 'on'=>'search'),
+			array('id, post_name, static_content, dynamic_content, slider, gallery, contact_us, social_media, other, site_content, service, news, settings, status, doc, dou, cb, ub', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -56,9 +61,7 @@ class AdminPost extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'cB' => array(self::BELONGS_TO, 'AdminUsers', 'CB'),
-			'uB' => array(self::BELONGS_TO, 'AdminUsers', 'UB'),
-			'adminUsers' => array(self::HAS_MANY, 'AdminUsers', 'post'),
+			'adminUsers' => array(self::HAS_MANY, 'AdminUsers', 'post_id'),
 		);
 	}
 
@@ -70,14 +73,22 @@ class AdminPost extends CActiveRecord
 		return array(
 			'id' => 'ID',
 			'post_name' => 'Post Name',
-			'rfp_rfq' => 'Rfp Rfq',
-			'btob' => 'Btob',
-			'btoc' => 'Btoc',
-			'quotes' => 'Quotes',
-			'CB' => 'Cb',
-			'UB' => 'Ub',
-			'DOC' => 'Doc',
-			'DOU' => 'Dou',
+			'static_content' => 'Static Content',
+			'dynamic_content' => 'Dynamic Content',
+			'slider' => 'Slider',
+			'gallery' => 'Gallery',
+			'contact_us' => 'Contact Us',
+			'social_media' => 'Social Media',
+			'other' => 'Other',
+			'site_content' => 'Site Content',
+			'service' => 'Service',
+			'news' => 'News',
+			'settings' => 'Settings',
+			'status' => 'Status',
+			'doc' => 'Doc',
+			'dou' => 'Dou',
+			'cb' => 'Cb',
+			'ub' => 'Ub',
 		);
 	}
 
@@ -101,14 +112,22 @@ class AdminPost extends CActiveRecord
 
 		$criteria->compare('id',$this->id);
 		$criteria->compare('post_name',$this->post_name,true);
-		$criteria->compare('rfp_rfq',$this->rfp_rfq,true);
-		$criteria->compare('btob',$this->btob,true);
-		$criteria->compare('btoc',$this->btoc,true);
-		$criteria->compare('quotes',$this->quotes,true);
-		$criteria->compare('CB',$this->CB);
-		$criteria->compare('UB',$this->UB);
-		$criteria->compare('DOC',$this->DOC,true);
-		$criteria->compare('DOU',$this->DOU,true);
+		$criteria->compare('static_content',$this->static_content);
+		$criteria->compare('dynamic_content',$this->dynamic_content);
+		$criteria->compare('slider',$this->slider);
+		$criteria->compare('gallery',$this->gallery);
+		$criteria->compare('contact_us',$this->contact_us);
+		$criteria->compare('social_media',$this->social_media);
+		$criteria->compare('other',$this->other);
+		$criteria->compare('site_content',$this->site_content);
+		$criteria->compare('service',$this->service);
+		$criteria->compare('news',$this->news);
+		$criteria->compare('settings',$this->settings);
+		$criteria->compare('status',$this->status);
+		$criteria->compare('doc',$this->doc,true);
+		$criteria->compare('dou',$this->dou,true);
+		$criteria->compare('cb',$this->cb);
+		$criteria->compare('ub',$this->ub);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
