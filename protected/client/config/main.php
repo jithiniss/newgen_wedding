@@ -59,7 +59,7 @@ return array(
         ),
         // uncomment the following to use a MySQL database
         'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=newgen_wedding',
+            'connectionString' => 'mysql:host=localhost;dbname=newgen',
             'emulatePrepare' => true,
             'username' => 'root',
             'password' => 'mysql',
