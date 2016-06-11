@@ -1,2 +1,6 @@
 /nbproject/private/
 /assets/
+protected/admin/runtime/application.log
+protected/admin/runtime/
+protected/client/runtime/application.log
+protected/client/runtime/
