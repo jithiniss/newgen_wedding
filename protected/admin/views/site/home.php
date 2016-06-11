@@ -29,13 +29,10 @@
                     </div>
 
                     <div class="col-md-6">
-
                         <div class="form-group">
                             <label for="field-2" class="control-label">Surname</label>
-
                             <input type="text" class="form-control" id="field-2" placeholder="Doe">
                         </div>
-
                     </div>
                 </div>
 
@@ -56,7 +53,6 @@
 
                         <div class="form-group">
                             <label for="field-4" class="control-label">City</label>
-
                             <input type="text" class="form-control" id="field-4" placeholder="Boston">
                         </div>
 
