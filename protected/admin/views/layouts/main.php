@@ -205,7 +205,10 @@
                             <ul>
 
                                 <li>
-                                    <?php echo CHtml::link('Change Password', array('site/password')); ?>
+                                    <?php echo CHtml::link('Admin Posts', array('/admin/adminPost/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Admin Users', array('/admin/adminUsers/admin')); ?>
                                 </li>
                             </ul>
                         </li>
@@ -214,6 +217,68 @@
                             <?php echo CHtml::link('<i class="fa-users"></i><span class="title" >User Details</span>', array('UserDetails/admin')); ?>
                         </li>
 
+                        <li>
+                            <a href="">
+
+                                <i class="fa-database"></i>
+                                <span class="title" >Masters</span>
+                            </a>
+                            <ul>
+
+                                <li>
+                                    <?php echo CHtml::link('Affluence Level', array('/masters/masterAffluenceLevel/admin')); ?>
+                                </li>
+
+                                <li>
+                                    <?php echo CHtml::link('Annual Income', array('/masters/MasterAnnualIncome/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Blood Group', array('/masters/MasterBloodGroup/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Body Type', array('/masters/MasterBodyType/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Caste', array('/masters/MasterCaste/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('City', array('/masters/MasterCity/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Country', array('/masters/MasterCountry/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Education Field', array('/masters/MasterEducationField/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Education Level', array('/masters/MasterEducationLevel/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Family Type', array('/masters/MasterFamilyType/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Family Value', array('/masters/MasterFamilyValue/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Health Information', array('/masters/MasterHealthInformation/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Occupation', array('/masters/MasterOccupation/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Religion', array('/masters/MasterReligion/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Skin Tone', array('/masters/MasterSkinTone/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('State', array('/masters/MasterState/admin')); ?>
+                                </li>
+                                <li>
+                                    <?php echo CHtml::link('Sub Caste', array('/masters/MasterSubCaste/admin')); ?>
+                                </li>
+                            </ul>
+                        </li>
 
 
                     </ul>
