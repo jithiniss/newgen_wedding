@@ -214,7 +214,7 @@
                         </li>
 
                         <li>
-                            <?php echo CHtml::link('<i class="fa-users"></i><span class="title" >User Details</span>', array('UserDetails/admin')); ?>
+                            <?php echo CHtml::link('<i class="fa-users"></i><span class="title" >User Details</span>', array('/user/userDetails/admin')); ?>
                         </li>
 
                         <li>
@@ -611,7 +611,7 @@
                         <!-- Add your copyright text here -->
                         <div class="footer-text">
                             &copy; 2015
-                            <strong>Alwesam Travel & Tourism</strong>
+                            <strong>NewGen Wedding </strong>
 
                         </div>
 
