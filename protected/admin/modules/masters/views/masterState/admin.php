@@ -23,7 +23,7 @@
 
         <ol class="breadcrumb bc-1" >
             <li>
-                <a href="<?php echo Yii::app()->request->baseurl.'/site/home'; ?>"><i class="fa-home"></i>Home</a>
+                <a href="<?php echo Yii::app()->request->baseurl . '/site/home'; ?>"><i class="fa-home"></i>Home</a>
             </li>
 
             <li class="active">
@@ -40,35 +40,34 @@
 
     <div class="col-sm-12">
 
-        <a class="btn btn-secondary btn-icon btn-icon-standalone" href="<?php echo Yii::app()->request->baseurl.'/admin.php/masters/masterState/create'; ?>" id="add-note">
+        <a class="btn btn-secondary btn-icon btn-icon-standalone" href="<?php echo Yii::app()->request->baseurl . '/admin.php/masters/masterState/create'; ?>" id="add-note">
             <i class="fa-pencil"></i>
             <span>Add Master States</span>
         </a>
         <div class="panel panel-default">
-            <?php $this->widget('booster.widgets.TbGridView', array(
-            'type' => ' bordered condensed hover',
-            'id'=>'master-state-grid',
-            'dataProvider'=>$model->search(),
-            'filter'=>$model,
-            'columns'=>array(
-            		'id',
-		'country_id',
-		'state',
-		'status',
-		'cb',
-		'ub',
-		/*
-		'doc',
-		'dou',
-		*/
-
-            array(
-            'htmlOptions' => array('nowrap' => 'nowrap'),
-            'class' => 'booster.widgets.TbButtonColumn',
-            'template' => '{update}{delete}',
-            ),
-            ),
-            )); ?>
+            <?php
+            $this->widget('booster.widgets.TbGridView', array(
+                'type' => ' bordered condensed hover',
+                'id' => 'master-state-grid',
+                'dataProvider' => $model->search(),
+                'filter' => $model,
+                'columns' => array(
+                    'country_id',
+                    'state',
+                    array(
+                        'name' => 'status',
+                        'value' => function($data) {
+                                return$data->status == 1 ? 'Enabled' : 'Disabled';
+                        }
+                    ),
+                    array(
+                        'htmlOptions' => array('nowrap' => 'nowrap'),
+                        'class' => 'booster.widgets.TbButtonColumn',
+                        'template' => '{update}{delete}',
+                    ),
+                ),
+            ));
+            ?>
         </div>
 
     </div>

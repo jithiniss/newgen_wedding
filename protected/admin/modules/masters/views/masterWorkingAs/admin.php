@@ -23,7 +23,7 @@
 
         <ol class="breadcrumb bc-1" >
             <li>
-                <a href="<?php echo Yii::app()->request->baseurl.'/site/home'; ?>"><i class="fa-home"></i>Home</a>
+                <a href="<?php echo Yii::app()->request->baseurl . '/site/home'; ?>"><i class="fa-home"></i>Home</a>
             </li>
 
             <li class="active">
@@ -40,34 +40,28 @@
 
     <div class="col-sm-12">
 
-        <a class="btn btn-secondary btn-icon btn-icon-standalone" href="<?php echo Yii::app()->request->baseurl.'/admin.php/masters/masterWorkingAs/create'; ?>" id="add-note">
+        <a class="btn btn-secondary btn-icon btn-icon-standalone" href="<?php echo Yii::app()->request->baseurl . '/admin.php/masters/masterWorkingAs/create'; ?>" id="add-note">
             <i class="fa-pencil"></i>
             <span>Add Master Working Ases</span>
         </a>
         <div class="panel panel-default">
-            <?php $this->widget('booster.widgets.TbGridView', array(
-            'type' => ' bordered condensed hover',
-            'id'=>'master-working-as-grid',
-            'dataProvider'=>$model->search(),
-            'filter'=>$model,
-            'columns'=>array(
-            		'id',
-		'working_as',
-		'status',
-		'cb',
-		'ub',
-		'doc',
-		/*
-		'dou',
-		*/
-
-            array(
-            'htmlOptions' => array('nowrap' => 'nowrap'),
-            'class' => 'booster.widgets.TbButtonColumn',
-            'template' => '{update}{delete}',
-            ),
-            ),
-            )); ?>
+            <?php
+            $this->widget('booster.widgets.TbGridView', array(
+                'type' => ' bordered condensed hover',
+                'id' => 'master-working-as-grid',
+                'dataProvider' => $model->search(),
+                'filter' => $model,
+                'columns' => array(
+                    'working_as',
+                    'status',
+                    array(
+                        'htmlOptions' => array('nowrap' => 'nowrap'),
+                        'class' => 'booster.widgets.TbButtonColumn',
+                        'template' => '{update}{delete}',
+                    ),
+                ),
+            ));
+            ?>
         </div>
 
     </div>
