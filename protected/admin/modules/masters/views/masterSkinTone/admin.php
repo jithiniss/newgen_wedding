@@ -55,9 +55,10 @@
                     'skin_tone',
                     array(
                         'name' => 'status',
+                        'filter' => array(1 => 'Enabled', 0 => 'Disabled'),
                         'value' => function($data) {
-                                return$data->status == 1 ? 'Enabled' : 'Disabled';
-                        }
+                        return $data->status == 1 ? 'Enabled' : 'Disabled';
+                }
                     ),
                     array(
                         'htmlOptions' => array('nowrap' => 'nowrap'),

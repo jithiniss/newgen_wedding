@@ -24,13 +24,13 @@
     <div class="form-inline">
         <div class="form-group">
             <?php echo $form->labelEx($model, 'country_id'); ?>
-            <?php echo $form->textField($model, 'country_id', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'country_id', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => '--please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'country_id'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'state_id'); ?>
-            <?php echo $form->textField($model, 'state_id', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'state_id', CHtml::listData(MasterState::model()->findAllByAttributes(array('status' => 1)), 'id', 'state'), array('empty' => '--please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'state_id'); ?>
         </div>
 

@@ -52,14 +52,23 @@
                 'dataProvider' => $model->search(),
                 'filter' => $model,
                 'columns' => array(
-                    'religion_id',
-                    'caste_id',
+                    array(
+                        'name' => 'religion_id',
+                        'value' => '$data->religion->religion',
+                        'filter' => CHtml::listData(MasterReligion::model()->findAllByAttributes(array('status' => 1)), 'id', 'religion')
+                    ),
+                    array(
+                        'name' => 'caste_id',
+                        'value' => '$data->caste->caste',
+                        'filter' => CHtml::listData(MasterCaste::model()->findAllByAttributes(array('status' => 1)), 'id', 'caste')
+                    ),
                     'sub_caste',
                     array(
                         'name' => 'status',
+                        'filter' => array(1 => 'Enabled', 0 => 'Disabled'),
                         'value' => function($data) {
-                                return$data->status == 1 ? 'Enabled' : 'Disabled';
-                        }
+                        return $data->status == 1 ? 'Enabled' : 'Disabled';
+                }
                     ),
                     array(
                         'htmlOptions' => array('nowrap' => 'nowrap'),

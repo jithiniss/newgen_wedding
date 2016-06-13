@@ -24,7 +24,7 @@
     <div class="form-inline">
         <div class="form-group">
             <?php echo $form->labelEx($model, 'religion_id'); ?>
-            <?php echo $form->textField($model, 'religion_id', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'religion_id', CHtml::listData(MasterReligion::model()->findAllByAttributes(array('status' => 1)), 'id', 'religion'), array('empty' => '--please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'religion_id'); ?>
         </div>
 

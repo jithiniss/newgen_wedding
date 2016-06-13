@@ -52,14 +52,23 @@
                 'dataProvider' => $model->search(),
                 'filter' => $model,
                 'columns' => array(
-                    'country_id',
-                    'state_id',
+                    array(
+                        'name' => 'country_id',
+                        'value' => '$data->country->country',
+                        'filter' => CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country')
+                    ),
+                    array(
+                        'name' => 'state_id',
+                        'value' => '$data->state->state',
+                        'filter' => CHtml::listData(MasterState::model()->findAllByAttributes(array('status' => 1)), 'id', 'state')
+                    ),
                     'city',
                     array(
                         'name' => 'status',
+                        'filter' => array(1 => 'Enabled', 0 => 'Disabled'),
                         'value' => function($data) {
-                                return$data->status == 1 ? 'Enabled' : 'Disabled';
-                        }
+                        return $data->status == 1 ? 'Enabled' : 'Disabled';
+                }
                     ),
                     array(
                         'htmlOptions' => array('nowrap' => 'nowrap'),
