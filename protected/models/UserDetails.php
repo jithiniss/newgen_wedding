@@ -28,6 +28,8 @@
  * @property integer $state
  * @property integer $city
  * @property integer $zip_code
+ * @property string $home_town
+ * @property string $house_name
  * @property integer $height
  * @property integer $weight
  * @property integer $skin_tone
@@ -92,13 +94,15 @@ class UserDetails extends CActiveRecord {
                     array('email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step', 'required', 'on' => 'admin_create'),
                     array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, cb, ub', 'numerical', 'integerOnly' => true),
                     array('email', 'email'),
+                    array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, cb, ub', 'numerical', 'integerOnly' => true),
                     array('user_id, password', 'length', 'max' => 50),
                     array('email, first_name, last_name', 'length', 'max' => 100),
                     array('contact_number, mobile_number', 'length', 'max' => 20),
+                    array('home_town, house_name', 'length', 'max' => 200),
                     array('photo, id_proof', 'length', 'max' => 99),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, cb, ub, doc, dou', 'safe', 'on' => 'search'),
+                    array('id, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, cb, ub, doc, dou', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -142,6 +146,8 @@ class UserDetails extends CActiveRecord {
                     'state' => 'State',
                     'city' => 'City',
                     'zip_code' => 'Zip Code',
+                    'home_town' => 'Home Town',
+                    'house_name' => 'House Name',
                     'height' => 'Height',
                     'weight' => 'Weight',
                     'skin_tone' => 'Skin Tone',
@@ -226,6 +232,8 @@ class UserDetails extends CActiveRecord {
                 $criteria->compare('state', $this->state);
                 $criteria->compare('city', $this->city);
                 $criteria->compare('zip_code', $this->zip_code);
+                $criteria->compare('home_town', $this->home_town, true);
+                $criteria->compare('house_name', $this->house_name, true);
                 $criteria->compare('height', $this->height);
                 $criteria->compare('weight', $this->weight);
                 $criteria->compare('skin_tone', $this->skin_tone);

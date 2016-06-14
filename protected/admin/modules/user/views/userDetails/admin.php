@@ -104,6 +104,8 @@
                     'state',
                     'city',
                     'zip_code',
+                    'home_town',
+                    'house_name',
                     'height',
                     'weight',
                     'skin_tone',

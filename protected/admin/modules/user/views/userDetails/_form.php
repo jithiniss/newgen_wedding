@@ -3,7 +3,9 @@
 /* @var $model UserDetails */
 /* @var $form CActiveForm */
 ?>
+<style>
 
+</style>
 <div class="form">
 
     <?php
@@ -22,8 +24,6 @@
     <?php echo $form->errorSummary($model); ?>
     <br/>
     <div class="form-inline">
-
-
         <div class="form-group">
             <?php echo $form->labelEx($model, 'email'); ?>
             <?php echo $form->textField($model, 'email', array('size' => 60, 'maxlength' => 100, 'class' => 'form-control')); ?>
@@ -44,17 +44,17 @@
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'profile_for'); ?>
-            <?php echo $form->textField($model, 'profile_for', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'profile_for', CHtml::listData(MasterProfileFor::model()->findAllByAttributes(array('status' => 1)), 'id', 'profile_for'), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'profile_for'); ?>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="width: 12.5%">
             <?php echo $form->labelEx($model, 'first_name'); ?>
             <?php echo $form->textField($model, 'first_name', array('size' => 60, 'maxlength' => 100, 'class' => 'form-control')); ?>
             <?php echo $form->error($model, 'first_name'); ?>
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="width: 12.5%; margin-left: 0px;">
             <?php echo $form->labelEx($model, 'last_name'); ?>
             <?php echo $form->textField($model, 'last_name', array('size' => 60, 'maxlength' => 100, 'class' => 'form-control')); ?>
             <?php echo $form->error($model, 'last_name'); ?>
@@ -62,91 +62,104 @@
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'gender'); ?>
-            <?php echo $form->textField($model, 'gender', array('class' => 'form-control')); ?>
+            <?php echo $form->dropDownList($model, 'gender', array(1 => 'Male', 2 => 'Female', 3 => 'Other'), array('empty' => '--Gender--', 'class' => 'form-control')); ?>
             <?php echo $form->error($model, 'gender'); ?>
         </div>
-
-        <div class="form-group">
-            <?php echo $form->labelEx($model, 'dob_day'); ?>
-            <?php echo $form->textField($model, 'dob_day', array('class' => 'form-control')); ?>
+        <br/>
+        <div class="form-group" style="width: 8.2%">
+            <label for="UserDetails_dob_day" class="required">Date of birth<span class="required">*</span></label>
+            <?php
+            $day = array();
+            for ($i = 1; $i <= 31; $i++) {
+                    $day[sprintf("%02d", $i)] = sprintf("%02d", $i);
+            }
+            ?>
+            <?php echo $form->dropDownList($model, 'dob_day', $day, array('empty' => '--Date--', 'class' => 'form-control')); ?>
             <?php echo $form->error($model, 'dob_day'); ?>
         </div>
 
-        <div class="form-group">
-            <?php echo $form->labelEx($model, 'dob_month'); ?>
-            <?php echo $form->textField($model, 'dob_month', array('class' => 'form-control')); ?>
+        <div class="form-group" style="width: 8.2%; margin-left: 0px;">
+            <label for="UserDetails_dob_day" class="required">&nbsp;</label>
+            <?php $months = array(01 => 'Jan', 02 => 'Feb', 03 => 'Mar', 04 => 'Apr', 05 => 'May', 06 => 'Jun', 07 => 'Jul', 08 => 'Aug', 09 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'); ?>
+            <?php echo $form->dropDownList($model, 'dob_month', $months, array('empty' => '--Month--', 'class' => 'form-control')); ?>
             <?php echo $form->error($model, 'dob_month'); ?>
         </div>
 
-        <div class="form-group">
-            <?php echo $form->labelEx($model, 'dob_year'); ?>
-            <?php echo $form->textField($model, 'dob_year', array('class' => 'form-control')); ?>
+        <div class="form-group" style="width: 8.2%; margin-left: 0px;">
+            <label for="UserDetails_dob_day" class="required">&nbsp;</label>
+            <?php
+            $year = array();
+            for ($i = date("Y", strtotime("-18 year")); $i >= date("Y", strtotime("-69 year")); $i--) {
+                    $year[$i] = $i;
+            }
+            ?>
+            <?php echo $form->dropDownList($model, 'dob_year', $year, array('empty' => '--Year--', 'class' => 'form-control')); ?>
             <?php echo $form->error($model, 'dob_year'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'religion'); ?>
-            <?php echo $form->textField($model, 'religion', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'religion', CHtml::listData(MasterReligion::model()->findAllByAttributes(array('status' => 1)), 'id', 'religion'), array('empty' => '--Please select a Religon--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'religion'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'caste'); ?>
-            <?php echo $form->textField($model, 'caste', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'religion', array(), array('empty' => '--Select a Religion to load Caste--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'caste'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'sub_caste'); ?>
-            <?php echo $form->textField($model, 'sub_caste', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'religion', array(), array('empty' => '--Select a Caste to load Sub-caste--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'sub_caste'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'nakshatra'); ?>
-            <?php echo $form->textField($model, 'nakshatra', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'nakshatra', CHtml::listData(MasterNakshatra::model()->findAllByAttributes(array('status' => 1)), 'id', 'nakshatra'), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'nakshatra'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'suddha_jadhagam'); ?>
-            <?php echo $form->textField($model, 'suddha_jadhagam', array('class' => 'form-control')); ?>
+            <?php echo $form->dropDownList($model, 'suddha_jadhagam', array('1' => 'Yes', '0' => 'No'), array('empty' => '--Select--', 'class' => 'form-control')); ?>
             <?php echo $form->error($model, 'suddha_jadhagam'); ?>
         </div>
 
-        <div class="form-group">
-            <?php echo $form->labelEx($model, 'regional_site'); ?>
-            <?php echo $form->textField($model, 'regional_site', array('class' => 'form-control')); ?>
-            <?php echo $form->error($model, 'regional_site'); ?>
-        </div>
+        <!--        <div class="form-group">
+        <?php //echo $form->labelEx($model, 'regional_site'); ?>
+        <?php //echo $form->textField($model, 'regional_site', array('class' => 'form-control')); ?>
+        <?php //echo $form->error($model, 'regional_site'); ?>
+                </div>-->
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'marital_status'); ?>
-            <?php echo $form->textField($model, 'marital_status', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'marital_status', CHtml::listData(MasterMaritalStatus::model()->findAllByAttributes(array('status' => 1)), 'id', 'marital_status'), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'marital_status'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'mothertongue'); ?>
-            <?php echo $form->textField($model, 'mothertongue', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'mothertongue', CHtml::listData(MasterMotherTongue::model()->findAllByAttributes(array('status' => 1)), 'id', 'mother_tongue'), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'mothertongue'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'country'); ?>
-            <?php echo $form->textField($model, 'country', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'country', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'country'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'state'); ?>
-            <?php echo $form->textField($model, 'state', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'state', array(), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'state'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'city'); ?>
-            <?php echo $form->textField($model, 'city', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'city', array(), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'city'); ?>
         </div>
 
@@ -155,6 +168,19 @@
             <?php echo $form->textField($model, 'zip_code', array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'zip_code'); ?>
         </div>
+
+        <div class="form-group">
+            <?php echo $form->labelEx($model, 'home_town'); ?>
+            <?php echo $form->textField($model, 'home_town', array('size' => 60, 'maxlength' => 200, 'class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'home_town'); ?>
+        </div>
+
+        <div class="form-group">
+            <?php echo $form->labelEx($model, 'house_name'); ?>
+            <?php echo $form->textField($model, 'house_name', array('size' => 60, 'maxlength' => 200, 'class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'house_name'); ?>
+        </div>
+
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'height'); ?>
@@ -188,7 +214,7 @@
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'blood_group'); ?>
-            <?php echo $form->textField($model, 'blood_group', array('class' => 'form-control')); ?>
+            <?php echo CHtml::activeDropDownList($model, 'profile_for', CHtml::listData(MasterBloodGroup::model()->findAllByAttributes(array('status' => 1)), 'id', 'blood_group'), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'blood_group'); ?>
         </div>
 
@@ -336,7 +362,7 @@
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'status'); ?>
-            <?php echo $form->textField($model, 'status', array('class' => 'form-control')); ?>
+            <?php echo $form->dropDownList($model, 'status', array('1' => 'Enabled', '0' => 'Disabled'), array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'status'); ?>
         </div>
 
