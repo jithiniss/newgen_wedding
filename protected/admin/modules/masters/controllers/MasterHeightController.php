@@ -1,6 +1,6 @@
 <?php
 
-class UserDetailsController extends Controller {
+class MasterHeightController extends Controller {
 
         /**
          * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -24,7 +24,6 @@ class UserDetailsController extends Controller {
          * @return array access control rules
          */
         public function accessRules() {
-
                 return array(
                     array('allow', // allow all users to perform 'index' and 'view' actions
                         'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete'),
@@ -59,15 +58,15 @@ class UserDetailsController extends Controller {
          * If creation is successful, the browser will be redirected to the 'view' page.
          */
         public function actionCreate() {
-                $model = new UserDetails('admin_create');
+                $model = new MasterHeight;
 
-                // Uncomment the following line if AJAX validation is needed
-                // $this->performAjaxValidation($model);
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
 
-                if (isset($_POST['UserDetails'])) {
-                        $model->attributes = $_POST['UserDetails'];
-                        //$model->setAttributes($_POST['UserDetails']);
-
+                if (isset($_POST['MasterHeight'])) {
+                        $model->attributes = $_POST['MasterHeight'];
+                        $model->cb = Yii::app()->session['admin']['id'];
+                        $model->doc = date('Y-m-d');
                         if ($model->save())
                                 $this->redirect(array('admin'));
                 }
@@ -85,11 +84,12 @@ class UserDetailsController extends Controller {
         public function actionUpdate($id) {
                 $model = $this->loadModel($id);
 
-                // Uncomment the following line if AJAX validation is needed
-                // $this->performAjaxValidation($model);
+// Uncomment the following line if AJAX validation is needed
+// $this->performAjaxValidation($model);
 
-                if (isset($_POST['UserDetails'])) {
-                        $model->attributes = $_POST['UserDetails'];
+                if (isset($_POST['MasterHeight'])) {
+                        $model->attributes = $_POST['MasterHeight'];
+                        $model->ub = Yii::app()->session['admin']['id'];
                         if ($model->save())
                                 $this->redirect(array('update', 'id' => $model->id));
                 }
@@ -107,7 +107,7 @@ class UserDetailsController extends Controller {
         public function actionDelete($id) {
                 $this->loadModel($id)->delete();
 
-                // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
                 if (!isset($_GET['ajax']))
                         $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
         }
@@ -116,7 +116,7 @@ class UserDetailsController extends Controller {
          * Lists all models.
          */
         public function actionIndex() {
-                $dataProvider = new CActiveDataProvider('UserDetails');
+                $dataProvider = new CActiveDataProvider('MasterHeight');
                 $this->render('index', array(
                     'dataProvider' => $dataProvider,
                 ));
@@ -126,10 +126,10 @@ class UserDetailsController extends Controller {
          * Manages all models.
          */
         public function actionAdmin() {
-                $model = new UserDetails('search');
+                $model = new MasterHeight('search');
                 $model->unsetAttributes();  // clear any default values
-                if (isset($_GET['UserDetails']))
-                        $model->attributes = $_GET['UserDetails'];
+                if (isset($_GET['MasterHeight']))
+                        $model->attributes = $_GET['MasterHeight'];
 
                 $this->render('admin', array(
                     'model' => $model,
@@ -140,11 +140,11 @@ class UserDetailsController extends Controller {
          * Returns the data model based on the primary key given in the GET variable.
          * If the data model is not found, an HTTP exception will be raised.
          * @param integer $id the ID of the model to be loaded
-         * @return UserDetails the loaded model
+         * @return MasterHeight the loaded model
          * @throws CHttpException
          */
         public function loadModel($id) {
-                $model = UserDetails::model()->findByPk($id);
+                $model = MasterHeight::model()->findByPk($id);
                 if ($model === null)
                         throw new CHttpException(404, 'The requested page does not exist.');
                 return $model;
@@ -152,10 +152,10 @@ class UserDetailsController extends Controller {
 
         /**
          * Performs the AJAX validation.
-         * @param UserDetails $model the model to be validated
+         * @param MasterHeight $model the model to be validated
          */
         protected function performAjaxValidation($model) {
-                if (isset($_POST['ajax']) && $_POST['ajax'] === 'user-details-form') {
+                if (isset($_POST['ajax']) && $_POST['ajax'] === 'master-height-form') {
                         echo CActiveForm::validate($model);
                         Yii::app()->end();
                 }

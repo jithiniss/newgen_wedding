@@ -91,7 +91,7 @@ class UserDetails extends CActiveRecord {
                 // will receive user inputs.
                 return array(
                     //array('user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, cb, ub, doc, dou', 'required'),
-                    array('email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step', 'required', 'on' => 'admin_create'),
+                    array('email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, marital_status, mothertongue, country, state, city, zip_code, education_level, education_field, working_with, working_as, annual_income, mobile_number, grow_up_in', 'required', 'on' => 'admin_create'),
                     array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, cb, ub', 'numerical', 'integerOnly' => true),
                     array('email', 'email'),
                     array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, cb, ub', 'numerical', 'integerOnly' => true),
@@ -131,9 +131,9 @@ class UserDetails extends CActiveRecord {
                     'first_name' => 'First Name',
                     'last_name' => 'Last Name',
                     'gender' => 'Gender',
-                    'dob_day' => 'Dob Day',
-                    'dob_month' => 'Dob Month',
-                    'dob_year' => 'Dob Year',
+                    'dob_day' => 'Day',
+                    'dob_month' => 'Month',
+                    'dob_year' => 'Year',
                     'religion' => 'Religion',
                     'caste' => 'Caste',
                     'sub_caste' => 'Sub Caste',

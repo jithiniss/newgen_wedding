@@ -1,6 +1,6 @@
 <?php
-/* @var $this MasterWorkingAsController */
-/* @var $model MasterWorkingAs */
+/* @var $this MasterDietController */
+/* @var $model MasterDiet */
 /* @var $form CActiveForm */
 ?>
 
@@ -8,7 +8,7 @@
 
     <?php
     $form = $this->beginWidget('CActiveForm', array(
-        'id' => 'master-working-as-form',
+        'id' => 'master-diet-form',
         // Please note: When you enable ajax validation, make sure the corresponding
         // controller action is handling ajax validation correctly.
         // There is a call to performAjaxValidation() commented in generated controller code.
@@ -23,9 +23,9 @@
     <br/>
     <div class="form-inline">
         <div class="form-group">
-            <?php echo $form->labelEx($model, 'working_as'); ?>
-            <?php echo $form->textField($model, 'working_as', array('size' => 60, 'maxlength' => 201, 'class' => 'form-control', 'autofocus' => 'autofocus')); ?>
-            <?php echo $form->error($model, 'working_as'); ?>
+            <?php echo $form->labelEx($model, 'diet'); ?>
+            <?php echo $form->textField($model, 'diet', array('size' => 60, 'maxlength' => 200, 'class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'diet'); ?>
         </div>
 
         <div class="form-group">
@@ -33,8 +33,6 @@
             <?php echo $form->dropDownList($model, 'status', array('1' => 'Enabled', '0' => 'Disabled'), array('class' => 'form-control')); ?>
             <?php echo $form->error($model, 'status'); ?>
         </div>
-
-
 
     </div>
     <div class="form-group btns">
