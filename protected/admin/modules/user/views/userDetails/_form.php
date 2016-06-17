@@ -11,6 +11,7 @@
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'user-details-form',
+        'htmlOptions' => array('enctype' => 'multipart/form-data'),
         // Please note: When you enable ajax validation, make sure the corresponding
         // controller action is handling ajax validation correctly.
         // There is a call to performAjaxValidation() commented in generated controller code.
@@ -102,16 +103,31 @@
             <?php echo CHtml::activeDropDownList($model, 'religion', CHtml::listData(MasterReligion::model()->findAllByAttributes(array('status' => 1)), 'id', 'religion'), array('empty' => '--Please select a Religon--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'religion'); ?>
         </div>
-
+        <?php
+        if ($model->religion != '') {
+                echo $model->religion;
+                $castes = MasterCaste::model()->findAllByAttributes(array('religion_id' => $model->religion));
+                if (!empty($castes)) {
+                        $options = "<option value=''>--Select Caste--</option>";
+                        foreach ($castes as $caste) {
+                                $options .= '<option value="' . $caste->id . '">' . $caste->caste . '</option>';
+                        }
+                } else {
+                        $options = '<option value="">--Select--</option><option value="0">Other</option>';
+                }
+                echo $options;
+                exit;
+        }
+        ?>
         <div class="form-group">
             <?php echo $form->labelEx($model, 'caste'); ?>
-            <?php echo CHtml::activeDropDownList($model, 'religion', array(), array('empty' => '--Select a Religion to load Caste--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
+            <?php echo CHtml::activeDropDownList($model, 'caste', array(), array('empty' => '--Select a Religion to load Caste--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'caste'); ?>
         </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'sub_caste'); ?>
-            <?php echo CHtml::activeDropDownList($model, 'religion', array(), array('empty' => '--Select a Caste to load Sub-caste--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
+            <?php echo CHtml::activeDropDownList($model, 'sub_caste', array(), array('empty' => '--Select a Caste to load Sub-caste--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'sub_caste'); ?>
         </div>
 
@@ -128,9 +144,9 @@
         </div>
 
         <!--        <div class="form-group">
-        <?php //echo $form->labelEx($model, 'regional_site'); ?>
+        <?php //echo $form->labelEx($model, 'regional_site');  ?>
         <?php //echo $form->textField($model, 'regional_site', array('class' => 'form-control')); ?>
-        <?php //echo $form->error($model, 'regional_site'); ?>
+        <?php //echo $form->error($model, 'regional_site');  ?>
                 </div>-->
 
         <div class="form-group">
@@ -298,28 +314,28 @@
 
         <div class="form-group" style="width: 12.5%; ">
             <label for="UserDetails_num_of_married_brother" class="required">Brother's</label>
-            <?php //echo $form->labelEx($model, 'num_of_married_brother'); ?>
+            <?php //echo $form->labelEx($model, 'num_of_married_brother');  ?>
             <?php echo $form->numberField($model, 'num_of_married_brother', array('class' => 'form-control', 'placeholder' => 'Married')); ?>
             <?php echo $form->error($model, 'num_of_married_brother'); ?>
         </div>
 
         <div class="form-group" style="width: 12.5%; margin-left: 0px;">
             <label for="UserDetails_num_of_unmarried_brother" class="required">&nbsp;</label>
-            <?php //echo $form->labelEx($model, 'num_of_unmarried_brother'); ?>
+            <?php //echo $form->labelEx($model, 'num_of_unmarried_brother');  ?>
             <?php echo $form->numberField($model, 'num_of_unmarried_brother', array('class' => 'form-control', 'placeholder' => 'Unmarried')); ?>
             <?php echo $form->error($model, 'num_of_unmarried_brother'); ?>
         </div>
 
         <div class="form-group" style="width: 12.5%; ">
             <label for="UserDetails_num_of_married_sister" class="required"> Sister's</label>
-            <?php //echo $form->labelEx($model, 'num_of_married_sister'); ?>
+            <?php //echo $form->labelEx($model, 'num_of_married_sister');  ?>
             <?php echo $form->numberField($model, 'num_of_married_sister', array('class' => 'form-control', 'placeholder' => 'Married')); ?>
             <?php echo $form->error($model, 'num_of_married_sister'); ?>
         </div>
 
         <div class="form-group" style="width: 12.5%; margin-left: 0px;">
             <label for="UserDetails_num_of_unmarried_sister" class="required">&nbsp;</label>
-            <?php //echo $form->labelEx($model, 'num_of_unmarried_sister'); ?>
+            <?php //echo $form->labelEx($model, 'num_of_unmarried_sister');  ?>
             <?php echo $form->numberField($model, 'num_of_unmarried_sister', array('class' => 'form-control', 'placeholder' => 'Unmarried')); ?>
             <?php echo $form->error($model, 'num_of_unmarried_sister'); ?>
         </div>
@@ -385,5 +401,61 @@
     </div>
 
     <?php $this->endWidget(); ?>
+    <script>
+            $(document).ready(function () {
+
+                /* Religion change function*/
+                $('#UserDetails_religion').change(function () {
+                    var religion = $(this).val();
+                    if (religion != '') {
+                        $.ajax({
+                            type: "POST",
+                            url: baseurl + "ajax/selectCaste",
+                            data: {religion: religion}
+                        }).done(function (data) {
+                            $('#UserDetails_caste').html(data);
+                        });
+                    } else {
+                        $('#UserDetails_caste').html("<option value=''>--Select a Religion to load Caste--</option>");
+                    }
+                });
+
+                /*country change function */
+
+                $('#UserDetails_country').change(function () {
+                    var country = $(this).val();
+                    if (country != '') {
+                        $.ajax({
+                            type: "POST",
+                            url: baseurl + "ajax/selectState",
+                            data: {country: country}
+                        }).done(function (data) {
+                            $('#UserDetails_state').html(data);
+                        });
+                    } else {
+                        $('#UserDetails_state').html("<option value=''>--Select a Country to load State--</option>");
+                    }
+                });
+
+                /*state change function */
+
+                $('#UserDetails_state').change(function () {
+                    var state = $(this).val();
+                    if (state != '') {
+                        $.ajax({
+                            type: "POST",
+                            url: baseurl + "ajax/selectCity",
+                            data: {state: state}
+                        }).done(function (data) {
+                            $('#UserDetails_city').html(data);
+                        });
+                    } else {
+                        $('#UserDetails_city').html("<option value=''>--Select a State to load City--</option>");
+                    }
+                });
+
+            });
+
+    </script>
 
 </div><!-- form -->

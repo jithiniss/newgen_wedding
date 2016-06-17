@@ -65,16 +65,29 @@ class UserDetailsController extends Controller {
                 // $this->performAjaxValidation($model);
 
                 if (isset($_POST['UserDetails'])) {
-                        $model->attributes = $_POST['UserDetails'];
-                        //$model->setAttributes($_POST['UserDetails']);
 
-                        if ($model->save())
-                                $this->redirect(array('admin'));
+                        $model->attributes = $_POST['UserDetails'];
+                        $model->setAttribute('about_me', $_POST['UserDetails']['about_me']);
+                        //$this->setValues($model);
+                        $model->dob = date('Y-m-d');
+
+                        if ($model->validate()) {
+                                if ($model->save()) {
+                                        //set partner details here
+                                        exit;
+                                        $this->redirect(array('admin'));
+                                }
+                        }
                 }
 
                 $this->render('create', array(
                     'model' => $model,
                 ));
+        }
+
+        public function setValues($model) {
+                var_dump($model);
+                exit;
         }
 
         /**

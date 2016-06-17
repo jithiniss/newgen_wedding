@@ -16,6 +16,7 @@
  * @property integer $dob_day
  * @property integer $dob_month
  * @property integer $dob_year
+ * @property string $dob
  * @property integer $religion
  * @property integer $caste
  * @property integer $sub_caste
@@ -66,6 +67,7 @@
  * @property integer $created_by
  * @property integer $profile_approval
  * @property integer $image_approval
+ * @property integer $plan_id
  * @property integer $cb
  * @property integer $ub
  * @property string $doc
@@ -91,8 +93,8 @@ class UserDetails extends CActiveRecord {
                 // will receive user inputs.
                 return array(
                     //array('user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, cb, ub, doc, dou', 'required'),
-                    array('email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, marital_status, mothertongue, country, state, city, zip_code, education_level, education_field, working_with, working_as, annual_income, mobile_number, grow_up_in', 'required', 'on' => 'admin_create'),
-                    array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, cb, ub', 'numerical', 'integerOnly' => true),
+                    array('email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, marital_status, mothertongue, country, state, city, zip_code, education_level, education_field, working_with, working_as, annual_income, mobile_number, grow_up_in, plan_id', 'required', 'on' => 'admin_create'),
+                    array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, plan_id, cb, ub', 'numerical', 'integerOnly' => true),
                     array('email', 'email'),
                     array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, cb, ub', 'numerical', 'integerOnly' => true),
                     array('user_id, password', 'length', 'max' => 50),
@@ -102,7 +104,7 @@ class UserDetails extends CActiveRecord {
                     array('photo, id_proof', 'length', 'max' => 99),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, cb, ub, doc, dou', 'safe', 'on' => 'search'),
+                    array('id, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, plan_id, cb, ub, doc, dou', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -134,6 +136,7 @@ class UserDetails extends CActiveRecord {
                     'dob_day' => 'Day',
                     'dob_month' => 'Month',
                     'dob_year' => 'Year',
+                    'dob' => 'Date of birth',
                     'religion' => 'Religion',
                     'caste' => 'Caste',
                     'sub_caste' => 'Sub Caste',
@@ -184,6 +187,7 @@ class UserDetails extends CActiveRecord {
                     'created_by' => 'Created By',
                     'profile_approval' => 'Profile Approval',
                     'image_approval' => 'Image Approval',
+                    'plan_id' => 'plan_id',
                     'cb' => 'Cb',
                     'ub' => 'Ub',
                     'doc' => 'Doc',
@@ -220,6 +224,7 @@ class UserDetails extends CActiveRecord {
                 $criteria->compare('dob_day', $this->dob_day);
                 $criteria->compare('dob_month', $this->dob_month);
                 $criteria->compare('dob_year', $this->dob_year);
+                $criteria->compare('dob', $this->dob);
                 $criteria->compare('religion', $this->religion);
                 $criteria->compare('caste', $this->caste);
                 $criteria->compare('sub_caste', $this->sub_caste);
@@ -270,6 +275,7 @@ class UserDetails extends CActiveRecord {
                 $criteria->compare('created_by', $this->created_by);
                 $criteria->compare('profile_approval', $this->profile_approval);
                 $criteria->compare('image_approval', $this->image_approval);
+                $criteria->compare('plan_id', $this->plan_id);
                 $criteria->compare('cb', $this->cb);
                 $criteria->compare('ub', $this->ub);
                 $criteria->compare('doc', $this->doc, true);
