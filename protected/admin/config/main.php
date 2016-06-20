@@ -37,6 +37,7 @@ return array(
     ),
     // application components
     'components' => array(
+        'Upload' => array('class' => 'UploadFile'),
         'booster' => array(
             'class' => 'booster.components.Booster',
         ),

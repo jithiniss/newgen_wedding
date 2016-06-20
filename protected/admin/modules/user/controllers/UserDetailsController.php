@@ -70,17 +70,19 @@ class UserDetailsController extends Controller {
                 // $this->performAjaxValidation($model);
                 if (isset($_POST['UserDetails'])) {
                         $model = $this->setValues($model, $_POST['UserDetails']);
+                        $image = CUploadedFile::getInstance($model, 'photo');
                         if ($model->validate()) {
                                 $transaction = Yii::app()->db->beginTransaction();
                                 try {
                                         $model->save();
                                         $this->userId($model->id)->save();
-                                        if (!$this->uploadFiles())
+                                        if (!$this->uploadFiles($model->id, $image)) {
                                                 throw new CHttpException(403, 'Forbidden');
-                                        if (!$this->partnerDetails())
-                                                throw new CHttpException(403, 'Forbidden');
-                                        if (!$this->userPlan())
-                                                throw new CHttpException(403, 'Forbidden');
+                                        }
+//                                        if (!$this->partnerDetails())
+//                                                throw new CHttpException(403, 'Forbidden');
+//                                        if (!$this->userPlan())
+//                                                throw new CHttpException(403, 'Forbidden');
 
                                         $transaction->commit();
                                         $this->redirect('admin');
@@ -96,8 +98,19 @@ class UserDetailsController extends Controller {
                 ));
         }
 
-        public function uploadFiles() {
-                return true;
+        public function uploadFiles($id, $image) {
+                if ($image != "") {
+                        $path = 'uploads/user/profile';
+                        $dimension[0] = array('width' => '116', 'height' => '155', 'name' => 'main');
+//                        $dimension[1] = array('width' => '322', 'height' => '500', 'name' => 'medium');
+//                        $dimension[2] = array('width' => '580', 'height' => '775', 'name' => 'big');
+//                        $dimension[3] = array('width' => '3016', 'height' => '4030', 'name' => 'zoom');
+                        if (Yii::app()->Upload->uploadImage($image, $id, true, $dimension, $path)) {
+                                return true;
+                        } else {
+                                return FALSE;
+                        }
+                }
         }
 
         public function userId($id) {
