@@ -8,6 +8,13 @@ class UserDetailsController extends Controller {
          */
         public $layout = '//layouts/column2';
 
+        public function init() {
+                if (!isset(Yii::app()->session['admin'])) {
+                        //Yii::app()->user->setFlash('session_expired', "Session expired please login again !");
+                        //$this->redirect(Yii::app()->baseUrl . '/admin.php/site/index');
+                }
+        }
+
         /**
          * @return array action filters
          */
@@ -60,22 +67,26 @@ class UserDetailsController extends Controller {
          */
         public function actionCreate() {
                 $model = new UserDetails('admin_create');
-
-                // Uncomment the following line if AJAX validation is needed
                 // $this->performAjaxValidation($model);
-
                 if (isset($_POST['UserDetails'])) {
-
-                        $model->attributes = $_POST['UserDetails'];
-                        $model->setAttribute('about_me', $_POST['UserDetails']['about_me']);
-                        //$this->setValues($model);
-                        $model->dob = date('Y-m-d');
-
+                        $model = $this->setValues($model, $_POST['UserDetails']);
                         if ($model->validate()) {
-                                if ($model->save()) {
-                                        //set partner details here
-                                        exit;
-                                        $this->redirect(array('admin'));
+                                $transaction = Yii::app()->db->beginTransaction();
+                                try {
+                                        $model->save();
+                                        $this->userId($model->id)->save();
+                                        if (!$this->uploadFiles())
+                                                throw new CHttpException(403, 'Forbidden');
+                                        if (!$this->partnerDetails())
+                                                throw new CHttpException(403, 'Forbidden');
+                                        if (!$this->userPlan())
+                                                throw new CHttpException(403, 'Forbidden');
+
+                                        $transaction->commit();
+                                        $this->redirect('admin');
+                                } catch (Exception $e) {
+                                        $transaction->rollback();
+                                        Yii::app()->user->setFlash('error', $e->getMessage());
                                 }
                         }
                 }
@@ -85,9 +96,31 @@ class UserDetailsController extends Controller {
                 ));
         }
 
-        public function setValues($model) {
-                var_dump($model);
-                exit;
+        public function uploadFiles() {
+                return true;
+        }
+
+        public function userId($id) {
+                $model = UserDetails::model()->findByPk($id);
+                $model->user_id = 'SH' . $model->id;
+                return $model;
+        }
+
+        public function setValues($model, $post) {
+                $model->attributes = $post;
+                $model->setAttribute('about_me', $post['about_me']);
+                $model->dob = $model->dob_year . '-' . $model->dob_month . '-' . $model->dob_day;
+                $model->mob_num_verification = 0;
+                $model->register_step = 5;
+                $model->last_login = date('Y-m-d H:i:s');
+                $model->created_by = 1;
+                $model->profile_approval = 1;
+                $model->image_approval = 1;
+                $model->user_id = rand(100, 100000);
+                $model->cb = Yii::app()->session['admin']['id'];
+                $model->ub = Yii::app()->session['admin']['id'];
+                $model->doc = date('Y-m-d');
+                return $model;
         }
 
         /**

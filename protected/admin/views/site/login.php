@@ -159,6 +159,14 @@
 
                             <p>Dear user, log in to access the admin area!</p>
                         </div>
+                        <?php if (Yii::app()->user->hasFlash('session_expired')): ?>
+                                <div class="form-group">
+                                    <div class="errorMessage" > <?php echo Yii::app()->user->getFlash('session_expired'); ?></div>
+
+                                </div>
+                        <?php endif; ?>
+
+
 
 
                         <div class="form-group">

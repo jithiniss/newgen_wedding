@@ -3,9 +3,12 @@
 /* @var $model UserDetails */
 /* @var $form CActiveForm */
 ?>
-<style>
 
-</style>
+<?php if (Yii::app()->user->hasFlash('error')): ?>
+        <div class="info">
+            <?php echo Yii::app()->user->getFlash('error'); ?>
+        </div>
+<?php endif; ?>
 <div class="form">
 
     <?php
@@ -104,30 +107,49 @@
             <?php echo $form->error($model, 'religion'); ?>
         </div>
         <?php
+        $caste_options = array();
         if ($model->religion != '') {
-                echo $model->religion;
                 $castes = MasterCaste::model()->findAllByAttributes(array('religion_id' => $model->religion));
                 if (!empty($castes)) {
-                        $options = "<option value=''>--Select Caste--</option>";
+                        $caste_options[""] = "--Select--";
                         foreach ($castes as $caste) {
-                                $options .= '<option value="' . $caste->id . '">' . $caste->caste . '</option>';
+                                $caste_options[$caste->id] = $caste->caste;
                         }
                 } else {
-                        $options = '<option value="">--Select--</option><option value="0">Other</option>';
+                        $caste_options[""] = "--Select--";
+                        $caste_options[0] = "Other";
                 }
-                echo $options;
-                exit;
+        } else {
+                $caste_options[""] = '--Select--';
         }
         ?>
         <div class="form-group">
             <?php echo $form->labelEx($model, 'caste'); ?>
-            <?php echo CHtml::activeDropDownList($model, 'caste', array(), array('empty' => '--Select a Religion to load Caste--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
+            <?php echo CHtml::activeDropDownList($model, 'caste', $caste_options, array('class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'caste'); ?>
         </div>
 
+        <?php
+        $subcaste_options = array();
+        if ($model->caste != '') {
+                $subcastes = MasterSubCaste::model()->findAllByAttributes(array('caste_id' => $model->caste));
+                if (!empty($subcastes)) {
+                        $subcaste_options[""] = "--Select--";
+                        foreach ($subcastes as $subcaste) {
+                                $subcaste_options[$subcaste->id] = $subcaste->sub_caste;
+                        }
+                } else {
+                        $subcaste_options[""] = "--Select--";
+                        $subcaste_options[0] = "Other";
+                }
+        } else {
+                $subcaste_options[""] = '--Select--';
+        }
+        ?>
+
         <div class="form-group">
             <?php echo $form->labelEx($model, 'sub_caste'); ?>
-            <?php echo CHtml::activeDropDownList($model, 'sub_caste', array(), array('empty' => '--Select a Caste to load Sub-caste--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
+            <?php echo CHtml::activeDropDownList($model, 'sub_caste', $subcaste_options, array('class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'sub_caste'); ?>
         </div>
 
@@ -144,9 +166,9 @@
         </div>
 
         <!--        <div class="form-group">
-        <?php //echo $form->labelEx($model, 'regional_site');  ?>
+        <?php //echo $form->labelEx($model, 'regional_site');    ?>
         <?php //echo $form->textField($model, 'regional_site', array('class' => 'form-control')); ?>
-        <?php //echo $form->error($model, 'regional_site');  ?>
+        <?php //echo $form->error($model, 'regional_site');   ?>
                 </div>-->
 
         <div class="form-group">
@@ -166,16 +188,50 @@
             <?php echo CHtml::activeDropDownList($model, 'country', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'country'); ?>
         </div>
-
+        <?php
+        $state_options = array();
+        if ($model->country != '') {
+                $states = MasterState::model()->findAllByAttributes(array('country_id' => $model->country));
+                if (!empty($states)) {
+                        $state_options[""] = "--Select--";
+                        foreach ($states as $state) {
+                                $state_options[$state->id] = $state->state;
+                        }
+                } else {
+                        $state_options[""] = "--Select--";
+                        $state_options[0] = "Other";
+                }
+        } else {
+                $state_options[""] = '--select--';
+        }
+        ?>
         <div class="form-group">
             <?php echo $form->labelEx($model, 'state'); ?>
-            <?php echo CHtml::activeDropDownList($model, 'state', array(), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
+            <?php echo CHtml::activeDropDownList($model, 'state', $state_options, array('class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'state'); ?>
         </div>
 
+        <?php
+        $city_options = array();
+        if ($model->country != '') {
+                $cities = MasterState::model()->findAllByAttributes(array('country_id' => $model->state));
+                if (!empty($cities)) {
+                        $city_options[""] = "--Select--";
+                        foreach ($cities as $city) {
+                                $city_options[$city->id] = $city->city;
+                        }
+                } else {
+                        $city_options[""] = "--Select--";
+                        $city_options[0] = "Other";
+                }
+        } else {
+                $city_options[""] = '--select--';
+        }
+        ?>
+
         <div class="form-group">
             <?php echo $form->labelEx($model, 'city'); ?>
-            <?php echo CHtml::activeDropDownList($model, 'city', array(), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
+            <?php echo CHtml::activeDropDownList($model, 'city', $city_options, array('class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
             <?php echo $form->error($model, 'city'); ?>
         </div>
 
@@ -314,28 +370,24 @@
 
         <div class="form-group" style="width: 12.5%; ">
             <label for="UserDetails_num_of_married_brother" class="required">Brother's</label>
-            <?php //echo $form->labelEx($model, 'num_of_married_brother');  ?>
             <?php echo $form->numberField($model, 'num_of_married_brother', array('class' => 'form-control', 'placeholder' => 'Married')); ?>
             <?php echo $form->error($model, 'num_of_married_brother'); ?>
         </div>
 
         <div class="form-group" style="width: 12.5%; margin-left: 0px;">
             <label for="UserDetails_num_of_unmarried_brother" class="required">&nbsp;</label>
-            <?php //echo $form->labelEx($model, 'num_of_unmarried_brother');  ?>
             <?php echo $form->numberField($model, 'num_of_unmarried_brother', array('class' => 'form-control', 'placeholder' => 'Unmarried')); ?>
             <?php echo $form->error($model, 'num_of_unmarried_brother'); ?>
         </div>
 
         <div class="form-group" style="width: 12.5%; ">
             <label for="UserDetails_num_of_married_sister" class="required"> Sister's</label>
-            <?php //echo $form->labelEx($model, 'num_of_married_sister');  ?>
             <?php echo $form->numberField($model, 'num_of_married_sister', array('class' => 'form-control', 'placeholder' => 'Married')); ?>
             <?php echo $form->error($model, 'num_of_married_sister'); ?>
         </div>
 
         <div class="form-group" style="width: 12.5%; margin-left: 0px;">
             <label for="UserDetails_num_of_unmarried_sister" class="required">&nbsp;</label>
-            <?php //echo $form->labelEx($model, 'num_of_unmarried_sister');  ?>
             <?php echo $form->numberField($model, 'num_of_unmarried_sister', array('class' => 'form-control', 'placeholder' => 'Unmarried')); ?>
             <?php echo $form->error($model, 'num_of_unmarried_sister'); ?>
         </div>
@@ -364,7 +416,13 @@
             <?php echo $form->error($model, 'grow_up_in'); ?>
         </div>
 
-        <div class="form-group" style="    width: 52.5%;">
+        <div class="form-group">
+            <?php echo $form->labelEx($model, 'plan_id'); ?>
+            <?php echo CHtml::activeDropDownList($model, 'plan_id', CHtml::listData(Plans::model()->findAllByAttributes(array('status' => 1)), 'id', 'plan_name'), array('empty' => '--Please select--', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
+            <?php echo $form->error($model, 'plan_id'); ?>
+        </div>
+
+        <div class="form-group" style="    width: 80%;">
             <?php echo $form->labelEx($model, 'about_me'); ?>
             <?php echo $form->textArea($model, 'about_me', array('rows' => 6, 'cols' => 50, 'class' => 'form-control')); ?>
             <?php echo $form->error($model, 'about_me'); ?>
@@ -416,9 +474,26 @@
                             $('#UserDetails_caste').html(data);
                         });
                     } else {
-                        $('#UserDetails_caste').html("<option value=''>--Select a Religion to load Caste--</option>");
+                        $('#UserDetails_caste').html("<option value=''>--Select--</option>");
                     }
                 });
+
+                /* Caste change function*/
+                $('#UserDetails_caste').change(function () {
+                    var caste = $(this).val();
+                    if (caste != '') {
+                        $.ajax({
+                            type: "POST",
+                            url: baseurl + "ajax/selectSubCaste",
+                            data: {caste: caste}
+                        }).done(function (data) {
+                            $('#UserDetails_sub_caste').html(data);
+                        });
+                    } else {
+                        $('#UserDetails_sub_caste').html("<option value=''>--Select--</option>");
+                    }
+                });
+
 
                 /*country change function */
 
@@ -433,7 +508,7 @@
                             $('#UserDetails_state').html(data);
                         });
                     } else {
-                        $('#UserDetails_state').html("<option value=''>--Select a Country to load State--</option>");
+                        $('#UserDetails_state').html("<option value=''>--Selec--</option>");
                     }
                 });
 
@@ -450,7 +525,7 @@
                             $('#UserDetails_city').html(data);
                         });
                     } else {
-                        $('#UserDetails_city').html("<option value=''>--Select a State to load City--</option>");
+                        $('#UserDetails_city').html("<option value=''>--Select--</option>");
                     }
                 });
 
