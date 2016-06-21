@@ -21,6 +21,7 @@ return array(
         'admin.components.*',
         'application.models.*',
         'application.components.*',
+        'admin.extensions.easyimage.EasyImage',
     ),
     'modulePath' => $admin . '/modules/',
     'modules' => array(

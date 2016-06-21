@@ -59,42 +59,31 @@ class UploadFile extends CApplicationComponent {
                 }
         }
 
-        public function uploadImage($uploadfile, $id, $foldername = false, $dimensions = array(), $path) {
-
-                if ($foldername) {
-                        $folder = $this->folderName(0, 1000, $id) . '/';
-                } else {
-                        $folder = "";
-                }
+        public function uploadImage($uploadfile, $dimensions = array(), $paths, $filename) {
 
                 if (isset($uploadfile)) {
-                        $filename = $id . '_' . rand(1000, 10000);
-                        if (Yii::app()->basePath . '/../' . $path) {
-                                chmod(Yii::app()->basePath . '/../' . $path, 0777);
-                                if ($foldername) {
-                                        if (!is_dir(Yii::app()->basePath . '/../' . $path . '/' . $folder))
-                                                mkdir(Yii::app()->basePath . '/../' . $path . '/' . $folder);
-                                        chmod(Yii::app()->basePath . '/../' . $path . '/' . $folder . '/', 0777);
 
-                                        if (!is_dir(Yii::app()->basePath . '/../' . $path . '/' . $folder . '/' . $id))
-                                                mkdir(Yii::app()->basePath . '/../' . $path . '/' . $folder . '/' . $id);
-                                        chmod(Yii::app()->basePath . '/../' . $path . '/' . $folder . '/' . $id . '/', 0777);
-
-//                                        if (!is_dir(Yii::app()->basePath . '/../' . $path . '/' . $folder . '/' . $id . '/hover'))
-//                                                mkdir(Yii::app()->basePath . '/../' . $path . '/' . $folder . '/' . $id . '/hover');
-//                                        chmod(Yii::app()->basePath . '/../' . $path . '/' . $folder . '/' . $id . '/' . 'hover/', 0777);
+                        $full_path = '/../';
+                        foreach ($paths as $value) {
+                                $full_path .= $value . '/';
+                                if (!is_dir(Yii::app()->basePath . $full_path)) {
+                                        mkdir(Yii::app()->basePath . $full_path);
+                                }
+                                chmod(Yii::app()->basePath . $full_path, 0777);
+                        }
+                        if ($uploadfile->saveAs(Yii::app()->basePath . $full_path . $filename . '.' . $uploadfile->extensionName)) {
+                                chmod(Yii::app()->basePath . $full_path . $filename . '.' . $uploadfile->extensionName, 0777);
+                                if (!empty($dimensions)) {
+                                        $file = Yii::app()->basePath . $full_path . $filename . '.' . $uploadfile->extensionName;
+                                        $path = Yii::app()->basePath . $full_path;
+                                        foreach ($dimensions as $dimension) {
+                                                $this->Resize($file, $dimension['width'], $dimension['height'], $filename . '_' . $dimension['width'] . '_' . $dimension['height'], $path, $uploadfile->extensionName);
+                                        }
                                 }
 
-                                if ($uploadfile->saveAs(Yii::app()->basePath . '/../' . $path . '/' . $folder . '/' . $id . '/' . $filename . '.' . $uploadfile->extensionName)) {
-//                                        chmod(Yii::app()->basePath . '/../' . $path . '/' . $folder . '/' . $id . '/hover/hover.' . $uploadfile->extensionName, 0777);
-//                                        // $this->WaterMark(Yii::app()->basePath . '/../uploads/products/' . $folder . '/' . $id . '/hover/hover.' . $uploadfile->extensionName, '/../images/watermark.png');
-//                                        $file = Yii::app()->basePath . '/../' . $path . '/' . $folder . '/' . $id . '/hover/hover.' . $uploadfile->extensionName;
-//                                        $path = Yii::app()->basePath . '/../' . $path . '/' . $folder . '/' . $id . '/hover';
-////                                        if (!empty($dimensions)) {
-//
-//                                                $this->Resize($file, $dimensions['width'], $dimensions['height'], 'hover', $path, $uploadfile->extensionName);
-//                                        }
-                                }
+                                return true;
+                        } else {
+                                return false;
                         }
                 }
         }
