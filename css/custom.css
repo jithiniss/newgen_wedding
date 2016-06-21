@@ -1,0 +1,6 @@
+.errorMessage,#agrees{
+        color: #ff9900;
+}
+.error{
+        border-color:  #ff9900 !important;
+}
