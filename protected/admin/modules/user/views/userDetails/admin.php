@@ -81,6 +81,27 @@
                             'dataProvider' => $model->search(),
                             'filter' => $model,
                             'columns' => array(
+                                array(
+                                    'htmlOptions' => array('nowrap' => 'nowrap'),
+                                    'class' => 'booster.widgets.TbButtonColumn',
+                                    'template' => '{update}{delete}',
+                                ),
+                                array(
+                                    'name' => 'photo',
+                                    'value' => function($data) {
+                                            if ($data->photo == "") {
+                                                    if ($data->gender == 2) {
+                                                            return '<img width="65" height="65" style="border: 2px solid #d2d2d2;" src="' . Yii::app()->request->baseUrl . '/images/w1.jpg" />';
+                                                    } else if ($data->gender == 1) {
+                                                            return '<img width="65" height="65" style="border: 2px solid #d2d2d2;" src="' . Yii::app()->request->baseUrl . '/images/pp.jpg" />';
+                                                    }
+                                            } else {
+                                                    $folder = Yii::app()->Upload->folderName(0, 1000, $data->id);
+                                                    return '<img width="65" height="65" style="border: 2px solid #d2d2d2;" src="' . Yii::app()->request->baseUrl . '/uploads/user/' . $folder . '/' . $data->id . '/profile/' . $data->photo . '" />';
+                                            }
+                                    },
+                                    'type' => 'raw'
+                                ),
                                 'user_id',
                                 'email',
                                 'password',

@@ -431,6 +431,12 @@
                 <div class="form-group">
                         <?php echo $form->labelEx($model, 'photo'); ?>
                         <?php echo $form->fileField($model, 'photo', array('size' => 60, 'maxlength' => 99, 'class' => 'form-control')); ?>
+                        <?php
+                        if ($model->photo != '' && $model->id != "") {
+                                $folder = Yii::app()->Upload->folderName(0, 1000, $model->id);
+                                echo '<img width="125" style="border: 2px solid #d2d2d2;" src="' . Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $model->id . '/profile/' . $model->photo . '" />';
+                        }
+                        ?>
                         <?php echo $form->error($model, 'photo'); ?>
                 </div>
 

@@ -79,11 +79,8 @@ class UserDetailsController extends Controller {
                                         if (!$this->uploadFiles($model->id, $image)) {
                                                 throw new CHttpException(403, 'Forbidden');
                                         }
-//                                        if (!$this->partnerDetails())
-//                                                throw new CHttpException(403, 'Forbidden');
-//                                        if (!$this->userPlan())
-//                                                throw new CHttpException(403, 'Forbidden');
-
+                                        $this->partnerDetails($model->id)->save(false);
+                                        $this->userPlan($model->id)->save(false);
                                         $transaction->commit();
                                         $this->redirect('admin');
                                 } catch (Exception $e) {
@@ -100,13 +97,21 @@ class UserDetailsController extends Controller {
 
         public function uploadFiles($id, $image) {
                 if ($image != "") {
-                        $path = 'uploads/user/profile';
+                        $folder = Yii::app()->Upload->folderName(0, 1000, $id);
+                        $filename = $id . '_' . rand(100001, 999999);
+                        $path = array('uploads', 'user', $folder, $id, 'profile');
                         $dimension[0] = array('width' => '116', 'height' => '155', 'name' => 'main');
 //                        $dimension[1] = array('width' => '322', 'height' => '500', 'name' => 'medium');
 //                        $dimension[2] = array('width' => '580', 'height' => '775', 'name' => 'big');
 //                        $dimension[3] = array('width' => '3016', 'height' => '4030', 'name' => 'zoom');
-                        if (Yii::app()->Upload->uploadImage($image, $id, true, $dimension, $path)) {
-                                return true;
+                        if (Yii::app()->Upload->uploadImage($image, $dimension, $path, $filename)) {
+                                $model = UserDetails::model()->findByPk($id);
+                                $model->photo = $filename . '.' . $image->extensionName;
+                                if ($model->save()) {
+                                        return true;
+                                } else {
+                                        return FALSE;
+                                }
                         } else {
                                 return FALSE;
                         }
@@ -115,7 +120,36 @@ class UserDetailsController extends Controller {
 
         public function userId($id) {
                 $model = UserDetails::model()->findByPk($id);
-                $model->user_id = 'SH' . $model->id;
+                $model->user_id = 'NG' . $model->id;
+                return $model;
+        }
+
+        public function partnerDetails($id) {
+                $user_details = UserDetails::model()->findByPk($id);
+                if (!empty($user_details)) {
+                        $age = date('Y') - date('Y', strtotime($user_details->dob));
+                }
+                $model = new PartnerDetails;
+                $model->user_id = $id;
+                if ($user_details->gender == 1) {
+                        $model->age_from = 18;
+                        $model->age_to = $age;
+                } else if ($user_details->gender == 2) {
+                        $model->age_from = $age;
+                }
+                $model->religion = $user_details->religion;
+                return $model;
+        }
+
+        public function userPlan($id) {
+                $user_details = UserDetails::model()->findByPk($id);
+                $plan_details = Plans::model()->findByPk($user_details->plan_id);
+                $model = new UserPlans;
+                $model->attributes = $plan_details->attributes;
+                $model->view_contact_left = $plan_details->view_contact;
+                $model->send_message_left = $plan_details->send_message;
+                $model->number_of_days_left = $plan_details->number_of_days;
+                $model->user_id = $id;
                 return $model;
         }
 
@@ -129,7 +163,7 @@ class UserDetailsController extends Controller {
                 $model->created_by = 1;
                 $model->profile_approval = 1;
                 $model->image_approval = 1;
-                $model->user_id = rand(100, 100000);
+                // $model->user_id = rand(100, 100000);
                 $model->cb = Yii::app()->session['admin']['id'];
                 $model->ub = Yii::app()->session['admin']['id'];
                 $model->doc = date('Y-m-d');
@@ -146,13 +180,20 @@ class UserDetailsController extends Controller {
 
                 // Uncomment the following line if AJAX validation is needed
                 // $this->performAjaxValidation($model);
-
+                $photo = $model->photo;
                 if (isset($_POST['UserDetails'])) {
-                        $model->attributes = $_POST['UserDetails'];
-                        if ($model->save())
-                                $this->redirect(array('update', 'id' => $model->id));
+                        $model = $this->setValues($model, $_POST['UserDetails']);
+                        $image = CUploadedFile::getInstance($model, 'photo');
+                        if (!isset($image)) {
+                                $model->photo = $photo;
+                                $model->save();
+                        } else {
+                                if (!$this->uploadFiles($model->id, $image)) {
+                                        throw new CHttpException(403, 'Forbidden');
+                                }
+                        }
+                        $this->redirect(array('admin'));
                 }
-
                 $this->render('update', array(
                     'model' => $model,
                 ));
