@@ -92,7 +92,9 @@ class UserDetails extends CActiveRecord {
                 // NOTE: you should only define rules for those attributes that
                 // will receive user inputs.
                 return array(
-                    array('email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, mothertongue, country', 'required', 'on' => 'userFirstStep'),
+                    array('email, password, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, mothertongue, country', 'required', 'on' => 'userFirstStep'),
+                    array('caste, marital_status, state, city', 'required', 'on' => 'userSecondStep'),
+                    array('height,smoke, drink', 'required', 'on' => 'userThirdStep'),
                     //array('user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, cb, ub, doc, dou', 'required'),
                     array('email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, marital_status, mothertongue, country, state, city, zip_code, education_level, education_field, working_with, working_as, annual_income, mobile_number, grow_up_in, plan_id', 'required', 'on' => 'admin_create'),
                     array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, plan_id, cb, ub', 'numerical', 'integerOnly' => true),
@@ -104,6 +106,9 @@ class UserDetails extends CActiveRecord {
                     array('contact_number, mobile_number', 'length', 'max' => 20),
                     array('home_town, house_name', 'length', 'max' => 200),
                     array('photo, id_proof', 'length', 'max' => 99),
+                    array('password', 'length', 'min' => 4, 'max' => 20,
+                        'tooShort' => Yii::t("translation", "password is too short."),
+                        'tooLong' => Yii::t("translation", "password is too long.")),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
                     array('id, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, plan_id, cb, ub, doc, dou', 'safe', 'on' => 'search'),
@@ -112,7 +117,7 @@ class UserDetails extends CActiveRecord {
 
         public function userId($id) {
                 $model = UserDetails::model()->findByPk($id);
-                $model->user_id = 'SH' . $model->id;
+                $model->user_id = 'NW' . $model->id;
                 return $model;
         }
 

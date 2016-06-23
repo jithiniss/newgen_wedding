@@ -9,10 +9,10 @@
             <div class="col-md-12 ">
 
                 <ul id="myTabf" class="nav nav-tabs ppl nav-justified ">
-                    <li class="sim active"><a href="register-1.php">Primary Info</a></li>
-                    <li class="sim"><a href="register-2.php">Location & Background</a> </li>
-                    <li class="sim"><a href="register-3.php">Lifestyle & Appearance </a> </li>
-                    <li class="sim"><a href="register-4.php">Education & Career</a> </li>
+                    <li class="sim active"><a>Primary Info</a></li>
+                    <li class="sim"><a>Location & Background</a> </li>
+                    <li class="sim"><a>Lifestyle & Appearance </a> </li>
+                    <li class="sim"><a>Education & Career</a> </li>
                 </ul>
 
 
@@ -23,7 +23,7 @@
                     // controller action is handling ajax validation correctly.
                     // There is a call to performAjaxValidation() commented in generated controller code.
                     // See class documentation of CActiveForm for details on this.
-                    'enableAjaxValidation' => false,
+                    'enableAjaxValidation' => true,
                 ));
                 ?>
 
@@ -33,7 +33,11 @@
                     <h1>Register</h1>
 
                     <div class="zeros">
-
+                        <?php if(Yii::app()->user->hasFlash('register_error1')): ?>
+                                <div class="alert alert-danger">
+                                    <?php echo Yii::app()->user->getFlash('register_error1'); ?>
+                                </div>
+                        <?php endif; ?>
                         <div class="common">
                             <div class="col-sm-3 col-xs-3 zeros">
                                 <label for="textinput" class="control-label">Email <span class="required">*</span></label>
@@ -43,7 +47,7 @@
                             </div>
                             <div class="col-sm-8 col-xs-8 zeros">
                                 <div class="form-group">
-                                    <?php echo $form->textField($firstStep, 'email', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps')); ?>
+                                    <?php echo $form->textField($firstStep, 'email', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps', 'placeholder' => 'Email Address')); ?>
                                     <?php echo $form->error($firstStep, 'email'); ?>
                                 </div>
                             </div>
@@ -61,7 +65,7 @@
                             </div>
                             <div class="col-sm-8 col-xs-8 zeros">
                                 <div class="form-group">
-                                    <?php echo $form->passwordField($firstStep, 'password', array('size' => 50, 'maxlength' => 50, 'class' => 'ui_apps')); ?>
+                                    <?php echo $form->passwordField($firstStep, 'password', array('size' => 50, 'maxlength' => 50, 'class' => 'ui_apps', 'placeholder' => 'Enter Strong Password')); ?>
                                     <?php echo $form->error($firstStep, 'password'); ?>
                                 </div>
                             </div>
@@ -93,7 +97,7 @@
                             </div>
                             <div class="col-sm-4 col-xs-4 zeros">
                                 <div class="form-group">
-                                    <?php echo $form->textField($firstStep, 'first_name', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps')); ?>
+                                    <?php echo $form->textField($firstStep, 'first_name', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps', 'placeholder' => 'First Name')); ?>
                                     <?php echo $form->error($firstStep, 'first_name'); ?>
                                 </div>
                             </div>
@@ -101,7 +105,7 @@
                             <div class="col-sm-4 col-xs-4 zeros">
                                 <div class="form-group">
 
-                                    <?php echo $form->textField($firstStep, 'last_name', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps')); ?>
+                                    <?php echo $form->textField($firstStep, 'last_name', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps', 'placeholder' => 'Last Name')); ?>
                                     <?php echo $form->error($firstStep, 'last_name'); ?>
                                 </div>
                             </div>
@@ -116,10 +120,10 @@
                             </div>
                             <div class="col-sm-8 col-xs-8 zeros">
                                 <label class="radio-inline sec">
-                                    <input type="radio" name="UserDetails[gender]" id="UserDetails_gender">Male
+                                    <input type="radio" name="UserDetails[gender]" id="UserDetails_gender" value="1">Male
                                 </label>
                                 <label class="radio-inline sec">
-                                    <input type="radio" name="UserDetails[gender]" id="UserDetails_gender">Female
+                                    <input type="radio" name="UserDetails[gender]" id="UserDetails_gender" value="2">Female
                                 </label>
                                 <?php echo $form->error($firstStep, 'gender'); ?>
                             </div>
