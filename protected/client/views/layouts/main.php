@@ -1,30 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
-
-    <!-- Mirrored from victoria-spa.themexriver.com/victoria/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Wed, 13 Apr 2016 20:33:15 GMT -->
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <title>Newgen </title>
-        <link href="<?= Yii::app()->baseUrl ?>/images/favicon.png" rel="icon">
+        <link rel="icon" href="<?php echo Yii::app()->baseUrl; ?>/images/favicon.png" type="image/x-icon" />
+        <link rel="shortcut icon" href="<?php echo Yii::app()->baseUrl; ?>/images/favicon.png" type="image/x-icon" />
+
         <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-
-
         <link href='https://fonts.googleapis.com/css?family=Roboto:400,500,700,300,100' rel='stylesheet' type='text/css'>
         <link href="<?= Yii::app()->baseUrl ?>/css/font-awesome.min.css" rel="stylesheet">
-        <link href="<?= Yii::app()->baseUrl ?>/css/bootstrap.min.css" rel="stylesheet">
+<!--        <link href="<?= Yii::app()->baseUrl ?>/css/bootstrap.min.css" rel="stylesheet">-->
         <link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl ?>/css/simpleMobileMenu.css" />
-        <link rel="stylesheet" href="<?= Yii::app()->baseUrl ?>/css/flexslider/flexslider.css" type="text/css">
-        <link rel="stylesheet" href="<?= Yii::app()->baseUrl ?>/css/animate.css" type="text/css">
-        <link href="<?= Yii::app()->baseUrl ?>/css/styles.css" rel="stylesheet" media="screen">
         <link href="<?= Yii::app()->baseUrl ?>/css/style.css" rel="stylesheet">
         <link href="<?= Yii::app()->baseUrl ?>/css/custom.css" rel="stylesheet">
         <link href="<?= Yii::app()->baseUrl ?>/css/slick.css" rel="stylesheet">
         <link href="<?= Yii::app()->baseUrl ?>/css/slick-theme.css" rel="stylesheet">
-
-        <link href="<?= Yii::app()->baseUrl ?>/css/set2.css" rel="stylesheet">
         <style>
             #mask {
                 background-color: #e4007d;
@@ -276,12 +269,8 @@
         </section>
 <!--        <script src="js/jquery-1.11.3.min.js"></script>
         <script src="js/bootstrap.min.js"></script>-->
-        <script src="<?= Yii::app()->baseUrl ?>/js/device.js"></script>
-        <script src="<?= Yii::app()->baseUrl ?>/js/jquery.flexslider.js"></script>
-        <script type="text/javascript" src="<?= Yii::app()->baseUrl ?>/js/script.js"></script>
-        <script type="text/javascript" src="<?= Yii::app()->baseUrl ?>/js/main-slider-image-title-animation.js"></script>
         <script src="<?= Yii::app()->baseUrl ?>/js/slick.min.js"></script>
-        <script type="text/javascript" src="<?= Yii::app()->baseUrl ?>/js/mp.mansory.js"></script>
+
 
 
 
@@ -311,166 +300,6 @@
         </script>
 
 
-        <script type="text/javascript">
-                jQuery(document).ready(function ($) {
-                    $("#my-gallery-container").mpmansory(
-                            {
-                                childrenClass: 'items', // default is a div
-                                columnClasses: 'paddings', //add classes to items
-                                breakpoints: {
-                                    lg: 3,
-                                    md: 4,
-                                    sm: 6,
-                                    xs: 12
-                                },
-                                distributeBy: {order: false, height: false, attr: 'data-order', attrOrder: 'asc'}, //default distribute by order, options => order: true/false, height: true/false, attr => 'data-order', attrOrder=> 'asc'/'desc'
-                                onload: function (items) {
-                                    //make somthing with items
-                                }
-                            }
-                    );
-                });
-        </script>
-        <script>
-
-                $(document).ready(function () {
-
-                    $('.quote').slick({
-                        slidesToShow: 1,
-                        autoplay: true,
-                        autoplaySpeed: 5000,
-                        slidesToScroll: 1,
-                        pauseOnHover: false,
-                        fade: true,
-                        dots: true,
-                        //                prevArrow: '<i id="prev_slide_3" class="fa fa-chevron-left"></i>',
-                        //                nextArrow: '<i id="next_slide_3" class="fa fa-chevron-right"></i>',
-                        responsive: [
-                            {
-                                breakpoint: 1000,
-                                settings: {
-                                    centerMode: false,
-                                    slidesToShow: 1
-                                }
-                            },
-                            {
-                                breakpoint: 800,
-                                settings: {
-                                    centerMode: false,
-                                    slidesToShow: 1
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    centerMode: false,
-                                    slidesToShow: 1
-                                }
-                            }
-                        ]
-                    });
-
-                });
-
-        </script>
-
-
-        <script>
-
-                $(document).ready(function () {
-
-                    $('.gold').slick({
-                        slidesToShow: 1,
-                        autoplay: true,
-                        autoplaySpeed: 5000,
-                        slidesToScroll: 1,
-                        pauseOnHover: false,
-                        fade: false,
-                        //                prevArrow: '<i id="prev_slide_3" class="fa fa-chevron-left"></i>',
-                        //                nextArrow: '<i id="next_slide_3" class="fa fa-chevron-right"></i>',
-                        responsive: [
-                            {
-                                breakpoint: 1000,
-                                settings: {
-                                    centerMode: false,
-                                    slidesToShow: 1
-                                }
-                            },
-                            {
-                                breakpoint: 800,
-                                settings: {
-                                    centerMode: false,
-                                    slidesToShow: 1
-                                }
-                            },
-                            {
-                                breakpoint: 480,
-                                settings: {
-                                    centerMode: false,
-                                    slidesToShow: 1
-                                }
-                            }
-                        ]
-                    });
-
-                });
-
-        </script>
-
-
-
-
-
-        <script>
-
-
-                jQuery(window).scroll(function ()
-
-
-                {
-
-                    if ($(window).width() > 991)
-                    {
-                        var scrlTop = jQuery(window).scrollTop();
-
-
-                        $window = jQuery(window);
-
-                        function myanimations(doelement, doclass) {
-                            $element = jQuery(doelement);
-
-                            $element.each(function () {
-                                $thisone = jQuery(this);
-                                if ($thisone.offset().top + 200 < ($window.height() + $window.scrollTop()) &&
-                                        ($thisone.offset().top + $element.outerHeight()) + 170 > $window.scrollTop())
-                                {
-                                    $thisone.removeClass('fadeOut');
-                                    $thisone.addClass('animated');
-                                    $thisone.addClass(doclass);
-                                } else {
-                                    $thisone.removeClass(doclass);
-                                    $thisone.addClass('fadeOut');
-                                }
-                            });
-                        }
-                        myanimations('.success h1', 'zoomIn');
-                        myanimations('.membership h1', 'zoomIn');
-                        myanimations('.quick h2', 'fadeInUp m2');
-
-                        myanimations('.more h1', 'fadeInLeft m2');
-                        myanimations('.groom h3', 'fadeInRight m3');
-
-                        myanimations('.couples h1', 'fadeInLeft m2');
-                        myanimations('.couples p', 'fadeInRight m3');
-                    }
-                });
-
-
-
-
-        </script>
-
-
         <script src="<?= Yii::app()->baseUrl ?>/js/simpleMobileMenu.js"></script>
         <script type="text/javascript">
 
@@ -479,15 +308,7 @@
                 });
 
         </script>
-        <script type="text/javascript">
-                $(document).ready(function () {
-                    setTimeout(function () {
-                        $("#myModal").modal('show');
-                    }, 4000);
 
-
-                });
-        </script>
         <script>
 
                 (function ($) {
@@ -536,5 +357,3 @@
     </body>
 
 </html>
-
-

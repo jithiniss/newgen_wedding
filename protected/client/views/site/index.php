@@ -1,4 +1,7 @@
-
+<link rel="stylesheet" href="<?= Yii::app()->baseUrl ?>/css/flexslider/flexslider.css" type="text/css">
+<link href="<?= Yii::app()->baseUrl ?>/css/styles.css" rel="stylesheet" media="screen">
+<link rel="stylesheet" href="<?= Yii::app()->baseUrl ?>/css/animate.css" type="text/css">
+<link href="<?= Yii::app()->baseUrl ?>/css/set2.css" rel="stylesheet">
 <!-- MAIN SLIDER -->
 <section id="main-slider" class="flexslider fullscreen">
 
@@ -339,21 +342,6 @@
                             <option value="audi">Audi</option>
                         </select>
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
                     <button type="submit" class="btn btn-default mat">Submit</button>
@@ -801,4 +789,173 @@
     </div>
 </section>
 <div class="clearfix"></div>
+<script src="<?= Yii::app()->baseUrl ?>/js/device.js"></script>
+<script src="<?= Yii::app()->baseUrl ?>/js/jquery.flexslider.js"></script>
+<script type="text/javascript" src="<?= Yii::app()->baseUrl ?>/js/script.js"></script>
+<script type="text/javascript" src="<?= Yii::app()->baseUrl ?>/js/main-slider-image-title-animation.js"></script>
+<script type="text/javascript" src="<?= Yii::app()->baseUrl ?>/js/mp.mansory.js"></script>
+<script type="text/javascript">
+        $(document).ready(function () {
+<?php if(!isset(Yii::app()->session['user']['id']) && Yii::app()->session['user']['id'] == '') { ?>
+                    setTimeout(function () {
+                        $("#myModal").modal('show');
+                    }, 4000);
+<?php } ?>
 
+
+        });
+</script>
+<script type="text/javascript">
+        jQuery(document).ready(function ($) {
+            $("#my-gallery-container").mpmansory(
+                    {
+                        childrenClass: 'items', // default is a div
+                        columnClasses: 'paddings', //add classes to items
+                        breakpoints: {
+                            lg: 3,
+                            md: 4,
+                            sm: 6,
+                            xs: 12
+                        },
+                        distributeBy: {order: false, height: false, attr: 'data-order', attrOrder: 'asc'}, //default distribute by order, options => order: true/false, height: true/false, attr => 'data-order', attrOrder=> 'asc'/'desc'
+                        onload: function (items) {
+                            //make somthing with items
+                        }
+                    }
+            );
+        });
+</script>
+<script>
+
+        $(document).ready(function () {
+
+            $('.quote').slick({
+                slidesToShow: 1,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                slidesToScroll: 1,
+                pauseOnHover: false,
+                fade: true,
+                dots: true,
+                //                prevArrow: '<i id="prev_slide_3" class="fa fa-chevron-left"></i>',
+                //                nextArrow: '<i id="next_slide_3" class="fa fa-chevron-right"></i>',
+                responsive: [
+                    {
+                        breakpoint: 1000,
+                        settings: {
+                            centerMode: false,
+                            slidesToShow: 1
+                        }
+                    },
+                    {
+                        breakpoint: 800,
+                        settings: {
+                            centerMode: false,
+                            slidesToShow: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            centerMode: false,
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+
+        });
+
+</script>
+<script>
+
+        $(document).ready(function () {
+
+            $('.gold').slick({
+                slidesToShow: 1,
+                autoplay: true,
+                autoplaySpeed: 5000,
+                slidesToScroll: 1,
+                pauseOnHover: false,
+                fade: false,
+                //                prevArrow: '<i id="prev_slide_3" class="fa fa-chevron-left"></i>',
+                //                nextArrow: '<i id="next_slide_3" class="fa fa-chevron-right"></i>',
+                responsive: [
+                    {
+                        breakpoint: 1000,
+                        settings: {
+                            centerMode: false,
+                            slidesToShow: 1
+                        }
+                    },
+                    {
+                        breakpoint: 800,
+                        settings: {
+                            centerMode: false,
+                            slidesToShow: 1
+                        }
+                    },
+                    {
+                        breakpoint: 480,
+                        settings: {
+                            centerMode: false,
+                            slidesToShow: 1
+                        }
+                    }
+                ]
+            });
+
+        });
+
+</script>
+
+
+
+<script>
+
+
+        jQuery(window).scroll(function ()
+
+
+        {
+
+            if ($(window).width() > 991)
+            {
+                var scrlTop = jQuery(window).scrollTop();
+
+
+                $window = jQuery(window);
+
+                function myanimations(doelement, doclass) {
+                    $element = jQuery(doelement);
+
+                    $element.each(function () {
+                        $thisone = jQuery(this);
+                        if ($thisone.offset().top + 200 < ($window.height() + $window.scrollTop()) &&
+                                ($thisone.offset().top + $element.outerHeight()) + 170 > $window.scrollTop())
+                        {
+                            $thisone.removeClass('fadeOut');
+                            $thisone.addClass('animated');
+                            $thisone.addClass(doclass);
+                        } else {
+                            $thisone.removeClass(doclass);
+                            $thisone.addClass('fadeOut');
+                        }
+                    });
+                }
+                myanimations('.success h1', 'zoomIn');
+                myanimations('.membership h1', 'zoomIn');
+                myanimations('.quick h2', 'fadeInUp m2');
+
+                myanimations('.more h1', 'fadeInLeft m2');
+                myanimations('.groom h3', 'fadeInRight m3');
+
+                myanimations('.couples h1', 'fadeInLeft m2');
+                myanimations('.couples p', 'fadeInRight m3');
+            }
+        });
+
+
+
+
+</script>

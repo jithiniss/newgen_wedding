@@ -106,7 +106,7 @@ class RegisterController extends Controller {
                                 $fourthStep = $this->setFourthStep($fourthStep, $_POST['UserDetails']);
                                 if($fourthStep->validate()) {
                                         if($fourthStep->save()) {
-                                                $this->redirect(array('MyHome'));
+                                                $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/index');
                                         } else {
                                                 Yii::app()->user->setFlash('register_error4', "Some Error Occured.Try Again");
                                         }
