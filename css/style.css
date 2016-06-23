@@ -3,13 +3,195 @@ body {
     font-family: 'Roboto', sans-serif;
     background-color: rgba(191, 191, 191, 0.35);
 }
+.lefted{
+    padding-left: 0;
+}
+span.fame {
+    font-weight: 500;
+    font-size: 15px;
+    color: #666;
+    font-family: 'Roboto', sans-serif;
+}
+
+
+span.fame:hover {
+color: #ff9900;
+}
+span.previews {
+    text-align: right;
+    float: right;
+    font-size: 12px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+img.fives {
+    padding-right: 13px;
+}
+.fifty-1 {
+    float: left;
+    width: 50%;
+    padding-left: 10px;
+    padding-bottom: 25px;
+}
+.fifty-2 {
+    float: right;
+    width: 50%;
+    
+    padding-bottom: 25px;
+}
+.myself {
+    margin-bottom: 26px;
+    float: left;
+    width: 100%;
+    padding-left: 18px;
+    margin-top: 20px;
+}
+.any ul li {
+    background-color: #fff;
+    display: inline-block;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 20px;
+    border-bottom: 1px solid #fff;
+    float: left;
+    width: 25%;
+    position: relative;
+}
+.any ul li a {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    font-weight: 400;
+    color: #333;
+    padding-left: 18px;
+}
+.any ul li:hover {
+    background-color: #fff;
+    border-bottom: 1px solid transparent;
+}
+
+.any ul li:before {
+    position: absolute;
+    content: "\f101";
+    font-family: FontAwesome;
+    vertical-align: middle;
+    display: inline-block;
+    top: 0px;
+    left: 16px;
+    padding-right: 0.5em;
+    color: #333;
+    font-size: 13px;
+    padding-top: 2px;
+}
+span.sets {
+    background-color: #fff;
+    width: 100%;
+    display: block;
+   padding-left: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+    font-size: 16px;
+    padding-right: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+}
+
+.family-1 {
+    float: left;
+    width: 20%;
+}
+.family-2 {
+    float: left;
+    width: 20%;
+   
+}
+
+
+span.labz {
+    background-color: #dbdbdb;
+    width: 100%;
+    display: block;
+    padding-left: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: right;
+    font-size: 11px;
+    padding-right: 10px;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 500;
+}
+.box-1 {
+    float: left;
+    width: 25%;
+    background-color: #fff;
+    margin-bottom: 15px;
+}
+.box-2 {
+    float: right;
+    width: 75%;
+    margin-top: 24px;
+     margin-bottom: 15px;
+}
+.status {
+    float: left;
+    margin-bottom: 0;
+    width: 100%;
+    padding-left: 0;
+    padding-bottom: 3px;
+}
+.care {
+    border: 1px solid #ccc;
+    float: left;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+span.calculate {
+    position: absolute;
+    right: 37%;
+    font-size: 12px;
+    top: 16px;
+}
+div#ui-progressbar {
+    height: 15px;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    border: 1px solid #e6e2e2;
+    position: relative;
+}
+div#ui-progress {
+    height: 14px;
+    background-color: #5cb85c;
+    width: 61%;
+    border-radius: 4px 0 0 4px;
+    border: 1px solid #5cb85c;
+}
+.run {
+    float: left;
+    margin-bottom: 0;
+    width: 100%;
+    padding-left: 0;
+    padding-bottom: 4px;
+}
+.actions{
+    padding-right: 0;
+}
+
+.badgez {
+    float: left;
+    width: 100%;
+    margin-top: 26px;
+    margin-bottom: 6px;
+}
+
 .rel-1 {
     float: left;
     width: 85%;
 }
-.strongz{
+.strongz {
     border: 1px solid #ccc;
     float: left;
+    border-left: 0;
 }
 .badgez h3 {
     padding-top: 0px;
@@ -50,10 +232,25 @@ img.lockz {
     margin: auto;
     bottom: 0;
 }
-.nest{
-    padding-right: 0;
-}
 
+.listen {
+    width: 100%;
+    float: left;
+    border: 1px solid #ccc;
+    padding-left: 0;
+    padding-right: 0;
+    padding-top: 0;
+    padding-bottom: 10px;
+    margin-bottom: 0px;
+    margin-top: 20px;
+}
+.short{
+    padding: 0;
+}
+.nest {
+    /* padding-right: 0; */
+    padding: 0;
+}
 span.ng {
     font-weight: bold;
     font-size: 17px;
@@ -74,7 +271,7 @@ span.ng {
 
 .prog-1 {
     float: left;
-    width: 50%;
+    width: 30%;
 }
 
 .strip-paddings {
@@ -83,19 +280,16 @@ span.ng {
 }
 .prog-2 {
     float: right;
-    width: 50%;
+    width: 70%;
+    padding-right: 20%;
 }
-
-
-
 .gen {
     background-color: #6ba7bd;
     float: left;
     width: 100%;
-    margin-bottom: 20px;
+    margin-bottom: 13px;
     border-bottom: 1px solid #ccc;
 }
-
 section.mynew {
     background-color: #fff;
     padding-top: 50px;
@@ -117,8 +311,11 @@ section.mynew {
 }
 img.img-responsive.fullz {
     margin-bottom: 11px;
+    width: 90%;
 }
-
+.girls.slick-initialized.slick-slider {
+    padding-left: 10px;
+}
 a.viewallz {
     background-color: #0e6382;
     color: #fff;
@@ -130,6 +327,16 @@ a.viewallz {
     margin-top: 10px;
 	font-size:12px;
 }
+
+a.viewallz:hover {
+    background-color: #ff9900;
+
+
+}
+
+
+
+
 .mynewgenz h1 {
     padding-top: 6px;
     padding-bottom: 0;
@@ -178,15 +385,8 @@ a.viewallz {
     color: #000;
     font-weight: 300;
     font-family: 'Roboto', sans-serif;
-    padding-bottom: 22px;
-    font-size: 13px;
-    /* position: absolute; */
-    /* top: 129px; */
-    /* left: 0; */
-    /* right: 0; */
-    /* margin: auto; */
-    /* text-align: center; */
-    /* max-width: 84px; */
+    padding-bottom: 0;
+    font-size: 14px;
     padding-left: 15px;
 }
 
@@ -198,10 +398,12 @@ a.viewallz {
     padding-right: 0;
     padding-top: 0;
     padding-bottom: 10px;
-    margin-bottom: 25px;
+    margin-bottom: 0px;
     background-color: #fafeff;
+    border-left: 0;
+    border-right: 0;
+    border-bottom: 0;
 }
-
 .mynewgen h6 {
     padding-top: 3px;
     padding-bottom: 3px;
@@ -225,7 +427,7 @@ a.viewallz {
     padding-top: 0px;
     color: #666;
     font-weight: 400;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
     font-size: 18px;
     font-family: 'Roboto', sans-serif;
     text-align: left;
@@ -233,7 +435,6 @@ a.viewallz {
     margin-top: 26px;
     padding-left: 15px;
 }
-
 .mynewgen h3 {
     padding-top: 9px;
     padding-bottom: 9px;
@@ -255,11 +456,15 @@ a.viewall {
     font-size: 12px;
     font-weight: 500;
     color: #006699;
+    float: right;
+    margin-right: 20px;
 }
 a.edits {
     font-size: 13px;
     font-weight: 500;
     color: #fff;
+    float: right;
+    margin-right: 20px;
 }
 .messagez.nop {
     border: 1px solid #ccc;
@@ -272,24 +477,23 @@ a.edits {
 .messagez ul li {
     background-color: #ffffff;
     display: block;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: 13px;
+    padding-bottom: 13px;
     padding-left: 0;
     border-bottom: 1px solid #ccc;
 }
-
 .messagez ul li:hover {
     background-color: #f2f2f2;
     border-bottom: 1px solid rgba(153, 153, 153, 0);
 }
-
 .messagez ul li a {
     font-size: 12px;
     font-family: 'Roboto', sans-serif;
     display: block;
-    text-align: center;
+    text-align: left;
     font-weight: 500;
     color: #006699;
+    margin-left: 30%;
 }
 img.access {
     padding-right: 14px;
@@ -332,7 +536,7 @@ img.access {
     margin-bottom: 0;
     width: 100%;
     padding-left: 0;
-    padding-bottom: 10px;
+    padding-bottom: 7px;
 }
 .strip-paddingz {
     padding-left: 20px;
@@ -805,7 +1009,7 @@ img.man {
 span.us {
     color: #ff9900;
     font-weight: 400;
-    padding-left: 0;
+    padding-left: 6px;
 }
 .profile-ui ul {
     margin-left: 7px;
@@ -1938,10 +2142,9 @@ section.profiles {
 
 section.religion {
     background-color: #fff;
-    padding-top: 50px;
+    padding-top: 12px;
     padding-bottom: 50px;
 }
-
 .religion h3 {
     padding-top: 9px;
     padding-bottom: 9px;
@@ -1958,7 +2161,7 @@ section.religion {
 .religion p {
     padding-top: 0px;
     color: #666;
-    font-weight: 400;
+    font-weight: 300;
     font-family: 'Roboto', sans-serif;
     margin-bottom: 2px;
     font-size: 12px;
@@ -1968,7 +2171,7 @@ section.religion {
     margin-left: 0px;
     padding-left: 0;
     padding-right: 0;
-    padding-bottom: 12px;
+    padding-bottom: 5px;
     margin-bottom: 0;
     line-height: 21px;
 }
@@ -1976,7 +2179,7 @@ section.religion {
     padding-top: 11px;
     padding-bottom: 11px;
     color: #666666;
-    font-weight: 400;
+    font-weight: 500;
     font-family: 'Roboto', sans-serif;
     margin-bottom: 0;
     font-size: 15px;
@@ -2020,12 +2223,11 @@ a.edit {
     margin-bottom: 36px;
 }
 
-
 .religion h4 {
     padding-top: 0px;
     color: #666;
     font-weight: 400;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
     font-size: 18px;
     font-family: 'Roboto', sans-serif;
     text-align: left;
@@ -2872,7 +3074,7 @@ section.main-head-2 {
     padding-top: 21px;
     z-index: 1000;
     width: 100%;
-    border-bottom: 3px solid #d278a5;
+    border-bottom: 3px solid #f7b6df;
 }
 .form-group {
     margin-bottom: 15px;
@@ -3168,20 +3370,20 @@ button.btn.row-btn.btn-default {
 }
 .control-labels {
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 300;
     margin-bottom: 5px;
     white-space: normal;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Roboto', sans-serif;
     color: #000;
     margin-top: 11px;
     margin-left: 13px;
 }
 .control-labelz {
     font-size: 13px;
-    font-weight: 400;
+    font-weight: 300;
     margin-bottom: 0;
     white-space: normal;
-    font-family: 'Open Sans', sans-serif;
+   font-family: 'Roboto', sans-serif;
     color: #666;
     margin-top: 8px;
 }
@@ -4829,8 +5031,8 @@ section.more {
 }
 
 #prev_slide_3 {
-    left: -19px;
-    top: 32.5%;
+    left: -22px;
+    top: 26.5%;
     width: 32px;
     height: 26px;
     color: #fff;
@@ -4840,10 +5042,9 @@ section.more {
     background-color: rgba(255, 255, 255, 0);
     border-radius: 0;
 }
-
 #next_slide_3 {
-    right: -10px;
-    top: 32.5%;
+    right: -22px;
+     top: 26.5%;
     width: 32px;
     height: 26px;
     color: #fff;
@@ -4853,7 +5054,6 @@ section.more {
     background-color: rgba(255, 255, 255, 0);
     border-radius: 0;
 }
-
 #prev_slide_2, #next_slide_2 {
     position: absolute;
     top: 44%;
@@ -6243,6 +6443,17 @@ footer ul li a:hover {
 }
 
 @media(max-width: 1199px) and (min-width: 992px) {
+    
+    .any ul li {
+    background-color: #fff;
+    display: inline-block;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 20px;
+    border-bottom: 1px solid #fff;
+    float: left;
+    width: 33%;
+}
     .send {
         width: 100%;
     }
@@ -6536,10 +6747,42 @@ footer ul li a:hover {
 
 
 @media(max-width: 991px) and (min-width: 768px) {
+    
+    .status {
+    float: left;
+    margin-bottom: 0;
+    width: 100%;
+    padding-left: 0;
+    padding-bottom: 3px;
+    text-align: left;
+}
+   .any ul li {
+    background-color: #fff;
+    display: inline-block;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 20px;
+    border-bottom: 1px solid #fff;
+    float: left;
+    width: 33%;
+} 
+    img.img-responsive.fullz {
+    margin-bottom: 11px;
+    width: auto;
+}
     .lifestyle {
         border-left: 0px dashed #ccc;
         padding-left: 18px;
     }
+    .messagez ul li a {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    text-align: left;
+    font-weight: 500;
+    color: #006699;
+    margin-left: 43%;
+}
     .send {
         width: 100%;
     }
@@ -6905,7 +7148,55 @@ footer ul li a:hover {
 
 
 @media(max-width: 767px) {
-
+    .any ul li {
+    background-color: #fff;
+    display: inline-block;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 20px;
+    border-bottom: 1px solid #fff;
+    float: left;
+    width: 33%;
+}
+    
+    .box-1 {
+    float: left;
+    width: 30%;
+    background-color: #fff;
+    margin-bottom: 15px;
+}
+    
+   .box-2 {
+    float: right;
+    width: 70%;
+    margin-top: 24px;
+    margin-bottom: 15px;
+} 
+    
+    
+    
+    
+    .status {
+    float: left;
+    margin-bottom: 0;
+    width: 100%;
+    padding-left: 0;
+    padding-bottom: 3px;
+    text-align: left;
+}
+    img.img-responsive.fullz {
+    margin-bottom: 11px;
+    width: auto;
+}
+.messagez ul li a {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    text-align: left;
+    font-weight: 500;
+    color: #006699;
+    margin-left: 40%;
+}
     .send ul li {
         width: 28%;
         float: left;
@@ -7453,7 +7744,34 @@ footer ul li a:hover {
 
 
 @media(max-width: 600px) {
-
+    
+    
+    .box-1 {
+    float: left;
+    width: 100%;
+    background-color: #fff;
+    margin-bottom: 15px;
+}
+    
+   .box-2 {
+    float: right;
+    width: 100%;
+    margin-top: 24px;
+    margin-bottom: 15px;
+} 
+    
+.prog-2 {
+    float: left;
+    width: 100%;
+    padding-right: 2%;
+    padding-left: 2%;
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+.prog-1 {
+    float: left;
+    width: 100%;
+}
     .ways-1 {
         float: left;
         width: 100%;
@@ -7556,7 +7874,25 @@ footer ul li a:hover {
 
 
 @media (max-width: 550px){
-
+    
+    .any ul li {
+    background-color: #fff;
+    display: inline-block;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-left: 20px;
+    border-bottom: 1px solid #fff;
+    float: left;
+    width: 48%;
+}
+.rel-1 {
+    float: left;
+    width: 70%;
+}
+.rel-2 {
+    float: right;
+    width: 30%;
+}
     .modal h1 {
         font-weight: 300;
         padding-left: 10px;
@@ -7723,6 +8059,15 @@ footer ul li a:hover {
 
 
 @media (max-width: 420px){
+    .messagez ul li a {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    text-align: left;
+    font-weight: 500;
+    color: #006699;
+    margin-left: 37%;
+}
     .modal p {
         font-weight: 300;
         padding-left: 0;
@@ -7897,6 +8242,27 @@ footer ul li a:hover {
 
 
 
+
+@media (max-width: 360px){
+.messagez ul li a {
+    font-size: 12px;
+    font-family: 'Roboto', sans-serif;
+    display: block;
+    text-align: left;
+    font-weight: 500;
+    color: #006699;
+    margin-left: 33%;
+}
+
+}
+
+
+
+
+
+
+
+
 @media (max-width: 350px){
 
 
@@ -8027,3 +8393,117 @@ footer ul li a:hover {
 
     to { width: 36% }
 }
+
+.slick-dots li{
+        background-color: transparent;
+    }
+    input#file-6 {
+        visibility: hidden;
+    }
+    .js .inputfile {
+        width: 0.1px;
+        height: 0.1px;
+        opacity: 0;
+        overflow: hidden;
+        position: absolute;
+        z-index: -1;
+    }
+
+
+
+    .no-js .inputfile + label {
+        display: none;
+    }
+
+    .inputfile:focus + label,
+    .inputfile.has-focus + label {
+        outline: 1px dotted #000;
+        outline: -webkit-focus-ring-color auto 5px;
+    }
+
+    .inputfile + label * {
+        /* pointer-events: none; */
+        /* in case of FastClick lib use */
+    }
+
+    .inputfile + label svg {
+        width: 1em;
+        height: 1em;
+        vertical-align: middle;
+        fill: currentColor;
+        margin-top: -0.25em;
+        /* 4px */
+        margin-right: 0.25em;
+        /* 4px */
+    }
+
+
+
+    .inputfile-5 + label {
+        color: #d3394c;
+    }
+
+    .inputfile-5:focus + label,
+    .inputfile-5.has-focus + label,
+    .inputfile-5 + label:hover {
+        color: #722040;
+    }
+
+    .inputfile-5 + label figure {
+        /* width: 100px; */
+        /* height: 135px; */
+        background-color: rgba(211, 57, 76, 0);
+        display: block;
+        position: relative;
+        padding: 0;
+        margin: 0;
+    }
+    .inputfile-5:focus + label figure,
+    .inputfile-5.has-focus + label figure,
+    .inputfile-5 + label:hover figure {
+        background-color: #722040;
+    }
+
+    .inputfile-5 + label figure::before,
+    .inputfile-5 + label figure::after {
+        width: 0;
+        height: 0;
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+    .inputfile-5 + label figure::before {
+        border-top: 20px solid #dfc8ca;
+        border-left: 20px solid transparent;
+    }
+
+    .inputfile-5 + label figure::after {
+        border-bottom: 20px solid #722040;
+        border-right: 20px solid transparent;
+    }
+
+    .inputfile-5:focus + label figure::after,
+    .inputfile-5.has-focus + label figure::after,
+    .inputfile-5 + label:hover figure::after {
+        border-bottom-color: #d3394c;
+    }
+
+    .inputfile-5 + label svg {
+        width: 100%;
+        height: 100%;
+        fill: #f1e5e6;
+    }
+    .inputfile + label {
+        max-width: 80%;
+        font-size: 13px;
+        /* background-color: red; */
+        font-weight: 700;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        cursor: pointer;
+        display: inline-block;
+        overflow: hidden;
+        padding: 0;
+    }

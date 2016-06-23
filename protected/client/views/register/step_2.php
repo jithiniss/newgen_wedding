@@ -266,7 +266,7 @@
                                     <input type="radio" name="UserDetails[suddha_jadhagam]" id="UserDetails_suddha_jadhagam" value="2">No
                                 </label>
                                 <label class="radio-inline sec">
-                                    <input type="radio" name="UserDetails[suddha_jadhagam]" id="UserDetails_suddha_jadhagam" value="2">Don't No
+                                    <input type="radio" name="UserDetails[suddha_jadhagam]" id="UserDetails_suddha_jadhagam" value="3">Don't No
                                 </label>
                                 <?php echo $form->error($secondStep, 'suddha_jadhagam'); ?>
                             </div>
