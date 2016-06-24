@@ -50,7 +50,17 @@ class SiteController extends Controller {
                                                 Yii::app()->user->setFlash('login_error', "<h3>Access Denied</h3>.Please contact customer care");
                                         } else {
                                                 Yii::app()->session['user'] = $user_login;
-                                                $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/index');
+                                                if($user_login->register_step == 1) {
+                                                        $this->redirect(Yii::app()->request->baseUrl . '/index.php/Register/SecondStep');
+                                                } else if($user_login->register_step == 2) {
+                                                        $this->redirect(Yii::app()->request->baseUrl . '/index.php/Register/ThirdStep');
+                                                } else if($user_login->register_step == 3) {
+                                                        $this->redirect(Yii::app()->request->baseUrl . '/index.php/Register/FourthStep');
+                                                } else if($user_login->register_step == 4) {
+                                                        $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/index');
+                                                } else {
+                                                        $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/index');
+                                                }
                                         }
                                 } else {
                                         $login->addError('email', '');

@@ -15,3 +15,23 @@
 .login_error{
     text-align: center;
 }
+.newgens ul li a:hover{
+    text-decoration: none;
+}
+.newgens ul li.active {
+    background-color: #fff;
+    border-bottom: 1px solid #999;
+}
+.newgens ul li.active a {
+    color: rebeccapurple;
+    font-weight: bold;
+}
+.partner_det {
+   
+    background-color: #dbdbdb !important;
+  
+}
+.stripsss{
+   border:0px; 
+   margin-bottom: 10px;
+}
