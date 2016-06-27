@@ -5,33 +5,52 @@
         border-color:  #ff9900 !important;
 }
 #sub_community{
-    display:none;
+        display:none;
 }
 .login_error h3{
         text-align: center;
-    font-size: 17px;
+        font-size: 17px;
         margin-top: 0;
 }
 .login_error{
-    text-align: center;
+        text-align: center;
 }
 .newgens ul li a:hover{
-    text-decoration: none;
+        text-decoration: none;
 }
 .newgens ul li.active {
-    background-color: #fff;
-    border-bottom: 1px solid #999;
+        background-color: #fff;
+        border-bottom: 1px solid #999;
 }
 .newgens ul li.active a {
-    color: rebeccapurple;
-    font-weight: bold;
+        color: rebeccapurple;
+        font-weight: bold;
 }
 .partner_det {
-   
-    background-color: #dbdbdb !important;
-  
+
+        background-color: #dbdbdb !important;
+
 }
 .stripsss{
-   border:0px; 
-   margin-bottom: 10px;
+        border:0px; 
+        margin-bottom: 10px;
+}
+.forgot h1 {
+        font-size: 26px;
+        color: #ff9900;
+        font-family: 'Roboto', sans-serif;
+        padding-right: 5px;
+        padding-left: 0;
+        margin-bottom: 14px;
+        font-weight: 400;
+        text-align: center;
+        margin-bottom: 39px;
+        margin-top: 0px;
+}
+.forgot h2{
+        font-size: 12px;
+        color: #666;
+        line-height: 22px;
+        text-align: center;
+        font-family: 'Roboto', sans-serif;
 }
