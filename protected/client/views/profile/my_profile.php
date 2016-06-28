@@ -7,15 +7,7 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-md-3 newgens">
-                <h3>NEWGEN</h3>
-                <ul class="list-unstyled">
-                    <li><a href="#">My Contact Details</a></li>
-                    <li class="active"><a href="#">My Profile</a></li>
-                    <li><a href="#">My Photos</a></li>
-                    <li><a href="#">My Partner Preferences</a></li>
-                </ul>
-            </div>
+            <?php $this->renderPartial('_leftSide'); ?>
             <div class="col-md-9 any nop">
                 <h4><?php echo ucwords($myProfile->first_name . ' ' . $myProfile->last_name); ?></h4>
                 <div class="pull-right">
@@ -35,7 +27,15 @@
 
 
                                 </form>
-                                <label for="file-6">
+                                <label for="file-6" id="ajax_pics" style="position: relative;cursor: pointer;">
+                                    <div style="
+                                         position: absolute;    height: 212px;
+                                         top: 0px;
+                                         left: 0px;
+                                         padding: 81px;display: none;background-color:#d2d2d2;background-image: url(<?= Yii::app()->baseUrl; ?>/images/profile_loader.gif); background-repeat: no-repeat;background-position: center; " id="loading_prof">
+
+
+                                    </div>
                                     <?php
                                     if($myProfile->photo != "") {
                                             $folder = Yii::app()->Upload->folderName(0, 1000, $myProfile->id);
@@ -193,7 +193,7 @@
 
 
                             <ul class="list-unstyled">
-                                <li><a href="#">Edit Personal Profile</a></li>
+                                <li><?php echo CHtml::link('Edit Personal Profile', array('profile/EditProfile')); ?></a></li>
                                 <li><a href="#">Edit Partner Profile</a></li>
 
                                 <li><a href="#">Edit Contact Details </a></li>
@@ -1312,8 +1312,37 @@
         $(document).ready(function () {
             $(".profile_pics").change(function () {
 
-                $("#profile_form").submit();
 
+                var fd = new FormData();
+                fd.append("UserDetails[photo]", $(".profile_pics")[0].files[0]);
+                $.ajax({
+                    url: '<?php echo Yii::app()->createUrl("Profile/MyProfile"); ?>',
+                    type: 'POST',
+                    data: fd,
+                    datatype: 'json',
+                    // async: false,
+                    beforeSend: function () {
+                        $('#loading_prof').show();
+                    },
+                    success: function (data) {
+
+                        // on success do some validation or refresh the content div to display the uploaded images
+                        $("#ajax_pics").html(data);
+                    },
+                    complete: function () {
+                        // success alerts
+                        $('#loading_prof').hide();
+                        // alert('Image uploaded successfully')
+                    },
+                    error: function (data) {
+                        alert("There may a error on uploading. Try again later");
+                    },
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                });
+
+                return false;
             });
         });
 </script>

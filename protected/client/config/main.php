@@ -9,6 +9,7 @@ $frontend = dirname($admin);
 Yii::setPathOfAlias('admin', $admin);
 Yii::setPathOfAlias('booster', dirname(__FILE__) . '/../extensions/yiibooster');
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__) . '/../extensions/bootstrap');
+Yii::setPathOfAlias('phpthumb', dirname(__FILE__) . '/../extensions/EPhpThumb/EPhpThumb');
 return array(
     'basePath' => $frontend,
     'controllerPath' => $admin . '/controllers',
@@ -20,6 +21,8 @@ return array(
         'admin.components.*',
         'application.models.*',
         'admin.components.*',
+        'application.components.*',
+        'admin.extensions.easyimage.EasyImage',
     ),
     'modulePath' => $admin . '/modules/',
     'modules' => array(

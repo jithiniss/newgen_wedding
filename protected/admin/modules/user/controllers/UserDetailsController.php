@@ -9,7 +9,7 @@ class UserDetailsController extends Controller {
         public $layout = '//layouts/column2';
 
         public function init() {
-                if (!isset(Yii::app()->session['admin'])) {
+                if(!isset(Yii::app()->session['admin'])) {
                         //Yii::app()->user->setFlash('session_expired', "Session expired please login again !");
                         //$this->redirect(Yii::app()->baseUrl . '/admin.php/site/index');
                 }
@@ -68,11 +68,11 @@ class UserDetailsController extends Controller {
         public function actionCreate() {
                 $model = new UserDetails('admin_create');
                 // $this->performAjaxValidation($model);
-                if (isset($_POST['UserDetails'])) {
+                if(isset($_POST['UserDetails'])) {
                         $model = $this->setValues($model, $_POST['UserDetails']);
                         $image = CUploadedFile::getInstance($model, 'photo');
-                        if ($model->validate()) {
-                                if (!$this->uploadFiles($model->id, $image)) {
+                        if($model->validate()) {
+                                if(!$this->uploadFiles($model->id, $image)) {
                                         throw new CHttpException(403, 'Forbidden');
                                 }
                                 $transaction = Yii::app()->db->beginTransaction();
@@ -83,7 +83,7 @@ class UserDetailsController extends Controller {
                                         $this->userPlan($model->id)->save(false);
                                         $transaction->commit();
                                         $this->redirect('admin');
-                                } catch (Exception $e) {
+                                } catch(Exception $e) {
                                         $transaction->rollback();
                                         Yii::app()->user->setFlash('error', $e->getMessage());
                                 }
@@ -96,18 +96,24 @@ class UserDetailsController extends Controller {
         }
 
         public function uploadFiles($id, $image) {
-                if ($image != "") {
+                if($image != "") {
                         $folder = Yii::app()->Upload->folderName(0, 1000, $id);
+                        $files = glob(Yii::app()->basePath . '/../uploads/user/' . $folder . '/' . $id . '/profile/*'); // get all file names
+                        foreach($files as $file) { // iterate files
+                                if(is_file($file)) {
+                                        unlink($file); // delete file
+                                }
+                        }
                         $filename = $id . '_' . rand(100001, 999999);
                         $path = array('uploads', 'user', $folder, $id, 'profile');
                         $dimension[0] = array('width' => '116', 'height' => '155', 'name' => 'main');
 //                        $dimension[1] = array('width' => '322', 'height' => '500', 'name' => 'medium');
 //                        $dimension[2] = array('width' => '580', 'height' => '775', 'name' => 'big');
 //                        $dimension[3] = array('width' => '3016', 'height' => '4030', 'name' => 'zoom');
-                        if (Yii::app()->Upload->uploadImage($image, $dimension, $path, $filename)) {
+                        if(Yii::app()->Upload->uploadImage($image, $dimension, $path, $filename)) {
                                 $model = UserDetails::model()->findByPk($id);
                                 $model->photo = $filename . '.' . $image->extensionName;
-                                if ($model->save()) {
+                                if($model->save()) {
                                         return true;
                                 } else {
                                         return FALSE;
@@ -126,15 +132,15 @@ class UserDetailsController extends Controller {
 
         public function partnerDetails($id) {
                 $user_details = UserDetails::model()->findByPk($id);
-                if (!empty($user_details)) {
+                if(!empty($user_details)) {
                         $age = date('Y') - date('Y', strtotime($user_details->dob));
                 }
                 $model = new PartnerDetails;
                 $model->user_id = $id;
-                if ($user_details->gender == 1) {
+                if($user_details->gender == 1) {
                         $model->age_from = 18;
                         $model->age_to = $age;
-                } else if ($user_details->gender == 2) {
+                } else if($user_details->gender == 2) {
                         $model->age_from = $age;
                 }
                 $model->religion = $user_details->religion;
@@ -181,14 +187,14 @@ class UserDetailsController extends Controller {
                 // Uncomment the following line if AJAX validation is needed
                 // $this->performAjaxValidation($model);
                 $photo = $model->photo;
-                if (isset($_POST['UserDetails'])) {
+                if(isset($_POST['UserDetails'])) {
                         $model = $this->setValues($model, $_POST['UserDetails']);
                         $image = CUploadedFile::getInstance($model, 'photo');
-                        if (!isset($image)) {
+                        if(!isset($image)) {
                                 $model->photo = $photo;
                                 $model->save();
                         } else {
-                                if (!$this->uploadFiles($model->id, $image)) {
+                                if(!$this->uploadFiles($model->id, $image)) {
                                         throw new CHttpException(403, 'Forbidden');
                                 }
                         }
@@ -208,7 +214,7 @@ class UserDetailsController extends Controller {
                 $this->loadModel($id)->delete();
 
                 // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-                if (!isset($_GET['ajax']))
+                if(!isset($_GET['ajax']))
                         $this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
         }
 
@@ -228,7 +234,7 @@ class UserDetailsController extends Controller {
         public function actionAdmin() {
                 $model = new UserDetails('search');
                 $model->unsetAttributes();  // clear any default values
-                if (isset($_GET['UserDetails']))
+                if(isset($_GET['UserDetails']))
                         $model->attributes = $_GET['UserDetails'];
 
                 $this->render('admin', array(
@@ -245,7 +251,7 @@ class UserDetailsController extends Controller {
          */
         public function loadModel($id) {
                 $model = UserDetails::model()->findByPk($id);
-                if ($model === null)
+                if($model === null)
                         throw new CHttpException(404, 'The requested page does not exist.');
                 return $model;
         }
@@ -255,7 +261,7 @@ class UserDetailsController extends Controller {
          * @param UserDetails $model the model to be validated
          */
         protected function performAjaxValidation($model) {
-                if (isset($_POST['ajax']) && $_POST['ajax'] === 'user-details-form') {
+                if(isset($_POST['ajax']) && $_POST['ajax'] === 'user-details-form') {
                         echo CActiveForm::validate($model);
                         Yii::app()->end();
                 }

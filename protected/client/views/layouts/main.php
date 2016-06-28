@@ -18,6 +18,11 @@
         <link href="<?= Yii::app()->baseUrl ?>/css/custom.css" rel="stylesheet">
         <link href="<?= Yii::app()->baseUrl ?>/css/slick.css" rel="stylesheet">
         <link href="<?= Yii::app()->baseUrl ?>/css/slick-theme.css" rel="stylesheet">
+        <script>
+                var baseurl = "<?php print Yii::app()->request->baseUrl . "/index.php/"; ?>";
+                var basepath = "<?php print Yii::app()->basePath; ?>";
+        </script>
+        <script src="<?= Yii::app()->baseUrl ?>/js/custom.js"></script>
         <style>
             #mask {
                 background-color: #e4007d;

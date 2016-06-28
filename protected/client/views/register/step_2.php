@@ -326,44 +326,6 @@
 
         $(document).ready(function () {
 
-            /*state change function */
-            var baseurl = "<?php print Yii::app()->request->baseUrl . "/index.php/"; ?>";
-            var basepath = "<?php print Yii::app()->basePath; ?>";
-            $('#UserDetails_state').change(function () {
-                var state = $(this).val();
-                if (state != '') {
-                    $.ajax({
-                        type: "POST",
-                        url: baseurl + "ajax/selectCity",
-                        data: {state: state}
-                    }).done(function (data) {
-                        $('#UserDetails_city').html(data);
-                    });
-                } else {
-                    $('#UserDetails_city').html("<option value=''>--Select--</option>");
-                }
-            });
-
-            /* Caste change function*/
-            $('#UserDetails_caste').change(function () {
-                var caste = $(this).val();
-                if (caste != '') {
-                    $.ajax({
-                        type: "POST",
-                        url: baseurl + "ajax/selectSubCaste",
-                        data: {caste: caste}
-                    }).done(function (data) {
-                        if (data != '') {
-                            $('#sub_community').show();
-                            $('#UserDetails_sub_caste').html(data);
-                        } else {
-                            $('#sub_community').hide();
-                        }
-                    });
-                } else {
-                    $('#sub_community').hide();
-                }
-            });
 
 
 
