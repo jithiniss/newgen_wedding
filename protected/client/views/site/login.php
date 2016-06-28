@@ -36,7 +36,7 @@
                                         <?php $this->endWidget(); ?>
 
                                         <div class="col-md-6 col-sm-6 col-xs-6 padd">
-                                                <a class="forgot" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/ForgotPassword/">Forgot Password</a>
+                                                <?php echo CHtml::link('Forgot Password', array('ForgotPassword/'), array('class' => 'forgot')); ?>
                                         </div>
 
                                         <div class="col-md-6 col-sm-6 col-xs-6 padd">

@@ -36,10 +36,8 @@ class ForgotPasswordController extends Controller {
                 $user = $details->email;
                 //$user = 'shahana@intersmart.in';
                 $user_subject = 'Please Reset Your Password';
-                $user_message = 'We heard that you lost your Laksyah password. Sorry about that!<br><br>'
-                        . 'But don’t worry! You can use the following link within the next day to reset your password:'
-                        . '<a href="http://beta.laksyah.com/index.php/ForgotPassword/Changepassword/token/' . $token . '">Click Here to Reset Password</a><br><br>'
-                        . 'Thanks';
+                $user_message = $this->renderPartial('mail/_forgot_password_mail_user', array('token' => $token), true);
+
 
                 // Always set content-type when sending HTML email
                 $headers = "MIME-Version: 1.0" . "\r\n";
@@ -86,6 +84,12 @@ class ForgotPasswordController extends Controller {
                         }
                 }
                 $this->render('changepassword');
+        }
+
+        public function siteURL() {
+                $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+                $domainName = $_SERVER['HTTP_HOST'];
+                return $protocol . $domainName;
         }
 
 }
