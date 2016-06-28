@@ -7,7 +7,7 @@ return array(
     'lifestyle-appearence' => 'register/ThirdStep',
     'education-career' => 'register/FourthStep',
     'login' => 'site/login',
-    'Forgot Password' => 'forgotPassword/index',
+    'Forgot Password' => 'ForgotPassword/index',
     'profile-details' => 'Partner/Partnerdetails/userid',
     'edit-profile' => 'profile/EditProfile',
     'my-profile' => 'profile/MyProfile',
