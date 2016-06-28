@@ -7,6 +7,7 @@ return array(
     'lifestyle-appearence' => 'register/ThirdStep',
     'education-career' => 'register/FourthStep',
     'login' => 'site/login',
+    'profile-details' => 'Partner/Partnerdetails/userid',
     '<controller:\w+>/<id:\d+>' => '<controller>/view',
     '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

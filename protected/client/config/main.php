@@ -33,7 +33,7 @@ return array(
     ),
     // application components
     'components' => array(
-        'upload' => array('class' => 'UploadFile'),
+        'Upload' => array('class' => 'UploadFile'),
         'dateFormat' => array('class' => 'DateFormat'),
         'booster' => array(
             'class' => 'booster.components.Booster',
