@@ -78,6 +78,10 @@
  */
 class UserDetails extends CActiveRecord {
 
+        public $old_password;
+        public $new_password;
+        public $repeat_password;
+
         /**
          * @return string the associated database table name
          */
@@ -96,7 +100,10 @@ class UserDetails extends CActiveRecord {
                     array('caste, marital_status, state, city', 'required', 'on' => 'userSecondStep'),
                     array('height,smoke, drink', 'required', 'on' => 'userThirdStep'),
                     array('height,smoke, drink,caste, marital_status, state, city,profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, mothertongue, country', 'required', 'on' => 'myProfile'),
-                    //array('user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, cb, ub, doc, dou', 'required'),
+                    array('contact_number', 'required', 'on' => 'contactupdate'),
+                    array('old_password,new_password,repeat_password', 'required', 'on' => 'changePwd'),
+                    array('repeat_password', 'compare', 'compareAttribute' => 'new_password', 'on' => 'changePwd'),
+//array('user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, cb, ub, doc, dou', 'required'),
                     array('email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, marital_status, mothertongue, country, state, city, zip_code, education_level, education_field, working_with, working_as, annual_income, mobile_number, grow_up_in, plan_id', 'required', 'on' => 'admin_create'),
                     array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, plan_id, cb, ub', 'numerical', 'integerOnly' => true),
                     array('email', 'email'),
@@ -130,6 +137,8 @@ class UserDetails extends CActiveRecord {
                 // class name for the relations automatically generated below.
                 return array(
                     'partnerDetails' => array(self::HAS_MANY, 'PartnerDetails', 'user_id'),
+                    'country0' => array(self::BELONGS_TO, 'MasterCountry', 'country'),
+                    'state0' => array(self::BELONGS_TO, 'MasterState', 'state'),
                 );
         }
 
