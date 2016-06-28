@@ -43,11 +43,7 @@
                             ));
                             ?>
                             <div class="common">
-                                <?php
-                                if ($account->hasErrors()) {
-                                        echo CHtml::errorSummary($account);
-                                }
-                                ?>
+
                                 <div class="col-sm-3 col-xs-3 zeros">
                                     <label for="textinput" class="control-label">Address</label>
                                 </div>

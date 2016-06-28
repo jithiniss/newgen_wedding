@@ -66,6 +66,16 @@ class SettingsController extends Controller {
                 $user_id = Yii::app()->session['user']['id'];
                 if ($user_id) {
                         $model = $this->loadModel($user_id);
+                        $model->setScenario('addressupdate');
+                        if (isset($_POST['UserDetails'])) {
+                                $model->attributes = $_POST['UserDetails'];
+                                if ($model->validate()) {
+                                        $model->ub = $user_id;
+                                        if ($model->save()) {
+                                                $this->redirect(array('index'));
+                                        }
+                                }
+                        }
                         $this->render('address', ['account' => $model]);
                 } else {
                         $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/login');
