@@ -2,7 +2,7 @@
     .slick-dots li{
         background-color: transparent;
     }
-</style>
+</style>   <label  id="basicinfo"></label>
 <section class="profiles">
     <div class="container">
         <div class="row">
@@ -228,7 +228,7 @@
                                 </div>
                                 <div class="col-sm-1 col-xs-1 zeros">
                                     <label for="textinput" class="control-label">:</label>
-                                </div>
+                                </div>  <label id="religiousbkd"></label>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <?php
                                     $skin_tone = MasterSkinTone::model()->findAll(array('condition' => 'status=1'));
@@ -303,10 +303,12 @@
                             </div>
                         </div>
                     </div>
-                    <!--****-->
-                    <div class="clearfix"></div>
 
-                    <div class="strip">
+                    <!--****-->
+
+
+
+                    <div class="strip" >
                         <h2>Religious Background</h2>
                         <div class="strip-padding">
 
@@ -398,7 +400,7 @@
                                 <div class="col-sm-1 col-xs-1 zeros">
                                     <label for="textinput" class="control-label">:</label>
                                 </div>
-                                <div class="col-sm-8 col-xs-8 zeros">
+                                <div class="col-sm-8 col-xs-8 zeros"  id="family">
                                     <div class="form-group">
 
                                         <?php
@@ -424,11 +426,11 @@
                                 </div>
 
                             </div>
-                            <div class="common">
+                            <div class="common" >
                                 <div class="col-sm-3 col-xs-3 zeros">
                                     <label for="textinput" class="control-label">Nakshatra(Optional)</label>
                                 </div>
-                                <div class="col-sm-1 col-xs-1 zeros">
+                                <div class="col-sm-1 col-xs-1 zeros" >
                                     <label for="textinput" class="control-label">:</label>
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
@@ -442,7 +444,7 @@
                             </div>
                             <div class="common">
                                 <div class="col-sm-3 col-xs-3 zeros">
-                                    <label for="textinput" class="control-label">Suddha Jathakam (Optional)</label>
+                                    <label for="textinput" class="control-label" >Suddha Jathakam (Optional)</label>
                                 </div>
                                 <div class="col-sm-1 col-xs-1 zeros">
                                     <label for="textinput" class="control-label">:</label>
@@ -479,7 +481,7 @@
                     <!--****-->
 
 
-                    <div class="strip">
+                    <div class="strip" >
                         <h2>Family</h2>
                         <div class="strip-padding">
 
@@ -630,7 +632,7 @@
 
 
 
-                            <div class="common">
+                            <div class="common" id="education">
                                 <div class="col-sm-3 col-xs-3 zeros">
                                     <label for="textinput" class="control-label">Family Type</label>
                                 </div>
@@ -817,7 +819,7 @@
 
 
 
-                    <div class="strip">
+                    <div class="strip" id="groom">
                         <h2>Life Style</h2>
                         <div class="strip-padding">
                             <div class="common">
@@ -1094,6 +1096,7 @@
 
 
                         </div>
+                        <label  id="aboutme"></label>
                     </div>
 
 

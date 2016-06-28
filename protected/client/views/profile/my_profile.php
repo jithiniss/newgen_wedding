@@ -193,7 +193,7 @@
 
 
                             <ul class="list-unstyled">
-                                <li><?php echo CHtml::link('Edit Personal Profile', array('profile/EditProfile')); ?></a></li>
+                                <li><?php echo CHtml::link('Edit Personal Profile', array('profile/EditProfile')); ?></li>
                                 <li><a href="#">Edit Partner Profile</a></li>
 
                                 <li><a href="#">Edit Contact Details </a></li>
@@ -224,7 +224,7 @@
                                 </div>
 
                                 <div class="rel-2">
-                                    <h6><a class="edit" href="#">Edit<i class="fa cart fa-caret-right"></i></a></h6>
+                                    <h6><?php echo CHtml::link('Edit<i class="fa cart fa-caret-right"></i>', array('profile/EditProfile', '#' => 'aboutme'), array('class' => 'edit')); ?></h6>
                                 </div>
                             </div>
                             <div class="strip-padding">
@@ -258,7 +258,8 @@
                                 </div>
 
                                 <div class="rel-2">
-                                    <h6><a class="edit" href="#">Edit<i class="fa cart fa-caret-right"></i></a></h6>
+                                    <h6><?php echo CHtml::link('Edit<i class="fa cart fa-caret-right"></i>', array('profile/EditProfile', '#' => 'basicinfo'), array('class' => 'edit')); ?></h6>
+
                                 </div>
                             </div>
                             <div class="strip-paddingz">
@@ -621,7 +622,8 @@
                                 </div>
 
                                 <div class="rel-2">
-                                    <h6><a class="edit" href="#">Edit<i class="fa cart fa-caret-right"></i></a></h6>
+                                    <h6><?php echo CHtml::link('Edit<i class="fa cart fa-caret-right"></i>', array('profile/EditProfile', '#' => 'religiousbkd'), array('class' => 'edit')); ?></h6>
+
                                 </div>
                             </div>
                             <div class="strip-paddingz">
@@ -769,7 +771,8 @@
                                 </div>
 
                                 <div class="rel-2">
-                                    <h6><a class="edit" href="#">Edit<i class="fa cart fa-caret-right"></i></a></h6>
+                                    <h6><?php echo CHtml::link('Edit<i class="fa cart fa-caret-right"></i>', array('profile/EditProfile', '#' => 'family'), array('class' => 'edit')); ?></h6>
+
                                 </div>
                             </div>
                             <div class="strip-paddingz">
@@ -992,7 +995,8 @@
                                 </div>
 
                                 <div class="rel-2">
-                                    <h6><a class="edit" href="#">Edit<i class="fa cart fa-caret-right"></i></a></h6>
+                                    <h6><?php echo CHtml::link('Edit<i class="fa cart fa-caret-right"></i>', array('profile/EditProfile', '#' => 'education'), array('class' => 'edit')); ?></h6>
+
                                 </div>
                             </div>
                             <div class="strip-paddingz">
@@ -1110,7 +1114,8 @@
                                 </div>
 
                                 <div class="rel-2">
-                                    <h6><a class="edit" href="#">Edit<i class="fa cart fa-caret-right"></i></a></h6>
+                                    <h6><?php echo CHtml::link('Edit<i class="fa cart fa-caret-right"></i>', array('profile/EditProfile', '#' => 'groom'), array('class' => 'edit')); ?></h6>
+
                                 </div>
                             </div>
                             <div class="strip-paddingz">
