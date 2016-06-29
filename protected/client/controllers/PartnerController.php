@@ -21,8 +21,9 @@ class PartnerController extends Controller {
                 if (isset(Yii::app()->session['user'])) {
                         if ($userid != '') {
                                 $user_details = UserDetails::model()->findByAttributes(array('user_id' => $userid));
+                                $current_user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                                 $partner_details = PartnerDetails::model()->findByAttributes(array('user_id' => $user_details->id));
-                                $this->render('index', array('user_details' => $user_details, 'partner_details' => $partner_details));
+                                $this->render('index', array('user_details' => $user_details, 'partner_details' => $partner_details, 'current_user' => $current_user));
                         } else {
                                 $this->redirect(array('site/error'));
                         }

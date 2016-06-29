@@ -346,8 +346,9 @@
                                                                                 <?php
                                                                                 if ($user_details->photo != '') {
                                                                                         $folder = Yii::app()->Upload->folderName(0, 1000, $user_details->id);
+                                                                                        $user_details_pic = explode('.', $user_details->photo);
                                                                                         ?>
-                                                                                        <img class = "her" src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $user_details->id . '/profile/' . $user_details->photo; ?>"><br>
+                                                                                        <img class="her" src="<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $user_details->id . '/profile/' . $user_details_pic[0] . '_100_130.' . $user_details_pic[1]; ?>" />
                                                                                 <?php } else if ($user_details->gender == 1) { ?>
                                                                                         <img class = "him" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/pp.jpg" />
                                                                                 <?php } else { ?>
@@ -361,11 +362,13 @@
                                                                         </th>
                                                                         <th>
                                                                                 <?php
-                                                                                if (Yii::app()->session['user']['photo'] != '') {
-                                                                                        $folder = Yii::app()->Upload->folderName(0, 1000, $user_details->id);
+                                                                                if ($current_user->photo != '') {
+                                                                                        $folder = Yii::app()->Upload->folderName(0, 1000, $current_user->id);
+                                                                                        $current_user_pic = explode('.', $current_user->photo);
                                                                                         ?>
-                                                                                        <img class = "him" src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . Yii::app()->session['user']['id'] . '/profile/' . Yii::app()->session['user']['photo']; ?>"><br>
-                                                                                <?php } else if (Yii::app()->session['user']['gender'] == 1) { ?>
+                                                                                        <img class="him" src="<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $current_user->id . '/profile/' . $current_user_pic[0] . '_100_130.' . $current_user_pic[1]; ?>" />
+                                                                                        <br>
+                                                                                <?php } else if ($current_user->gender == 1) { ?>
                                                                                         <img class = "him" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/pp.jpg" />
                                                                                 <?php } else { ?>
                                                                                         <img class = "him" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
@@ -382,19 +385,19 @@
                                                                 <tr>
                                                                         <td style = "borde">Age </td>
                                                                         <td><?php echo $partner_details->age_from; ?> to <?php echo $partner_details->age_to; ?></td>
-                                                                        <td><?php if (($partner_details->age_from < (date('Y') - Yii::app()->session['user']['dob_year'])) && (date('Y') - Yii::app()->session['user']['dob_year']) < ($partner_details->age_to)) { ?>
+                                                                        <td><?php if (($partner_details->age_from < (date('Y') - $current_user->dob_year)) && (date('Y') - $current_user->dob_year) < ($partner_details->age_to)) { ?>
                                                                                         <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
                                                                                 <?php } else { ?>
                                                                                         <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
                                                                                 <?php } ?></td>
 
                                                                 </tr>
-                                                                <?php if ($partner_details->height_from != 0 && $partner_details->height_from != 0) { ?>
+                                                                <?php if ($partner_details->height_from != 0 && $partner_details->height_to != 0) { ?>
                                                                         <tr>
                                                                                 <td>Height</td>
                                                                                 <td><?php echo $partner_details->height_from; ?> cm to <?php echo $partner_details->height_to; ?> cm</td>
                                                                                 <td>
-                                                                                        <?php if (($partner_details->height_from < (date('Y') - Yii::app()->session['user']['height'])) && (date('Y') - Yii::app()->session['user']['height']) < ($partner_details->height_from)) { ?>
+                                                                                        <?php if (($partner_details->height_from < (date('Y') - $current_user->height)) && (date('Y') - $current_user->height) < ($partner_details->height_from)) { ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
                                                                                         <?php } else { ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
@@ -403,49 +406,94 @@
 
                                                                         </tr>
                                                                 <?php } ?>
+                                                                <?php if ($partner_details->marital_status != 0) { ?>
+                                                                        <tr>
+                                                                                <td>Marital Status</td>
+                                                                                <td><?php echo MasterMaritalStatus::model()->findByPk($partner_details->marital_status)->marital_status; ?></td>
+                                                                                <td>
+                                                                                        <?php if ($partner_details->marital_status == $current_user->marital_status) {
+                                                                                                ?>
+                                                                                                <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
+                                                                                        <?php } else { ?>
+                                                                                                <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
+                                                                                        <?php } ?>
+                                                                        </tr>
+                                                                <?php } ?>
+                                                                <?php if ($partner_details->religion != 0) { ?>
+                                                                        <tr>
+                                                                                <td>Religion / Community</td>
+                                                                                <td><?php echo MasterReligion::model()->findByPk($partner_details->religion)->religion; ?></td>
+                                                                                <td> <?php if ($partner_details->religion == $current_user->religion) {
+                                                                                ?>
+                                                                                                <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
+                                                                                        <?php } else { ?>
+                                                                                                <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
+                                                                                        <?php } ?></td>
 
+                                                                        </tr>
+
+                                                                <?php } ?>
+                                                                <?php if ($partner_details->mothertongue != 0) { ?>
+                                                                        <tr>
+                                                                                <td>Mother Tongue </td>
+                                                                                <td><?php echo MasterMotherTongue::model()->findByPk($partner_details->mothertongue)->mother_tongue; ?></td>
+                                                                                <td><?php if ($partner_details->mothertongue == $current_user->mothertongue) {
+                                                                                ?>
+                                                                                                <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
+                                                                                        <?php } else { ?>
+                                                                                                <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
+                                                                                        <?php } ?></td>
+
+                                                                        </tr>
+                                                                <?php } ?>
+                                                                <?php if ($partner_details->profession_area != 0) { ?>
+                                                                        <tr>
+                                                                                <td>Education </td>
+                                                                                <td><?php echo MasterEducationLevel::model()->findByPk($partner_details->profession_area)->education_level; ?></td>
+                                                                                <td><?php if ($partner_details->profession_area == $current_user->education_level) {
+                                                                                ?>
+                                                                                                <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
+                                                                                        <?php } else { ?>
+                                                                                                <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
+                                                                                        <?php } ?></td>
+                                                                        </tr>
+                                                                <?php } ?>
                                                                 <tr>
-                                                                        <td>Marital Status</td>
-                                                                        <td>Never Married</td>
-                                                                        <td>
-                                                                                <?php if ($partner_details->marital_status == Yii::app()->session['user']['marital_status']) { ?>
+                                                                        <td>Smoke </td>
+                                                                        <td><?php
+                                                                                if ($partner_details->smoke == 0) {
+                                                                                        echo 'No';
+                                                                                } else if ($partner_details->smoke == 1) {
+                                                                                        echo 'Yes';
+                                                                                } else if ($partner_details->smoke == 2) {
+                                                                                        echo 'Occasionally';
+                                                                                }
+                                                                                ?></td>
+                                                                        <td><?php if ($partner_details->smoke == $current_user->smoke) {
+                                                                                        ?>
                                                                                         <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
                                                                                 <?php } else { ?>
                                                                                         <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
-                                                                                <?php } ?>
-                                                                </tr>
-
-                                                                <tr>
-                                                                        <td>Religion / Community</td>
-                                                                        <td>Christian:Born Again, Christian:IPC... more</td>
-                                                                        <td><img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png"></td>
-
-                                                                </tr>
-
-
-
-                                                                <tr>
-                                                                        <td>Mother Tongue </td>
-                                                                        <td>English, Malayalam</td>
-                                                                        <td><img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png"></td>
-
-                                                                </tr>
-
-                                                                <tr>
-                                                                        <td>Education </td>
-                                                                        <td>Masters</td>
-                                                                        <td><img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png"></td>
-                                                                </tr>
-                                                                <tr>
-                                                                        <td>Smoke </td>
-                                                                        <td> Don't include profiles who smoke</td>
-                                                                        <td><img class="never" src="<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png"></td>
+                                                                                <?php } ?></td>
                                                                 </tr>
 
                                                                 <tr>
                                                                         <td>Drink </td>
-                                                                        <td> Never Drinks </td>
-                                                                        <td><img class="never" src="<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png"></td>
+                                                                        <td><?php
+                                                                                if ($partner_details->drink == 0) {
+                                                                                        echo 'No';
+                                                                                } else if ($partner_details->drink == 1) {
+                                                                                        echo 'Yes';
+                                                                                } else if ($partner_details->drink == 2) {
+                                                                                        echo 'Occasionally';
+                                                                                }
+                                                                                ?></td>
+                                                                        <td><?php if ($partner_details->drink == $current_user->drink) {
+                                                                                        ?>
+                                                                                        <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
+                                                                                <?php } else { ?>
+                                                                                        <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
+                                                                                <?php } ?></td>
                                                                 </tr>
                                                         </tbody>
                                                 </table>

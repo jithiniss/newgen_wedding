@@ -5,7 +5,7 @@ class ProfileController extends Controller {
         public function init() {
 
 
-                if(!isset(Yii::app()->session['user'])) {
+                if (!isset(Yii::app()->session['user'])) {
 
                         $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/login');
                 }
@@ -14,14 +14,14 @@ class ProfileController extends Controller {
         public function actionMyProfile() {
 
                 $myProfile = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                if(!empty($myProfile)) {
+                if (!empty($myProfile)) {
                         $partnerDetails = PartnerDetails::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
 
-                        if(isset($_FILES['UserDetails'])) {
+                        if (isset($_FILES['UserDetails'])) {
 
                                 $image = CUploadedFile::getInstance($myProfile, 'photo');
 
-                                if(!$this->uploadFiles($myProfile->id, $image)) {
+                                if (!$this->uploadFiles($myProfile->id, $image)) {
                                         throw new CHttpException(403, 'Forbidden');
                                 } else {
                                         $myProfile->refresh();
@@ -38,15 +38,15 @@ class ProfileController extends Controller {
 
         public function actionEditProfile() {
                 $editProfile = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                if(!empty($editProfile)) {
+                if (!empty($editProfile)) {
                         $editProfile->scenario = 'myProfile';
                         $partnerDetails = PartnerDetails::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
-                        if(isset($_POST['UserDetails'])) {
+                        if (isset($_POST['UserDetails'])) {
                                 $editProfile->attributes = $_POST['UserDetails'];
                                 $editProfile->about_me = $_POST['UserDetails']['about_me'];
                                 $editProfile->ub = $editProfile->id;
                                 $editProfile->dob = $editProfile->dob_year . '-' . $editProfile->dob_month . '-' . $editProfile->dob_day;
-                                if($editProfile->validate()) {
+                                if ($editProfile->validate()) {
                                         $editProfile->save(FALSE);
                                         Yii::app()->user->setFlash('edit_profile', "Profile Changed Successfully");
                                 }
@@ -58,11 +58,11 @@ class ProfileController extends Controller {
         }
 
         public function uploadFiles($id, $image) {
-                if($image != "") {
+                if ($image != "") {
                         $folder = Yii::app()->Upload->folderName(0, 1000, $id);
                         $files = glob(Yii::app()->basePath . '/../uploads/user/' . $folder . '/' . $id . '/profile/*'); // get all file names
-                        foreach($files as $file) { // iterate files
-                                if(is_file($file)) {
+                        foreach ($files as $file) { // iterate files
+                                if (is_file($file)) {
                                         unlink($file); // delete file
                                 }
                         }
@@ -73,11 +73,11 @@ class ProfileController extends Controller {
 //                        $dimension[1] = array('width' => '322', 'height' => '500', 'name' => 'medium');
 //                        $dimension[2] = array('width' => '580', 'height' => '775', 'name' => 'big');
 //                        $dimension[3] = array('width' => '3016', 'height' => '4030', 'name' => 'zoom');
-                        if(Yii::app()->Upload->uploadImage($image, $dimension, $path, $filename)) {
+                        if (Yii::app()->Upload->uploadImage($image, $dimension, $path, $filename)) {
                                 $model = UserDetails::model()->findByPk($id);
                                 $model->photo = $filename . '.' . $image->extensionName;
 
-                                if($model->save()) {
+                                if ($model->save()) {
                                         return true;
                                 } else {
                                         return FALSE;
