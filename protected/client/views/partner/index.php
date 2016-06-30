@@ -163,19 +163,11 @@
                         </ul>
                     </div>
                     <div class="ui-right">
-                        <div class="connect-6">
-                            <h5>Do you want to connect?</h5>
-
-                            <div class="yes">
-                                <div class="f4"><a href="#" class="connect-3">Yes</a></div>
-                                <div class="f5"><a href="#" class="connect-4">No</a></div>
-
-                            </div>
-                            <div class="clearfix"></div>
-                            <a href="#" class="offsets"><i class="fa car fa-envelope"></i>Send a message<i class="fa car fa-caret-right"></i></a>
-                            <a href="#" class="offsets"><i class="fa car fa-phone"></i>View  Contacts<i class="fa car fa-caret-right"></i></a>
-
-                        </div>
+                        <?php
+                        $this->widget("application.client.components.UserInterest", array(
+                            'interest_id' => $user_details->user_id,
+                        ));
+                        ?>
                     </div>
                 </div>
 
