@@ -74,45 +74,6 @@
                 }
             });
 
-          /*
-           * for partner preference
-           */
-          
-          
-            /*country change function */
-
-            $('#PartnerDetails_country_living_in').change(function () {
-                var country = $(this).val();
-                if (country != '') {
-                    $.ajax({
-                        type: "POST",
-                        url: baseurl + "ajax/selectState",
-                        data: {country: country}
-                    }).done(function (data) {
-                        $('#PartnerDetails_residency_status').html(data);
-                    });
-                } else {
-                    $('#PartnerDetails_residency_status').html("<option value=''>--Selec--</option>");
-                }
-            });
-
-         
-
-   /* Religion change function*/
-            $('#PartnerDetails_religion').change(function () {
-                var religion = $(this).val();
-                if (religion != '') {
-                    $.ajax({
-                        type: "POST",
-                        url: baseurl + "ajax/selectCaste",
-                        data: {religion: religion}
-                    }).done(function (data) {
-                        $('#PartnerDetails_caste').html(data);
-                    });
-                } else {
-                    $('#PartnerDetails_caste').html("<option value=''>Select Community</option>");
-                }
-            });
 
 
            

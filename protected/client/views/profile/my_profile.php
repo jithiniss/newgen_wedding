@@ -1087,14 +1087,14 @@
                                         </div>
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
-
                                                 <?php
-                                                if($myProfile->annual_income != '') {
-                                                        echo $myProfile->annual_income;
+                                                if($myProfile->annual_income != 0) {
+                                                        echo MasterAnnualIncome::model()->findByPk($myProfile->annual_income)->income_from;
                                                 } else {
                                                         echo '--';
                                                 }
                                                 ?>
+
                                             </label>
                                         </div>
                                     </div>
@@ -1285,12 +1285,22 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->skin_tone != 0) {
-                                                                echo MasterSkinTone::model()->findByPk($partnerDetails->skin_tone)->skin_tone;
+                                                        if($partnerDetails->skin_tone != '') {
+                                                                $profile_skin = explode(',', $partnerDetails->skin_tone);
+                                                                $ho = 1;
+                                                                foreach($profile_skin as $profile_skins) {
+                                                                        if($ho == 1) {
+                                                                                echo MasterSkinTone::model()->findByPk($profile_skins)->skin_tone;
+                                                                        } else {
+                                                                                echo ", " . MasterSkinTone::model()->findByPk($profile_skins)->skin_tone;
+                                                                        }
+                                                                        $ho++;
+                                                                }
                                                         } else {
                                                                 echo '--';
                                                         }
                                                         ?>
+
                                                     </label>
                                                 </div>
                                             </div>
@@ -1304,12 +1314,22 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->body_type != 0) {
-                                                                echo MasterBodyType::model()->findByPk($partnerDetails->body_type)->body_type;
+                                                        if($partnerDetails->body_type != '') {
+                                                                $profile_body = explode(',', $partnerDetails->body_type);
+                                                                $hi = 1;
+                                                                foreach($profile_body as $profile_bodys) {
+                                                                        if($hi == 1) {
+                                                                                echo MasterBodyType::model()->findByPk($profile_bodys)->body_type;
+                                                                        } else {
+                                                                                echo ", " . MasterBodyType::model()->findByPk($profile_bodys)->body_type;
+                                                                        }
+                                                                        $hi++;
+                                                                }
                                                         } else {
                                                                 echo '--';
                                                         }
                                                         ?>
+
                                                     </label>
                                                 </div>
                                             </div>
@@ -1342,8 +1362,17 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->profile_created_by != 0) {
-                                                                echo MasterProfileFor::model()->findByPk($partnerDetails->profile_created_by)->profile_for;
+                                                        if($partnerDetails->profile_created_by != '') {
+                                                                $profile_cret = explode(',', $partnerDetails->profile_created_by);
+                                                                $hh = 1;
+                                                                foreach($profile_cret as $profile_crets) {
+                                                                        if($hh == 1) {
+                                                                                echo MasterProfileFor::model()->findByPk($profile_crets)->profile_for;
+                                                                        } else {
+                                                                                echo ", " . MasterProfileFor::model()->findByPk($profile_crets)->profile_for;
+                                                                        }
+                                                                        $hh++;
+                                                                }
                                                         } else {
                                                                 echo '--';
                                                         }
@@ -1374,7 +1403,7 @@
 
                                             <div class="copyz">
                                                 <div class="col-sm-5 col-xs-3 zeros">
-                                                    <label for="textinput" class="control-labelz">Annual Income</label>
+                                                    <label for="textinput" class="control-labelz">Drink</label>
                                                 </div>
                                                 <div class="col-sm-1 col-xs-1 zeros">
                                                     <label for="textinput" class="control-labelz">:</label>
@@ -1382,7 +1411,363 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
 
-                                                        1                                            </label>
+                                                        <?php
+                                                        if($partnerDetails->drink != 0) {
+                                                                if($partnerDetails->drink == 1) {
+                                                                        echo 'No';
+                                                                } elseif($partnerDetails->drink == 2) {
+                                                                        echo 'Yes';
+                                                                } elseif($partnerDetails->drink == 3) {
+                                                                        echo 'Occasionally';
+                                                                }
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Diet</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        if($partnerDetails->diet != '') {
+                                                                $profile_diet = explode(',', $partnerDetails->diet);
+                                                                $hs = 1;
+                                                                foreach($profile_diet as $profile_diets) {
+                                                                        if($hs == 1) {
+                                                                                echo MasterDiet::model()->findByPk($profile_diets)->diet;
+                                                                        } else {
+                                                                                echo ", " . MasterDiet::model()->findByPk($profile_diets)->diet;
+                                                                        }
+                                                                        $hs++;
+                                                                }
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Smoke</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+
+                                                        <?php
+                                                        if($partnerDetails->smoke != 0) {
+                                                                if($partnerDetails->smoke == 1) {
+                                                                        echo 'No';
+                                                                } elseif($partnerDetails->smoke == 2) {
+                                                                        echo 'Yes';
+                                                                } elseif($partnerDetails->smoke == 3) {
+                                                                        echo 'Occasionally';
+                                                                }
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
+
+
+                                    </div>
+
+                                </div>
+                                <div class="strip">
+                                    <div class="rels">
+                                        <div class="rel-1">
+                                            <h2>Religion & Social Background</h2>
+                                        </div>
+
+                                        <div class="rel-2">
+                                            <h6><a class="edit" href="#">Edit<i class="fa cart fa-caret-right"></i></a></h6>
+                                        </div>
+                                    </div>
+                                    <div class="strip-paddingz">
+                                        <div class="col-md-6">
+
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Age</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        echo $partnerDetails->age_from . ' to ' . $partnerDetails->age_to;
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
+
+
+
+
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Marital Status</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        if($partnerDetails->marital_status != 0) {
+                                                                echo MasterMaritalStatus::model()->findByPk($partnerDetails->marital_status)->marital_status;
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Height</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        $height_from = MasterHeight::model()->findByPk($partnerDetails->height_from)->height;
+                                                        $height_to = MasterHeight::model()->findByPk($partnerDetails->height_to)->height;
+                                                        echo $height_from . ' TO ' . $height_to;
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Skin Tone</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        if($partnerDetails->skin_tone != '') {
+                                                                $profile_skin = explode(',', $partnerDetails->skin_tone);
+                                                                $ho = 1;
+                                                                foreach($profile_skin as $profile_skins) {
+                                                                        if($ho == 1) {
+                                                                                echo MasterSkinTone::model()->findByPk($profile_skins)->skin_tone;
+                                                                        } else {
+                                                                                echo ", " . MasterSkinTone::model()->findByPk($profile_skins)->skin_tone;
+                                                                        }
+                                                                        $ho++;
+                                                                }
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Body Type</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        if($partnerDetails->body_type != '') {
+                                                                $profile_body = explode(',', $partnerDetails->body_type);
+                                                                $hi = 1;
+                                                                foreach($profile_body as $profile_bodys) {
+                                                                        if($hi == 1) {
+                                                                                echo MasterBodyType::model()->findByPk($profile_bodys)->body_type;
+                                                                        } else {
+                                                                                echo ", " . MasterBodyType::model()->findByPk($profile_bodys)->body_type;
+                                                                        }
+                                                                        $hi++;
+                                                                }
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Grew Up in</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        if($partnerDetails->country_grew_up != 0) {
+                                                                echo MasterCountry::model()->findByPk($partnerDetails->country_grew_up)->country;
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Profile Created By</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        if($partnerDetails->profile_created_by != '') {
+                                                                $profile_cret = explode(',', $partnerDetails->profile_created_by);
+                                                                $hh = 1;
+                                                                foreach($profile_cret as $profile_crets) {
+                                                                        if($hh == 1) {
+                                                                                echo MasterProfileFor::model()->findByPk($profile_crets)->profile_for;
+                                                                        } else {
+                                                                                echo ", " . MasterProfileFor::model()->findByPk($profile_crets)->profile_for;
+                                                                        }
+                                                                        $hh++;
+                                                                }
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="col-md-6 lifestyle">
+
+
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Disability</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?= $partnerDetails->disability == 1 ? 'Dont include profiles with disability' : 'Doesnt Matter'; ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Drink</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+
+                                                        <?php
+                                                        if($partnerDetails->drink != 0) {
+                                                                if($partnerDetails->drink == 1) {
+                                                                        echo 'No';
+                                                                } elseif($partnerDetails->drink == 2) {
+                                                                        echo 'Yes';
+                                                                } elseif($partnerDetails->drink == 3) {
+                                                                        echo 'Occasionally';
+                                                                }
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Diet</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        if($partnerDetails->diet != '') {
+                                                                $profile_diet = explode(',', $partnerDetails->diet);
+                                                                $hs = 1;
+                                                                foreach($profile_diet as $profile_diets) {
+                                                                        if($hs == 1) {
+                                                                                echo MasterDiet::model()->findByPk($profile_diets)->diet;
+                                                                        } else {
+                                                                                echo ", " . MasterDiet::model()->findByPk($profile_diets)->diet;
+                                                                        }
+                                                                        $hs++;
+                                                                }
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Smoke</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+
+                                                        <?php
+                                                        if($partnerDetails->smoke != 0) {
+                                                                if($partnerDetails->smoke == 1) {
+                                                                        echo 'No';
+                                                                } elseif($partnerDetails->smoke == 2) {
+                                                                        echo 'Yes';
+                                                                } elseif($partnerDetails->smoke == 3) {
+                                                                        echo 'Occasionally';
+                                                                }
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+                                                    </label>
                                                 </div>
                                             </div>
 

@@ -23,6 +23,7 @@
                 var basepath = "<?php print Yii::app()->basePath; ?>";
         </script>
         <script src="<?= Yii::app()->baseUrl ?>/js/custom.js"></script>
+
         <style>
             #mask {
                 background-color: #e4007d;

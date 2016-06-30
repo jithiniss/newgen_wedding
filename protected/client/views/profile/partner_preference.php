@@ -1,7 +1,11 @@
+<script type="text/javascript" src="<?= Yii::app()->baseUrl ?>/js/jquery.tokenize.js"></script>
+<link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl ?>/css/jquery.tokenize.css" />
 <style>
     .slick-dots li{
         background-color: transparent;
     }
+
+
 </style>
 <section class="profiles">
     <div class="container">
@@ -104,7 +108,19 @@
 
                                 <div class="col-sm-8 col-xs-9 zeros">
                                     <div class="form-group">
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'marital_status', CHtml::listData(MasterMaritalStatus::model()->findAllByAttributes(array('status' => 1)), 'id', 'marital_status'), array('empty' => 'Select Marital Status', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                        <?php
+                                        if(!is_array($partnerDetails->marital_status)) {
+
+                                                $marital_status = explode(',', $partnerDetails->marital_status);
+                                        } else {
+                                                $marital_status = $partnerDetails->marital_status;
+                                        }
+                                        $marital_status_opt = array();
+                                        foreach($marital_status as $value) {
+                                                $marital_status_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
+                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'marital_status', CHtml::listData(MasterMaritalStatus::model()->findAllByAttributes(array('status' => 1)), 'id', 'marital_status'), array('empty' => 'Select Marital Status', 'class' => 'aps tokenize-sample', 'multiple' => "multiple", 'options' => $marital_status_opt)); ?>
                                         <?php echo $form->error($partnerDetails, 'marital_status'); ?>
 
                                     </div>
@@ -122,7 +138,19 @@
 
                                 <div class="col-sm-8 col-xs-9 zeros">
                                     <div class="form-group">
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'religion', CHtml::listData(MasterReligion::model()->findAllByAttributes(array('status' => 1)), 'id', 'religion'), array('empty' => 'Select a Religon', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                        <?php
+                                        if(!is_array($partnerDetails->religion)) {
+
+                                                $religion = explode(',', $partnerDetails->religion);
+                                        } else {
+                                                $religion = $partnerDetails->religion;
+                                        }
+                                        $religion_opt = array();
+                                        foreach($religion as $value) {
+                                                $religion_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
+                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'religion', CHtml::listData(MasterReligion::model()->findAllByAttributes(array('status' => 1)), 'id', 'religion'), array('empty' => 'Select a Religon', 'class' => 'aps tokenize-sample', 'multiple' => "multiple", 'options' => $religion_opt)); ?>
                                         <?php echo $form->error($partnerDetails, 'religion'); ?>
                                     </div></div>
                             </div>
@@ -135,8 +163,19 @@
 
                                 <div class="col-sm-8 col-xs-9 zeros">
                                     <div class="form-group">
+                                        <?php
+                                        if(!is_array($partnerDetails->mothertongue)) {
 
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'mothertongue', CHtml::listData(MasterMotherTongue::model()->findAllByAttributes(array('status' => 1)), 'id', 'mother_tongue'), array('empty' => 'Select Mother Tongue', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                                $mothertongue = explode(',', $partnerDetails->mothertongue);
+                                        } else {
+                                                $mothertongue = $partnerDetails->mothertongue;
+                                        }
+                                        $mothertongue_opt = array();
+                                        foreach($mothertongue as $value) {
+                                                $mothertongue_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
+                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'mothertongue', CHtml::listData(MasterMotherTongue::model()->findAllByAttributes(array('status' => 1)), 'id', 'mother_tongue'), array('empty' => 'Select Mother Tongue', 'class' => 'aps tokenize-sample', 'multiple' => "multiple", 'options' => $mothertongue_opt)); ?>
                                         <?php echo $form->error($partnerDetails, 'mothertongue'); ?>
                                     </div>
                                 </div>
@@ -170,7 +209,19 @@
                                                 $caste_options[""] = 'Select Community';
                                         }
                                         ?>
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'caste', $caste_options, array('class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                        <?php
+                                        if(!is_array($partnerDetails->caste)) {
+
+                                                $caste = explode(',', $partnerDetails->caste);
+                                        } else {
+                                                $caste = $partnerDetails->caste;
+                                        }
+                                        $caste_opt = array();
+                                        foreach($caste as $value) {
+                                                $caste_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
+                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'caste', $caste_options, array('class' => 'aps tokenize-sample', 'multiple' => "multiple", 'options' => $caste_opt)); ?>
                                         <?php echo $form->error($partnerDetails, 'caste'); ?>
                                     </div>
                                 </div>
@@ -232,8 +283,19 @@
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <div class="form-group">
+                                        <?php
+                                        if(!is_array($partnerDetails->country_living_in)) {
 
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'country_living_in', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => 'Select Country', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                                $country_living_in = explode(',', $partnerDetails->country_living_in);
+                                        } else {
+                                                $country_living_in = $partnerDetails->country_living_in;
+                                        }
+                                        $country_living_in_opt = array();
+                                        foreach($country_living_in as $value) {
+                                                $country_living_in_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
+                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'country_living_in', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => 'Select Country', 'class' => 'aps tokenize-sample country_chan', 'multiple' => "multiple", 'options' => $country_living_in_opt)); ?>
                                         <?php echo $form->error($partnerDetails, 'country_living_in'); ?>
                                     </div>
                                 </div>
@@ -252,7 +314,18 @@
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <div class="form-group">
+                                        <?php
+                                        if(!is_array($partnerDetails->residency_status)) {
 
+                                                $residency_status = explode(',', $partnerDetails->residency_status);
+                                        } else {
+                                                $residency_status = $partnerDetails->residency_status;
+                                        }
+                                        $residency_status_opt = array();
+                                        foreach($residency_status as $value) {
+                                                $residency_status_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
                                         <?php
                                         $state_options = array();
                                         if($partnerDetails->country_living_in != '') {
@@ -270,7 +343,10 @@
                                                 $state_options[""] = "Select State Living In";
                                         }
                                         ?>
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'residency_status', $state_options, array('class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+
+                                        <?php
+                                        echo CHtml::activeDropDownList($partnerDetails, 'residency_status', $state_options, array('class' => 'aps tokenize-sample', 'multiple' => "multiple", 'options' => $residency_status_opt));
+                                        ?>
                                         <?php echo $form->error($partnerDetails, 'residency_status'); ?>
                                     </div>
                                 </div>
@@ -288,8 +364,19 @@
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <div class="form-group">
+                                        <?php
+                                        if(!is_array($partnerDetails->country_grew_up)) {
 
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'country_grew_up', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => 'Select Country', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                                $country_grew_up = explode(',', $partnerDetails->country_grew_up);
+                                        } else {
+                                                $country_grew_up = $partnerDetails->country_grew_up;
+                                        }
+                                        $country_grew_up_opt = array();
+                                        foreach($country_grew_up as $value) {
+                                                $country_grew_up_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
+                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'country_grew_up', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => 'Select Country', 'class' => 'aps tokenize-sample', 'multiple' => "multiple", 'options' => $country_grew_up_opt)); ?>
                                         <?php echo $form->error($partnerDetails, 'country_grew_up'); ?>
                                     </div>
                                 </div>
@@ -320,8 +407,19 @@
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <div class="form-group">
+                                        <?php
+                                        if(!is_array($partnerDetails->education)) {
 
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'education', CHtml::listData(MasterEducationField::model()->findAllByAttributes(array('status' => 1)), 'id', 'education_field'), array('empty' => 'Select Education', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                                $education = explode(',', $partnerDetails->education);
+                                        } else {
+                                                $education = $partnerDetails->education;
+                                        }
+                                        $education_opt = array();
+                                        foreach($education as $value) {
+                                                $education_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
+                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'education', CHtml::listData(MasterEducationField::model()->findAllByAttributes(array('status' => 1)), 'id', 'education_field'), array('empty' => 'Select Education', 'class' => 'aps tokenize-sample', 'multiple' => "multiple", 'options' => $education_opt)); ?>
                                         <?php echo $form->error($partnerDetails, 'education'); ?>
                                     </div>
                                 </div>
@@ -339,8 +437,19 @@
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <div class="form-group">
+                                        <?php
+                                        if(!is_array($partnerDetails->working_with)) {
 
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'working_with', CHtml::listData(MasterWorkingWith::model()->findAllByAttributes(array('status' => 1)), 'id', 'working_with'), array('empty' => 'Select Working With', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                                $working_with = explode(',', $partnerDetails->working_with);
+                                        } else {
+                                                $working_with = $partnerDetails->working_with;
+                                        }
+                                        $working_with_opt = array();
+                                        foreach($working_with as $value) {
+                                                $working_with_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
+                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'working_with', CHtml::listData(MasterWorkingWith::model()->findAllByAttributes(array('status' => 1)), 'id', 'working_with'), array('empty' => 'Select Working With', 'class' => 'aps tokenize-sample', 'multiple' => "multiple", 'options' => $working_with_opt)); ?>
                                         <?php echo $form->error($partnerDetails, 'working_with'); ?>
                                     </div>
                                 </div>
@@ -366,8 +475,19 @@
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <div class="form-group">
+                                        <?php
+                                        if(!is_array($partnerDetails->profession_area)) {
 
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'profession_area', CHtml::listData(MasterWorkingAs::model()->findAllByAttributes(array('status' => 1)), 'id', 'working_as'), array('empty' => 'Select Professional Area', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                                $profession_area = explode(',', $partnerDetails->profession_area);
+                                        } else {
+                                                $profession_area = $partnerDetails->profession_area;
+                                        }
+                                        $profession_area_opt = array();
+                                        foreach($profession_area as $value) {
+                                                $profession_area_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
+                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'profession_area', CHtml::listData(MasterWorkingAs::model()->findAllByAttributes(array('status' => 1)), 'id', 'working_as'), array('empty' => 'Select Professional Area', 'class' => 'aps tokenize-sample', 'multiple' => "multiple", 'options' => $profession_area_opt)); ?>
                                         <?php echo $form->error($partnerDetails, 'profession_area'); ?>
                                     </div>
                                 </div>
@@ -384,7 +504,19 @@
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <div class="form-group">
-                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'annual_income_from', CHtml::listData(MasterAnnualIncome::model()->findAllByAttributes(array('status' => 1)), 'id', 'income_from'), array('empty' => 'Select Annual Income', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                        <?php
+                                        if(!is_array($partnerDetails->annual_income_from)) {
+
+                                                $annual_income_from = explode(',', $partnerDetails->annual_income_from);
+                                        } else {
+                                                $annual_income_from = $partnerDetails->annual_income_from;
+                                        }
+                                        $annual_income_from_opt = array();
+                                        foreach($annual_income_from as $value) {
+                                                $annual_income_from_opt[$value] = array('selected' => 'selected');
+                                        }
+                                        ?>
+                                        <?php echo CHtml::activeDropDownList($partnerDetails, 'annual_income_from', CHtml::listData(MasterAnnualIncome::model()->findAllByAttributes(array('status' => 1)), 'id', 'income_from'), array('empty' => 'Select Annual Income', 'class' => 'aps tokenize-sample', 'multiple' => "multiple", 'options' => $annual_income_from_opt)); ?>
                                         <?php echo $form->error($partnerDetails, 'annual_income_from'); ?>
 
                                     </div>
@@ -462,7 +594,7 @@
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <?php
-                                    $drink = array('1' => 'No', '2' => 'Yes', '3' => 'Occasionally');
+                                    $drink = array('1' => 'No', '2' => 'Yes', '3' => 'Occasionally', '4' => 'Doesnt Matter');
 
                                     foreach($drink as $drinkkey => $drinkvalue) {
 
@@ -499,7 +631,7 @@
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <?php
                                     $sm = 1;
-                                    $smoke = array('1' => 'No', '2' => 'Yes', '3' => 'Occasionally');
+                                    $smoke = array('1' => 'No', '2' => 'Yes', '3' => 'Occasionally', '4' => 'Doesnt Matter');
                                     foreach($smoke as $smokekey => $smokevalue) {
 
                                             if($partnerDetails->smoke == $smokekey) {
@@ -650,3 +782,110 @@
 
     </div>
 </section>
+<script type="text/javascript">
+        $('#PartnerDetails_marital_status').tokenize({displayDropdownOnFocus: true});
+        $('#PartnerDetails_religion').tokenize({displayDropdownOnFocus: true,
+            onAddToken: function (value, text, e) {
+                if ($.isFunction(AddCaste)) { // check if func exists
+                    AddCaste(value, text, e); // if true execute it
+                }
+            },
+            onRemoveToken: function (value, text, e) {
+                if ($.isFunction(RemoveCaste)) { // check if func exists
+                    RemoveCaste(); // if true execute it
+                }
+            }
+        });
+        $('#PartnerDetails_mothertongue').tokenize({displayDropdownOnFocus: true});
+        $('#PartnerDetails_caste').tokenize({displayDropdownOnFocus: true});
+        $('#PartnerDetails_country_living_in').tokenize({displayDropdownOnFocus: true,
+            onAddToken: function (value, text, e) {
+                if ($.isFunction(AddStateLiving)) { // check if func exists
+                    AddStateLiving(value, text, e); // if true execute it
+                }
+            },
+            onRemoveToken: function (value, text, e) {
+                if ($.isFunction(RemoveStateLiving)) { // check if func exists
+                    RemoveStateLiving(); // if true execute it
+                }
+            }
+        });
+        $('#PartnerDetails_residency_status').tokenize({displayDropdownOnFocus: true});
+        $('#PartnerDetails_country_grew_up').tokenize({displayDropdownOnFocus: true});
+        $('#PartnerDetails_education').tokenize({displayDropdownOnFocus: true});
+        $('#PartnerDetails_working_with').tokenize({displayDropdownOnFocus: true});
+        $('#PartnerDetails_profession_area').tokenize({displayDropdownOnFocus: true});
+        $('#PartnerDetails_annual_income_from').tokenize({displayDropdownOnFocus: true});
+
+        function AddStateLiving(country, t, r) {
+
+            if (country != '') {
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "ajax/selectState",
+                    data: {country: country}
+                }).done(function (data) {
+                    $('#PartnerDetails_residency_status').prepend(data);
+                });
+            }
+
+        }
+        function RemoveStateLiving() {
+
+
+            var living_country = new Array();
+            $('#PartnerDetails_country_living_in  option:selected').each(function () {
+                living_country.push(this.value);
+            });
+
+            if (living_country != '') {
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "ajax/selectPartnerState",
+                    data: {living_country: living_country}
+                }).done(function (data) {
+                    $('#PartnerDetails_residency_status').html(data);
+                    // $('#PartnerDetails_residency_status').empty(data);
+
+                });
+            }
+
+        }
+
+        /* Religion change function*/
+
+        function AddCaste(religion, t, r) {
+
+            if (religion != '') {
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "ajax/selectCaste",
+                    data: {religion: religion}
+                }).done(function (data) {
+                    $('#PartnerDetails_caste').prepend(data);
+                });
+            }
+
+        }
+        function RemoveCaste() {
+
+
+            var caste = new Array();
+            $('#PartnerDetails_religion  option:selected').each(function () {
+                caste.push(this.value);
+            });
+
+            if (caste != '') {
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "ajax/selectPartnerCaste",
+                    data: {caste: caste}
+                }).done(function (data) {
+                    $('#PartnerDetails_caste').html(data);
+
+                });
+            }
+
+        }
+
+</script>

@@ -127,3 +127,6 @@ button.btn.new-btn.btn-default{
         background-color: rgba(255, 0, 0, 0);
         max-width: 100px;
 }
+@media screen and (min-width: 480px) {
+ .tokenize-sample { width: 300px }
+}
