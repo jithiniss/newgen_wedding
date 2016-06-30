@@ -1,3 +1,4 @@
+
 <?php
 /* @var $this MasterAffluenceLevelController */
 /* @var $model MasterAffluenceLevel */
@@ -13,8 +14,8 @@
 <div class="page-title">
 
     <div class="title-env">
-        <h1 style="float: left;" class="title">Master Affluence Levels</h1>
-        <p style="float: left;margin-top: 8px;margin-left: 11px;" class="description">Create Master Affluence Levels</p>
+        <h1 style="float: left;" class="title">Success Stories</h1>
+        <p style="float: left;margin-top: 8px;margin-left: 11px;" class="description">Create Success Stories</p>
     </div>
 
     <div class="breadcrumb-env">
@@ -26,7 +27,7 @@
 
             <li class="active">
 
-                <strong>Create Master Affluence Levels</strong>
+                <strong>Create Success Stories</strong>
             </li>
         </ol>
 
@@ -37,9 +38,9 @@
 
 
     <div class="col-sm-12">
-        <a class="btn btn-secondary btn-icon btn-icon-standalone" href="<?php echo Yii::app()->request->baseurl . '/admin.php/masters/masterAffluenceLevel/admin'; ?>" id="add-note">
+        <a class="btn btn-secondary btn-icon btn-icon-standalone" href="<?php echo Yii::app()->request->baseurl . '/admin.php/TellUsStory/admin/admin'; ?>" id="add-note">
             <i class="fa-pencil"></i>
-            <span>Manage Master Affluence Levels</span>
+            <span>Manage Success Stories</span>
         </a>
 
         <div class="panel panel-default">

@@ -279,6 +279,19 @@
                                 </li>
                             </ul>
                         </li>
+                        <li>
+                            <a href="">
+
+                                <i class="fa-paperclip"></i>
+                                <span class="title" >Masters</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <?php echo CHtml::link('Add Story', array('/TellUsStory/admin')); ?>
+                                    <?php echo CHtml::link('Story Approval', array('/TellUsStory/approve')); ?>
+                                </li>
+                            </ul>
+                        </li>
 
 
                     </ul>
