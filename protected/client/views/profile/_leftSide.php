@@ -4,6 +4,6 @@
         <li><a href="#">My Contact Details</a></li>
         <li class="active"><?php echo CHtml::link('My Profile', array('profile/MyProfile')); ?></li>
         <li><a href="#">My Photos</a></li>
-        <li><a href="#">My Partner Preferences</a></li>
+        <li><?php echo CHtml::link('My Partner Preferences', array('profile/PartnerPreference')); ?></li>
     </ul>
 </div>

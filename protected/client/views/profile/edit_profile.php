@@ -782,7 +782,7 @@
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <div class="form-group">
 
-                                        <?php echo CHtml::activeDropDownList($editProfile, 'working_as', CHtml::listData(MasterWorkingAs::model()->findAllByAttributes(array('status' => 1)), 'id', 'working_as'), array('empty' => 'Select', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                        <?php echo CHtml::activeDropDownList($editProfile, 'working_as', CHtml::listData(MasterWorkingAs::model()->findAllByAttributes(array('status' => 1)), 'id', 'working_as'), array('empty' => 'Select Working As', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
                                         <?php echo $form->error($editProfile, 'working_as'); ?>
                                     </div>
                                 </div>
@@ -799,9 +799,9 @@
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <div class="form-group">
-
-                                        <?php echo $form->textField($editProfile, 'annual_income', array('class' => 'ui_apps')); ?>
+                                        <?php echo CHtml::activeDropDownList($editProfile, 'annual_income', CHtml::listData(MasterAnnualIncome::model()->findAllByAttributes(array('status' => 1)), 'id', 'income_from'), array('empty' => 'Select Annual Income', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
                                         <?php echo $form->error($editProfile, 'annual_income'); ?>
+
                                     </div>
                                 </div>
 

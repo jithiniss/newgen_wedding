@@ -7,7 +7,9 @@
     <div class="container">
         <div class="row">
 
-            <?php $this->renderPartial('_leftSide'); ?>
+            <?php
+            $this->renderPartial('_leftSide');
+            ?>
             <div class="col-md-9 any nop">
                 <h4><?php echo ucwords($myProfile->first_name . ' ' . $myProfile->last_name); ?></h4>
                 <div class="pull-right">
@@ -39,7 +41,9 @@
                                     <?php
                                     if($myProfile->photo != "") {
                                             $folder = Yii::app()->Upload->folderName(0, 1000, $myProfile->id);
-                                            echo '<img class="img-responsive" src="' . Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $myProfile->id . '/profile/' . $myProfile->photo . '" />';
+                                            $userPic = explode('.', $myProfile->photo);
+
+                                            echo '<img class="img-responsive" src="' . Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $myProfile->id . '/profile/' . $userPic[0] . '_163_212.' . $userPic[1] . '" />';
                                             ?>
 
                                     <?php } else {
@@ -194,7 +198,7 @@
 
                             <ul class="list-unstyled">
                                 <li><?php echo CHtml::link('Edit Personal Profile', array('profile/EditProfile')); ?></li>
-                                <li><a href="#">Edit Partner Profile</a></li>
+                                <li><?php echo CHtml::link('Edit Partner Preferences', array('profile/PartnerPreference')); ?></li>
 
                                 <li><a href="#">Edit Contact Details </a></li>
                                 <li><a href="#">View Profile Status</a></li>
@@ -1110,7 +1114,7 @@
                         <div class="strip">
                             <div class="rels">
                                 <div class="rel-1">
-                                    <h2>Location of Groom</h2>
+                                    <h2>Location</h2>
                                 </div>
 
                                 <div class="rel-2">
@@ -1264,7 +1268,9 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        echo $partnerDetails->height_from . ' to ' . $partnerDetails->height_to;
+                                                        $height_from = MasterHeight::model()->findByPk($partnerDetails->height_from)->height;
+                                                        $height_to = MasterHeight::model()->findByPk($partnerDetails->height_to)->height;
+                                                        echo $height_from . ' TO ' . $height_to;
                                                         ?>
                                                     </label>
                                                 </div>
@@ -1279,8 +1285,65 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->marital_status != 0) {
-                                                                echo MasterMaritalStatus::model()->findByPk($partnerDetails->marital_status)->marital_status;
+                                                        if($partnerDetails->skin_tone != 0) {
+                                                                echo MasterSkinTone::model()->findByPk($partnerDetails->skin_tone)->skin_tone;
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Body Type</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        if($partnerDetails->body_type != 0) {
+                                                                echo MasterBodyType::model()->findByPk($partnerDetails->body_type)->body_type;
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Grew Up in</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        if($partnerDetails->country_grew_up != 0) {
+                                                                echo MasterCountry::model()->findByPk($partnerDetails->country_grew_up)->country;
+                                                        } else {
+                                                                echo '--';
+                                                        }
+                                                        ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Profile Created By</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?php
+                                                        if($partnerDetails->profile_created_by != 0) {
+                                                                echo MasterProfileFor::model()->findByPk($partnerDetails->profile_created_by)->profile_for;
                                                         } else {
                                                                 echo '--';
                                                         }
@@ -1291,7 +1354,43 @@
                                         </div>
 
 
+                                        <div class="col-md-6 lifestyle">
 
+
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Disability</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+                                                        <?= $partnerDetails->disability == 1 ? 'Dont include profiles with disability' : 'Doesnt Matter'; ?>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="copyz">
+                                                <div class="col-sm-5 col-xs-3 zeros">
+                                                    <label for="textinput" class="control-labelz">Annual Income</label>
+                                                </div>
+                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                    <label for="textinput" class="control-labelz">:</label>
+                                                </div>
+                                                <div class="col-sm-6 col-xs-8 zeros">
+                                                    <label for="textinput" class="control-labelz">
+
+                                                        1                                            </label>
+                                                </div>
+                                            </div>
+
+
+
+
+
+                                        </div>
 
 
                                     </div>

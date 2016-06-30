@@ -112,15 +112,13 @@
                                 <label for="textinput" class="control-label">:</label>
                             </div>
                             <div class="col-sm-7 col-xs-7 zeros">
+
                                 <div class="form-group">
-                                    <?php
-                                    if($fourthStep->annual_income == 0) {
-                                            $fourthStep->annual_income = '';
-                                    }
-                                    ?>
-                                    <?php echo $form->textField($fourthStep, 'annual_income', array('class' => 'ui_apps', 'placeholder' => 'Enter Your Annual Income')); ?>
+                                    <?php echo CHtml::activeDropDownList($fourthStep, 'annual_income', CHtml::listData(MasterAnnualIncome::model()->findAllByAttributes(array('status' => 1)), 'id', 'income_from'), array('empty' => 'Select Annual Income', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
                                     <?php echo $form->error($fourthStep, 'annual_income'); ?>
+
                                 </div>
+
                             </div>
 
                         </div>

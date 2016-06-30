@@ -49,7 +49,9 @@ class SiteController extends Controller {
                                         if($user_login->status == 0) {
                                                 Yii::app()->user->setFlash('login_error', "<h3>Access Denied</h3>.Please contact customer care");
                                         } else {
+                                                $plan = UserPlans::model()->findByAttributes(array('user_id' => $user_login->id));
                                                 Yii::app()->session['user'] = $user_login;
+                                                Yii::app()->session['plan'] = $plan;
                                                 if($user_login->register_step == 1) {
                                                         $this->redirect(array('//Register/SecondStep'));
                                                 } else if($user_login->register_step == 2) {

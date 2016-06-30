@@ -11,6 +11,7 @@ return array(
     'profile-details' => 'Partner/Partnerdetails/userid',
     'edit-profile' => 'profile/EditProfile',
     'my-profile' => 'profile/MyProfile',
+    'partner-preference' => 'profile/PartnerPreference',
     'my-account' => 'Myaccount/Index',
     'edit-contacts' => 'settings/editcontact',
     'edit-password' => 'settings/changepassword',

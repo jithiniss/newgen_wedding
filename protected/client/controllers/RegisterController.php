@@ -17,16 +17,25 @@ class RegisterController extends Controller {
                 if(isset($_POST['UserDetails'])) {
                         $firstStep = $this->setFirstStep($firstStep, $_POST['UserDetails']);
                         if($firstStep->validate()) {
-                                if($firstStep->save()) {
+
+                                $transaction = Yii::app()->db->beginTransaction();
+                                try {
+                                        $firstStep->save();
                                         UserDetails::model()->userId($firstStep->id)->save();
+                                        $this->partnerDetails($firstStep->id)->save(false);
+                                        $this->userPlan($firstStep->id)->save(false);
                                         $user = UserDetails::model()->findByPk($firstStep->id);
                                         $user->cb = $firstStep->id;
                                         $user->ub = $firstStep->id;
                                         $user->save(FALSE);
+                                        $plan = UserPlans::model()->findByAttributes(array('user_id' => $user->id));
                                         Yii::app()->session['user'] = $user;
+                                        Yii::app()->session['plan'] = $plan;
+                                        $transaction->commit();
                                         $this->redirect(array('SecondStep'));
-                                } else {
-                                        Yii::app()->user->setFlash('register_error1', "Some Error Occured.Try Again");
+                                } catch(Exception $e) {
+                                        $transaction->rollback();
+                                        Yii::app()->user->setFlash('register_error1', $e->getMessage());
                                 }
                         }
                 }
@@ -40,6 +49,41 @@ class RegisterController extends Controller {
                 $model->created_by = 2;
                 $model->doc = date('Y-m-d');
                 $model->status = 1;
+                return $model;
+        }
+
+        public function partnerDetails($id) {
+                $user_details = UserDetails::model()->findByPk($id);
+                if(!empty($user_details)) {
+                        $age = date('Y') - date('Y', strtotime($user_details->dob_year));
+                        $model = new PartnerDetails;
+                        $model->user_id = $user_details->id;
+                        if($user_details->gender == 1) {
+                                $model->age_from = 18;
+                                $model->age_to = $age;
+                        } else if($user_details->gender == 2) {
+                                $model->age_from = $age;
+                                $model->age_to = $age;
+                        }
+                        $model->religion = $user_details->religion;
+                        $model->status = 1;
+                        $model->doc = date('Y-m-d');
+                        $model->cb = $id;
+                        return $model;
+                } else {
+                        return FALSE;
+                }
+        }
+
+        public function userPlan($id) {
+                $user_details = UserDetails::model()->findByPk($id);
+                $plan_details = Plans::model()->findByPk($user_details->plan_id);
+                $model = new UserPlans;
+                $model->attributes = $plan_details->attributes;
+                $model->view_contact_left = $plan_details->view_contact;
+                $model->send_message_left = $plan_details->send_message;
+                $model->number_of_days_left = $plan_details->number_of_days;
+                $model->user_id = $id;
                 return $model;
         }
 
