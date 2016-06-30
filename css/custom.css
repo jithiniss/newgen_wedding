@@ -32,7 +32,7 @@
 
 }
 .stripsss{
-        border:0px; 
+        border:0px;
         margin-bottom: 10px;
 }
 .forgot h1 {
@@ -55,9 +55,9 @@
         font-family: 'Roboto', sans-serif;
 }
 img.center-block.line {
-    padding-bottom: 20px;
-    width: 149px;
-    height: 178px;
+        padding-bottom: 20px;
+        width: 149px;
+        height: 178px;
 }
 /*span.in {
     font-size: 11px;
@@ -67,25 +67,31 @@ img.center-block.line {
     padding-left: 20px;
 }*/
 input.btn.sub-ment.btn-default {
-    background-color: #0e6382;
-    width: 100%;
-    border: 0;
-    border-radius: 0;
-    color: #fff;
-    display: block;
-    float: right;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 33px;
-    font-family: 'Roboto', sans-serif;
-    text-transform: uppercase;
-    margin-top: 24px;
+        background-color: #0e6382;
+        width: 100%;
+        border: 0;
+        border-radius: 0;
+        color: #fff;
+        display: block;
+        float: right;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 33px;
+        font-family: 'Roboto', sans-serif;
+        text-transform: uppercase;
+        margin-top: 24px;
 }
 .form-control {
-   background-color: #f3f3f3 ;
+        background-color: #f3f3f3 ;
 }
-.zeros.submit_class{
-        padding-top: 17px;
+.text {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        line-height: 16px;     /* fallback */
+        max-height: 32px;      /* fallback */
+        -webkit-line-clamp: 2; /* number of lines to show */
+        -webkit-box-orient: vertical;
 }
 button.btn.new-btn.btn-default{
         background-color: #0e6382;
@@ -107,5 +113,17 @@ button.btn.new-btn.btn-default{
 }
 .zeros .photos_set .current_pass{
         color: blue;
-
+}
+.slick-dots {
+        position: absolute;
+        bottom: -46px !important;
+        display: block;
+        width: 100%;
+        padding: 0;
+        list-style: none;
+        text-align: center;
+        left: 6% !important;
+        z-index: 10000;
+        background-color: rgba(255, 0, 0, 0);
+        max-width: 100px;
 }

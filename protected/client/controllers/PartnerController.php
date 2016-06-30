@@ -20,10 +20,13 @@ class PartnerController extends Controller {
         public function actionPartnerdetails($userid) {
                 if (isset(Yii::app()->session['user'])) {
                         if ($userid != '') {
+
                                 $user_details = UserDetails::model()->findByAttributes(array('user_id' => $userid));
                                 $current_user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                                 $partner_details = PartnerDetails::model()->findByAttributes(array('user_id' => $user_details->id));
-                                $this->render('index', array('user_details' => $user_details, 'partner_details' => $partner_details, 'current_user' => $current_user));
+                                $similar_profile = $this->Similar($userid);
+                                $story = TellUsStory::model()->findAllByAttributes(array('admin_approval' => '1', 'status' => '1'));
+                                $this->render('index', array('user_details' => $user_details, 'partner_details' => $partner_details, 'current_user' => $current_user, 'similar_profiles' => $similar_profile, 'story' => $story));
                         } else {
                                 $this->redirect(array('site/error'));
                         }
@@ -32,27 +35,90 @@ class PartnerController extends Controller {
                 }
         }
 
-        public function actionPhotoRequest($data) {
-                $recevier_details = UserDetails::model()->findByAttributes(array('user_id' => $data));
-                $check = PhotoRequests::model()->findByAttributes(array('sender_id' => Yii::app()->session['user']['id'], 'receiver_id' => $recevier_details->id));
-                if (!empty($recevier_details)) {
-                        if (empty($check)) {
-                                $model = new PhotoRequests;
-                                $model->sender_id = Yii::app()->session['user']['id'];
-                                $model->receiver_id = $recevier_details->id;
-                                $model->status = 1;
-                                $model->date = date('Y-m-d');
-                                if ($model->save()) {
-                                        Yii::app()->user->setFlash('success', "Your request is submitted");
-                                        $this->redirect(Yii::app()->request->urlReferrer);
-                                }
-                        } else {
-                                $this->redirect(Yii::app()->request->urlReferrer);
-                        }
+        public function Similar($userid) {
+                $user = UserDetails::model()->findByAttributes(array('user_id' => $userid));
+                $similar_profile1 = UserDetails::model()->findAllByAttributes(array(
+                    'gender' => $user->gender,
+                    'religion' => $user->religion,
+                    'caste' => $user->caste,
+                    'dob_year' => $user->dob_year,
+                    'country' => $user->country,
+                    'state' => $user->state,
+                    'city' => $user->city,
+                    'education_level' => $user->education_level,
+                    'working_as' => $user->working_as), array('condition' => 'user_id != "' . $userid . '"'));
+
+                $similar_profile2 = UserDetails::model()->findAllByAttributes(array(
+                    'gender' => $user->gender,
+                    'religion' => $user->religion,
+                    'caste' => $user->caste,
+                    'dob_year' => $user->dob_year,
+                    'country' => $user->country,
+                    'state' => $user->state,
+                    'city' => $user->city,
+                    'education_level' => $user->education_level), array('condition' => 'user_id != "' . $userid . '"'));
+                $similar_profile3 = UserDetails::model()->findAllByAttributes(array(
+                    'gender' => $user->gender,
+                    'religion' => $user->religion,
+                    'caste' => $user->caste,
+                    'dob_year' => $user->dob_year,
+                    'country' => $user->country,
+                    'state' => $user->state,
+                    'city' => $user->city,
+                        ), array('condition' => 'user_id != "' . $userid . '"'));
+                $similar_profile4 = UserDetails::model()->findAllByAttributes(array(
+                    'gender' => $user->gender,
+                    'religion' => $user->religion,
+                    'caste' => $user->caste,
+                    'dob_year' => $user->dob_year,
+                    'country' => $user->country,
+                    'state' => $user->state,
+                        ), array('condition' => 'user_id != "' . $userid . '"'));
+                $similar_profile5 = UserDetails::model()->findAllByAttributes(array(
+                    'gender' => $user->gender,
+                    'religion' => $user->religion,
+                    'caste' => $user->caste,
+                    'dob_year' => $user->dob_year,
+                    'country' => $user->country,
+                        ), array('condition' => 'user_id != "' . $userid . '"'));
+                $similar_profile6 = UserDetails::model()->findAllByAttributes(array(
+                    'gender' => $user->gender,
+                    'religion' => $user->religion,
+                    'caste' => $user->caste,
+                    'dob_year' => $user->dob_year,
+                        ), array('condition' => 'user_id != "' . $userid . '"'));
+                $similar_profile7 = UserDetails::model()->findAllByAttributes(array(
+                    'gender' => $user->gender,
+                    'religion' => $user->religion,
+                    'caste' => $user->caste,
+                        ), array('condition' => 'user_id != "' . $userid . '"'));
+                $similar_profile8 = UserDetails::model()->findAllByAttributes(array(
+                    'gender' => $user->gender,
+                    'religion' => $user->religion), array('condition' => 'user_id != "' . $userid . '"'));
+
+
+                if (!empty($similar_profile1)) {
+                        return $similar_profile1;
+                } else if (!empty($similar_profile2)) {
+                        return $similar_profile2;
+                } else if (!empty($similar_profile3)) {
+                        return $similar_profile3;
+                } else if (!empty($similar_profile4)) {
+                        return $similar_profile4;
+                } else if (!empty($similar_profile5)) {
+                        return $similar_profile5;
+                } else if (!empty($similar_profile6)) {
+                        return $similar_profile6;
+                } else if (!empty($similar_profile7)) {
+                        return $similar_profile7;
+                } else if (!empty($similar_profile8)) {
+                        return $similar_profile8;
+                } else {
+                        return NULL;
                 }
         }
 
-        // Uncomment the following methods and override them if needed
+// Uncomment the following methods and override them if needed
         /*
           public function filters()
           {
@@ -125,11 +191,11 @@ class PartnerController extends Controller {
 
                         $subject = 'info_NewGen';
                         $message = $this->renderPartial(_user_mail, array('model' => $model));
-                        // Always set content-type when sending HTML email
+// Always set content-type when sending HTML email
                         $headers = "MIME-Version: 1.0" . "\r\n";
                         $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
-                        // More headers
+// More headers
                         $headers .= 'From: <no-reply@newgen.com>' . "\r\n";
                         //$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
                         //                        echo $message;

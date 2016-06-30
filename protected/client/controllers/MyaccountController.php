@@ -3,8 +3,13 @@
 class MyaccountController extends Controller {
 
         public function actionIndex() {
-                $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                $this->render('index', array('user' => $user));
+
+                if (isset(Yii::app()->session['user'])) {
+                        $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                        $this->render('index', array('user' => $user));
+                } else {
+                        $this->redirect(array('site/login'));
+                }
         }
 
         public function actionUpdatePhoto() {
