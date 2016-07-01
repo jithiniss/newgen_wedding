@@ -56,11 +56,11 @@
                                                                     </div>
                                                                     <div class="col-sm-8 col-xs-8 zeros">
                                                                         <div class="form-group">
-                                                                            <input type="text" class="ui_apps" id="email" value="<?php // echo $account->email                                 ?>">
+                                                                            <input type="text" class="ui_apps" id="email" value="<?php // echo $account->email                                  ?>">
                                                                         </div>
                                                                     </div>-->
                                 <div class="col-sm-3 col-xs-3 zeros">
-                                    <label for="textinput" class="control-label">Contact</label>
+                                    <label for="textinput" class="control-label">Contact Number</label>
                                 </div>
                                 <div class="col-sm-1 col-xs-1 zeros">
                                     <label for="textinput" class="control-label">:</label>

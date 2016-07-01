@@ -77,6 +77,20 @@ class SiteController extends Controller {
                 }
         }
 
+        public function actionStatic($page) {
+                if (!empty($page)) {
+                        $model = StaticPage::model()->findByAttributes(array('canonical_name' => $page));
+                        if ($model != '') {
+
+                                $this->render('static_page', array('model' => $model));
+                        } else {
+                                $this->redirect(Yii::app()->baseUrl . '/index.php/site/Error');
+                        }
+                } else {
+                        $this->redirect(Yii::app()->baseUrl . '/index.php/site/Error');
+                }
+        }
+
         public function actionAbout() {
                 $banner = Banner::model()->findByPk(1);
                 $about = StaticPage::model()->findByPk(1);

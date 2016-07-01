@@ -50,7 +50,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-3 col-xs-3 zeros">
-                                        <label for="textinput" class="control-label">Contact</label>
+                                        <label for="textinput" class="control-label">Contact Number</label>
                                     </div>
                                     <div class="col-sm-1 col-xs-1 zeros">
                                         <label for="textinput" class="control-label">:</label>
@@ -136,7 +136,15 @@
                                         <label for="textinput" class="control-labelz">:</label>
                                     </div>
                                     <div class="col-sm-8 col-xs-8 zeros">
-                                        <label for="textinput" class="control-labelz"><?php echo $account->city ?></label>
+                                        <label for="textinput" class="control-labelz">
+                                            <?php
+                                            if (empty($account->city) || $account->city == "0") {
+                                                    echo '-';
+                                            } else {
+                                                    echo $account->city;
+                                            }
+                                            ?>
+                                        </label>
                                     </div>
                                 </div>
                                 <div class="copyz">

@@ -130,3 +130,6 @@ button.btn.new-btn.btn-default{
 @media screen and (min-width: 480px) {
  .tokenize-sample { width: 300px }
 }
+.col-md-6 {
+    padding-left: 0px;
+}
