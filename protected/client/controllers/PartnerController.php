@@ -144,6 +144,25 @@ class PartnerController extends Controller {
           );
           }
          */
+        public function actionPhotoRequest($data) {
+                $recevier_details = UserDetails::model()->findByAttributes(array('user_id' => $data));
+                $check = PhotoRequests::model()->findByAttributes(array('sender_id' => Yii::app()->session['user']['id'], 'receiver_id' => $recevier_details->id));
+                if (!empty($recevier_details)) {
+                        if (empty($check)) {
+                                $model = new PhotoRequests;
+                                $model->sender_id = Yii::app()->session['user']['id'];
+                                $model->receiver_id = $recevier_details->id;
+                                $model->status = 1;
+                                $model->date = date('Y-m-d');
+                                if ($model->save()) {
+                                        Yii::app()->user->setFlash('success', "Your request is submitted");
+                                        $this->redirect(Yii::app()->request->urlReferrer);
+                                }
+                        } else {
+                                $this->redirect(Yii::app()->request->urlReferrer);
+                        }
+                }
+        }
 
         public function actionSendInterest($userid) {
                 if (isset(Yii::app()->session['user'])) {

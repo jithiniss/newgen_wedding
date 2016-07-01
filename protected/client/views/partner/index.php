@@ -47,7 +47,7 @@
                                                                                 <?php } else { ?>
                                                                                         <img class = "sim" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
                                                                                 <?php } ?>
-                                        <!--<img class="sim" src="<?php echo Yii::app()->request->baseUrl; ?>/images/w2.jpg">-->
+                        <!--<img class="sim" src="<?php echo Yii::app()->request->baseUrl; ?>/images/w2.jpg">-->
                                                                                 <h4><?= $similar_profile->first_name; ?> <?= $similar_profile->last_name; ?></h4>
                                                                                 <h2><?= date('Y') - $similar_profile->dob_year; ?> yrs, <?= MasterHeight::model()->findByPk($similar_profile->height)->height; ?>, <?= MasterReligion::model()->findByPk($similar_profile->religion)->religion; ?>, <?= MasterMotherTongue::model()->findByPk($similar_profile->mothertongue)->mother_tongue; ?></h2>
                                                                                 <h2><?= MasterEducationField::model()->findByPk($similar_profile->education_field)->education_field; ?></h2>
@@ -324,7 +324,7 @@
                                                                                 <?php } else { ?>
                                                                                         <img class = "him" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
                                                                                 <?php } ?>
-        <!--                                                                                <img class="her" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p1.jpg">--><br>
+<!--                                                                                <img class="her" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p1.jpg">--><br>
                                                                                 <span class="lift-1"> Her Preferences</span>
                                                                         </th>
                                                                         <th>
