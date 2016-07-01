@@ -19,7 +19,9 @@
                 <div class="col-md-12 col-sm-12 col-xs-12 thank mains2">
 
                     <h1>Dear <?php echo ucfirst($account->first_name) . ' ' . ucfirst($account->last_name) ?>, </h1>
-                    <h2>Thank you for sharing your Story with us!</h2>
+                    <?php if (!empty($story)) { ?>
+                            <h2>Thank you for sharing your Story with us!</h2>
+                    <?php } ?>
                     <?php if (empty($story)) { ?>
                             <div class="tellus">
 
