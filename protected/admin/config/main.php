@@ -22,6 +22,7 @@ return array(
         'application.models.*',
         'application.components.*',
         'admin.extensions.easyimage.EasyImage',
+        'admin.extensions.imgresizer.ImgResizer ',
     ),
     'modulePath' => $admin . '/modules/',
     'modules' => array(

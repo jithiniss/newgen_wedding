@@ -119,7 +119,7 @@ class UploadFile extends CApplicationComponent {
 
                                         if ($upload->saveAs(Yii::app()->basePath . '/../uploads/products/' . $folder . '/' . $id . '/gallery/' . $picname)) {
                                                 chmod(Yii::app()->basePath . '/../uploads/products/' . $folder . $id . '/gallery/' . $picname, 0777);
-                                                // $this->WaterMark(Yii::app()->basePath . '/../uploads/products/' . $folder . $id . '/gallery/' . $picname, '/../images/watermark.png');
+// $this->WaterMark(Yii::app()->basePath . '/../uploads/products/' . $folder . $id . '/gallery/' . $picname, '/../images/watermark.png');
                                                 $file = Yii::app()->basePath . '/../uploads/products/' . $folder . '/' . $id . '/gallery/' . $picname;
 
 
@@ -150,7 +150,7 @@ class UploadFile extends CApplicationComponent {
                 $watermark1 = imagecreatefrompng($watermarks);
                 $resize = new EasyImage($orginal);
 
-                // Get dimensions
+// Get dimensions
                 $orginalWidth = imagesx($orginal1);
                 $orginalHeight = imagesy($orginal1);
 
@@ -227,5 +227,4 @@ class UploadFile extends CApplicationComponent {
         }
 
 }
-
 ?>

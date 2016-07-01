@@ -260,8 +260,8 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/p2.jpg">
-                                                                                                                <img class="lockz" src="images/lock.png">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                 <p>Visible on Accept</p>
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -273,7 +273,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -285,7 +285,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -297,7 +297,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -309,7 +309,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -354,7 +354,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -366,7 +366,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -377,8 +377,8 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/p2.jpg">
-                                                                                                                <img class="lockz" src="images/lock.png">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                 <p>Visible on Accept</p>
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -390,7 +390,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -402,7 +402,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -446,7 +446,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -457,8 +457,8 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/p2.jpg">
-                                                                                                                <img class="lockz" src="images/lock.png">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                 <p>Visible on Accept</p>
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -470,7 +470,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -482,7 +482,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -494,7 +494,7 @@
                                                                                         <div class="item">
                                                                                                 <div class="main">
                                                                                                         <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="images/gg1.jpg">
+                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
                                                                                                         </div>
                                                                                                         <h1>Janet</h1>
@@ -532,8 +532,8 @@
                         autoplaySpeed: 4000,
                         slidesToScroll: 1,
                         pauseOnHover: false,
-                        prevArrow: '<i id="prev_slide_3"><img src="images/prev.jpg"></i>',
-                        nextArrow: '<i id="next_slide_3"><img src="images/nex.jpg"></i>',
+                        prevArrow: '<i id="prev_slide_3"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/prev.jpg"></i>',
+                        nextArrow: '<i id="next_slide_3"><img src="<?php echo Yii::app()->request->baseUrl; ?>/images/nex.jpg"></i>',
                         responsive: [
                                 {
                                         breakpoint: 1000,
