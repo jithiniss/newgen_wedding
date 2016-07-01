@@ -76,7 +76,7 @@ class AjaxController extends Controller {
                                 $options .= '<option value="' . $state->id . '">' . $state->state . '</option>';
                         }
                 } else {
-                        $options = '<option value="">Select States</option><option value="0">Other</option>';
+                        $options = '<option value="">Select States</option><option value="-1">Doesnt Matter</option><option value="0">Other</option>';
                 }
                 echo $options;
         }
@@ -91,7 +91,7 @@ class AjaxController extends Controller {
                                 $options .= '<option value="' . $caste->id . '">' . $caste->caste . '</option>';
                         }
                 } else {
-                        $options = '<option value="">Select Community</option><option value="0">Other</option>';
+                        $options = '<option value="">Select Community</option><option value="-1">Doesnt Matter</option><option value="0">Other</option>';
                 }
                 echo $options;
         }
