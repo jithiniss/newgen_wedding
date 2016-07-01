@@ -296,11 +296,24 @@
                             <a href="">
 
                                 <i class="fa-paperclip"></i>
-                                <span class="title" >Masters</span>
+                                <span class="title" >Success Story</span>
                             </a>
                             <ul>
                                 <li>
                                     <?php echo CHtml::link('Add Story', array('/TellUsStory/admin')); ?>
+                                    <?php echo CHtml::link('Story Approval', array('/TellUsStory/approve')); ?>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">
+
+                                <i class="fa-paperclip"></i>
+                                <span class="title" >FAQ</span>
+                            </a>
+                            <ul>
+                                <li>
+                                    <?php echo CHtml::link('Add Awards', array('/TellUsStory/admin')); ?>
                                     <?php echo CHtml::link('Story Approval', array('/TellUsStory/approve')); ?>
                                 </li>
                             </ul>

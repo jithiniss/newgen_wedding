@@ -97,6 +97,12 @@ class SiteController extends Controller {
                 $this->render('about', ['banner' => $banner, 'about' => $about]);
         }
 
+        public function actionAwards() {
+                $criteria = new CDbCriteria(array('order' => 'sort_order ASC'));
+                $about = Awards::model()->findAllByAttributes(array('status' => '1'), $criteria);
+                $this->render('awards', ['about' => $about]);
+        }
+
         public function actionLogout() {
                 unset(Yii::app()->session['user']);
 
