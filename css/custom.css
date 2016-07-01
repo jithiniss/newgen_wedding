@@ -84,14 +84,8 @@ input.btn.sub-ment.btn-default {
 .form-control {
         background-color: #f3f3f3 ;
 }
-.text {
-        overflow: hidden;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        line-height: 16px;     /* fallback */
-        max-height: 32px;      /* fallback */
-        -webkit-line-clamp: 2; /* number of lines to show */
-        -webkit-box-orient: vertical;
+.zeros.submit_class{
+        padding-top: 17px;
 }
 button.btn.new-btn.btn-default{
         background-color: #0e6382;
@@ -126,6 +120,34 @@ button.btn.new-btn.btn-default{
         z-index: 10000;
         background-color: rgba(255, 0, 0, 0);
         max-width: 100px;
+}
+.photo_album_col .delete_photo{
+        width: 23px;
+        height: 23px;
+
+
+}
+.photo_album_col{
+        width: 22.333333%;
+}
+.photo_album_col img{
+        width: 94px;
+        height: 92px;
+}
+.photo_approval{
+        width: 80px;
+        height: 70px;
+}
+.photo_album_col h2{
+        color: #666;
+        font-weight: 300;
+        margin-bottom: -3px;
+        font-size: 11px;
+        font-family: 'Roboto', sans-serif;
+        text-align: center;
+        margin-left: 0;
+        margin-top: 0px;
+        line-height: 33px;
 }
 @media screen and (min-width: 480px) {
  .tokenize-sample { width: 300px }

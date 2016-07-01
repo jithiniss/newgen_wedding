@@ -17,7 +17,7 @@
 
                                 <ul id="myTabs" class="nav nav-tabs nav-justified adv">
                                         <li class="sims active"><?php echo CHtml::link('Photo Album', array('Profile/MyPhotos')); ?></li>
-                                        <li class="sims"><?php echo CHtml::link('Settings', array('Profile/MySettings')); ?></li>
+                                        <li class="sims "><?php echo CHtml::link('Settings', array('Profile/MySettings')); ?></li>
 
                                 </ul>
 
@@ -36,45 +36,57 @@
                                                         <div class="clearfix"></div>
 
                                                         <div class="box">
-                                                                <form method="post" id="multiple_upload_form" enctype="multipart/form-data"  >
-                                                                        <input type="file" name="fileToUpload" id="file-4" class="inputfile datas inputfile-3 img_files"  data-multiple-caption="{count} files selected" multiple />
+                                                                <form method="post" id="photo_update" enctype="multipart/form-data" action="<?= Yii::app()->baseUrl; ?>/index.php/Profile/MyPhotosUpload" >
+                                                                        <input type="file" name="UserPhotos[photo_name]" id="file-4" class="inputfile datas inputfile-3 img_files test"  id="my-file" data-multiple-caption="{count} files selected" multiple />
                                                                         <label for="file-4" class="fileUpload"><span>Browser Photo</span></label>
                                                                 </form>
-                                                                <div class="photo_album">
-
-                                                                </div>
                                                         </div>
-                                                        <!--                                                        <div class="photo_album" id="ajax_pics" style="position: relative;cursor: pointer;">
-                                                                                                                        <div style="
-                                                                                                                             position: absolute;    height: 212px;
-                                                                                                                             top: 0px;
-                                                                                                                             left: 0px;
-                                                                                                                             padding: 81px;display: none;background-color:#d2d2d2;background-image: url(<?= Yii::app()->baseUrl; ?>/images/profile_loader.gif); background-repeat: no-repeat;background-position: center; " id="loading_prof">
-
-
-                                                                                                                        </div>
+                                                </div>
+                                                <div class="photo_album">
                                                         <?php
-//                                                                if ($myProfile->photo != "") {
-//                                                                        $folder = Yii::app()->Upload->folderName(0, 1000, $myProfile->id);
-//                                                                        echo '<img class="img-responsive" src="' . Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $myProfile->id . '/profile/' . $myProfile->photo . '" />';
-//
+                                                        if (!empty($model)) {
+                                                                ?>
+
+                                                                <div class="photo_albums">
+                                                                        <div class="row">
+                                                                                <?php
+                                                                                foreach ($model as $photos) {
+                                                                                        $folder = Yii::app()->Upload->folderName(0, 1000, $photos->user_id);
+                                                                                        $userPic = explode('.', $photos->photo_name);
+                                                                                        ?>
+
+                                                                                        <div class="col-md-4 photo_album_col">
+                                                                                                <?php
+                                                                                                if ($photos->approval == 1) {
+                                                                                                        echo '<img class="img-responsive" src="' . Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $photos->user_id . '/album/' . $userPic[0] . '_116_155.' . $userPic[1] . '" />';
+                                                                                                        ?>
+                                                                                                        <h2>Album Photo</h2>
+                                                                                                        <?php
+                                                                                                } else {
+                                                                                                        $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                                                                                                        ?>
+                                                                                                        <?php if ($user->gender == 1) { ?>
+                                                                                                                <img class="photo_approval img-responsive" src="<?php echo Yii::app()->baseUrl; ?>/images/pp.jpg" />
+                                                                                                                <h2>Awaiting Approval</h2>
+
+                                                                                                        <?php } else { ?>
+                                                                                                                <img class="photo_approval img-responsive" src="<?php echo Yii::app()->baseUrl; ?>/images/w1.jpg" />
+                                                                                                                <h2>Awaiting Approval</h2>
+                                                                                                        <?php } ?>
+                                                                                                <?php } ?>
+                                                                                                <span class="delete_photo" ><img alt="delete" class="delete_photo"  src="<?php echo Yii::app()->baseUrl; ?>/images/delete-trash.jpg" onclick="delete_photo(<?php echo $photos->id; ?>)"/></span>
+                                                                                        </div>
+                                                                                        <?php
+                                                                                }
+                                                                                ?>
+                                                                        </div>
+                                                                </div>
+
+
+
+                                                                <?php
+                                                        }
                                                         ?>
-
-
-                                                        <?php //}
-                                                        ?>
-                                                                                                                </div>-->
-                                                        <div class="photo_album">
-
-                                                        </div>
-
-
-
-
-
-
-
-
                                                 </div>
 
                                                 <h5>Get more responses by uploading upto 20 photos on your profileGet more responses by uploading upto 20 photos on your profileGet more responses by uploading upto 20 photos on your profile</h5>
@@ -148,95 +160,35 @@
 </script>
 <script>
         $(document).ready(function () {
-                $(".img_files").change(function () {
-                        var fd = new FormData();
-                        fd.append("fileToUpload", $(".img_files")[0].files[0]);
-                        $.ajax({
-                                url: '<?php echo Yii::app()->createUrl("Profile/MyPhotos"); ?>',
-                                type: 'POST',
-                                data: fd,
-                                datatype: 'json',
-                                // async: false,
-                                beforeSend: function () {
-                                        $('#loading_prof').show();
-                                },
-                                success: function (data) {
-                                        // on success do some validation or refresh the content div to display the uploaded images
-                                        $("#ajax_pics").html(data);
-                                },
-                                complete: function () {
-                                        // success alerts
-                                        $('#loading_prof').hide();
-                                        // alert('Image uploaded successfully')
-                                },
-                                error: function (data) {
-                                        alert("There may a error on uploading. Try again later");
-                                },
-                                cache: false,
-                                contentType: false,
-                                processData: false
+                $('.fileUpload').on('click', function () {
+//                        $(".img_files").click();
+                        $(".img_files").change(function () {
+                                var photo = $(".img_files").val();
+                                $("form#photo_update").submit();
+
                         });
-
-                        return false;
                 });
-
-
-//                $('.images').on('change', function () {
-//                        $('#multiple_upload_form').ajaxForm({
-//                                //display the uploaded images
-//                                target: '.photo_album',
-//                                beforeSubmit: function (e) {
-//                                        $('.uploading').show();
-//                                },
-//                                success: function (e) {
-//                                        $('.uploading').hide();
-//                                },
-//                                error: function (e) {
-//                                }
-//                        }).submit();
-//                });
-
-
-
-
-//                $('.fileUpload').on('click', function () {
-//                        $(".img_files").change(function () {
-//                                var fileToUpload = $(".img_files").val();
-////                                $("form#photo_update").submit();
-//                                $.ajax({
-//                                        type: "POST",
-//                                        cache: 'false',
-//                                        async: false,
-//                                        url: '<?php echo Yii::app()->createUrl("Profile/MyProfile"); ?>',
-//                                        data: {fileToUpload: fileToUpload}
-//                                }).done(function (data) {
-////                                        var obj = jQuery.parseJSON(data);
-////                                        $("#photos_album").html(obj.img);
-//                                });
-//                        });
-//                });
 
         });
 
-//        $(document).ready(function () {
-//                $(".fileUpload").on('click', function () {
-//                        $(".img_files").change(function () {
-//                                var img_files = $(".img_files").val();
-//                                $.ajax({
-//                                        type: "POST",
-//                                        cache: 'false',
-//                                        async: false,
-//                                        url: baseurl + 'Profile/MyPhotos',
-//                                        data: {img_files: img_files}
-//                                }).done(function (data) {
-//                                        var obj = jQuery.parseJSON(data);
-//                                        $("#photos_album").html(obj.img);
-//                                });
-//                        });
-//                });
-//
-//        });
-
+</script>
+<script>
+        function delete_photo(id) {
+                var r = confirm("Are you sure wish to delete your photo ??");
+                if (r == true) {
+                        $.ajax({
+                                type: "POST",
+                                url: baseurl + 'Profile/DeleteItem',
+                                data: ({id: id}),
+                                success: function (data)
+                                {
+                                        window.location.replace("<?= Yii::app()->baseUrl; ?>/index.php/Profile/MyPhotos");
+                                }
+                        });
+                } else {
+                        window.location.replace("<?= Yii::app()->baseUrl; ?>/index.php/Profile/MyPhotos");
+                }
+        }
 </script>
 
 
