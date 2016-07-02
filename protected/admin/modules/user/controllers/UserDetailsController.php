@@ -255,11 +255,15 @@ class UserDetailsController extends Controller {
         /**
          * Manages all models.
          */
-        public function actionAdmin() {
+        public function actionAdmin($user_approval = '') {
                 $model = new UserDetails('search');
                 $model->unsetAttributes();  // clear any default values
-                if (isset($_GET['UserDetails']))
+                if (isset($_GET['UserDetails'])) {
                         $model->attributes = $_GET['UserDetails'];
+                }
+                if ($user_approval != '') {
+                        $model->id = $user_approval;
+                }
 
                 $this->render('admin', array(
                     'model' => $model,

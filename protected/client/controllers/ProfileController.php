@@ -220,6 +220,8 @@ class ProfileController extends Controller {
                                 $model->photo_name = $filename . '.' . $image->extensionName;
                                 $model->status = 1;
                                 $model->approval = 0;
+                                $model->cb = Yii::app()->session['user']['id'];
+                                $model->doc = date('Y-m-d');
                                 $model->user_id = Yii::app()->session['user']['id'];
                                 if ($model->save(FALSE)) {
                                         return true;
