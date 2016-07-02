@@ -72,12 +72,12 @@ class UserDetailsController extends Controller {
                         $model = $this->setValues($model, $_POST['UserDetails']);
                         $image = CUploadedFile::getInstance($model, 'photo');
                         if ($model->validate()) {
+                                $model->save();
                                 if (!$this->uploadFiles($model->id, $image)) {
                                         throw new CHttpException(403, 'Forbidden');
                                 }
                                 $transaction = Yii::app()->db->beginTransaction();
                                 try {
-                                        $model->save();
                                         $this->userId($model->id)->save();
                                         $this->partnerDetails($model->id)->save(false);
                                         $this->userPlan($model->id)->save(false);

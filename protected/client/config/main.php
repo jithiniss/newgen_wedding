@@ -37,6 +37,7 @@ return array(
     // application components
     'components' => array(
         'Upload' => array('class' => 'UploadFile'),
+        'PhotoVisibility' => array('class' => 'PhotoVisibility'),
         'Matches' => array('class' => 'Matches'),
         'dateFormat' => array('class' => 'DateFormat'),
         'booster' => array(

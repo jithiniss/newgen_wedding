@@ -209,31 +209,28 @@
                         <div class="col-lg-9 col-md-9 col-sm-8 search">
                                 <div class="row">
                                         <h4>Your Matches</h4>
-
-
                                         <form action="action_page.php">
                                                 <div class=row>
                                                         <div class="col-xs-3 col-sm-4 col-md-3 col-md-offset-2 ">
-                                                                <a href="#" class="offset">Save this Search</a>
+                                                                <!--                                                                <a href="#" class="offset">Save this Search</a>-->
                                                         </div>
-
                                                         <div class="col-xs-3 col-md-2 col-sm-2">
                                                                 <div class="form-group">
 
                                                                         <select class="ord" name="carlist" form="carform">
                                                                                 <option value="volvo">Default Order</option>
-                                                                                <option value="saab">1</option>
-                                                                                <option value="opel">2</option>
-                                                                                <option value="audi">3</option>
+                                                                                <option value="1">Sorting By Age</option>
+                                                                                <option value="2">Recently Posted</option>
+                                                                                <option value="3">Name (A-Z)</option>
+                                                                                <option value="4">Name (Z-A)</option>
                                                                         </select>
                                                                 </div>
                                                         </div>
-
                                                         <div class="col-xs-1 col-md-1 col-sm-1 nop">
-                                                                <a href="#"><img class="center-block grids" src="images/g2.jpg"></a>
+                                                                <a href="#"><img class="center-block grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g2.jpg"></a>
                                                         </div>
                                                         <div class="col-xs-1 col-md-1 col-sm-1 nop">
-                                                                <a href="#"><img class="center-block ans grids" src="images/g3.jpg"></a>
+                                                                <a href="#"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
                                                         </div>
                                                         <div class="col-xs-3 col-md-3 col-sm-4">
                                                                 <span>2000 profiles found</span>
@@ -242,231 +239,11 @@
 
                                         </form>
 
+                                        <?php
+                                        $this->widget("application.client.components.Matches");
+                                        ?>
 
 
-
-
-
-
-
-
-
-                                        <div class="col-md-4 col-sm-6 col-xs-6 sized">
-                                                <div class="load">
-                                                        <img class="center-block img-responsive side" src="images/w1.jpg">
-                                                        <h1>Janet I</h1>
-                                                        <h2>Profile created by Parent </h2>
-                                                        <h3>24 yrs, 5' 4", Christian, English</h3>
-                                                        <h3>Doctor</h3>
-                                                        <h3>Lives in Cuttack, India</h3>
-                                                        <h3>Grew up in India</h3>
-
-                                                        <div class="connect">
-                                                                <h5>Connect with her?</h5>
-
-
-                                                                <div class="f2"><a href="#" class="connect-1">Yes</a></div>
-                                                                <div class="f3"><a href="#" class="connect-2">No</a></div>
-
-
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 col-xs-6 sized">
-                                                <div class="load">
-                                                        <img class="center-block img-responsive side" src="images/w2.jpg">
-                                                        <h1>Janet I</h1>
-                                                        <h2>Profile created by Parent </h2>
-                                                        <h3>24 yrs, 5' 4", Christian, English</h3>
-                                                        <h3>Doctor</h3>
-                                                        <h3>Lives in Cuttack, India</h3>
-                                                        <h3>Grew up in India</h3>
-
-                                                        <div class="connect">
-                                                                <h5>Connect with her?</h5>
-
-
-                                                                <div class="f2"><a href="#" class="connect-1">Yes</a></div>
-                                                                <div class="f3"><a href="#" class="connect-2">No</a></div>
-
-
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 col-xs-6 sized">
-                                                <div class="load">
-                                                        <img class="center-block img-responsive side" src="images/w3.jpg">
-                                                        <h1>Janet I</h1>
-                                                        <h2>Profile created by Parent </h2>
-                                                        <h3>24 yrs, 5' 4", Christian, English</h3>
-                                                        <h3>Doctor</h3>
-                                                        <h3>Lives in Cuttack, India</h3>
-                                                        <h3>Grew up in India</h3>
-
-                                                        <div class="connect">
-                                                                <h5>Connect with her?</h5>
-
-
-                                                                <div class="f2"><a href="#" class="connect-1">Yes</a></div>
-                                                                <div class="f3"><a href="#" class="connect-2">No</a></div>
-
-
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-
-
-                                        <div class="col-md-4 col-sm-6 col-xs-6 sized">
-                                                <div class="load">
-
-                                                        <div class="profile">
-                                                                <img class="center-block file img-responsive side" src="images/w4.jpg">
-                                                                <img class="lock" src="images/lock.png">
-                                                                <h6>Visible on Accept</h6>
-                                                        </div>
-                                                        <h1>Janet I</h1>
-                                                        <h2>Profile created by Parent </h2>
-                                                        <h3>24 yrs, 5' 4", Christian, English</h3>
-                                                        <h3>Doctor</h3>
-                                                        <h3>Lives in Cuttack, India</h3>
-                                                        <h3>Grew up in India</h3>
-
-                                                        <div class="connect">
-                                                                <h5>Connect with her?</h5>
-
-
-                                                                <div class="f2"><a href="#" class="connect-1">Yes</a></div>
-                                                                <div class="f3"><a href="#" class="connect-2">No</a></div>
-
-
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-
-
-                                        <div class="col-md-4 col-sm-6 col-xs-6 sized">
-                                                <div class="load">
-                                                        <img class="center-block img-responsive side" src="images/w2.jpg">
-                                                        <h1>Janet I</h1>
-                                                        <h2>Profile created by Parent </h2>
-                                                        <h3>24 yrs, 5' 4", Christian, English</h3>
-                                                        <h3>Doctor</h3>
-                                                        <h3>Lives in Cuttack, India</h3>
-                                                        <h3>Grew up in India</h3>
-
-                                                        <div class="connect">
-                                                                <h5>Connect with her?</h5>
-
-
-                                                                <div class="f2"><a href="#" class="connect-1">Yes</a></div>
-                                                                <div class="f3"><a href="#" class="connect-2">No</a></div>
-
-
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 col-xs-6 sized">
-                                                <div class="load">
-                                                        <img class="center-block img-responsive side" src="images/w3.jpg">
-                                                        <h1>Janet I</h1>
-                                                        <h2>Profile created by Parent </h2>
-                                                        <h3>24 yrs, 5' 4", Christian, English</h3>
-                                                        <h3>Doctor</h3>
-                                                        <h3>Lives in Cuttack, India</h3>
-                                                        <h3>Grew up in India</h3>
-
-                                                        <div class="connect">
-                                                                <h5>Connect with her?</h5>
-
-
-                                                                <div class="f2"><a href="#" class="connect-1">Yes</a></div>
-                                                                <div class="f3"><a href="#" class="connect-2">No</a></div>
-
-
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-
-
-
-
-
-                                        <div class="col-md-4 col-sm-6 col-xs-6 sized">
-                                                <div class="load">
-                                                        <img class="center-block img-responsive side" src="images/w2.jpg">
-                                                        <h1>Janet I</h1>
-                                                        <h2>Profile created by Parent </h2>
-                                                        <h3>24 yrs, 5' 4", Christian, English</h3>
-                                                        <h3>Doctor</h3>
-                                                        <h3>Lives in Cuttack, India</h3>
-                                                        <h3>Grew up in India</h3>
-
-                                                        <div class="connect">
-                                                                <h5>Connect with her?</h5>
-
-
-                                                                <div class="f2"><a href="#" class="connect-1">Yes</a></div>
-                                                                <div class="f3"><a href="#" class="connect-2">No</a></div>
-
-
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div class="col-md-4 col-sm-6 col-xs-6 sized">
-                                                <div class="load">
-                                                        <img class="center-block img-responsive side" src="images/w3.jpg">
-                                                        <h1>Janet I</h1>
-                                                        <h2>Profile created by Parent </h2>
-                                                        <h3>24 yrs, 5' 4", Christian, English</h3>
-                                                        <h3>Doctor</h3>
-                                                        <h3>Lives in Cuttack, India</h3>
-                                                        <h3>Grew up in India</h3>
-
-                                                        <div class="connect">
-                                                                <h5>Connect with her?</h5>
-
-
-                                                                <div class="f2"><a href="#" class="connect-1">Yes</a></div>
-                                                                <div class="f3"><a href="#" class="connect-2">No</a></div>
-
-
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-
-
-
-
-
-                                        <div class="col-md-4 col-sm-6 col-xs-6 sized">
-                                                <div class="load">
-                                                        <img class="center-block img-responsive side" src="images/w2.jpg">
-                                                        <h1>Janet I</h1>
-                                                        <h2>Profile created by Parent </h2>
-                                                        <h3>24 yrs, 5' 4", Christian, English</h3>
-                                                        <h3>Doctor</h3>
-                                                        <h3>Lives in Cuttack, India</h3>
-                                                        <h3>Grew up in India</h3>
-
-                                                        <div class="connect">
-                                                                <h5>Connect with her?</h5>
-
-
-                                                                <div class="f2"><a href="#" class="connect-1">Yes</a></div>
-                                                                <div class="f3"><a href="#" class="connect-2">No</a></div>
-
-
-                                                        </div>
-                                                </div>
-                                        </div>
 
 
 

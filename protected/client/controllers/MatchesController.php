@@ -15,8 +15,8 @@ class MatchesController extends Controller {
 
         public function actionMyMatches() {
 
-                $matches = Yii::app()->Matches->MyMatches();
-                $this->render('mymatches', array('matches' => $matches));
+//                $matches = Yii::app()->Matches->MyMatches();
+                $this->render('mymatches');
         }
 
 // Uncomment the following methods and override them if needed
