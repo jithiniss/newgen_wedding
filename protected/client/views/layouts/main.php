@@ -278,36 +278,43 @@
 
         <?php
         if(isset(Yii::app()->session['user']['id']) && Yii::app()->session['user']['id'] != '') {
-                $email_verify = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                if($user->register_step == 4) {
+                        $email_verify = 1;
+                        ?>
+                        <div class="modal fade" id="emailVerification" role="dialog">
+                            <div class="modal-dialog">
+
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <div class="modal-header">
+
+
+                                    </div>
+                                    <div class="modal-body">
+                                        <h1>Confirm your Email Address</h1>
+                                        <p style="font-size: 15px;padding-bottom:0px;">A confirmation email has been sent to <b><?= $user->email; ?></b>. Click on the confirmation link in the email to activate your account. </p>
+                                        <ul class="list-inline list-unstyled">
+                                            <li> <p style="color: #663366;"><i class="fa  fa-envelope"></i><a href="#" style="color: #663366;"> Need to resend the email</a></p></li>
+                                            <li><p style="color: #663366;"><?php echo CHtml::link('<i class="fa locks fa-lock"></i>Log Out', array('site/logout')); ?></p></li>
+                                        </ul>
+
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+                        </div>
+                        <?php
+                } else {
+                        $email_verify = 0;
+                }
         } else {
-                $email_verify = '';
+                $email_verify = 0;
         }
         ?>
-        <div class="modal fade" id="emailVerification" role="dialog">
-            <div class="modal-dialog">
-                <?php echo $email_verify->email_verification;
-                ?>
-                <!-- Modal content-->
-                <div class="modal-content">
-                    <div class="modal-header">
 
-
-                    </div>
-                    <div class="modal-body">
-                        <h1>Confirm your Email Address</h1>
-                        <p style="font-size: 15px;padding-bottom:0px;">A confirmation email has been sent to <b><?= $email_verify->email; ?></b>. Click on the confirmation link in the email to activate your account. </p>
-                        <ul class="list-inline list-unstyled">
-                            <li> <p style="color: #663366;"><i class="fa  fa-envelope"></i><a href="#" style="color: #663366;"> Need to resend the email</a></p></li>
-                            <li><p style="color: #663366;"><?php echo CHtml::link('<i class="fa locks fa-lock"></i>Log Out', array('site/logout')); ?></p></li>
-                        </ul>
-
-
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
 
 
         <script>
@@ -399,8 +406,8 @@
                 });
         </script>-->
         <?php
-        if($email_verify != '') {
-                if($email_verify->email_verification == 0) {
+        if($email_verify == 1) {
+                if($user->email_verification == 0) {
                         ?>
                         <script type="text/javascript">
                                 $(document).ready(function () {
