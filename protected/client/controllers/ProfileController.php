@@ -5,7 +5,7 @@ class ProfileController extends Controller {
         public function init() {
 
 
-                if (!isset(Yii::app()->session['user'])) {
+                if(!isset(Yii::app()->session['user'])) {
 
                         $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/login');
                 }
@@ -14,14 +14,14 @@ class ProfileController extends Controller {
         public function actionMyProfile() {
 
                 $myProfile = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                if (!empty($myProfile)) {
+                if(!empty($myProfile)) {
                         $partnerDetails = PartnerDetails::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
 
-                        if (isset($_FILES['UserDetails'])) {
+                        if(isset($_FILES['UserDetails'])) {
 
                                 $image = CUploadedFile::getInstance($myProfile, 'photo');
 
-                                if (!$this->uploadFiles($myProfile->id, $image)) {
+                                if(!$this->uploadFiles($myProfile->id, $image)) {
                                         throw new CHttpException(403, 'Forbidden');
                                 } else {
                                         $myProfile->refresh();
@@ -40,15 +40,15 @@ class ProfileController extends Controller {
 
         public function actionEditProfile() {
                 $editProfile = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                if (!empty($editProfile)) {
+                if(!empty($editProfile)) {
                         $editProfile->scenario = 'myProfile';
 
-                        if (isset($_POST['UserDetails'])) {
+                        if(isset($_POST['UserDetails'])) {
                                 $editProfile->attributes = $_POST['UserDetails'];
                                 $editProfile->about_me = $_POST['UserDetails']['about_me'];
                                 $editProfile->ub = $editProfile->id;
                                 $editProfile->dob = $editProfile->dob_year . '-' . $editProfile->dob_month . '-' . $editProfile->dob_day;
-                                if ($editProfile->validate()) {
+                                if($editProfile->validate()) {
                                         $editProfile->save(FALSE);
                                         Yii::app()->session['user'] = $editProfile;
                                         Yii::app()->user->setFlash('edit_profile', "Profile Changed Successfully");
@@ -63,88 +63,298 @@ class ProfileController extends Controller {
         public function actionPartnerPreference() {
                 $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                 $partnerDetails = PartnerDetails::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
-                if (!empty($partnerDetails)) {
-                        if (isset($_POST['PartnerDetails'])) {
+                if(!empty($partnerDetails)) {
+                        if(isset($_POST['PartnerDetails'])) {
                                 $partnerDetails->attributes = $_POST['PartnerDetails'];
-                                if (!empty($_POST['PartnerDetails']['marital_status'])) {
-                                        $partnerDetails->marital_status = implode(',', $_POST['PartnerDetails']['marital_status']);
+                                if(!empty($_POST['PartnerDetails']['marital_status'])) {
+                                        $marital_status = $_POST['PartnerDetails']['marital_status'];
+
+                                        if(sizeof($marital_status) > 1) {
+                                                if(in_array('-1', $marital_status) == 1) {
+
+                                                        unset($marital_status[array_search('-1', $marital_status)]);
+                                                } else {
+
+                                                        $marital_status = $marital_status;
+                                                }
+                                        } else {
+                                                $marital_status = $_POST['PartnerDetails']['marital_status'];
+                                        }
+                                        $partnerDetails->marital_status = implode(',', $marital_status);
                                 } else {
                                         $partnerDetails->marital_status = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['religion'])) {
-                                        $partnerDetails->religion = implode(',', $_POST['PartnerDetails']['religion']);
+                                if(!empty($_POST['PartnerDetails']['religion'])) {
+                                        $religion = $_POST['PartnerDetails']['religion'];
+
+                                        if(sizeof($religion) > 1) {
+                                                if(in_array('-1', $religion) == 1) {
+
+                                                        unset($religion[array_search('-1', $religion)]);
+                                                } else {
+
+                                                        $religion = $religion;
+                                                }
+                                        } else {
+                                                $religion = $_POST['PartnerDetails']['religion'];
+                                        }
+
+                                        $partnerDetails->religion = implode(',', $religion);
                                 } else {
                                         $partnerDetails->religion = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['mothertongue'])) {
-                                        $partnerDetails->mothertongue = implode(',', $_POST['PartnerDetails']['mothertongue']);
+                                if(!empty($_POST['PartnerDetails']['mothertongue'])) {
+                                        $mothertongue = $_POST['PartnerDetails']['mothertongue'];
+
+                                        if(sizeof($mothertongue) > 1) {
+                                                if(in_array('-1', $mothertongue) == 1) {
+
+                                                        unset($mothertongue[array_search('-1', $mothertongue)]);
+                                                } else {
+
+                                                        $mothertongue = $mothertongue;
+                                                }
+                                        } else {
+                                                $mothertongue = $_POST['PartnerDetails']['mothertongue'];
+                                        }
+
+                                        $partnerDetails->mothertongue = implode(',', $mothertongue);
                                 } else {
                                         $partnerDetails->mothertongue = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['caste'])) {
-                                        $partnerDetails->caste = implode(',', $_POST['PartnerDetails']['caste']);
+
+                                if(!empty($_POST['PartnerDetails']['caste'])) {
+                                        $caste = $_POST['PartnerDetails']['caste'];
+
+                                        if(sizeof($caste) > 1) {
+                                                if(in_array('-1', $caste) == 1) {
+
+                                                        unset($caste[array_search('-1', $caste)]);
+                                                } else {
+
+                                                        $caste = $caste;
+                                                }
+                                        } else {
+                                                $caste = $_POST['PartnerDetails']['caste'];
+                                        }
+
+                                        $partnerDetails->caste = implode(',', $caste);
                                 } else {
                                         $partnerDetails->caste = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['profile_created_by'])) {
-                                        $partnerDetails->profile_created_by = implode(',', $_POST['PartnerDetails']['profile_created_by']);
+                                if(!empty($_POST['PartnerDetails']['profile_created_by'])) {
+                                        $profile_created_by = $_POST['PartnerDetails']['profile_created_by'];
+
+                                        if(sizeof($profile_created_by) > 1) {
+                                                if(in_array('-1', $profile_created_by) == 1) {
+
+                                                        unset($profile_created_by[array_search('-1', $profile_created_by)]);
+                                                } else {
+
+                                                        $profile_created_by = $profile_created_by;
+                                                }
+                                        } else {
+                                                $profile_created_by = $_POST['PartnerDetails']['profile_created_by'];
+                                        }
+
+                                        $partnerDetails->profile_created_by = implode(',', $profile_created_by);
                                 } else {
                                         $partnerDetails->profile_created_by = '';
                                 }
 
-                                if (!empty($_POST['PartnerDetails']['country_living_in'])) {
-                                        $partnerDetails->country_living_in = implode(',', $_POST['PartnerDetails']['country_living_in']);
+                                if(!empty($_POST['PartnerDetails']['country_living_in'])) {
+                                        $country_living_in = $_POST['PartnerDetails']['country_living_in'];
+
+                                        if(sizeof($country_living_in) > 1) {
+                                                if(in_array('-1', $country_living_in) == 1) {
+
+                                                        unset($country_living_in[array_search('-1', $country_living_in)]);
+                                                } else {
+
+                                                        $country_living_in = $country_living_in;
+                                                }
+                                        } else {
+                                                $country_living_in = $_POST['PartnerDetails']['country_living_in'];
+                                        }
+
+                                        $partnerDetails->country_living_in = implode(',', $country_living_in);
                                 } else {
                                         $partnerDetails->country_living_in = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['country_grew_up'])) {
-                                        $partnerDetails->country_grew_up = implode(',', $_POST['PartnerDetails']['country_grew_up']);
+                                if(!empty($_POST['PartnerDetails']['country_grew_up'])) {
+                                        $country_grew_up = $_POST['PartnerDetails']['country_grew_up'];
+
+                                        if(sizeof($country_grew_up) > 1) {
+                                                if(in_array('-1', $country_grew_up) == 1) {
+
+                                                        unset($country_grew_up[array_search('-1', $country_grew_up)]);
+                                                } else {
+
+                                                        $country_grew_up = $country_grew_up;
+                                                }
+                                        } else {
+                                                $country_grew_up = $_POST['PartnerDetails']['country_grew_up'];
+                                        }
+
+                                        $partnerDetails->country_grew_up = implode(',', $country_grew_up);
                                 } else {
                                         $partnerDetails->country_grew_up = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['residency_status'])) {
-                                        $partnerDetails->residency_status = implode(',', $_POST['PartnerDetails']['residency_status']);
+                                if(!empty($_POST['PartnerDetails']['residency_status'])) {
+                                        $residency_status = $_POST['PartnerDetails']['residency_status'];
+
+                                        if(sizeof($residency_status) > 1) {
+                                                if(in_array('-1', $residency_status) == 1) {
+
+                                                        unset($residency_status[array_search('-1', $residency_status)]);
+                                                } else {
+
+                                                        $residency_status = $residency_status;
+                                                }
+                                        } else {
+                                                $residency_status = $_POST['PartnerDetails']['residency_status'];
+                                        }
+
+                                        $partnerDetails->residency_status = implode(',', $residency_status);
                                 } else {
                                         $partnerDetails->residency_status = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['education'])) {
-                                        $partnerDetails->education = implode(',', $_POST['PartnerDetails']['education']);
+                                if(!empty($_POST['PartnerDetails']['education'])) {
+                                        $education = $_POST['PartnerDetails']['education'];
+
+                                        if(sizeof($education) > 1) {
+                                                if(in_array('-1', $education) == 1) {
+
+                                                        unset($education[array_search('-1', $education)]);
+                                                } else {
+
+                                                        $education = $education;
+                                                }
+                                        } else {
+                                                $education = $_POST['PartnerDetails']['education'];
+                                        }
+
+                                        $partnerDetails->education = implode(',', $education);
                                 } else {
                                         $partnerDetails->education = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['working_with'])) {
-                                        $partnerDetails->working_with = implode(',', $_POST['PartnerDetails']['working_with']);
+                                if(!empty($_POST['PartnerDetails']['working_with'])) {
+                                        $working_with = $_POST['PartnerDetails']['working_with'];
+
+                                        if(sizeof($working_with) > 1) {
+                                                if(in_array('-1', $working_with) == 1) {
+
+                                                        unset($working_with[array_search('-1', $working_with)]);
+                                                } else {
+
+                                                        $working_with = $working_with;
+                                                }
+                                        } else {
+                                                $working_with = $_POST['PartnerDetails']['working_with'];
+                                        }
+
+                                        $partnerDetails->working_with = implode(',', $working_with);
                                 } else {
                                         $partnerDetails->working_with = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['profession_area'])) {
-                                        $partnerDetails->profession_area = implode(',', $_POST['PartnerDetails']['profession_area']);
+                                if(!empty($_POST['PartnerDetails']['profession_area'])) {
+                                        $profession_area = $_POST['PartnerDetails']['profession_area'];
+
+                                        if(sizeof($profession_area) > 1) {
+                                                if(in_array('-1', $profession_area) == 1) {
+
+                                                        unset($profession_area[array_search('-1', $profession_area)]);
+                                                } else {
+
+                                                        $profession_area = $profession_area;
+                                                }
+                                        } else {
+                                                $profession_area = $_POST['PartnerDetails']['profession_area'];
+                                        }
+
+                                        $partnerDetails->profession_area = implode(',', $profession_area);
                                 } else {
                                         $partnerDetails->profession_area = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['annual_income_from'])) {
-                                        $partnerDetails->annual_income_from = implode(',', $_POST['PartnerDetails']['annual_income_from']);
+                                if(!empty($_POST['PartnerDetails']['annual_income_from'])) {
+                                        $annual_income_from = $_POST['PartnerDetails']['annual_income_from'];
+
+                                        if(sizeof($annual_income_from) > 1) {
+                                                if(in_array('-1', $annual_income_from) == 1) {
+
+                                                        unset($annual_income_from[array_search('-1', $annual_income_from)]);
+                                                } else {
+
+                                                        $annual_income_from = $annual_income_from;
+                                                }
+                                        } else {
+                                                $annual_income_from = $_POST['PartnerDetails']['annual_income_from'];
+                                        }
+
+                                        $partnerDetails->annual_income_from = implode(',', $annual_income_from);
                                 } else {
                                         $partnerDetails->annual_income_from = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['diet'])) {
-                                        $partnerDetails->diet = implode(',', $_POST['PartnerDetails']['diet']);
+                                if(!empty($_POST['PartnerDetails']['diet'])) {
+                                        $diet = $_POST['PartnerDetails']['diet'];
+
+                                        if(sizeof($diet) > 1) {
+                                                if(in_array('-1', $diet) == 1) {
+
+                                                        unset($diet[array_search('-1', $diet)]);
+                                                } else {
+
+                                                        $diet = $diet;
+                                                }
+                                        } else {
+                                                $diet = $_POST['PartnerDetails']['diet'];
+                                        }
+
+                                        $partnerDetails->diet = implode(',', $diet);
                                 } else {
                                         $partnerDetails->diet = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['body_type'])) {
-                                        $partnerDetails->body_type = implode(',', $_POST['PartnerDetails']['body_type']);
+                                if(!empty($_POST['PartnerDetails']['body_type'])) {
+                                        $body_type = $_POST['PartnerDetails']['body_type'];
+
+                                        if(sizeof($body_type) > 1) {
+                                                if(in_array('-1', $body_type) == 1) {
+
+                                                        unset($body_type[array_search('-1', $body_type)]);
+                                                } else {
+
+                                                        $body_type = $body_type;
+                                                }
+                                        } else {
+                                                $body_type = $_POST['PartnerDetails']['body_type'];
+                                        }
+
+                                        $partnerDetails->body_type = implode(',', $body_type);
                                 } else {
                                         $partnerDetails->body_type = '';
                                 }
-                                if (!empty($_POST['PartnerDetails']['skin_tone'])) {
-                                        $partnerDetails->skin_tone = implode(',', $_POST['PartnerDetails']['skin_tone']);
+                                if(!empty($_POST['PartnerDetails']['skin_tone'])) {
+                                        $skin_tone = $_POST['PartnerDetails']['skin_tone'];
+
+                                        if(sizeof($skin_tone) > 1) {
+                                                if(in_array('-1', $skin_tone) == 1) {
+
+                                                        unset($skin_tone[array_search('-1', $skin_tone)]);
+                                                } else {
+
+                                                        $skin_tone = $skin_tone;
+                                                }
+                                        } else {
+                                                $skin_tone = $_POST['PartnerDetails']['skin_tone'];
+                                        }
+
+                                        $partnerDetails->skin_tone = implode(',', $skin_tone);
                                 } else {
                                         $partnerDetails->skin_tone = '';
                                 }
-                                if ($partnerDetails->validate()) {
+                                if($partnerDetails->validate()) {
                                         $partnerDetails->ub = $user->id;
-                                        if ($partnerDetails->save())
+                                        if($partnerDetails->save())
                                                 Yii::app()->user->setFlash('partner_fet', "Partner Preference Changed Successfully");
                                 }
                         }
@@ -155,11 +365,11 @@ class ProfileController extends Controller {
         }
 
         public function uploadFiles($id, $image) {
-                if ($image != "") {
+                if($image != "") {
                         $folder = Yii::app()->Upload->folderName(0, 1000, $id);
                         $files = glob(Yii::app()->basePath . '/../uploads/user/' . $folder . '/' . $id . '/profile/*'); // get all file names
-                        foreach ($files as $file) { // iterate files
-                                if (is_file($file)) {
+                        foreach($files as $file) { // iterate files
+                                if(is_file($file)) {
                                         unlink($file); // delete file
                                 }
                         }
@@ -170,11 +380,11 @@ class ProfileController extends Controller {
 //                        $dimension[1] = array('width' => '322', 'height' => '500', 'name' => 'medium');
 //                        $dimension[2] = array('width' => '580', 'height' => '775', 'name' => 'big');
 //                        $dimension[3] = array('width' => '3016', 'height' => '4030', 'name' => 'zoom');
-                        if (Yii::app()->Upload->uploadImage($image, $dimension, $path, $filename)) {
+                        if(Yii::app()->Upload->uploadImage($image, $dimension, $path, $filename)) {
                                 $model = UserDetails::model()->findByPk($id);
                                 $model->photo = $filename . '.' . $image->extensionName;
 
-                                if ($model->save()) {
+                                if($model->save()) {
                                         return true;
                                 } else {
                                         return FALSE;
@@ -192,10 +402,10 @@ class ProfileController extends Controller {
 
         public function actionMyPhotosUpload() {
                 $model = new UserPhotos;
-                if (isset($_FILES['UserPhotos'])) {
+                if(isset($_FILES['UserPhotos'])) {
                         $image = CUploadedFile::getInstance($model, 'photo_name');
                 }
-                if (!$this->uploadFilesAlbum(Yii::app()->session['user']['id'], $image)) {
+                if(!$this->uploadFilesAlbum(Yii::app()->session['user']['id'], $image)) {
 
                         throw new CHttpException(403, 'Forbidden');
                 } else {
@@ -205,7 +415,7 @@ class ProfileController extends Controller {
         }
 
         public function uploadFilesAlbum($id, $image) {
-                if ($image != "") {
+                if($image != "") {
                         $folder = Yii::app()->Upload->folderName(0, 1000, $id);
                         $files = glob(Yii::app()->basePath . '/../uploads/user/' . $folder . '/' . $id . '/album/*'); // get all file names
                         $filename = $id . '_' . rand(100001, 999999) . '_album';
@@ -215,7 +425,7 @@ class ProfileController extends Controller {
 //                        $dimension[2] = array('width' => '580', 'height' => '775', 'name' => 'big');
 //                        $dimension[3] = array('width' => '3016', 'height' => '4030', 'name' => 'zoom');
 
-                        if (Yii::app()->Upload->uploadImage($image, $dimension, $path, $filename)) {
+                        if(Yii::app()->Upload->uploadImage($image, $dimension, $path, $filename)) {
                                 $model = new UserPhotos;
                                 $model->photo_name = $filename . '.' . $image->extensionName;
                                 $model->status = 1;
@@ -223,7 +433,7 @@ class ProfileController extends Controller {
                                 $model->cb = Yii::app()->session['user']['id'];
                                 $model->doc = date('Y-m-d');
                                 $model->user_id = Yii::app()->session['user']['id'];
-                                if ($model->save(FALSE)) {
+                                if($model->save(FALSE)) {
                                         return true;
                                 } else {
                                         return FALSE;
@@ -235,9 +445,9 @@ class ProfileController extends Controller {
         }
 
         public function actionDeleteItem() {
-                if (isset($_POST['id'])) {
+                if(isset($_POST['id'])) {
                         $model = UserPhotos::model()->findByPk($_POST['id']);
-                        if ($model->delete()) {
+                        if($model->delete()) {
                                 $this->redirect(Yii::app()->request->urlReferrer);
                         }
                 }
@@ -245,9 +455,9 @@ class ProfileController extends Controller {
 
         public function actionPhotoSettings() {
                 $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                if (isset($_POST['photo_visibility'])) {
+                if(isset($_POST['photo_visibility'])) {
                         $model->photo_visibility = $_POST['photo_visibility'];
-                        if ($model->photo_visibility == 3) {
+                        if($model->photo_visibility == 3) {
                                 $model->photo_password = $this->randomPassword();
                         } else {
                                 $model->photo_password = 0;
@@ -261,7 +471,7 @@ class ProfileController extends Controller {
                 $alphabet = '1234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ';
                 $pass = array(); //remember to declare $pass as an array
                 $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
-                for ($i = 0; $i < 9; $i++) {
+                for($i = 0; $i < 9; $i++) {
                         $n = rand(0, $alphaLength);
                         $pass[] = $alphabet[$n];
                 }

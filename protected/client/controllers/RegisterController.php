@@ -18,25 +18,28 @@ class RegisterController extends Controller {
                         $firstStep = $this->setFirstStep($firstStep, $_POST['UserDetails']);
                         if($firstStep->validate()) {
 
-                                $transaction = Yii::app()->db->beginTransaction();
-                                try {
-                                        $firstStep->save();
-                                        UserDetails::model()->userId($firstStep->id)->save();
-                                        $this->partnerDetails($firstStep->id)->save(false);
-                                        $this->userPlan($firstStep->id)->save(false);
-                                        $user = UserDetails::model()->findByPk($firstStep->id);
-                                        $user->cb = $firstStep->id;
-                                        $user->ub = $firstStep->id;
-                                        $user->save(FALSE);
-                                        $plan = UserPlans::model()->findByAttributes(array('user_id' => $user->id));
-                                        Yii::app()->session['user'] = $user;
-                                        Yii::app()->session['plan'] = $plan;
-                                        $transaction->commit();
-                                        $this->redirect(array('SecondStep'));
-                                } catch(Exception $e) {
-                                        $transaction->rollback();
-                                        Yii::app()->user->setFlash('register_error1', $e->getMessage());
-                                }
+
+                                //  $transaction = Yii::app()->db->beginTransaction();
+                                //  try {
+                                $firstStep->save();
+                                UserDetails::model()->userId($firstStep->id)->save();
+                                $this->partnerDetails($firstStep->id)->save(false);
+                                $this->userPlan($firstStep->id)->save(false);
+                                $user = UserDetails::model()->findByPk($firstStep->id);
+                                $user->cb = $firstStep->id;
+                                $user->ub = $firstStep->id;
+                                $user->save(FALSE);
+                                $plan = UserPlans::model()->findByAttributes(array('user_id' => $user->id));
+                                Yii::app()->session['user'] = $user;
+                                Yii::app()->session['plan'] = $plan;
+                                $this->RegisterMail($firstStep);
+                                //$transaction->commit();
+
+                                $this->redirect(array('SecondStep'));
+//                                } catch(Exception $e) {
+//                                        $transaction->rollback();
+//                                        Yii::app()->user->setFlash('register_error1', $e->getMessage());
+//                                }
                         }
                 }
                 $this->render('step_1', array('firstStep' => $firstStep));
@@ -85,6 +88,27 @@ class RegisterController extends Controller {
                 $model->number_of_days_left = $plan_details->number_of_days;
                 $model->user_id = $id;
                 return $model;
+        }
+
+        /* mail to user and admin */
+
+        public function RegisterMail($model) {
+                $user = $model->email;
+//                $user = 'sibys09@gmail.com';
+                $user_subject = 'Welcome to NEWGEN.com!';
+                $user_message = $this->renderPartial('mail/_register_user_mail', array('model' => $model), true);
+
+//                $admin = 'sibys09@gmail.com';
+                // $admin_subject = $model->first_name . ' registered with NEWGEN.com';
+                //  $admin_message = $this->renderPartial('mail/_register_admin_mail', array('model' => $model), true);
+// Always set content-type when sending HTML email
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+// More headers
+                $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
+//$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
+                // mail($user, $user_subject, $user_message, $headers);
+                // mail($admin, $admin_subject, $admin_message, $headers);
         }
 
         public function actionSecondStep() {
@@ -169,6 +193,43 @@ class RegisterController extends Controller {
                 return $model;
         }
 
+        public function actionVerify($m) {
+                if($m != '') {
+                        $user_id = $this->encrypt_decrypt('decrypt', $m);
+                        $model = UserDetails::model()->findByPk($user_id);
+                        if(!empty($model)) {
+                                if($model->email_verification == 0) {
+                                        $model->email_verification = 1;
+                                        if($model->save()) {
+                                                Yii::app()->user->setFlash('email_verified', "Your account has been successfully verified.");
+                                                $this->ReturnUrl($model);
+                                        }
+                                } else {
+                                        Yii::app()->user->setFlash('email_verified', "You have already verified your account.");
+                                        $this->ReturnUrl($model);
+                                }
+                        } else {
+
+                        }
+                } else {
+
+                }
+        }
+
+        public function ReturnUrl($model) {
+                if($model->register_step == 1) {
+                        $this->redirect(array('//Register/SecondStep'));
+                } else if($model->register_step == 2) {
+                        $this->redirect(array('//Register/ThirdStep'));
+                } else if($model->register_step == 3) {
+                        $this->redirect(array('//Register/FourthStep'));
+                } else if($model->register_step == 4) {
+                        $this->redirect(array('//Myaccount/Index'));
+                } else {
+                        $this->redirect(array('//Myaccount/Index'));
+                }
+        }
+
         /**
          * Performs the AJAX validation.
          * @param UserDetails $model the model to be validated
@@ -178,6 +239,35 @@ class RegisterController extends Controller {
                         echo CActiveForm::validate($model);
                         Yii::app()->end();
                 }
+        }
+
+        public function siteURL() {
+                $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+                $domainName = $_SERVER['HTTP_HOST'];
+                return $protocol . $domainName . '/newgen_wedding/';
+        }
+
+        public function encrypt_decrypt($action, $string) {
+                $output = false;
+
+                $encrypt_method = "AES-256-CBC";
+                $secret_key = 'This is my secret key';
+                $secret_iv = 'This is my secret iv';
+
+// hash
+                $key = hash('sha256', $secret_key);
+
+// iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
+                $iv = substr(hash('sha256', $secret_iv), 0, 16);
+
+                if($action == 'encrypt') {
+                        $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
+                        $output = base64_encode($output);
+                } else if($action == 'decrypt') {
+                        $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
+                }
+
+                return $output;
         }
 
 }

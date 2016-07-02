@@ -4,7 +4,7 @@ class MyaccountController extends Controller {
 
         public function actionIndex() {
 
-                if (isset(Yii::app()->session['user'])) {
+                if(isset(Yii::app()->session['user'])) {
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $this->render('index', array('user' => $user));
                 } else {
@@ -13,7 +13,7 @@ class MyaccountController extends Controller {
         }
 
         public function actionUpdatePhoto() {
-                if (isset($_FILES['fileToUpload'])) {
+                if(isset($_FILES['fileToUpload'])) {
 
                         $errors = array();
                         $file_size = $_FILES['fileToUpload']['size'];
@@ -22,16 +22,16 @@ class MyaccountController extends Controller {
                         $array = explode('.', $_FILES['fileToUpload']['name']);
                         $extension_name = end($array);
                         $extensions = array("jpeg", "jpg", "png");
-                        if (in_array($extension_name, $extensions) === false) {
+                        if(in_array($extension_name, $extensions) === false) {
                                 $errors[] = "extension not allowed, please choose a JPEG or PNG file.";
                         }
 
-                        if ($file_size > 87078) {
+                        if($file_size > 87078) {
                                 $errors[] = 'File size must be exactely 2 MB';
                         }
                         $path = Yii::app()->basePath . '/../uploads/user/1000/' . Yii::app()->session['user']['id'] . "/profile/" . $file_name;
-                        if (empty($errors) == true) {
-                                if (move_uploaded_file($file_tmp, $path)) {
+                        if(empty($errors) == true) {
+                                if(move_uploaded_file($file_tmp, $path)) {
                                         $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                                         $model->photo = $file_name;
                                         $model->update();
@@ -45,7 +45,7 @@ class MyaccountController extends Controller {
 
         public function actionInvitations() {
                 $requests = Requests::model()->findAllByAttributes(array(), array('condition' => '(partner_id = "' . Yii::app()->session['user']['user_id'] . '" AND status = 1)'));
-                if (!empty($requests))
+                if(!empty($requests))
                         $this->redirect(array('Pending'));
                 else {
                         $this->redirect(array('Accepted'));
@@ -54,7 +54,7 @@ class MyaccountController extends Controller {
 
         public function actionSentInvitations() {
                 $requests = Requests::model()->findAllByAttributes(array(), array('condition' => '(user_id = "' . Yii::app()->session['user']['id'] . '" AND status = 1)'));
-                if (!empty($requests))
+                if(!empty($requests))
                         $this->redirect(array('Sent'));
                 else {
                         $this->redirect(array('SentAccepted'));
@@ -93,7 +93,7 @@ class MyaccountController extends Controller {
 
         public function actionAccept($id) {
                 $request = Requests::model()->findByPk($id);
-                if (!empty($request) && $request->status == 1) {
+                if(!empty($request) && $request->status == 1) {
                         $request->status = 2;
                         $request->save();
                         $this->redirect(Yii::app()->request->urlReferrer);
@@ -102,7 +102,7 @@ class MyaccountController extends Controller {
 
         public function actionReject($id) {
                 $reject = Requests::model()->findByPk($id);
-                if (!empty($reject) && $reject->status == 1) {
+                if(!empty($reject) && $reject->status == 1) {
                         $reject->status = 4;
                         $reject->save();
                         $this->redirect(Yii::app()->request->urlReferrer);

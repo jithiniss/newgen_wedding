@@ -7,7 +7,7 @@
                 $active1 = 'active';
         } else if($active_menu == 'profile/MyProfile') {
                 $active2 = 'active';
-        } else if($active_menu == 'profile/MyPhotos') {
+        } else if($active_menu == 'profile/MyPhotos' || $active_menu == 'profile/PhotoSettings') {
                 $active3 = 'active';
         }
         ?>

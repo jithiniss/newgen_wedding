@@ -153,7 +153,7 @@
                                                 $religion = explode(',', $partnerDetails->religion);
                                         }
                                         $religion_opt = array();
-                                        if(!empty($marital_status)) {
+                                        if(!empty($religion)) {
                                                 foreach($religion as $value) {
                                                         $religion_opt[$value] = array('selected' => 'selected');
                                                 }
@@ -183,7 +183,7 @@
                                         $caste_options = array();
 
                                         if($partnerDetails->religion != '') {
-                                                $castes = MasterCaste::model()->findAllByAttributes(array('religion_id' => $partnerDetails->religion));
+                                                $castes = MasterCaste::model()->findAll(array('condition' => 'religion_id in(' . $partnerDetails->religion . ')'));
                                                 if(!empty($castes)) {
                                                         $caste_options[""] = "Select Community";
                                                         foreach($castes as $caste) {
@@ -340,7 +340,7 @@
                                         <?php
                                         $state_options = array();
                                         if($partnerDetails->country_living_in != '') {
-                                                $states = MasterState::model()->findAllByAttributes(array('country_id' => $partnerDetails->country_living_in));
+                                                $states = MasterState::model()->findAll(array('condition' => 'country_id in(' . $partnerDetails->country_living_in . ')'));
                                                 if(!empty($states)) {
                                                         $state_options[""] = "Select State Living In";
                                                         foreach($states as $state) {
@@ -822,13 +822,13 @@
         $('#PartnerDetails_marital_status').tokenize({displayDropdownOnFocus: true});
         $('#PartnerDetails_religion').tokenize({displayDropdownOnFocus: true,
             onAddToken: function (value, text, e) {
-                if ($.isFunction(Caste)) { // check if func exists
-                    Caste(value, text, e); // if true execute it
+                if ($.isFunction(AddCaste)) { // check if func exists
+                    AddCaste(value, text, e); // if true execute it
                 }
             },
             onRemoveToken: function (value, text, e) {
-                if ($.isFunction(Caste)) { // check if func exists
-                    Caste(); // if true execute it
+                if ($.isFunction(RemoveCaste)) { // check if func exists
+                    RemoveCaste(); // if true execute it
                 }
             }
         });
@@ -836,13 +836,13 @@
         $('#PartnerDetails_caste').tokenize({displayDropdownOnFocus: true});
         $('#PartnerDetails_country_living_in').tokenize({displayDropdownOnFocus: true,
             onAddToken: function (value, text, e) {
-                if ($.isFunction(StateLiving)) { // check if func exists
-                    StateLiving(value, text, e); // if true execute it
+                if ($.isFunction(AddStateLiving)) { // check if func exists
+                    AddStateLiving(value, text, e); // if true execute it
                 }
             },
             onRemoveToken: function (value, text, e) {
-                if ($.isFunction(StateLiving)) { // check if func exists
-                    StateLiving(); // if true execute it
+                if ($.isFunction(RemoveStateLiving)) { // check if func exists
+                    RemoveStateLiving(); // if true execute it
                 }
             }
         });
@@ -869,7 +869,7 @@
                     url: baseurl + "ajax/selectPartnerState",
                     data: {living_country: living_country}
                 }).done(function (data) {
-                    $('#PartnerDetails_residency_status').html(data);
+                    $('#PartnerDetails_residency_status').prepend(data);
 
                 });
             }
@@ -892,7 +892,80 @@
                     url: baseurl + "ajax/selectPartnerCaste",
                     data: {caste: caste}
                 }).done(function (data) {
-                    $('#PartnerDetails_caste').html(data);
+                    $('#PartnerDetails_caste').prepend(data);
+
+                });
+            }
+
+        }
+
+
+        function AddStateLiving(country, t, r) {
+
+            if (country != '') {
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "ajax/selectState",
+                    data: {country: country}
+                }).done(function (data) {
+                    $('#PartnerDetails_residency_status').append(data);
+                });
+            }
+
+        }
+        function RemoveStateLiving() {
+
+
+            var living_country = new Array();
+            $('#PartnerDetails_country_living_in  option:selected').each(function () {
+                living_country.push(this.value);
+            });
+
+            if (living_country != '') {
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "ajax/selectPartnerState",
+                    data: {living_country: living_country}
+                }).done(function (data) {
+                    $('#PartnerDetails_residency_status').html(data);
+                    // $('#PartnerDetails_residency_status').empty(data);
+
+                });
+            }
+
+        }
+
+        /* Religion change function*/
+
+        function AddCaste(religion, t, r) {
+
+            if (religion != '') {
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "ajax/selectCaste",
+                    data: {religion: religion}
+                }).done(function (data) {
+                    $('#PartnerDetails_caste').append(data);
+                });
+            }
+
+        }
+        function RemoveCaste() {
+
+
+            var caste = new Array();
+            $('#PartnerDetails_religion  option:selected').each(function () {
+                caste.push(this.value);
+            });
+
+            if (caste != '') {
+                $.ajax({
+                    type: "POST",
+                    url: baseurl + "ajax/selectPartnerState",
+                    data: {living_country: living_country}
+                }).done(function (data) {
+                    $('#PartnerDetails_residency_status').html(data);
+                    // $('#PartnerDetails_residency_status').empty(data);
 
                 });
             }
