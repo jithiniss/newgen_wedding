@@ -208,7 +208,7 @@
 
                         <div class="col-lg-9 col-md-9 col-sm-8 search">
                                 <div class="row">
-                                        <h4>Your Matches</h4>
+                                        <h4>Looking For Me</h4>
                                         <form action="action_page.php">
                                                 <div class=row>
                                                         <div class="col-xs-3 col-sm-4 col-md-3 col-md-offset-2 ">
@@ -238,20 +238,11 @@
                                                 </div>
 
                                         </form>
-
                                         <?php
-                                        $this->widget("application.client.widgets.Matches", array('id' => Yii::app()->session['user']['id']));
+                                        $this->widget("application.client.widgets.LookingMe", array('id' => Yii::app()->session['user']['id']));
                                         ?>
-
-
-
-
-
                                 </div>
                         </div>
-
-
-
                 </div>
         </div>
 </section>

@@ -6,10 +6,10 @@ class MyaccountController extends Controller {
 
                 if (isset(Yii::app()->session['user'])) {
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                        $matches = Yii::app()->Matches->MyMatches();
+                        //$matches = Yii::app()->Matches->run();
 //                        var_dump($matches);
 //                        exit;
-                        $this->render('index', array('user' => $user, 'matches' => $matches));
+                        $this->render('index', array('user' => $user));
                 } else {
                         $this->redirect(array('site/login'));
                 }

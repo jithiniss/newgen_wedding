@@ -19,6 +19,22 @@ class MatchesController extends Controller {
                 $this->render('mymatches');
         }
 
+        public function actionLookingMe() {
+
+                //  $lookingme = Yii::app()->Matches->LookingMe();
+//                var_dump($lookingme);
+//                exit;
+                $this->render('lookingme');
+        }
+
+        public function actionTwoWayMatches() {
+
+                //  $lookingme = Yii::app()->Matches->LookingMe();
+//                var_dump($lookingme);
+//                exit;
+                $this->render('twowaymatches');
+        }
+
 // Uncomment the following methods and override them if needed
         /*
           public function filters()

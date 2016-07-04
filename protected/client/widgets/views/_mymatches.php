@@ -5,7 +5,7 @@
                     'id' => $data->id,
                 ));
                 ?>
-                <h1>Janet I - <?php echo $data->id; ?></h1>
+                <h1><?php echo $data->first_name; ?> - <?php echo $data->id; ?></h1>
                 <h2>Profile created by Parent </h2>
                 <h3>24 yrs, 5' 4", Christian, English</h3>
                 <h3>Doctor</h3>
