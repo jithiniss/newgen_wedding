@@ -15,9 +15,134 @@ class Matches extends CWidget {
 
         public $id = '';
 
-        public function run() {
+        public function MyMatches() {
+                $user = UserDetails::model()->findByPk(array('id' => Yii::app()->session['user']['id']));
+                $partner = PartnerDetails::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
+                if ($user->gender == 1) {
+                        $gender = 2;
+                } else {
+                        $gender = 1;
+                }
+                $condition1 = 'gender = ' . $gender
+                        . ' AND dob_year <= ' . $partner->age_from
+                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
+                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
+                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
+                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
+                        . ' AND city = ' . $user->city
+                        . ' AND FIND_IN_SET("' . $partner->working_with . '",working_with)'
+                        . ' AND FIND_IN_SET("' . $partner->profession_area . '",working_as)'
+                        . ' AND FIND_IN_SET("' . $partner->education . '",education_field)';
+                $condition2 = 'gender = ' . $gender
+                        . ' AND dob_year <= ' . $partner->age_from
+                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
+                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
+                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
+                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
+                        . ' AND city = ' . $user->city
+                        . ' AND FIND_IN_SET("' . $partner->working_with . '",working_with)'
+                        . ' AND FIND_IN_SET("' . $partner->profession_area . '",working_as)';
+                $condition3 = 'gender = ' . $gender
+                        . ' AND dob_year <= ' . $partner->age_from
+                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
+                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
+                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
+                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
+                        . ' AND city = ' . $user->city
+                        . ' AND FIND_IN_SET("' . $partner->working_with . '",working_with)';
+                $condition4 = 'gender = ' . $gender
+                        . ' AND dob_year <= ' . $partner->age_from
+                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
+                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
+                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
+                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
+                        . ' AND city = ' . $user->city;
+                $condition5 = 'gender = ' . $gender
+                        . ' AND dob_year <= ' . $partner->age_from
+                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
+                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
+                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
+                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)';
+                $condition6 = 'gender = ' . $gender
+                        . ' AND dob_year <= ' . $partner->age_from
+                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
+                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
+                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)';
+                $condition7 = 'gender = ' . $gender
+                        . ' AND dob_year <= ' . $partner->age_from
+                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
+                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)';
+                $condition8 = 'gender = ' . $gender
+                        . ' AND dob_year <= ' . $partner->age_from
+                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)';
+                $condition9 = 'gender = ' . $gender
+                        . ' AND dob_year <= ' . $partner->age_from
+                        . ' AND dob_year >= ' . $partner->age_to;
 
-                $user = UserDetails::model()->findByAttributes(array('id' => $this->id));
+                $condition10 = 'gender = ' . $gender
+                        . ' AND dob_year <= ' . $partner->age_from;
+
+                $condition11 = 'gender = ' . $gender;
+
+                $matchprofile1 = UserDetails::model()->findAll(array('condition' => $condition1));
+                $matchprofile2 = UserDetails::model()->findAll(array('condition' => $condition2));
+                $matchprofile3 = UserDetails::model()->findAll(array('condition' => $condition3));
+                $matchprofile4 = UserDetails::model()->findAll(array('condition' => $condition4));
+                $matchprofile5 = UserDetails::model()->findAll(array('condition' => $condition5));
+                $matchprofile6 = UserDetails::model()->findAll(array('condition' => $condition6));
+                $matchprofile7 = UserDetails::model()->findAll(array('condition' => $condition7));
+                $matchprofile8 = UserDetails::model()->findAll(array('condition' => $condition8));
+                $matchprofile9 = UserDetails::model()->findAll(array('condition' => $condition9));
+                $matchprofile10 = UserDetails::model()->findAll(array('condition' => $condition10));
+                $matchprofile11 = UserDetails::model()->findAll(array('condition' => $condition11));
+
+
+                if (!empty($matchprofile1)) {
+                        return $matchprofile1;
+                } else if (!empty($matchprofile2)) {
+                        return $matchprofile2;
+                } else if (!empty($matchprofile3)) {
+                        return $matchprofile3;
+                } else if (!empty($matchprofile4)) {
+                        return $matchprofile4;
+                } else if (!empty($matchprofile5)) {
+                        return $matchprofile5;
+                } else if (!empty($matchprofile6)) {
+                        return $matchprofile6;
+                } else if (!empty($matchprofile7)) {
+                        return $matchprofile7;
+                } else if (!empty($matchprofile8)) {
+                        return $matchprofile8;
+                } else if (!empty($matchprofile9)) {
+                        return $matchprofile9;
+                } else if (!empty($matchprofile10)) {
+                        return $matchprofile10;
+                } else if (!empty($matchprofile11)) {
+                        return $matchprofile11;
+                } else {
+                        return NULL;
+                }
+        }
+
+        public function MyTwoWayMatches($uid) {
+
+                $user = UserDetails::model()->findByPk(array('id' => $uid));
                 $partner = PartnerDetails::model()->findByAttributes(array('user_id' => $this->id));
                 if ($user->gender == 1) {
                         $gender = 2;
@@ -30,231 +155,70 @@ class Matches extends CWidget {
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
                         . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
+                        . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
+                        . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
+                        . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
+                        . ' AND FIND_IN_SET(grow_up_in,"' . $partner->country_grew_up . '")'
                         . ' AND city = ' . $user->city
-                        . ' AND FIND_IN_SET("' . $partner->working_with . '",working_with)'
-                        . ' AND FIND_IN_SET("' . $partner->profession_area . '",working_as)'
-                        . ' AND FIND_IN_SET("' . $partner->education . '",education_field)'
+//                        . ' AND FIND_IN_SET(working_with,"' . $partner->working_with . '")'
+//                        . ' AND FIND_IN_SET(working_as,"' . $partner->profession_area . '")'
+//                        . ' AND FIND_IN_SET(education_field,"' . $partner->education . '")'
                         . ' AND status = 1';
-                $condition2 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $date_from
-                        . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
-                        . ' AND city = ' . $user->city
-                        . ' AND FIND_IN_SET("' . $partner->working_with . '",working_with)'
-                        . ' AND FIND_IN_SET("' . $partner->profession_area . '",working_as)'
-                        . ' AND status = 1';
-                $condition3 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $date_from
-                        . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
-                        . ' AND city = ' . $user->city
-                        . ' AND FIND_IN_SET("' . $partner->working_with . '",working_with)'
-                        . ' AND status = 1';
-                $condition4 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $date_from
-                        . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
-                        . ' AND city = ' . $user->city
-                        . ' AND status = 1';
-                $condition5 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $date_from
-                        . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
-                        . ' AND status = 1';
-                $condition6 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $date_from
-                        . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND status = 1';
-                $condition7 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $date_from
-                        . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND status = 1';
-                $condition8 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $date_from
-                        . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND status = 1';
-                $condition9 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $date_from
-                        . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND status = 1';
-                $condition10 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $date_from
-                        . ' AND dob_year >= ' . $date_to
-                        . ' AND status = 1';
+                $mymatchestwo = UserDetails::model()->findAll(array('condition' => $condition1));
 
-
-                $condition11 = 'gender = ' . $gender
-                        . ' AND status = 1';
-
-
-                $dataProvider1 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition1
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-                $dataProvider2 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition2
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-                $dataProvider3 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition3
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-                $dataProvider4 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition4
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-                $dataProvider5 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition5
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-                $dataProvider6 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition6
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-                $dataProvider7 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition7
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-                $dataProvider8 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition8
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-                $dataProvider9 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition9
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-                $dataProvider10 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition10
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-                $dataProvider11 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition11
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 25,
-                    ),
-                ));
-
-
-
-
-
-                if ($dataProvider1->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider1,
-                        ));
-                } else if ($dataProvider2->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider2,
-                        ));
-                } else if ($dataProvider3->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider3,
-                        ));
-                } else if ($dataProvider4->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider4,
-                        ));
-                } else if ($dataProvider5->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider5,
-                        ));
-                } else if ($dataProvider6->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider6,
-                        ));
-                } else if ($dataProvider7->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider7,
-                        ));
-                } else if ($dataProvider8->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider8,
-                        ));
-                } else if ($dataProvider9->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider9,
-                        ));
-                } else if ($dataProvider10->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider10,
-                        ));
-                } else if ($dataProvider11->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider11,
-                        ));
+                if (!empty($mymatchestwo)) {
+                        foreach ($mymatchestwo as $mymatche) {
+                                if ($mymatche->gender == 1) {
+                                        $partnergender = 2;
+                                } else {
+                                        $partnergender = 1;
+                                }
+                                $matches_partner_details = PartnerDetails::model()->findByAttributes(array('user_id' => $mymatche->id));
+                                $partner_date_from = date('Y') - $matches_partner_details->age_from;
+                                $partner_date_to = date('Y') - $matches_partner_details->age_to;
+                                $partnercondition = 'gender = ' . $partnergender
+                                        . ' AND dob_year <= ' . $partner_date_from
+                                        . ' AND dob_year >= ' . $partner_date_to
+                                        . ' AND  FIND_IN_SET(religion,"' . $matches_partner_details->religion . '")'
+                                        . ' AND FIND_IN_SET(caste , "' . $matches_partner_details->caste . '")'
+                                        . ' AND FIND_IN_SET(country , "' . $matches_partner_details->country_living_in . '")'
+                                        . ' AND FIND_IN_SET(state , "' . $matches_partner_details->residency_status . '")'
+                                        . ' AND FIND_IN_SET(grow_up_in , "' . $matches_partner_details->country_grew_up . '")'
+                                        . ' AND city = ' . $mymatche->city
+                                        . ' AND FIND_IN_SET(working_with , "' . $matches_partner_details->working_with . '")'
+                                        . ' AND FIND_IN_SET(working_as ,"' . $matches_partner_details->profession_area . '")'
+                                        . ' AND FIND_IN_SET(education_field ,"' . $matches_partner_details->education . '")'
+                                        . ' AND status = 1'
+                                        . ' AND id = ' . $user->id;
+                                $partner_matches = UserDetails::model()->findAll(array('condition' => $partnercondition));
+                                if (!empty($partner_matches)) {
+                                        return $partner_matches;
+                                } else {
+                                        return NULL;
+                                }
+//                                if (!empty($partner_matches)) {
+//                                        $selected_ids .= $mymatche->id . ',';
+//                                }
+                        }
+//                        $selected_ids = rtrim($selected_ids, ',');
                 }
+
+//                $selectcondition = 'gender = ' . $gender
+//                        . ' AND  id  IN(' . $selected_ids . ')'
+//                        . ' AND status = 1';
+//                $dataProvider1 = new CActiveDataProvider('UserDetails', array('criteria' => array(
+//                        'condition' => $selectcondition
+//                    ),
+//                    'pagination' => array(
+//                        'pageSize' => 25,
+//                    ),
+//                ));
+//                if ($dataProvider1->getTotalItemCount() >= 1) {
+//
+//                        $this->render('mymatches', array(
+//                            'dataProvider' => $dataProvider1,
+//                        ));
+//                }
         }
 
 }
