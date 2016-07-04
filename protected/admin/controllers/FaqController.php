@@ -1,6 +1,6 @@
 <?php
 
-class AwardsController extends Controller {
+class FaqController extends Controller {
 
         /**
          * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -58,27 +58,15 @@ class AwardsController extends Controller {
          * If creation is successful, the browser will be redirected to the 'view' page.
          */
         public function actionCreate() {
-                $model = new Awards('create');
+                $model = new Faq;
 
                 // Uncomment the following line if AJAX validation is needed
                 // $this->performAjaxValidation($model);
 
-                if (isset($_POST['Awards'])) {
-                        $model->attributes = $_POST['Awards'];
-                        $model->cb = Yii::app()->session['admin']['id'];
-                        $model->doc = date('Y-m-d');
-                        if ($model->validate()) {
-                                $image = CUploadedFile::getInstance($model, 'image');
-                                if (isset($image)) {
-                                        $model->image = $image->extensionName;
-                                }
-                                if ($model->save()) {
-                                        if ($model->image != "") {
-                                                $this->ImageUpload($image, 'awards', $model->id, 'awards');
-                                        }
-                                        $this->redirect(array('admin'));
-                                }
-                        }
+                if (isset($_POST['Faq'])) {
+                        $model->attributes = $_POST['Faq'];
+                        if ($model->save())
+                                $this->redirect(array('admin'));
                 }
 
                 $this->render('create', array(
@@ -97,22 +85,10 @@ class AwardsController extends Controller {
                 // Uncomment the following line if AJAX validation is needed
                 // $this->performAjaxValidation($model);
 
-                if (isset($_POST['Awards'])) {
-                        $AwardsImage = $model->image;
-                        $model->attributes = $_POST['Awards'];
-
-                        $image = CUploadedFile::getInstance($model, 'image');
-                        if (isset($image)) {
-                                $model->image = $image->extensionName;
-                        } else {
-                                $model->image = $AwardsImage;
-                        }
-                        if ($model->save()) {
-                                if ($model->image != "") {
-                                        $this->ImageUpload($image, 'awards', $model->id, 'awards');
-                                }
+                if (isset($_POST['Faq'])) {
+                        $model->attributes = $_POST['Faq'];
+                        if ($model->save())
                                 $this->redirect(array('admin'));
-                        }
                 }
 
                 $this->render('update', array(
@@ -137,7 +113,7 @@ class AwardsController extends Controller {
          * Lists all models.
          */
         public function actionIndex() {
-                $dataProvider = new CActiveDataProvider('Awards');
+                $dataProvider = new CActiveDataProvider('Faq');
                 $this->render('index', array(
                     'dataProvider' => $dataProvider,
                 ));
@@ -147,10 +123,10 @@ class AwardsController extends Controller {
          * Manages all models.
          */
         public function actionAdmin() {
-                $model = new Awards('search');
+                $model = new Faq('search');
                 $model->unsetAttributes();  // clear any default values
-                if (isset($_GET['Awards']))
-                        $model->attributes = $_GET['Awards'];
+                if (isset($_GET['Faq']))
+                        $model->attributes = $_GET['Faq'];
 
                 $this->render('admin', array(
                     'model' => $model,
@@ -161,11 +137,11 @@ class AwardsController extends Controller {
          * Returns the data model based on the primary key given in the GET variable.
          * If the data model is not found, an HTTP exception will be raised.
          * @param integer $id the ID of the model to be loaded
-         * @return Awards the loaded model
+         * @return Faq the loaded model
          * @throws CHttpException
          */
         public function loadModel($id) {
-                $model = Awards::model()->findByPk($id);
+                $model = Faq::model()->findByPk($id);
                 if ($model === null)
                         throw new CHttpException(404, 'The requested page does not exist.');
                 return $model;
@@ -173,40 +149,12 @@ class AwardsController extends Controller {
 
         /**
          * Performs the AJAX validation.
-         * @param Awards $model the model to be validated
+         * @param Faq $model the model to be validated
          */
         protected function performAjaxValidation($model) {
-                if (isset($_POST['ajax']) && $_POST['ajax'] === 'awards-form') {
+                if (isset($_POST['ajax']) && $_POST['ajax'] === 'faq-form') {
                         echo CActiveForm::validate($model);
                         Yii::app()->end();
-                }
-        }
-
-        public function ImageUpload($uploadedFile, $folder, $id, $name) {
-                if (isset($uploadedFile)) {
-
-                        if (Yii::app()->basePath . '/../uploads') {
-                                chmod(Yii::app()->basePath . '/../uploads', 0777);
-
-                                if (!is_dir(Yii::app()->basePath . '/../uploads/' . $folder . '/'))
-                                        mkdir(Yii::app()->basePath . '/../uploads/' . $folder . '/');
-                                chmod(Yii::app()->basePath . '/../uploads/' . $folder . '/', 0777);
-
-                                if (!is_dir(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/'))
-                                        mkdir(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/');
-                                chmod(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/', 0777);
-
-                                if ($uploadedFile->saveAs(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/' . $name . '.' . $uploadedFile->extensionName)) {
-                                        chmod(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/' . $name . '.' . $uploadedFile->extensionName, 0777);
-                                        return true;
-                                } else {
-                                        return false;
-                                }
-                        } else {
-                                return false;
-                        }
-                } else {
-                        return false;
                 }
         }
 

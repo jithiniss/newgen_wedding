@@ -225,7 +225,7 @@
                                                         <ul>
                                                                 <li>
                                                                         <?php echo CHtml::link('Static Pages', array('/staticPage/admin')); ?>
-                                                                        <?php echo CHtml::link('Banner', array('/Banner/admin')); ?>
+                                                                        <!--   <?php echo CHtml::link('Banner', array('/Banner/admin')); ?>-->
                                                                         <?php echo CHtml::link('File Uploads', array('/fileUploads/admin')); ?>
                                                                 </li>
                                                         </ul>
@@ -309,19 +309,27 @@
                                                         <a href="">
 
                                                                 <i class="fa-paperclip"></i>
-                                                                <span class="title" >FAQ</span>
+                                                                <span class="title" >Awards</span>
                                                         </a>
                                                         <ul>
                                                                 <li>
-                                                                        <?php echo CHtml::link('Add Awards', array('/TellUsStory/admin')); ?>
-                                                                        <?php echo CHtml::link('Story Approval', array('/TellUsStory/approve')); ?>
-                                                                        <?php echo CHtml::link('Album Approval', array('/user/UserPhotos/admin')); ?>
-
+                                                                        <?php echo CHtml::link('Awards', array('/Awards/admin')); ?>
                                                                 </li>
                                                         </ul>
                                                 </li>
 
+                                                <li>
+                                                        <a href="">
 
+                                                                <i class="fa-paperclip"></i>
+                                                                <span class="title" >FAQ</span>
+                                                        </a>
+                                                        <ul>
+                                                                <li>
+                                                                        <?php echo CHtml::link('FAQ', array('/FAQ/admin')); ?>
+                                                                </li>
+                                                        </ul>
+                                                </li>
                                         </ul>
 
                                 </div>
@@ -693,28 +701,28 @@
                                                 {
                                                         $messages.perfectScrollbar('destroy');
 
-                                                        setTimeout(function () {
+                                                        setTimeout(function() {
                                                                 $messages.perfectScrollbar();
                                                                 $chat_win.find('.form-control').focus();
                                                         }, 300);
                                                 }
                                         }
 
-                                        jQuery("#sample-chat-window form").on('submit', function (ev)
+                                        jQuery("#sample-chat-window form").on('submit', function(ev)
                                         {
                                                 ev.preventDefault();
                                         });
                                 }
 
-                                jQuery(document).ready(function ($)
+                                jQuery(document).ready(function($)
                                 {
-                                        $(".footer-sticked-chat .chat-user, .other-conversations-list a").on('click', function (ev)
+                                        $(".footer-sticked-chat .chat-user, .other-conversations-list a").on('click', function(ev)
                                         {
                                                 ev.preventDefault();
                                                 toggleSampleChatWindow();
                                         });
 
-                                        $(".mobile-chat-toggle").on('click', function (ev)
+                                        $(".mobile-chat-toggle").on('click', function(ev)
                                         {
                                                 ev.preventDefault();
 
