@@ -98,7 +98,7 @@
                                                                                         <li class="active"><a href="#">Home</a></li>
                                                                                         <li><a href="#">Wedding Planner</a></li>
                                                                                         <li><a href="#">Membership Plans</a></li>
-                                                                                        <li><?php echo CHtml::link('Search', array('Search')); ?></li>
+                                                                                        <li><?php echo CHtml::link('Search', array('Search/index')); ?></li>
 
                                                                                         <li><a href="#">Contact Us</a></li>
                                                                                         <li class="colors"><a href="#">Couples</a></li>

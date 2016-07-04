@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Jun 30, 2016 at 11:06 AM
+-- Generation Time: Jul 04, 2016 at 01:22 PM
 -- Server version: 5.6.17
 -- PHP Version: 5.4.28
 
@@ -82,6 +82,72 @@ CREATE TABLE IF NOT EXISTS `admin_users` (
 
 INSERT INTO `admin_users` (`id`, `post_id`, `user_name`, `password`, `name`, `email`, `phone_no`, `status`, `doc`, `dou`, `cb`, `ub`) VALUES
 (1, 1, 'admin', 'admin', 'ADMIN', 'admin@gmail.com', '9645243529', 1, '2016-04-13', '2016-06-10 10:41:30', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `awards`
+--
+
+CREATE TABLE IF NOT EXISTS `awards` (
+  `id` int(11) NOT NULL,
+  `year` int(11) NOT NULL,
+  `content` text NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `sort_order` int(11) NOT NULL,
+  `field1` int(11) NOT NULL,
+  `cb` int(11) NOT NULL,
+  `ub` int(11) NOT NULL,
+  `doc` date NOT NULL,
+  `dou` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `status` int(11) NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `banner`
+--
+
+CREATE TABLE IF NOT EXISTS `banner` (
+  `id` int(11) NOT NULL,
+  `page` varchar(60) NOT NULL,
+  `banner` varchar(200) NOT NULL,
+  `image` varchar(200) NOT NULL,
+  `cb` int(11) NOT NULL,
+  `ub` int(11) NOT NULL,
+  `doc` int(11) NOT NULL,
+  `dou` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `faq`
+--
+
+CREATE TABLE IF NOT EXISTS `faq` (
+  `id` int(11) NOT NULL,
+  `question` varchar(200) NOT NULL,
+  `answer` longtext NOT NULL,
+  `cb` int(11) NOT NULL,
+  `dou` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `file_uploads`
+--
+
+CREATE TABLE IF NOT EXISTS `file_uploads` (
+  `id` int(11) NOT NULL,
+  `heading` varchar(300) NOT NULL,
+  `file` varchar(100) NOT NULL,
+  `cb` int(11) NOT NULL,
+  `dou` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `content` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -239,7 +305,7 @@ CREATE TABLE IF NOT EXISTS `master_caste` (
   `ub` int(11) NOT NULL,
   `doc` date NOT NULL,
   `dou` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data for table `master_caste`
@@ -247,7 +313,15 @@ CREATE TABLE IF NOT EXISTS `master_caste` (
 
 INSERT INTO `master_caste` (`id`, `religion_id`, `caste`, `status`, `cb`, `ub`, `doc`, `dou`) VALUES
 (1, 1, 'Brahman', 1, 0, 0, '0000-00-00', '2016-06-10 09:31:47'),
-(2, 2, 'Roman Catholic', 1, 0, 0, '0000-00-00', '2016-06-10 09:36:57');
+(2, 2, 'Roman Catholic', 1, 0, 0, '0000-00-00', '2016-06-10 09:36:57'),
+(3, 2, 'Penthacosth', 1, 1, 0, '2016-07-02', '2016-07-02 05:22:19'),
+(4, 2, 'Jacobaits', 1, 1, 0, '2016-07-02', '2016-07-02 05:22:30'),
+(5, 3, 'Sunni', 1, 1, 0, '2016-07-02', '2016-07-02 05:22:39'),
+(6, 3, 'Shiya', 1, 1, 0, '2016-07-02', '2016-07-02 05:22:46'),
+(7, 3, 'Mujahid', 1, 1, 0, '2016-07-02', '2016-07-02 05:22:57'),
+(8, 3, 'Jama''ath Islami', 1, 1, 0, '2016-07-02', '2016-07-02 05:23:15'),
+(9, 1, 'Nair', 1, 1, 0, '2016-07-02', '2016-07-02 05:23:23'),
+(10, 1, 'Ezhava', 1, 1, 0, '2016-07-02', '2016-07-02 05:23:30');
 
 -- --------------------------------------------------------
 
@@ -4309,7 +4383,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `viewed` int(11) NOT NULL COMMENT '1->not viewed,2->viewed',
   `status` int(11) NOT NULL,
   `DOC` datetime NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=17 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=19 ;
 
 --
 -- Dumping data for table `message`
@@ -4321,7 +4395,9 @@ INSERT INTO `message` (`id`, `sender_id`, `receiver_id`, `message`, `viewed`, `s
 (9, 68, 64, 'pcontact me', 1, 1, '2016-06-30 11:26:48'),
 (10, 2, 68, 'hello ety trytryrty', 1, 1, '2016-06-30 11:25:57'),
 (11, 68, 64, 'rthyrty', 1, 1, '2016-06-30 12:19:55'),
-(16, 68, 2, 'hello', 1, 1, '2016-06-30 12:30:34');
+(16, 68, 2, 'hello', 1, 1, '2016-06-30 12:30:34'),
+(17, 53, 68, 'ss', 1, 1, '2016-07-01 13:03:00'),
+(18, 53, 68, 'ww', 1, 1, '2016-07-01 13:03:03');
 
 -- --------------------------------------------------------
 
@@ -4361,7 +4437,7 @@ CREATE TABLE IF NOT EXISTS `partner_details` (
   `ub` int(11) NOT NULL,
   `doc` date NOT NULL,
   `dou` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data for table `partner_details`
@@ -4369,10 +4445,11 @@ CREATE TABLE IF NOT EXISTS `partner_details` (
 
 INSERT INTO `partner_details` (`id`, `user_id`, `age_from`, `age_to`, `height_from`, `height_to`, `marital_status`, `religion`, `caste`, `mothertongue`, `profile_created_by`, `country_living_in`, `residency_status`, `country_grew_up`, `education`, `working_with`, `profession_area`, `annual_income_from`, `annual_income_to`, `diet`, `smoke`, `drink`, `body_type`, `skin_tone`, `disability`, `HIV_positive`, `status`, `cb`, `ub`, `doc`, `dou`) VALUES
 (1, 1, 19, 22, 160, 170, 'single', 'hindu', 'Brahman', 'malayalam', 'my self', 'india', '', 'india', 'b-tech', 'pvt', 'it', '10000', '50000', 'no', 2, 2, '', '', 0, 2, 1, 0, 0, '0000-00-00', '2016-06-10 09:51:08'),
-(2, 61, 18, 25, 0, 0, '', '3', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, '', '', 0, 0, 0, 0, 0, '0000-00-00', '2016-06-21 07:40:33'),
+(2, 53, 18, 28, 0, 0, '-1', '3', '5,7,8', '-1', '', '13,99,154', '72,424,2204', '99', '4', '1', '1', '-1', '', '', 0, 0, '', '', 0, 0, 0, 0, 53, '0000-00-00', '2016-07-04 08:34:36'),
 (3, 63, 18, 33, 0, 0, '', '2', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, '', '', 0, 0, 0, 0, 0, '0000-00-00', '2016-06-21 07:46:48'),
 (4, 64, 18, 27, 0, 0, '', '3', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, '', '', 0, 0, 0, 0, 0, '0000-00-00', '2016-06-22 05:05:19'),
-(5, 68, 28, 0, 0, 0, '1', '2', '', '', '', '', '', '', '', '', '', '', '', '', 0, 0, '', '', 0, 0, 0, 0, 0, '0000-00-00', '2016-06-23 11:45:56');
+(5, 68, 18, 27, 0, 0, '1', '3', '5', '', '', '13,99,154', '72,424,2204', '99', '3,15', '2', '2', '', '', '', 0, 0, '', '', 0, 0, 1, 0, 0, '0000-00-00', '2016-07-04 09:26:58'),
+(6, 69, 18, 27, 0, 0, '', '3', '5', '', '', '13,99,154', '72,424,2204', '99', '3,15', '2', '2', '', '', '', 0, 0, '', '', 0, 0, 1, 69, 0, '2016-07-02', '2016-07-04 08:53:14');
 
 -- --------------------------------------------------------
 
@@ -4386,7 +4463,7 @@ CREATE TABLE IF NOT EXISTS `photo_requests` (
   `receiver_id` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `date` date NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data for table `photo_requests`
@@ -4394,7 +4471,8 @@ CREATE TABLE IF NOT EXISTS `photo_requests` (
 
 INSERT INTO `photo_requests` (`id`, `sender_id`, `receiver_id`, `status`, `date`) VALUES
 (1, 68, 1, 1, '2016-06-30'),
-(2, 1, 68, 1, '2016-06-30');
+(2, 1, 68, 1, '2016-06-30'),
+(3, 53, 54, 1, '2016-06-30');
 
 -- --------------------------------------------------------
 
@@ -4420,14 +4498,15 @@ CREATE TABLE IF NOT EXISTS `plans` (
   `ub` int(11) NOT NULL,
   `doc` date NOT NULL,
   `dou` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data for table `plans`
 --
 
 INSERT INTO `plans` (`id`, `plan_name`, `amount`, `view_contact`, `send_message`, `search`, `Interest`, `sms_alerts`, `email_alerts`, `premium_tag`, `set_featured`, `number_of_days`, `status`, `cb`, `ub`, `doc`, `dou`) VALUES
-(1, 'Basic(Free)', 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, '2016-06-17', '2016-06-17 10:12:02');
+(1, 'Basic(Free)', 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 1, 1, 1, '2016-06-17', '2016-06-17 10:12:02'),
+(2, 'Silver Plan', 2500, 50, 60, 1, 1, 1, 1, 0, 0, 60, 1, 1, 1, '2016-06-17', '2016-07-01 06:20:12');
 
 -- --------------------------------------------------------
 
@@ -4441,7 +4520,7 @@ CREATE TABLE IF NOT EXISTS `requests` (
   `partner_id` varchar(11) NOT NULL,
   `status` int(11) NOT NULL COMMENT '4->declined,1->interest send,2->interest accept,3->pending',
   `date` date NOT NULL
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data for table `requests`
@@ -4453,7 +4532,51 @@ INSERT INTO `requests` (`id`, `user_id`, `partner_id`, `status`, `date`) VALUES
 (8, 68, '92991', 2, '2016-06-28'),
 (9, 64, 'NG68', 2, '2016-06-29'),
 (10, 2, 'NG68', 4, '2016-06-30'),
-(11, 1, 'NG68', 1, '2016-06-30');
+(11, 1, 'NG68', 1, '2016-06-30'),
+(12, 68, 'SH53', 2, '2016-06-30');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `static_page`
+--
+
+CREATE TABLE IF NOT EXISTS `static_page` (
+`id` int(11) NOT NULL,
+  `category_name` varchar(200) NOT NULL,
+  `parent` int(11) NOT NULL,
+  `side_menu` int(11) NOT NULL,
+  `header_visibility` int(11) NOT NULL,
+  `sort_order` int(11) NOT NULL,
+  `has_page` int(11) NOT NULL,
+  `canonical_name` varchar(200) NOT NULL,
+  `link` varchar(500) NOT NULL,
+  `title` varchar(200) NOT NULL,
+  `heading` varchar(300) NOT NULL,
+  `small_content` text NOT NULL,
+  `big_content` text NOT NULL,
+  `small_image` varchar(200) NOT NULL,
+  `banner` varchar(200) NOT NULL,
+  `big_image` varchar(200) NOT NULL,
+  `status` int(11) NOT NULL,
+  `field_1` int(11) NOT NULL,
+  `field_2` varchar(300) NOT NULL,
+  `field_3` varchar(300) NOT NULL,
+  `cb` int(11) NOT NULL,
+  `ub` int(11) NOT NULL,
+  `doc` date NOT NULL,
+  `dou` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
+
+--
+-- Dumping data for table `static_page`
+--
+
+INSERT INTO `static_page` (`id`, `category_name`, `parent`, `side_menu`, `header_visibility`, `sort_order`, `has_page`, `canonical_name`, `link`, `title`, `heading`, `small_content`, `big_content`, `small_image`, `banner`, `big_image`, `status`, `field_1`, `field_2`, `field_3`, `cb`, `ub`, `doc`, `dou`) VALUES
+(1, 'Privacy Policy', 1, 0, 1, 0, 1, 'privacy-policy', '', 'Privacy', 'Policy', '', '<p>\r\n	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>\r\n<p>\r\n	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>\r\n<ul class="list-unstyled" >\r\n	<li>\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</li>\r\n	<li>\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</li>\r\n	<li>\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing</li>\r\n</ul>\r\n<p>\r\n	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>\r\n<p>\r\n	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>\r\n<ul class="list-unstyled">\r\n	<li>\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</li>\r\n	<li>\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</li>\r\n	<li>\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing</li>\r\n</ul>\r\n', '', 'jpg', '', 0, 0, '', '', 1, 1, '2016-07-01', '2016-07-01 06:57:07'),
+(2, 'SecurityTips', 2, 0, 1, 0, 1, 'securitytips', '', 'Security', 'Tips', '', '<p>\r\n	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>\r\n<p>\r\n	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>\r\n<ul class="list-unstyled">\r\n	<li>\r\n		Lorem ipsum dolor sit ametLorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing</li>\r\n	<li>\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing</li>\r\n	<li>\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing</li>\r\n	<li>\r\n		Lorem ipsum dolor sit ametLorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing</li>\r\n	<li>\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing</li>\r\n	<li>\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing</li>\r\n</ul>\r\n<p>\r\n	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>\r\n', '', 'jpg', '', 0, 0, '', '', 1, 1, '2016-07-01', '2016-07-01 07:31:03'),
+(3, 'Terms and Use', 3, 0, 1, 0, 1, 'terms', '', 'Terms', 'and Use', '', '<ul class="list-unstyled">\r\n	<li style="box-sizing: inherit; position: relative; padding-left: 20px; padding-bottom: 20px; color: rgb(102, 102, 102); line-height: 25px; text-align: justify;">\r\n		<span style="box-sizing: inherit; font-weight: 700;">Lorem ipsum dolor sit amet Lorem&nbsp;</span>ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Loreipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit m ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</li>\r\n	<li style="box-sizing: inherit; position: relative; padding-left: 20px; padding-bottom: 20px; color: rgb(102, 102, 102); line-height: 25px; text-align: justify;">\r\n		<span style="box-sizing: inherit; font-weight: 700;">Lorem ipsum dolor sit amet Lorem&nbsp;</span>ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Loreipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit m ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</li>\r\n	<li style="box-sizing: inherit; position: relative; padding-left: 20px; padding-bottom: 20px; color: rgb(102, 102, 102); line-height: 25px; text-align: justify;">\r\n		<span style="box-sizing: inherit; font-weight: 700;">Lorem ipsum dolor sit amet Lorem&nbsp;</span>ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Loreipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit m ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</li>\r\n	<li style="box-sizing: inherit; position: relative; padding-left: 20px; padding-bottom: 20px; color: rgb(102, 102, 102); line-height: 25px; text-align: justify;">\r\n		<span style="box-sizing: inherit; font-weight: 700;">Lorem ipsum dolor sit amet Lorem&nbsp;</span>ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Loreipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit m ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</li>\r\n	<li style="box-sizing: inherit; position: relative; padding-left: 20px; padding-bottom: 20px; color: rgb(102, 102, 102); line-height: 25px; text-align: justify;">\r\n		<span style="box-sizing: inherit; font-weight: 700;">Lorem ipsum dolor sit amet Lorem&nbsp;</span>ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Loreipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit m ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet</li>\r\n</ul>\r\n', '', 'jpg', '', 0, 0, '', '', 1, 1, '2016-07-01', '2016-07-01 07:37:41'),
+(4, 'CompanyProfile', 4, 0, 1, 0, 1, 'company-profile', '', 'Company', 'Profile', '', '<p style="box-sizing: inherit; margin: 9px 0px 2px; color: rgb(102, 102, 102); font-family: Roboto, sans-serif; font-size: 15px; text-align: justify; padding-top: 5px; line-height: 23px; background-color: rgb(255, 255, 255);">\r\n	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>\r\n<p style="box-sizing: inherit; margin: 9px 0px 2px; color: rgb(102, 102, 102); font-family: Roboto, sans-serif; font-size: 15px; text-align: justify; padding-top: 5px; line-height: 23px; background-color: rgb(255, 255, 255);">\r\n	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>\r\n<ul class="list-unstyled">\r\n	<li style="box-sizing: inherit; position: relative; padding-left: 20px; padding-bottom: 7px; color: rgb(102, 102, 102);">\r\n		Lorem ipsum dolor sit amet</li>\r\n	<li style="box-sizing: inherit; position: relative; padding-left: 20px; padding-bottom: 7px; color: rgb(102, 102, 102);">\r\n		Lorem ipsum dolor sit amet</li>\r\n	<li style="box-sizing: inherit; position: relative; padding-left: 20px; padding-bottom: 7px; color: rgb(102, 102, 102);">\r\n		Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing</li>\r\n</ul>\r\n<div class="col-md-6">\r\n	<img class="man" src="http://localhost/newgen_wedding/uploads/files/1/pres.jpg" />\r\n	<h2 style="box-sizing: inherit; font-family: Roboto, sans-serif; font-weight: 400; line-height: 23px; color: rgb(255, 152, 0); margin-top: 0px; margin-bottom: 2px; font-size: 15px; text-align: justify; padding-top: 0px; margin-left: 0px; background-color: rgb(255, 255, 255);">\r\n		Lorem ipsum dolor sit</h2>\r\n	<h3 style="box-sizing: inherit; font-family: Roboto, sans-serif; font-weight: 400; line-height: 23px; color: rgb(102, 102, 102); margin-top: 9px; margin-bottom: 2px; font-size: 12px; text-align: justify; padding-top: 5px; margin-left: 0px; background-color: rgb(255, 255, 255);">\r\n		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</h3>\r\n</div>\r\n<div class="col-md-6">\r\n	<img class="man" src="http://localhost/newgen_wedding/uploads/files/1/pres.jpg" />\r\n	<h2 style="box-sizing: inherit; font-family: Roboto, sans-serif; font-weight: 400; line-height: 23px; color: rgb(255, 152, 0); margin-top: 0px; margin-bottom: 2px; font-size: 15px; text-align: justify; padding-top: 0px; margin-left: 0px; background-color: rgb(255, 255, 255);">\r\n		Lorem ipsum dolor sit</h2>\r\n	<h3 style="box-sizing: inherit; font-family: Roboto, sans-serif; font-weight: 400; line-height: 23px; color: rgb(102, 102, 102); margin-top: 9px; margin-bottom: 2px; font-size: 12px; text-align: justify; padding-top: 5px; margin-left: 0px; background-color: rgb(255, 255, 255);">\r\n		Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</h3>\r\n</div>\r\n<p>\r\n	&nbsp;</p>\r\n', '', 'jpg', '', 0, 0, '', '', 1, 1, '2016-07-01', '2016-07-01 08:22:37');
 
 -- --------------------------------------------------------
 
@@ -4479,7 +4602,7 @@ CREATE TABLE IF NOT EXISTS `tell_us_story` (
   `doc` date NOT NULL,
   `dou` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `status` int(11) NOT NULL DEFAULT '1'
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data for table `tell_us_story`
@@ -4490,7 +4613,8 @@ INSERT INTO `tell_us_story` (`id`, `user_id`, `name`, `email`, `partner_name`, `
 (2, 0, 'Remya', 'remu@gmail.com', 'Ramesh', 'ram@hdhf.jjc', 'dsad dsadsa ddad\r\nderf\r\nersfsff gdgdhydfd\r\n ', '2016-06-20', 'jpg', 0, 0, 1, 1, 0, '2016-06-24', '2016-06-29 11:57:06', 1),
 (3, 0, 'Ragav', 'rag@gag.bhj', 'Lamborty', 'lam@gsh.com', 'We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package', '2016-06-28', 'png', 0, 0, 1, 0, 0, '0000-00-00', '2016-06-30 05:15:10', 1),
 (5, 0, 'Jithin', 'jith@gdg.in', 'Aleena', 'ali@gmil.com', 'We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package', '2016-06-24', 'png', 0, 0, 1, 0, 0, '0000-00-00', '2016-06-30 05:16:41', 1),
-(6, 0, 'Jithin', 'jith@gdg.in', 'Aleena', 'ali@gmil.com', 'We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package', '2016-06-24', 'png', 0, 0, 1, 0, 0, '0000-00-00', '2016-06-30 05:22:54', 1);
+(6, 0, 'Jithin', 'jith@gdg.in', 'Aleena', 'ali@gmil.com', 'We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package We specialised in back bone clinic that gives sure cure for you. Feel the magic of Herbs. Here to see our specially designed treatment packages give you definite rejuvenation and vigour. see our specially designed treatment package', '2016-06-24', 'png', 0, 0, 1, 0, 0, '0000-00-00', '2016-06-30 05:22:54', 1),
+(7, 53, 'Ashik', 'ashiq@intersmart.in', 'Honey', 'honey@gmail.com', 'I thought its difficult to find match from India being resident of Singapore. I was looking for good educated, kind, cultured girl that can manage both professional and family responsibilities. But I found more than expected in Jeevansathi. Being a software engineer never thought of marring with a doctor, but we were destined together. Thanks to Jeevansathi to provide such a efficient platform that can unite two soul irrespective of distance and culture.\r\n', '2016-08-24', 'jpg', 0, 0, 0, 1, 0, '2016-06-30', '2016-06-30 08:05:47', 1);
 
 -- --------------------------------------------------------
 
@@ -4568,30 +4692,63 @@ CREATE TABLE IF NOT EXISTS `user_details` (
   `cb` int(11) NOT NULL,
   `ub` int(11) NOT NULL,
   `doc` date NOT NULL,
-  `dou` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=69 ;
+  `dou` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `address` text NOT NULL,
+  `email_verification` int(11) NOT NULL
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=70 ;
 
 --
 -- Dumping data for table `user_details`
 --
 
-INSERT INTO `user_details` (`id`, `user_id`, `email`, `password`, `contact_number`, `profile_for`, `first_name`, `last_name`, `gender`, `dob_day`, `dob_month`, `dob_year`, `dob`, `religion`, `caste`, `sub_caste`, `nakshatra`, `suddha_jadhagam`, `regional_site`, `marital_status`, `mothertongue`, `country`, `state`, `city`, `zip_code`, `home_town`, `house_name`, `height`, `weight`, `skin_tone`, `body_type`, `health_info`, `blood_group`, `disablity`, `smoke`, `drink`, `diet`, `education_level`, `education_field`, `working_with`, `working_as`, `annual_income`, `mobile_number`, `father_status`, `mother_status`, `num_of_married_brother`, `num_of_unmarried_brother`, `num_of_married_sister`, `num_of_unmarried_sister`, `family_type`, `family_value`, `affluence_level`, `grow_up_in`, `about_me`, `photo`, `mob_num_verification`, `id_proof`, `register_step`, `status`, `last_login`, `created_by`, `profile_approval`, `image_approval`, `plan_id`, `photo_visibility`, `photo_password`, `cb`, `ub`, `doc`, `dou`) VALUES
-(1, 'NG1', 'surumi@intersmart.in', 'surumi', '', 1, 'rejin', 'raveendran', 1, 1, 1, 1, '0000-00-00', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '', '', 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, '9645352929', 1, 6, 0, 0, 2, 0, 2, 3, 1, 1, 'hiiiiiiii', '', 1, '', 0, 1, '0000-00-00', 0, 0, 0, 0, 0, '', 0, 0, '0000-00-00', '2016-06-30 07:04:44'),
-(2, '56156', 'jithin@gmail.com', 'testing', '09895573839', 1, 'jithin', 'wails', 1, 2, 5, 1990, '2016-06-16', 2, 2, 0, 11, 1, 0, 1, 17, 99, 425, 0, 136541, 'cochin', 'address1', 16, 86, 2, 1, 1, 7, 0, 0, 0, 2, 2, 7, 1, 58, 300000, '9895573839', 3, 2, 1, 0, 1, 0, 2, 1, 3, 99, '', '', 0, '', 0, 1, '0000-00-00', 0, 0, 0, 0, 0, '', 0, 0, '0000-00-00', '2016-06-23 05:42:08'),
-(6, '49855', 'adminjithinnn@gmail.com', 'testing', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 0, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 04:39:34'),
-(14, '45712', 'adminjithinnns@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 04:48:15'),
-(19, '36248', 'njithinnndsws@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 04:56:07'),
-(20, '53199', 'ithinnndsws@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 04:57:35'),
-(21, '79751', 'jjithinnndsws@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 04:58:26'),
-(23, '73647', 'dhinnndsws@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 05:05:40'),
-(28, '60160', 'ddfhinnndsws@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 05:24:31'),
-(53, 'SH53', 'ashiq@intersmart.in', '1234', '09037187848', 1, 'Ashik', 'Ali', 1, 17, 11, 1989, '1989-11-17', 3, 0, 0, 14, 1, 0, 1, 8, 99, 425, 0, 324324234, 'sdsdfsd', 'sdfdsfsdf', 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 7, 15, 3, 8, 122, '09037187848', 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 'sdasdsa', '', 0, '', 5, 1, '2016-06-21', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-21', '2016-06-21 07:02:06'),
-(54, 'SH54', 'ashiq@intersmarsst.in', '1234', '09037187848', 1, 'Ashik', 'Ali', 1, 17, 7, 1990, '1990-07-17', 3, 0, 0, 19, 1, 0, 1, 8, 99, 425, 0, 324324234, 'sdsdfsd', 'sdfdsfsdf', 18, 47, 1, 1, 4, 7, 0, 0, 0, 0, 1, 16, 1, 15, 1000000, '09037187849', 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 'hjgjg', '', 0, '', 5, 1, '2016-06-21', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-21', '2016-06-21 07:18:21'),
-(58, 'SH58', 'ashiq@intersmaqwwrt.in', '1111', '09037187848', 1, 'Ashik', 'Ali', 1, 17, 1, 1991, '1991-01-17', 3, 0, 0, 22, 1, 0, 1, 2, 99, 425, 0, 324324234, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17, 3, 14, 1000000, '09037187848', 0, 0, 0, 0, 0, 0, 0, 0, 0, 85, 'fhhfghfghfdhggf', '', 0, '', 5, 1, '2016-06-21', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-21', '2016-06-21 07:34:29'),
-(61, 'SH61', 'ashiq@intersmaq1234qwet.in', '1111', '09037187848', 1, 'Ashik', 'Ali', 1, 17, 1, 1991, '1991-01-17', 3, 0, 0, 22, 1, 0, 1, 2, 99, 425, 0, 324324234, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17, 3, 14, 1000000, '09037187848', 0, 0, 0, 0, 0, 0, 0, 0, 0, 85, 'fhhfghfghfdhggf', '', 0, '', 5, 1, '2016-06-21', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-21', '2016-06-21 07:40:33'),
-(63, 'SH63', 'ashiq@intersm43244art.in', '111', '09037187848', 1, 'Ashik', 'Ali', 1, 13, 2, 1983, '1983-02-13', 2, 2, 0, 0, 0, 0, 1, 8, 99, 425, 0, 324324234, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 15, 3, 18, 1000000, '09037187848', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, 'fdgfgg', '', 0, '', 5, 1, '2016-06-21', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-21', '2016-06-21 07:46:48'),
-(64, '92991', 'ashiq@intersmartashiq.in', '1111', '09037187848', 1, 'Ashik', 'Ali', 1, 17, 1, 1989, '1989-01-17', 3, 0, 0, 16, 1, 0, 1, 8, 99, 425, 0, 324324234, 'Kochi', '', 14, 90, 1, 1, 0, 0, 0, 0, 0, 0, 1, 7, 1, 3, 1000000, '9037187848', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, 'hai hai', '64_960668.jpg', 0, '', 5, 1, '2016-06-22', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-22', '2016-06-29 04:31:47'),
-(68, 'NG68', 'dalia@gmail.com', '12', '9874563210', 1, 'Dalia', 'Joseph', 2, 4, 4, 1988, '1988-04-04', 2, 2, 2, 5, 1, 0, 1, 8, 99, 425, 0, 682035, 'Kochi', 'Palakkal', 8, 47, 2, 2, 1, 3, 0, 0, 0, 2, 1, 2, 1, 3, 800000, '9658741230', 1, 1, 0, 0, 0, 0, 2, 3, 2, 99, 'Hai i am very lovely Person. i am looking a very good person with same profession', '68_243784.jpg', 0, '', 5, 1, '2016-06-23', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-23', '2016-06-23 05:42:45');
+INSERT INTO `user_details` (`id`, `user_id`, `email`, `password`, `contact_number`, `profile_for`, `first_name`, `last_name`, `gender`, `dob_day`, `dob_month`, `dob_year`, `dob`, `religion`, `caste`, `sub_caste`, `nakshatra`, `suddha_jadhagam`, `regional_site`, `marital_status`, `mothertongue`, `country`, `state`, `city`, `zip_code`, `home_town`, `house_name`, `height`, `weight`, `skin_tone`, `body_type`, `health_info`, `blood_group`, `disablity`, `smoke`, `drink`, `diet`, `education_level`, `education_field`, `working_with`, `working_as`, `annual_income`, `mobile_number`, `father_status`, `mother_status`, `num_of_married_brother`, `num_of_unmarried_brother`, `num_of_married_sister`, `num_of_unmarried_sister`, `family_type`, `family_value`, `affluence_level`, `grow_up_in`, `about_me`, `photo`, `mob_num_verification`, `id_proof`, `register_step`, `status`, `last_login`, `created_by`, `profile_approval`, `image_approval`, `plan_id`, `photo_visibility`, `photo_password`, `cb`, `ub`, `doc`, `dou`, `address`, `email_verification`) VALUES
+(1, 'rejin', 'rejin@gmail.com', 'rejin123', '', 1, 'rejin', 'raveendran', 1, 1, 1, 1, '0000-00-00', 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, '', '', 1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 1, '9645352929', 1, 6, 0, 0, 2, 0, 2, 3, 1, 1, 'hiiiiiiii', '', 1, '', 0, 0, '0000-00-00', 0, 0, 0, 0, 0, '', 0, 0, '0000-00-00', '2016-06-10 09:47:31', '', 0),
+(2, '56156', 'jithin@gmail.com', 'testing', '09895573839', 1, 'jithin', 'wails', 1, 2, 5, 1990, '2016-06-16', 2, 2, 0, 11, 1, 0, 1, 17, 99, 425, 0, 136541, 'cochin', 'address1', 16, 86, 2, 1, 1, 7, 0, 0, 0, 2, 2, 7, 1, 58, 300000, '9895573839', 3, 2, 1, 0, 1, 0, 2, 1, 3, 99, '', '', 0, '', 0, 1, '0000-00-00', 0, 0, 0, 0, 0, '', 0, 0, '0000-00-00', '2016-06-23 05:42:08', '', 0),
+(6, '49855', 'adminjithinnn@gmail.com', 'testing', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 0, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 04:39:34', '', 0),
+(14, '45712', 'adminjithinnns@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 04:48:15', '', 0),
+(19, '36248', 'njithinnndsws@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 04:56:07', '', 0),
+(20, '53199', 'ithinnndsws@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 04:57:35', '', 0),
+(21, '79751', 'jjithinnndsws@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 04:58:26', '', 0),
+(23, '73647', 'dhinnndsws@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 05:05:40', '', 0),
+(28, '60160', 'ddfhinnndsws@gmail.com', 'admin', '98955738389', 1, 'jithin', 'wails', 1, 2, 5, 1990, '1990-05-02', 2, 2, 2, 2, 0, 0, 1, 12, 99, 425, 0, 689674, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 7, 1, 27, 400000, '9895573839', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, '', '', 0, '', 5, 1, '2016-06-20', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-20', '2016-06-20 05:24:31', '', 0),
+(53, 'SH53', 'ashiq@intersmart.in', '1234', '09037187848', 1, 'Ashik', 'Ali', 1, 17, 11, 1989, '1989-11-17', 3, 5, 0, 14, 1, 0, 1, 8, 99, 424, 1, 324324234, 'sdsdfsd', 'sdfdsfsdf', 12, 0, 0, 1, 0, 0, 1, 1, 1, 0, 7, 15, 2, 2, 0, '09037187848', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, 'sdasdsa', '53_362903.jpg', 0, '', 5, 1, '2016-07-01', 1, 1, 1, 2, 0, '', 1, 53, '2016-07-01', '2016-07-04 08:54:13', '', 0),
+(54, 'SH54', 'ashiq@intersmarsst.in', '1234', '09037187848', 1, 'Ashik', 'Ali', 1, 17, 7, 1990, '1990-07-17', 3, 0, 0, 19, 1, 0, 1, 8, 99, 425, 0, 324324234, 'sdsdfsd', 'sdfdsfsdf', 18, 47, 1, 1, 4, 7, 0, 0, 0, 0, 1, 16, 1, 15, 1000000, '09037187849', 0, 0, 0, 0, 0, 0, 0, 0, 0, 7, 'hjgjg', '', 0, '', 5, 1, '2016-06-21', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-21', '2016-06-21 07:18:21', '', 0),
+(58, 'SH58', 'ashiq@intersmaqwwrt.in', '1111', '09037187848', 1, 'Ashik', 'Ali', 1, 17, 1, 1991, '1991-01-17', 3, 0, 0, 22, 1, 0, 1, 2, 99, 425, 0, 324324234, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17, 3, 14, 1000000, '09037187848', 0, 0, 0, 0, 0, 0, 0, 0, 0, 85, 'fhhfghfghfdhggf', '', 0, '', 5, 1, '2016-06-21', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-21', '2016-06-21 07:34:29', '', 0),
+(61, 'SH61', 'ashiq@intersmaq1234qwet.in', '1111', '09037187848', 1, 'Ashik', 'Ali', 1, 17, 1, 1991, '1991-01-17', 3, 0, 0, 22, 1, 0, 1, 2, 99, 425, 0, 324324234, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 17, 3, 14, 1000000, '09037187848', 0, 0, 0, 0, 0, 0, 0, 0, 0, 85, 'fhhfghfghfdhggf', '', 0, '', 5, 1, '2016-06-21', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-21', '2016-06-21 07:40:33', '', 0),
+(63, 'SH63', 'ashiq@intersm43244art.in', '111', '09037187848', 1, 'Ashik', 'Ali', 1, 13, 2, 1983, '1983-02-13', 2, 2, 0, 0, 0, 0, 1, 8, 99, 425, 0, 324324234, '', '', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 15, 3, 18, 1000000, '09037187848', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, 'fdgfgg', '', 0, '', 5, 1, '2016-06-21', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-21', '2016-06-21 07:46:48', '', 0),
+(64, '92991', 'ashiq@intersmartashiq.in', '1111', '09037187848', 1, 'Ashik', 'Ali', 1, 17, 1, 1989, '1989-01-17', 3, 0, 0, 16, 1, 0, 1, 8, 99, 425, 0, 324324234, '', '', 14, 90, 1, 1, 0, 0, 0, 0, 0, 0, 1, 7, 1, 3, 1000000, '9037187848', 0, 0, 0, 0, 0, 0, 0, 0, 0, 99, 'hai hai', '64_960668.jpg', 0, '', 5, 1, '2016-06-22', 1, 1, 1, 1, 0, '', 1, 1, '2016-06-22', '2016-06-22 05:06:02', '', 0),
+(68, 'NG68', 'dalia@gmail.com', '12', '9874563210', 1, 'Dalia', 'Joseph', 2, 28, 5, 1997, '1988-04-04', 3, 5, 0, 5, 1, 0, 1, 8, 99, 424, 1, 682035, 'Kochi', 'Palakkal', 8, 47, 2, 2, 1, 3, 0, 0, 0, 2, 1, 4, 1, 1, 800000, '9658741230', 1, 1, 0, 0, 0, 0, 2, 3, 2, 99, 'Hai i am very lovely Person. i am looking a very good person with same profession', '68_360568.jpg', 0, '', 5, 1, '2016-06-23', 1, 1, 1, 1, 2, '', 1, 1, '2016-06-23', '2016-07-04 09:58:56', '', 0),
+(69, 'NG69', 'Sania@gmail.com', '1234', '9037187848', 1, 'Sania ', 'Mirza', 2, 28, 5, 1997, '1997-05-28', 3, 5, 0, 4, 3, 0, 1, 8, 99, 424, 1, 679337, '', '', 2, 38, 2, 3, 3, 2, 2, 1, 1, 2, 2, 4, 1, 1, 250000, '9847874563', 1, 2, 4, 3, 3, 4, 2, 3, 3, 99, 'i am a muslim girlm', '69_239225.jpeg', 0, '', 5, 1, '2016-07-02', 1, 1, 1, 2, 0, '', 1, 1, '2016-07-02', '2016-07-04 08:36:13', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_photos`
+--
+
+CREATE TABLE IF NOT EXISTS `user_photos` (
+`id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `photo_name` varchar(100) NOT NULL,
+  `approval` int(11) NOT NULL COMMENT '1=yes,0=no',
+  `status` int(11) NOT NULL,
+  `cb` int(11) NOT NULL,
+  `doc` date NOT NULL,
+  `ub` int(11) NOT NULL,
+  `dou` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `user_photos`
+--
+
+INSERT INTO `user_photos` (`id`, `user_id`, `photo_name`, `approval`, `status`, `cb`, `doc`, `ub`, `dou`) VALUES
+(1, 64, '63_190583.jpg', 0, 1, 64, '2016-06-29', 0, '0000-00-00 00:00:00'),
+(2, 64, '63_190583.jpg', 0, 1, 64, '2016-06-29', 0, '0000-00-00 00:00:00'),
+(3, 64, '63_190583_116_155.jpg', 0, 1, 64, '2016-06-29', 0, '0000-00-00 00:00:00'),
+(5, 53, '53_193329_album.jpg', 0, 1, 0, '0000-00-00', 0, '0000-00-00 00:00:00'),
+(6, 53, '53_402536_album.jpg', 0, 1, 0, '0000-00-00', 0, '0000-00-00 00:00:00'),
+(7, 53, '53_354553_album.jpg', 0, 1, 0, '0000-00-00', 0, '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -4629,12 +4786,12 @@ CREATE TABLE IF NOT EXISTS `user_plans` (
 --
 
 INSERT INTO `user_plans` (`id`, `plan_id`, `user_id`, `plan_name`, `amount`, `view_contact`, `view_contact_left`, `send_message`, `send_message_left`, `search`, `Interest`, `sms_alerts`, `email_alerts`, `premium_tag`, `featured`, `number_of_days`, `number_of_days_left`, `status`, `cb`, `ub`, `doc`, `dou`) VALUES
-(1, 0, 61, 'Basic(Free)', 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, '0000-00-00', '2016-06-30 09:22:36'),
+(1, 0, 61, 'Basic(Free)', 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, '0000-00-00', '2016-06-21 07:40:33'),
 (2, 0, 63, 'Basic(Free)', 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, '0000-00-00', '2016-06-21 07:46:48'),
 (3, 0, 64, 'Basic(Free)', 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, '0000-00-00', '2016-06-22 05:05:19'),
-(4, 0, 68, 'Basic(Free)', 0, 0, 0, 0, 2, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, '0000-00-00', '2016-06-30 09:22:41'),
-(5, 0, 1, 'Basic(Free)', 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, '0000-00-00', '2016-06-28 09:16:08'),
-(6, 0, 2, 'Basic(Free)', 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, '0000-00-00', '2016-06-28 09:16:08');
+(4, 0, 68, 'Basic(Free)', 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, '0000-00-00', '2016-06-23 05:42:45'),
+(5, 2, 53, 'Silver Plan', 2500, 50, 0, 60, 60, 1, 1, 1, 1, 0, 0, 0, 0, 1, 1, 1, '0000-00-00', '2016-07-01 06:51:08'),
+(6, 0, 69, 'Silver Plan', 2500, 50, 50, 60, 60, 1, 1, 1, 1, 0, 0, 60, 60, 1, 1, 1, '0000-00-00', '2016-07-02 09:14:09');
 
 -- --------------------------------------------------------
 
@@ -7932,6 +8089,12 @@ ALTER TABLE `requests`
  ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `static_page`
+--
+ALTER TABLE `static_page`
+ ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `tell_us_story`
 --
 ALTER TABLE `tell_us_story`
@@ -7942,6 +8105,12 @@ ALTER TABLE `tell_us_story`
 --
 ALTER TABLE `user_details`
  ADD PRIMARY KEY (`id`), ADD UNIQUE KEY `email` (`email`), ADD UNIQUE KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `user_photos`
+--
+ALTER TABLE `user_photos`
+ ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `user_plans`
@@ -7998,7 +8167,7 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 -- AUTO_INCREMENT for table `master_caste`
 --
 ALTER TABLE `master_caste`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `master_city`
 --
@@ -8108,37 +8277,47 @@ MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 -- AUTO_INCREMENT for table `message`
 --
 ALTER TABLE `message`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=17;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=19;
 --
 -- AUTO_INCREMENT for table `partner_details`
 --
 ALTER TABLE `partner_details`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `photo_requests`
 --
 ALTER TABLE `photo_requests`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `plans`
 --
 ALTER TABLE `plans`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `requests`
 --
 ALTER TABLE `requests`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=12;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
+--
+-- AUTO_INCREMENT for table `static_page`
+--
+ALTER TABLE `static_page`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `tell_us_story`
 --
 ALTER TABLE `tell_us_story`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `user_details`
 --
 ALTER TABLE `user_details`
-MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=69;
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=70;
+--
+-- AUTO_INCREMENT for table `user_photos`
+--
+ALTER TABLE `user_photos`
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
 --
 -- AUTO_INCREMENT for table `user_plans`
 --
@@ -8163,8 +8342,8 @@ ADD CONSTRAINT `admin_users_ibfk_1` FOREIGN KEY (`post_id`) REFERENCES `admin_po
 -- Constraints for table `message`
 --
 ALTER TABLE `message`
-ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `user_details` (`id`),
-ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `user_details` (`id`);
+ADD CONSTRAINT `message_ibfk_1` FOREIGN KEY (`sender_id`) REFERENCES `user_details` (`id`),
+ADD CONSTRAINT `message_ibfk_2` FOREIGN KEY (`receiver_id`) REFERENCES `user_details` (`id`);
 
 --
 -- Constraints for table `partner_details`

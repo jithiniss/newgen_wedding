@@ -1987,7 +1987,7 @@ section.ui-teams {
 input.joint {
         margin-top: 16px;
         margin-right: 10px;
-        font-size: 13px !important;  
+        font-size: 13px !important;
 }
 section.platinum {
         padding-top: 2%;
@@ -3049,7 +3049,7 @@ select.ord {
     position: relative;
 }
 .nav>li.sim>a:after{
-  content: url(../images/arrow.png); 
+  content: url(../images/arrow.png);
   position:absolute;
   top:0px;
   left:0px;
@@ -3067,7 +3067,7 @@ select.ord {
     background-color: #0e6382;
     color: #fff;
     float: none;
-     margin: auto; 
+     margin: auto;
     width: 100%;
     max-width: 61px;
     margin: 0 auto;
@@ -3750,7 +3750,7 @@ a.connect-2 {
 }
 
 .mains{
-        border:1px solid #ccc; 
+        border:1px solid #ccc;
         padding: 4px;
 }
 .panel-default>.panel-heading {
@@ -5059,7 +5059,7 @@ section.faq {
 .nav>li>a {
         position: relative;
         display: block;
-        padding: 10px 20px;
+        padding: 10px 16px;
         font-size: 13px;
         color: #000 !important;
         font-weight: 300;
@@ -5903,7 +5903,7 @@ img.img-responsive.golds {
         margin: 0;
         font-family: 'Roboto', sans-serif;
         font-weight: 300;
-}	
+}
 
 .overlay {
         background-color: rgba(0, 0, 0, 0);
@@ -7026,7 +7026,7 @@ span.call {
             margin-right: 20px;
             padding-bottom: 14px;
         }
-        
+
         i.fa.email.fa-facebook {
             background-color: #123e9b;
             padding: 11px;
@@ -7325,7 +7325,7 @@ span.call {
                 min-width: 100%;
                 background-color: #64536f;
                 width: 100%;
-        } 
+        }
         a.album {
                 color: #006699;
                 font-size: 11px;
@@ -7463,7 +7463,7 @@ span.call {
 
         #my-gallery-container img{
                 width:100%;
-        } 
+        }
         .mem {
                 background-image: url('../images/price.png');
                 margin-top: 3%;
@@ -7485,7 +7485,7 @@ span.call {
         }
         .visions {
                 padding: 80px;
-        } 
+        }
         .upload h2 {
                 padding-top: 9px;
                 padding-bottom: 9px;
@@ -7615,7 +7615,7 @@ span.call {
                 border-bottom: 1px solid #fff;
                 float: left;
                 width: 33%;
-        } 
+        }
         img.img-responsive.fullz {
                 margin-bottom: 11px;
                 width: auto;
@@ -8111,7 +8111,7 @@ span.call {
                 width: 70%;
                 margin-top: 24px;
                 margin-bottom: 15px;
-        } 
+        }
 
 
 
@@ -8408,7 +8408,7 @@ span.call {
                 padding-top: 25px;
                 padding-bottom: 0;
                 margin-bottom: 30px;
-        }  
+        }
         .img.img-responsive.center-block {
                 float: left;
         }
@@ -8549,7 +8549,7 @@ span.call {
         }
         section#main-slider {
                 height: 300px !important;
-        } 
+        }
         .membership ul {
                 margin-left: 53px;
                 margin-top: 9%;
@@ -8715,7 +8715,7 @@ span.call {
                 width: 100%;
                 margin-top: 24px;
                 margin-bottom: 15px;
-        } 
+        }
 
         .prog-2 {
                 float: left;
@@ -8738,7 +8738,7 @@ span.call {
                 float: left;
                 width: 100%;
                 padding-right: 20px;
-        }   
+        }
         .modal ul li {
                 margin-bottom: 10px;
         }
@@ -8750,7 +8750,7 @@ span.call {
                 padding-right: 21px;
                 margin-right: 9px;
                 padding-bottom: 14px;
-        }  
+        }
 
         .modal ul li.link-1 a {
                 background-color: #c22000;
@@ -8905,7 +8905,7 @@ span.call {
                 padding-right: 21px;
                 margin-right: 9px;
                 padding-bottom: 14px;
-        }  
+        }
 
         .modal ul li.link-1 a {
                 background-color: #c22000;
@@ -8969,7 +8969,7 @@ span.call {
                 padding-right: 21px;
                 margin-right: 9px;
                 padding-bottom: 14px;
-        }  
+        }
 
         .modal ul li.link-1 a {
                 background-color: #c22000;
@@ -9136,7 +9136,7 @@ span.call {
                 padding-right: 21px;
                 margin-right: 9px;
                 padding-bottom: 14px;
-        }  
+        }
 
         .modal ul li.link-1 a {
                 background-color: #c22000;
@@ -9279,7 +9279,7 @@ span.call {
                 padding-right: 21px;
                 margin-right: 9px;
                 padding-bottom: 14px;
-        }  
+        }
 
         .modal ul li.link-1 a {
                 background-color: #c22000;
@@ -9348,7 +9348,7 @@ span.call {
                 padding-right: 21px;
                 margin-right: 9px;
                 padding-bottom: 14px;
-        }  
+        }
 
         .modal ul li.link-1 a {
                 background-color: #c22000;
@@ -9444,26 +9444,26 @@ span.call {
         filter: alpha(opacity=25);
 }
 
-@-webkit-keyframes progress { 
+@-webkit-keyframes progress {
         from { }
 
         to { width: 36% }
 }
 
-@-moz-keyframes progress { 
+@-moz-keyframes progress {
         from { }
 
         to { width: 36% }
 }
 
-@-ms-keyframes progress { 
+@-ms-keyframes progress {
         from { }
 
         to { width: 36% }
 }
 
 
-@keyframes progress { 
+@keyframes progress {
         from { }
 
         to { width: 36% }
