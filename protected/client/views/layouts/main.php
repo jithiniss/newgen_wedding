@@ -98,6 +98,8 @@
                                                                                         <li class="active"><a href="#">Home</a></li>
                                                                                         <li><a href="#">Wedding Planner</a></li>
                                                                                         <li><a href="#">Membership Plans</a></li>
+                                                                                        <li><?php echo CHtml::link('Search', array('Search')); ?></li>
+
                                                                                         <li><a href="#">Contact Us</a></li>
                                                                                         <li class="colors"><a href="#">Couples</a></li>
 
@@ -282,7 +284,7 @@
 
 
                 <script>
-                        $(window).scroll(function() {
+                        $(window).scroll(function () {
 
                                 var body = $("html, body");
 
@@ -292,7 +294,7 @@
                                 else
                                         $('#static_cnt').addClass('dropup');
                         });
-                        $(document).ready(function() {
+                        $(document).ready(function () {
 
                                 var body = $("html, body");
 
@@ -309,7 +311,7 @@
                 <script src="<?= Yii::app()->baseUrl ?>/js/simpleMobileMenu.js"></script>
                 <script type="text/javascript">
 
-                        jQuery(document).ready(function($) {
+                        jQuery(document).ready(function ($) {
                                 $('.smobitrigger').smplmnu();
                         });
 
@@ -317,11 +319,11 @@
 
                 <script>
 
-                        (function($) {
-                                $(document).ready(function() {
+                        (function ($) {
+                                $(document).ready(function () {
                                         $('#cssmenu ul ul li:odd').addClass('odd');
                                         $('#cssmenu ul ul li:even').addClass('even');
-                                        $('#cssmenu > ul > li > a').click(function() {
+                                        $('#cssmenu > ul > li > a').click(function () {
                                                 $('#cssmenu li').removeClass('active');
                                                 $(this).closest('li').addClass('active');
                                                 var checkElement = $(this).next();
@@ -347,22 +349,22 @@
 
                 <script>
 
-                        (function() {
+                        (function () {
                                 "use strict";
 
-                                $(window).load(function() {
+                                $(window).load(function () {
                                         $("#loader").fadeOut();
                                         $("#mask").delay(10000).fadeOut("slow");
                                 });
                         })(jQuery);
 
-                        window.onload = function() {
+                        window.onload = function () {
                                 document.getElementById('mask').style.display = 'none';
                         };
                 </script>
                 <script type="text/javascript">
-                        $(document).ready(function() {
-                                setTimeout(function() {
+                        $(document).ready(function () {
+                                setTimeout(function () {
                                         $("#myModal").modal('show');
                                 }, 4000);
 

@@ -199,32 +199,7 @@
 
                 <div class="row">
 
-                        <div class="col-md-3 newgens short">
-                                <h3>Inbox</h3>
-                                <ul class="list-unstyled">
-                                        <li><?php echo CHtml::link('Message', array('Myaccount/Message')); ?></li>
-                                        <li><?php echo CHtml::link('Invitations', array('Myaccount/Invitations')); ?></li>
-                                        <li><?php echo CHtml::link('Photo Requests', array('Myaccount/PhotoRequests')); ?></li>
-
-                                </ul>
-                                <h3>Accepted</h3>
-                                <h3>Sent</h3>
-                                <ul class="list-unstyled">
-                                        <li><?php echo CHtml::link('Message', array('Myaccount/Message')); ?></li>
-                                        <li><?php echo CHtml::link('Invitations', array('Myaccount/SentInvitations')); ?></li>
-                                </ul>
-                                <h3>Quick Links</h3>
-                                <ul class="list-unstyled">
-                                        <li><a href="#">Shortlists & more</a></li>
-                                        <li><a href="#">My Matches</a></li>
-                                        <li><a href="#">Looking for Me</a></li>
-                                        <li><a href="#">2-way Matches</a></li>
-                                        <li><a href="#">Profile Visitors</a></li>
-                                        <li><a href="#">Profile Visited</a></li>
-                                        <li><a href="#">Saved Searches</a></li>
-                                </ul>
-
-                        </div>
+                        <?php echo $this->renderPartial('_leftmenu'); ?>
                         <div class="col-md-9 mynewgenz actions">
 
 
