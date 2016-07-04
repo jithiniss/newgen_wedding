@@ -227,7 +227,7 @@
                                                         <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/static/page/company-profile">Company Profile</a></li>
                                                         <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/static/page/securitytips">Security Tips</a></li>
                                                         <li><a href="#">Upgrade</a></li>
-                                                        <li><a href="#">Success Story</a></li>
+                                                        <li><a href="<?= Yii::app()->baseUrl ?>/index.php/featuredstory">Success Story</a></li>
                                                 </ul>
                                         </div> <!-- end of explore  -->
                                         <div class="clearfix visible-sm"></div>
