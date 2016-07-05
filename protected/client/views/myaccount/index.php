@@ -219,8 +219,8 @@
                                         <li><a href="#">My Matches</a></li>
                                         <li><a href="#">Looking for Me</a></li>
                                         <li><a href="#">2-way Matches</a></li>
-                                        <li><a href="#">Profile Visitors</a></li>
-                                        <li><a href="#">Profile Visited</a></li>
+                                        <li><?php echo CHtml::link('Profile Visitors', array('Myaccount/ProfileVisitors')); ?></li>
+                                        <li><?php echo CHtml::link('Profile Visited', array('Myaccount/ProfileVisited')); ?></li>
                                         <li><a href="#">Saved Searches</a></li>
                                 </ul>
 

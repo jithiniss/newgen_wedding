@@ -8,10 +8,7 @@ class MyaccountController extends Controller {
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $matches = Yii::app()->Matches->MyMatches();
                         $twowaymatches = Yii::app()->Matches->MyTwoWayMatches($user->id);
-//                        $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $user->user_id));
                         $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $user->user_id), array('order' => 'date DESC', 'group' => 'user_id', 'distinct' => TRUE));
-//                        var_dump($profile_visitors);
-//                        exit;
                         $this->render('index', array('user' => $user, 'matches' => $matches, 'twowaymatches' => $twowaymatches, 'profile_visitors' => $profile_visitors));
                 } else {
                         $this->redirect(array('site/login'));
@@ -157,7 +154,6 @@ class MyaccountController extends Controller {
         public function actionProfileVisitors() {
                 if (isset(Yii::app()->session['user'])) {
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-//                        $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $user->user_id), array('order' => 'date DESC', 'group' => 'user_id', 'distinct' => TRUE));
                         $dataProvider = new CActiveDataProvider('ProfileVisitors', array(
                             'criteria' => array(
                                 'condition' => 'visited_id="' . $user->user_id . '" AND status = 1',
@@ -179,7 +175,6 @@ class MyaccountController extends Controller {
         public function actionProfileVisited() {
                 if (isset(Yii::app()->session['user'])) {
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-//                        $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $user->user_id), array('order' => 'date DESC', 'group' => 'user_id', 'distinct' => TRUE));
                         $dataProvider = new CActiveDataProvider('ProfileVisitors', array(
                             'criteria' => array(
                                 'condition' => 'user_id="' . $user->user_id . '" AND status = 1',
