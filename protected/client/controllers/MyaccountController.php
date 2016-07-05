@@ -8,9 +8,11 @@ class MyaccountController extends Controller {
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $matches = Yii::app()->Matches->MyMatches();
                         $twowaymatches = Yii::app()->Matches->MyTwoWayMatches($user->id);
-//                        var_dump($twowaymatches);
+//                        $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $user->user_id));
+                        $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $user->user_id), array('order' => 'date DESC', 'group' => 'user_id', 'distinct' => TRUE));
+//                        var_dump($profile_visitors);
 //                        exit;
-                        $this->render('index', array('user' => $user, 'matches' => $matches, 'twowaymatches' => $twowaymatches));
+                        $this->render('index', array('user' => $user, 'matches' => $matches, 'twowaymatches' => $twowaymatches, 'profile_visitors' => $profile_visitors));
                 } else {
                         $this->redirect(array('site/login'));
                 }
@@ -150,6 +152,48 @@ class MyaccountController extends Controller {
         public function actionPhotoRequests() {
                 $requests = PhotoRequests::model()->findAllByAttributes(array('receiver_id' => Yii::app()->session['user']['id']));
                 $this->render('photo_requests', array('requests' => $requests));
+        }
+
+        public function actionProfileVisitors() {
+                if (isset(Yii::app()->session['user'])) {
+                        $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+//                        $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $user->user_id), array('order' => 'date DESC', 'group' => 'user_id', 'distinct' => TRUE));
+                        $dataProvider = new CActiveDataProvider('ProfileVisitors', array(
+                            'criteria' => array(
+                                'condition' => 'visited_id="' . $user->user_id . '" AND status = 1',
+                                'order' => 'date desc',
+                                'group' => 'user_id',
+                                'distinct' => TRUE
+                            ),
+                            'pagination' => array(
+                                'pageSize' => 8,
+                            ),
+                                )
+                        );
+                        $this->render('profile_visitors', array('dataProvider' => $dataProvider));
+                } else {
+                        $this->redirect(array('site/login'));
+                }
+        }
+
+        public function actionProfileVisited() {
+                if (isset(Yii::app()->session['user'])) {
+                        $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+//                        $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $user->user_id), array('order' => 'date DESC', 'group' => 'user_id', 'distinct' => TRUE));
+                        $dataProvider = new CActiveDataProvider('ProfileVisitors', array(
+                            'criteria' => array(
+                                'condition' => 'user_id="' . $user->user_id . '" AND status = 1',
+                                'order' => 'date desc',
+                            ),
+                            'pagination' => array(
+                                'pageSize' => 8,
+                            ),
+                                )
+                        );
+                        $this->render('profile_visited', array('dataProvider' => $dataProvider));
+                } else {
+                        $this->redirect(array('site/login'));
+                }
         }
 
         // Uncomment the following methods and override them if needed

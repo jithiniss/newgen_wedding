@@ -19,13 +19,21 @@ class PartnerController extends Controller {
 
         public function actionPartnerdetails($userid) {
                 if (isset(Yii::app()->session['user'])) {
-                        if ($userid != '') {
 
+                        if ($userid != '') {
                                 $user_details = UserDetails::model()->findByAttributes(array('user_id' => $userid));
                                 $current_user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                                 $partner_details = PartnerDetails::model()->findByAttributes(array('user_id' => $user_details->id));
                                 $similar_profile = $this->Similar($userid);
                                 $story = TellUsStory::model()->findAllByAttributes(array('admin_approval' => '1', 'status' => '1'));
+                                $profile_viewed = new ProfileVisitors;
+                                $profile_viewed->user_id = $current_user->user_id;
+                                $profile_viewed->visited_id = $userid;
+                                $profile_viewed->date = date('Y-m-d');
+                                $profile_viewed->status = 1;
+//                                var_dump($profile_viewed->visited_id);
+//                                exit;
+                                $profile_viewed->save(FALSE);
                                 $this->render('index', array('user_details' => $user_details, 'partner_details' => $partner_details, 'current_user' => $current_user, 'similar_profiles' => $similar_profile, 'story' => $story));
                         } else {
                                 $this->redirect(array('site/error'));
