@@ -1759,9 +1759,9 @@
                                                                         $ww = 1;
                                                                         foreach($partner_working_with as $partner_working) {
                                                                                 if($ww == 1) {
-                                                                                        echo MasterCaste::model()->findByPk($partner_working)->working_with;
+                                                                                        echo MasterWorkingWith::model()->findByPk($partner_working)->working_with;
                                                                                 } else {
-                                                                                        echo ", " . MasterCaste::model()->findByPk($partner_working)->working_with;
+                                                                                        echo ", " . MasterWorkingWith::model()->findByPk($partner_working)->working_with;
                                                                                 }
                                                                                 $ww++;
                                                                         }

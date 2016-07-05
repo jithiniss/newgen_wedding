@@ -32,7 +32,7 @@ class RegisterController extends Controller {
                                 $plan = UserPlans::model()->findByAttributes(array('user_id' => $user->id));
                                 Yii::app()->session['user'] = $user;
                                 Yii::app()->session['plan'] = $plan;
-                                $this->RegisterMail($firstStep);
+                                $this->RegisterMail($firstStep, 1);
                                 //$transaction->commit();
 
                                 $this->redirect(array('SecondStep'));
@@ -92,15 +92,14 @@ class RegisterController extends Controller {
 
         /* mail to user and admin */
 
-        public function RegisterMail($model) {
+        public function RegisterMail($model, $s) {
                 $user = $model->email;
 //                $user = 'sibys09@gmail.com';
                 $user_subject = 'Welcome to NEWGEN.com!';
                 $user_message = $this->renderPartial('mail/_register_user_mail', array('model' => $model), true);
 
-//                $admin = 'sibys09@gmail.com';
-                // $admin_subject = $model->first_name . ' registered with NEWGEN.com';
-                //  $admin_message = $this->renderPartial('mail/_register_admin_mail', array('model' => $model), true);
+
+
 // Always set content-type when sending HTML email
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
@@ -108,7 +107,23 @@ class RegisterController extends Controller {
                 $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
 //$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
                 // mail($user, $user_subject, $user_message, $headers);
-                // mail($admin, $admin_subject, $admin_message, $headers);
+                if($s == 1) {
+                        $admin = 'sibys09@gmail.com';
+                        $admin_subject = $model->first_name . ' registered with NEWGEN.com';
+                        $admin_message = $this->renderPartial('mail/_register_admin_mail', array('model' => $model), true);
+
+                        // mail($admin, $admin_subject, $admin_message, $headers);
+                }
+        }
+
+        public function actionResendMail() {
+                if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL && Yii::app()->session['user'] != '') {
+                        $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                        $this->RegisterMail($model, 0);
+                        $this->redirect(Yii::app()->request->urlReferrer);
+                } else {
+                        $this->redirect(Yii::app()->request->urlReferrer);
+                }
         }
 
         public function actionSecondStep() {
@@ -174,7 +189,7 @@ class RegisterController extends Controller {
                                 $fourthStep = $this->setFourthStep($fourthStep, $_POST['UserDetails']);
                                 if($fourthStep->validate()) {
                                         if($fourthStep->save()) {
-                                                $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/index');
+                                                $this->redirect(array('FifthStep'));
                                         } else {
                                                 Yii::app()->user->setFlash('register_error4', "Some Error Occured.Try Again");
                                         }
@@ -191,6 +206,28 @@ class RegisterController extends Controller {
                 $model->register_step = 4;
                 $model->last_login = date('Y-m-d');
                 return $model;
+        }
+
+        public function actionFifthStep() {
+                $plans = Plans::model()->findAllByAttributes(array('status' => 1), array('condition' => 'amount!=0', 'order' => 'amount desc'));
+                if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
+                        $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                } else {
+                        $this->redirect('//site/index');
+                }
+                $this->render('step_5', array('model' => $model, 'plans' => $plans));
+        }
+
+        public function actionUpgradePlan($plan) {
+                $plans = Plans::model()->findByPk($plan);
+                if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
+
+                        if(!empty($plans)) {
+                                $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                        }
+                } else {
+                        $this->render('//site/error');
+                }
         }
 
         public function actionVerify($m) {
@@ -224,9 +261,11 @@ class RegisterController extends Controller {
                 } else if($model->register_step == 3) {
                         $this->redirect(array('//Register/FourthStep'));
                 } else if($model->register_step == 4) {
+                        $this->redirect(array('//Register/FifthStep'));
+                } else if($model->register_step == 5) {
                         $this->redirect(array('//Myaccount/Index'));
                 } else {
-                        $this->redirect(array('//Myaccount/Index'));
+                        $this->redirect(array('//site/Index'));
                 }
         }
 

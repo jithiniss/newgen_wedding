@@ -11,9 +11,24 @@
                     <td><a href="#"><img src="<?= $this->siteURL(); ?>images/emailer_01.jpg" width="776" height="102" alt=""></a></td>
                 </tr>
                 <tr>
-                    <td style="padding:40px 20px; font-family:'Open Sans',arial, sans-serif; font-size:13px"><p style="font-size:14px; font-weight:bold;">Lorem ipsum dolor sit amet, consectetur adipisicing elit,</p>
-                        <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut in elit ipsum. Mauris et suscipit velit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. In volutpat, sapien ut scelerisque euismod, augue urna euismod sem, id porttitor mauris sem nec justo. Donec nisi felis, ultrices in mi sed, hendrerit sodales risus. Integer suscipit lacus sit amet arcu sodales egestas.
-                        </p>
+                    <td style="padding:40px 20px; font-family:'Open Sans',arial, sans-serif; font-size:13px">
+                        <p style="font-size:14px; font-weight:bold;">New Registration Details</p>
+
+                        <table style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">
+
+                            <tr>
+                                <td>NEWGEN ID</td><td>:</td><td><?php echo $model->user_id; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Name</td><td>:</td><td><?php echo $model->first_name . ' ' . $model->last_name; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Email ID</td><td>:</td><td><?php echo $model->email; ?></td>
+                            </tr>
+                            <tr>
+                                <td>Profile created by</td><td>:</td><td><?php echo MasterProfileFor::model()->findByPk($model->profile_for)->profile_for; ?></td>
+                            </tr>
+                        </table>
 
 
 

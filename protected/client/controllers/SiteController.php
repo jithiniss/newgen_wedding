@@ -33,35 +33,37 @@ class SiteController extends Controller {
 
 
 
-                if (isset(Yii::app()->session['user'])) {
+                if(isset(Yii::app()->session['user'])) {
 
                         $this->redirect($this->createUrl('index'));
                 } else {
                         $login = new UserDetails();
 
-                        if (isset($_REQUEST['UserDetails'])) {
+                        if(isset($_REQUEST['UserDetails'])) {
 
 
 
                                 $user_login = UserDetails::model()->find(['condition' => '(email = "' . $_REQUEST['UserDetails']['email'] . '" or user_id = "' . $_REQUEST['UserDetails']['email'] . '") and  password = "' . $_REQUEST['UserDetails']['password'] . '" ']);
 
-                                if (!empty($user_login)) {
-                                        if ($user_login->status == 0) {
+                                if(!empty($user_login)) {
+                                        if($user_login->status == 0) {
                                                 Yii::app()->user->setFlash('login_error', "<h3>Access Denied</h3>.Please contact customer care");
                                         } else {
                                                 $plan = UserPlans::model()->findByAttributes(array('user_id' => $user_login->id));
                                                 Yii::app()->session['user'] = $user_login;
                                                 Yii::app()->session['plan'] = $plan;
-                                                if ($user_login->register_step == 1) {
+                                                if($user_login->register_step == 1) {
                                                         $this->redirect(array('//Register/SecondStep'));
-                                                } else if ($user_login->register_step == 2) {
+                                                } else if($user_login->register_step == 2) {
                                                         $this->redirect(array('//Register/ThirdStep'));
-                                                } else if ($user_login->register_step == 3) {
+                                                } else if($user_login->register_step == 3) {
                                                         $this->redirect(array('//Register/FourthStep'));
-                                                } else if ($user_login->register_step == 4) {
+                                                } else if($user_login->register_step == 4) {
+                                                        $this->redirect(array('//Register/FifthStep'));
+                                                } else if($user_login->register_step == 5) {
                                                         $this->redirect(array('//Myaccount/Index'));
                                                 } else {
-                                                        $this->redirect(array('//Myaccount/Index'));
+                                                        $this->redirect(array('//site/Index'));
                                                 }
                                         }
                                 } else {
@@ -78,9 +80,9 @@ class SiteController extends Controller {
         }
 
         public function actionStatic($page) {
-                if (!empty($page)) {
+                if(!empty($page)) {
                         $model = StaticPage::model()->findByAttributes(array('canonical_name' => $page));
-                        if ($model != '') {
+                        if($model != '') {
 
                                 $this->render('static_page', array('model' => $model));
                         } else {
@@ -112,7 +114,7 @@ class SiteController extends Controller {
 
         public function actionEnquiry() {
 
-                if (isset($_REQUEST['Enquiry'])) {
+                if(isset($_REQUEST['Enquiry'])) {
                         $name = $_REQUEST['name'];
                         $email = $_REQUEST['email'];
                         $phones = $_REQUEST['phones'];
@@ -125,7 +127,7 @@ class SiteController extends Controller {
                         $model->mobile = $phones;
                         $model->subject = $subject;
                         $model->message = $coment;
-                        if ($model->save()) {
+                        if($model->save()) {
                                 // if ($this->SendMail($name, $email, $subject, $phones, $coment)) {
                                 //   $this->SendMail1($name, $email, $phones);
 
@@ -181,7 +183,7 @@ class SiteController extends Controller {
 
 // More headers
                 $headers .= 'From: Newgen Matrimony<no-reply@intersmarthosting.in>' . "\r\n";
-                if (mail($to, $subject, $message, $headers)) {
+                if(mail($to, $subject, $message, $headers)) {
                         return true;
                 } else {
                         return false;
@@ -223,7 +225,7 @@ class SiteController extends Controller {
 
 // More headers
                 $headers .= 'From: Newgen Matrimony<no-reply@intersmarthosting.in>' . "\r\n";
-                if (mail($to, $subject, $message, $headers)) {
+                if(mail($to, $subject, $message, $headers)) {
                         return true;
                 } else {
                         return false;
@@ -239,7 +241,7 @@ class SiteController extends Controller {
 
         public function actionError() {
                 $error = Yii::app()->errorHandler->error;
-                if ($error)
+                if($error)
                         $this->render('error', array('error' => $error));
                 else
                         throw new CHttpException(404, 'Page not found.');
@@ -250,7 +252,7 @@ class SiteController extends Controller {
          * @param UserDetails $model the model to be validated
          */
         protected function performAjaxValidation($model, $model_id) {
-                if (isset($_POST['ajax']) && $_POST['ajax'] === $model_id) {
+                if(isset($_POST['ajax']) && $_POST['ajax'] === $model_id) {
                         echo CActiveForm::validate($model);
                         Yii::app()->end();
                 }
