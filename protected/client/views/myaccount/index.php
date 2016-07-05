@@ -199,7 +199,32 @@
 
                 <div class="row">
 
-                        <?php echo $this->renderPartial('_leftmenu'); ?>
+                        <div class="col-md-3 newgens short">
+                                <h3>Inbox</h3>
+                                <ul class="list-unstyled">
+                                        <li><?php echo CHtml::link('Message', array('Myaccount/Message')); ?></li>
+                                        <li><?php echo CHtml::link('Invitations', array('Myaccount/Invitations')); ?></li>
+                                        <li><?php echo CHtml::link('Photo Requests', array('Myaccount/PhotoRequests')); ?></li>
+
+                                </ul>
+                                <h3>Accepted</h3>
+                                <h3>Sent</h3>
+                                <ul class="list-unstyled">
+                                        <li><?php echo CHtml::link('Message', array('Myaccount/Message')); ?></li>
+                                        <li><?php echo CHtml::link('Invitations', array('Myaccount/SentInvitations')); ?></li>
+                                </ul>
+                                <h3>Quick Links</h3>
+                                <ul class="list-unstyled">
+                                        <li><a href="#">Shortlists & more</a></li>
+                                        <li><a href="#">My Matches</a></li>
+                                        <li><a href="#">Looking for Me</a></li>
+                                        <li><a href="#">2-way Matches</a></li>
+                                        <li><a href="#">Profile Visitors</a></li>
+                                        <li><a href="#">Profile Visited</a></li>
+                                        <li><a href="#">Saved Searches</a></li>
+                                </ul>
+
+                        </div>
                         <div class="col-md-9 mynewgenz actions">
 
 
@@ -372,7 +397,7 @@
                                                 <div class="listen">
                                                         <div class="match">
                                                                 <div class="rel-1">
-                                                                        <h5>Profile Visitors (26)</h5>
+                                                                        <h5>Profile Visitors (<?php echo count($profile_visitors); ?>)</h5>
                                                                 </div>
 
                                                                 <div class="rel-2">
@@ -387,66 +412,62 @@
 
 
                                                                                 <div class="girls">
+                                                                                        <?php
+                                                                                        if (!empty($profile_visitors)) {
+                                                                                                foreach ($profile_visitors as $profile_visitor) {
+                                                                                                        $visitors = UserDetails::model()->findAllByAttributes(array('user_id' => $profile_visitor->user_id));
+                                                                                                        foreach ($visitors as $visitor) {
+//                                                                                                                var_dump($visitor);
+//                                                                                                                exit;
+                                                                                                                if ($visitor->photo_visibility == 3) {
+                                                                                                                        ?>
+                                                                                                                        <div class="item">
+                                                                                                                                <div class="main">
+                                                                                                                                        <div class="profile">
+                                                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                                                <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                                                                                                                <p>Visible on Accept</p>
+                                                                                                                                        </div>
+                                                                                                                                        <h1><?= $visitor->first_name; ?></h1>
+                                                                                                                                        <h1><?php echo date('Y') - date('Y', strtotime($visitor->dob_year)); ?>
+                                                                                                                                                <?php
+                                                                                                                                                if ($visitor->height != 0) {
+                                                                                                                                                        echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
+                                                                                                                                                }
+                                                                                                                                                ?></h1>
+                                                                                                                                        <a class="viewallz" href="#">Full profile</a>
+                                                                                                                                </div>
+                                                                                                                        </div>
+                                                                                                                <?php } if ($visitor->photo_visibility == 1 || $visitor->photo_visibility == 2) { ?>
 
-                                                                                        <div class="item">
-                                                                                                <div class="main">
-                                                                                                        <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
 
-                                                                                                        </div>
-                                                                                                        <h1>Janet</h1>
-                                                                                                        <h1>25 yrs,5 Ft 1 in</h1>
-                                                                                                        <a class="viewallz" href="#">Full profile</a>
-                                                                                                </div>
-                                                                                        </div>
-                                                                                        <div class="item">
-                                                                                                <div class="main">
-                                                                                                        <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                                                                                                <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
-                                                                                                                <p>Visible on Accept</p>
-                                                                                                        </div>
-                                                                                                        <h1>Janet</h1>
-                                                                                                        <h1>25 yrs,5 Ft 1 in</h1>
-                                                                                                        <a class="viewallz" href="#">Full profile</a>
-                                                                                                </div>
-                                                                                        </div>
+                                                                                                                        <div class="item">
+                                                                                                                                <div class="main">
+                                                                                                                                        <div class="profile">
+                                                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">
 
-                                                                                        <div class="item">
-                                                                                                <div class="main">
-                                                                                                        <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
+                                                                                                                                        </div>
+                                                                                                                                        <h1><?= $visitor->first_name; ?></h1>
+                                                                                                                                        <h1><?php echo date('Y') - date('Y', strtotime($visitor->dob_year)); ?>
+                                                                                                                                                <?php
+                                                                                                                                                if ($visitor->height != 0) {
+                                                                                                                                                        echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
+                                                                                                                                                }
+                                                                                                                                                ?></h1>
+                                                                                                                                        <a class="viewallz" href="#">Full profile</a>
+                                                                                                                                </div>
+                                                                                                                        </div>
 
-                                                                                                        </div>
-                                                                                                        <h1>Janet</h1>
-                                                                                                        <h1>25 yrs,5 Ft 1 in</h1>
-                                                                                                        <a class="viewallz" href="#">Full profile</a>
-                                                                                                </div>
-                                                                                        </div>
+                                                                                                                        <?php
+                                                                                                                }
+                                                                                                        }
+                                                                                                }
+                                                                                        } else {
+                                                                                                echo 'Not Found!!!!';
+                                                                                                ?>
 
-                                                                                        <div class="item">
-                                                                                                <div class="main">
-                                                                                                        <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
+                                                                                        <?php } ?>
 
-                                                                                                        </div>
-                                                                                                        <h1>Janet</h1>
-                                                                                                        <h1>25 yrs,5 Ft 1 in</h1>
-                                                                                                        <a class="viewallz" href="#">Full profile</a>
-                                                                                                </div>
-                                                                                        </div>
-
-                                                                                        <div class="item">
-                                                                                                <div class="main">
-                                                                                                        <div class="profile">
-                                                                                                                <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gg1.jpg">
-
-                                                                                                        </div>
-                                                                                                        <h1>Janet</h1>
-                                                                                                        <h1>25 yrs,5 Ft 1 in</h1>
-                                                                                                        <a class="viewallz" href="#">Full profile</a>
-                                                                                                </div>
-                                                                                        </div>
                                                                                 </div>
                                                                         </div>
 
