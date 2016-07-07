@@ -1,11 +1,12 @@
 <?php
 
 return array(
-    '' => '/site/index',
+    '' => 'site/index',
     'primary-info' => 'register/FirstStep',
     'location-background' => 'register/SecondStep',
     'lifestyle-appearence' => 'register/ThirdStep',
     'education-career' => 'register/FourthStep',
+    'upgrade-plan' => 'register/FifthStep',
     'login' => 'site/login',
     'forgot-password' => 'ForgotPassword/index',
     'profile-details' => 'Partner/Partnerdetails/userid',

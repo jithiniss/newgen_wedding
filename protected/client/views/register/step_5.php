@@ -6,7 +6,15 @@
 
                 <section class="membership">
                     <h1>Membership <span class="plans">Plans</span></h1>
+                    <?php if(Yii::app()->session['unloggedUserPlan']): ?>
+                            <div class="alert alert-warning">
+                                <?php
+                                $plan_name = Plans::model()->findByPk(Yii::app()->session['unloggedUserPlan']);
+                                ?>
+                                You have selected <b><?php echo $plan_name->plan_name; ?> Plan</b>.   To continue with this plan <?php echo CHtml::link('Click here<i class="fa fat fa-angle-right"></i>', array('Register/UpgradePlan', 'plan' => $this->encrypt_decrypt('encrypt', $plan_name->id)), array("class" => "btc", 'style' => 'margin:0px;display: inline;')); ?>
 
+                            </div>
+                    <?php endif; ?>
 
                     <div class="container dotted full-width">
 
@@ -79,7 +87,7 @@
                                                 }
                                                 ?>
                                             </ul>
-                                            <?php echo CHtml::link('Choose<i class="fa fat fa-angle-right"></i>', array('Myaccount/Index'), array("class" => "btc")); ?>
+                                            <?php echo CHtml::link('Choose<i class="fa fat fa-angle-right"></i>', array('Register/UpgradePlan', 'plan' => $this->encrypt_decrypt('encrypt', $plan->id)), array("class" => "btc")); ?>
 
                                         </div>
                                         <?php

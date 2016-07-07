@@ -219,14 +219,49 @@ class RegisterController extends Controller {
         }
 
         public function actionUpgradePlan($plan) {
-                $plans = Plans::model()->findByPk($plan);
-                if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
+                $plan_id = $this->encrypt_decrypt('decrypt', $plan);
+                $plans = Plans::model()->findByPk($plan_id);
+                if(!empty($plans)) {
+                        if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
 
-                        if(!empty($plans)) {
-                                $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                                $this->redirect(array('PlanPaymentSuccess', 'plan_id' => $plan_id));
+                        } else {
+                                Yii::app()->session['unloggedUserPlan'] = $plan_id;
+                                $this->redirect(array('site/login'));
                         }
                 } else {
                         $this->render('//site/error');
+                }
+        }
+
+        public function actionPlanPaymentSuccess($plan_id) {
+                $plans = Plans::model()->findByPk($plan_id);
+                if(!empty($plans)) {
+
+                        $model = UserPlans::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
+                        $model->attributes = $plans->attributes;
+                        $model->plan_id = $plans->id;
+                        $model->featured = $plans->set_featured;
+                        $model->dou = date('Y-m-d H:i:s');
+                        $model->save();
+                        $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                        $user->register_step = 5;
+                        $user->save();
+                        Yii::app()->session['user'] = $user;
+                        Yii::app()->session['plan'] = $model;
+                        Yii::app()->user->setFlash('plan_success', "Payment for  " . $plans->plan_name . " plan successfully placed");
+                        Yii::app()->session['unloggedUserPlan'] = '';
+                        unset(Yii::app()->session['unloggedUserPlan']);
+                        $this->redirect(array('//Myaccount/Index'));
+                }
+        }
+
+        public function actionPlanPaymentError($plan_id) {
+                $plans = Plans::model()->findByPk($plan_id);
+                if(!empty($plans)) {
+
+                        Yii::app()->user->setFlash('plan_error', "Transaction Failed.Try again later");
+                        $this->redirect(array('//Myaccount/Index'));
                 }
         }
 

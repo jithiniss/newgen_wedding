@@ -580,50 +580,87 @@
 
 
 
-<section class="membership">
+<section class="membership" id="upgrade">
     <div class="container dotted full-width hidden-xs">
         <h1>Membership <span class="plans">Plans</span></h1>
-        <div class="col-md-4 col-sm-4">
-            <div class="mem">
-                <h2>Gold</h2>
-                <h3>3 months</h3>
-            </div>
-            <ul class="list-inline list-unstyled">
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing </li>
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Lorem ipsum dolor sit amet</li>
-            </ul>
-        </div>
+        <?php
+        if(!empty($plans)) {
+                foreach($plans as $plan) {
+                        ?>
 
-        <div class="col-md-4 col-sm-4">
-            <div class="mem">
-                <h2>Diamond</h2>
-                <h3>3 months</h3>
-            </div>
-            <ul class="list-inline list-unstyled">
-                <li>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing </li>
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Lorem ipsum dolor sit amet</li>
-            </ul>
-        </div>
+                        <div class="col-md-4 col-sm-6">
+                            <div class="mem">
+                                <h2><?php echo $plan->plan_name; ?></h2>
+                                <h3><?php
+                                    if($plan->number_of_days == 0) {
 
-        <div class="col-md-4 col-sm-4">
-            <div class="mem">
-                <h2>Platinum</h2>
-                <h3>3 months</h3>
-            </div>
-            <ul class="list-inline list-unstyled">
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing </li>
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Lorem ipsum dolor sit amet</li>
-                <li>Lorem ipsum dolor sit amet</li>
-            </ul>
-        </div>
+                                    } else {
+                                            echo $plan->number_of_days / 30 . " months";
+                                    }
+                                    ?></h3>
+                                <p><?php
+                                    if($plan->amount == 0) {
+
+                                    } else {
+                                            echo "Rs. " . $plan->amount;
+                                    }
+                                    ?></p>
+                            </div>
+                            <ul class="list-inline list-unstyled">
+                                <?php
+                                if($plan->view_contact > 0) {
+
+                                        echo "<li>View contact detail upto " . $plan->view_contact . "</li>";
+                                }
+                                ?>
+
+                                <?php
+                                if($plan->send_message == 1) {
+
+                                        echo " <li>Send Messages</li>";
+                                }
+                                ?>
+                                <?php
+                                if($plan->search == 1) {
+
+                                        echo " <li>Search Unlimited Profiles</li>";
+                                }
+                                ?>
+
+                                <?php
+                                if($plan->Interest == 1) {
+
+                                        echo " <li>Send and receive Interests</li>";
+                                }
+                                ?>
+                                <?php
+                                if($plan->sms_alerts == 1) {
+
+                                        echo " <li>SMS Alert Available</li>";
+                                }
+                                ?>
+                                <?php
+                                if($plan->email_alerts == 1) {
+
+                                        echo " <li>Email Alert Available</li>";
+                                }
+                                ?>
+                                <?php
+                                if($plan->set_featured == 1) {
+
+                                        echo " <li>Set as Featured Profile</li>";
+                                }
+                                ?>
+                            </ul>
+                            <?php echo CHtml::link('Choose<i class="fa fat fa-angle-right"></i>', array('Register/UpgradePlan', 'plan' => $this->encrypt_decrypt('encrypt', $plan->id)), array("class" => "btc")); ?>
+
+                        </div>
+                        <?php
+                }
+        }
+        ?>
+
+
 
 
     </div>
@@ -632,76 +669,87 @@
     <div class="container dotted full-width visible-xs">
         <div class="row">
             <div class="gold">
-                <div class="item">
-                    <div class="main">
-                        <div class="mem">
-                            <h2>gold</h2>
-                            <h3>3 months</h3>
-                        </div>
-                        <ul class="list-inline list-unstyled">
-                            <li>Lorem ipsum dolor sit amet Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                        </ul>
-                    </div>
-                </div>
+                <?php
+                if(!empty($plans)) {
+                        foreach($plans as $plan) {
+                                ?>
+                                <div class="item">
+                                    <div class="main">
+                                        <div class="mem">
+                                            <h2><?php echo $plan->plan_name; ?></h2>
+                                            <h3><?php
+                                                if($plan->number_of_days == 0) {
 
-                <div class="item">
-                    <div class="main">
-                        <div class="mem">
-                            <h2>diamond</h2>
-                            <h3>3 months</h3>
-                        </div>
-                        <ul class="list-inline list-unstyled">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit ametLorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor</li>
-                        </ul>
-                    </div>
-                </div>
+                                                } else {
+                                                        echo $plan->number_of_days / 30 . " months";
+                                                }
+                                                ?></h3>
+                                            <p><?php
+                                                if($plan->amount == 0) {
 
-                <div class="item">
-                    <div class="main">
-                        <div class="mem">
-                            <h2>Platinum</h2>
-                            <h3>3 months</h3>
-                        </div>
-                        <ul class="list-inline list-unstyled">
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                            <li>Lorem ipsum dolor sit amet</li>
-                        </ul>
-                    </div>
-                </div>
+                                                } else {
+                                                        echo "Rs. " . $plan->amount;
+                                                }
+                                                ?></p>
+                                        </div>
+                                        <ul class="list-inline list-unstyled">
+                                            <?php
+                                            if($plan->view_contact > 0) {
+
+                                                    echo "<li>View contact detail upto " . $plan->view_contact . "</li>";
+                                            }
+                                            ?>
+
+                                            <?php
+                                            if($plan->send_message == 1) {
+
+                                                    echo " <li>Send Messages</li>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if($plan->search == 1) {
+
+                                                    echo " <li>Search Unlimited Profiles</li>";
+                                            }
+                                            ?>
+
+                                            <?php
+                                            if($plan->Interest == 1) {
+
+                                                    echo " <li>Send and receive Interests</li>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if($plan->sms_alerts == 1) {
+
+                                                    echo " <li>SMS Alert Available</li>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if($plan->email_alerts == 1) {
+
+                                                    echo " <li>Email Alert Available</li>";
+                                            }
+                                            ?>
+                                            <?php
+                                            if($plan->set_featured == 1) {
+
+                                                    echo " <li>Set as Featured Profile</li>";
+                                            }
+                                            ?>
+                                        </ul>
+                                        <?php echo CHtml::link('Choose<i class="fa fat fa-angle-right"></i>', array('Register/UpgradePlan', 'plan' => $this->encrypt_decrypt('encrypt', $plan->id)), array("class" => "btc")); ?>
+
+                                    </div>
+                                </div>
+                                <?php
+                        }
+                }
+                ?>
+
             </div>
         </div>
     </div>
-
-
-
-
-    <div class="container">
-        <div class="row">
-
-            <div class="col-md-6 col-xs-6">
-                <a class="compare" href="#">Compare Plans in Detail</a>
-            </div>
-
-            <div class="col-md-6 col-xs-6">
-                <a class="now" href="#">Upgrade Now</a>
-            </div>
-        </div>
-    </div>
-
-
-
-
 
 
 </section>
