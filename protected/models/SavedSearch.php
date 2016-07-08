@@ -53,6 +53,7 @@ class SavedSearch extends CActiveRecord {
                 // NOTE: you should only define rules for those attributes that
                 // will receive user inputs.
                 return array(
+                    array('age_from, age_to,gender', 'required'),
 //			array('user_id, age_from, age_to, height_from, height_to, marital_status, religion, caste, mothertongue, profile_created_by, country_living_in, residency_status, country_grew_up, education, working_with, profession_area, annual_income_from, annual_income_to, diet, smoke, drink, body_type, skin_tone, disability, HIV_positive, status, cb, ub, doc, dou, gender', 'required'),
                     array('user_id, age_from, age_to, height_from, height_to, smoke, drink, disability, HIV_positive, status, cb, ub, gender', 'numerical', 'integerOnly' => true),
                     array('marital_status, religion, caste, mothertongue, profile_created_by, country_living_in, residency_status, country_grew_up, education, working_with, profession_area, annual_income_from, annual_income_to, diet, body_type, skin_tone', 'length', 'max' => 99),

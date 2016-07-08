@@ -29,20 +29,21 @@ class BasicSearch extends CWidget {
                 $condition = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to;
-                if ($search_details->religion == '' && $search_details->religion == 0 && $search_details->religion == -1) {
-                        $condition .= ' AND  FIND_IN_SET("' . $search_details->religion . '",religion)';
+                if ($search_details->marital_status != '' && $search_details->marital_status != 0 && $search_details->marital_status != -1) {
+                        $condition .= ' AND  marital_status = ' . $search_details->marital_status;
                 }
-                if ($search_details->caste == '' && $search_details->caste == 0 && $search_details->caste == -1) {
-                        $condition .= ' AND FIND_IN_SET(caste,"' . $search_details->caste . '")';
+                if ($search_details->religion != '' && $search_details->religion != 0 && $search_details->religion != -1) {
+                        $condition .= ' AND  religion = ' . $search_details->religion;
                 }
-                $condition .= ' AND FIND_IN_SET(country,"' . $search_details->country_living_in . '")';
-
-                $condition .= ' AND FIND_IN_SET(state,"' . $search_details->residency_status . '")'
-                        . ' AND FIND_IN_SET(grow_up_in,"' . $search_details->country_grew_up . '")'
-                        . ' AND FIND_IN_SET(working_with,"' . $search_details->working_with . '")'
-                        . ' AND FIND_IN_SET(working_as,"' . $search_details->profession_area . '")'
-                        . ' AND FIND_IN_SET(education_field,"' . $search_details->education . '")'
-                        . ' AND status = 1';
+                if ($search_details->caste != '' && $search_details->caste != 0 && $search_details->caste != -1) {
+                        $condition .= ' AND caste = ' . $search_details->caste;
+                }
+                if ($search_details->mothertongue != '' && $search_details->mothertongue != 0 && $search_details->mothertongue != -1) {
+                        $condition .= ' AND mothertongue = ' . $search_details->mothertongue;
+                }
+                if ($search_details->country_living_in != '' && $search_details->country_living_in != 0 && $search_details->country_living_in != -1) {
+                        $condition .= ' AND country = ' . $search_details->country_living_in;
+                }
                 $dataProvider = new CActiveDataProvider('UserDetails', array('criteria' => array(
                         'condition' => $condition
                     ),

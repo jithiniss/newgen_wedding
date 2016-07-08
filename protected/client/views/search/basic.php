@@ -39,10 +39,10 @@
 
                                                         <div class="col-sm-8 col-xs-9 zeros">
                                                                 <label class="radio-inline sec">
-                                                                        <input required="" type="radio" name="couple" value="2">Bride
+                                                                        <input required="" type="radio" name="SavedSearch[gender]" value="2">Bride
                                                                 </label>
                                                                 <label class="radio-inline sec">
-                                                                        <input type="radio" name="couple" value="1">Groom
+                                                                        <input type="radio" name="SavedSearch[gender]" value="1">Groom
                                                                 </label>
                                                         </div>
                                                 </div>
@@ -59,7 +59,7 @@
                                                                                 $age_from[sprintf("%02d", $i)] = sprintf("%02d", $i);
                                                                         }
                                                                         ?>
-                                                                        <?php echo $form->dropDownList($model, 'age_from', $age_from, array('empty' => 'Age From', 'class' => 'ages')); ?>
+                                                                        <?php echo $form->dropDownList($model, 'age_from', $age_from, array('empty' => 'Age From', 'class' => 'ages', 'required' => true)); ?>
                                                                         <?php echo $form->error($model, 'age_from'); ?>
                                                                 </div>
                                                         </div>
@@ -74,7 +74,7 @@
                                                                                 $age_to[sprintf("%02d", $i)] = sprintf("%02d", $i);
                                                                         }
                                                                         ?>
-                                                                        <?php echo $form->dropDownList($model, 'age_to', $age_to, array('empty' => 'Age To', 'class' => 'ages')); ?>
+                                                                        <?php echo $form->dropDownList($model, 'age_to', $age_to, array('empty' => 'Age To', 'class' => 'ages', 'required' => true)); ?>
                                                                         <?php echo $form->error($model, 'age_to'); ?>
 
 
@@ -346,7 +346,7 @@
 //                $('#PartnerDetails_religion  option:selected').each(function () {
 //                        caste.push(this.value);
 //                });
-                alert(caste);
+
 
                 if (caste != '') {
                         $.ajax({

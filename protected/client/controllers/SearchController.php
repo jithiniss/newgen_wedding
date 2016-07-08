@@ -8,26 +8,49 @@ class SearchController extends Controller {
                 if (isset($_POST['SavedSearch'])) {
                         $model->attributes = $_POST['SavedSearch'];
                         $model->user_id = Yii::app()->session['user']['id'];
-                        if ($_POST['couple'] == 2) {
+                        if ($_POST['SavedSearch']['gender'] == 2) {
                                 $model->gender = 1;
                         } else {
                                 $model->gender = 2;
                         }
-                        if ($model->save()) {
-                                $this->redirect('Search/Result/id/' . $this->encrypt_decrypt('encrypt', $model->id));
+                        if ($model->validate()) {
+                                if ($model->save()) {
+
+                                        $this->redirect('Result/id/' . $this->encrypt_decrypt('encrypt', $model->id));
+                                }
                         }
                 }
                 $this->render('basic', array('model' => $model));
         }
 
         public function actionAdvanced() {
-                $this->render('advanced');
+                $model = new SavedSearch();
+                if (isset($_POST['SavedSearch'])) {
+                        $model->attributes = $_POST['SavedSearch'];
+                        $model->user_id = Yii::app()->session['user']['id'];
+                        if ($_POST['SavedSearch']['gender'] == 2) {
+                                $model->gender = 1;
+                        } else {
+                                $model->gender = 2;
+                        }
+                        if ($model->validate()) {
+                                if ($model->save()) {
+
+                                        $this->redirect('Result/id/' . $this->encrypt_decrypt('encrypt', $model->id));
+                                }
+                        }
+                }
+                $this->render('advanced', array('model' => $model));
         }
 
         public function actionResult($id) {
                 $result_id = $this->encrypt_decrypt('decrypt', $id);
-
                 $this->render('search_result', array('id' => $result_id));
+        }
+
+        public function actionAdvanceResult($id) {
+                $result_id = $this->encrypt_decrypt('decrypt', $id);
+                $this->render('advance_search_result', array('id' => $result_id));
         }
 
         public function encrypt_decrypt($action, $string) {
