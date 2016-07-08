@@ -4,13 +4,12 @@ class MyaccountController extends Controller {
 
         public function actionIndex() {
 
-                if(isset(Yii::app()->session['user'])) {
+                if (isset(Yii::app()->session['user'])) {
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                        $my_plan = UserPlans::model()->findByPk(Yii::app()->session['plan']['id']);
                         $matches = Yii::app()->Matches->MyMatches();
                         $twowaymatches = Yii::app()->Matches->MyTwoWayMatches($user->id);
                         $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $user->user_id), array('order' => 'date DESC', 'group' => 'user_id', 'distinct' => TRUE));
-                        $this->render('index', array('user' => $user, 'matches' => $matches, 'twowaymatches' => $twowaymatches, 'profile_visitors' => $profile_visitors, 'my_plan' => $my_plan));
+                        $this->render('index', array('user' => $user, 'matches' => $matches, 'twowaymatches' => $twowaymatches, 'profile_visitors' => $profile_visitors));
                 } else {
                         $this->redirect(array('site/login'));
                 }
@@ -18,7 +17,7 @@ class MyaccountController extends Controller {
 
         public function actionInvitations() {
                 $requests = Requests::model()->findAllByAttributes(array(), array('condition' => '(partner_id = "' . Yii::app()->session['user']['user_id'] . '" AND status = 1)'));
-                if(!empty($requests))
+                if (!empty($requests))
                         $this->redirect(array('Pending'));
                 else {
                         $this->redirect(array('Accepted'));
@@ -27,7 +26,7 @@ class MyaccountController extends Controller {
 
         public function actionSentInvitations() {
                 $requests = Requests::model()->findAllByAttributes(array(), array('condition' => '(user_id = "' . Yii::app()->session['user']['id'] . '" AND status = 1)'));
-                if(!empty($requests))
+                if (!empty($requests))
                         $this->redirect(array('Sent'));
                 else {
                         $this->redirect(array('SentAccepted'));
@@ -66,7 +65,7 @@ class MyaccountController extends Controller {
 
         public function actionAccept($id) {
                 $request = Requests::model()->findByPk($id);
-                if(!empty($request) && $request->status == 1) {
+                if (!empty($request) && $request->status == 1) {
                         $request->status = 2;
                         $request->save();
                         $this->redirect(Yii::app()->request->urlReferrer);
@@ -75,7 +74,7 @@ class MyaccountController extends Controller {
 
         public function actionReject($id) {
                 $reject = Requests::model()->findByPk($id);
-                if(!empty($reject) && $reject->status == 1) {
+                if (!empty($reject) && $reject->status == 1) {
                         $reject->status = 4;
                         $reject->save();
                         $this->redirect(Yii::app()->request->urlReferrer);
@@ -153,7 +152,7 @@ class MyaccountController extends Controller {
         }
 
         public function actionProfileVisitors() {
-                if(isset(Yii::app()->session['user'])) {
+                if (isset(Yii::app()->session['user'])) {
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $dataProvider = new CActiveDataProvider('ProfileVisitors', array(
                             'criteria' => array(
@@ -174,12 +173,14 @@ class MyaccountController extends Controller {
         }
 
         public function actionProfileVisited() {
-                if(isset(Yii::app()->session['user'])) {
+                if (isset(Yii::app()->session['user'])) {
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $dataProvider = new CActiveDataProvider('ProfileVisitors', array(
                             'criteria' => array(
                                 'condition' => 'user_id="' . $user->user_id . '" AND status = 1',
                                 'order' => 'date desc',
+                                'group' => 'visited_id',
+                                'distinct' => TRUE,
                             ),
                             'pagination' => array(
                                 'pageSize' => 8,
@@ -192,30 +193,25 @@ class MyaccountController extends Controller {
                 }
         }
 
-        // Uncomment the following methods and override them if needed
-        /*
-          public function filters()
-          {
-          // return the filter configuration for this controller, e.g.:
-          return array(
-          'inlineFilterName',
-          array(
-          'class'=>'path.to.FilterClass',
-          'propertyName'=>'propertyValue',
-          ),
-          );
-          }
+        public function actionShortList() {
+                if (isset(Yii::app()->session['user'])) {
+                        $dataProvider = new CActiveDataProvider('Requests', array(
+                            'criteria' => array(
+                                'condition' => 'user_id="' . Yii::app()->session['user']['id'] . '" AND status = 1',
+                                'condition' => 'status = 2',
+                                'order' => 'date desc',
+                                'group' => 'user_id',
+                                'distinct' => TRUE,
+                            ),
+                            'pagination' => array(
+                                'pageSize' => 8,
+                            ),
+                                )
+                        );
+                        $this->render('short_list', array('dataProvider' => $dataProvider));
+                } else {
+                        $this->redirect(array('site/login'));
+                }
+        }
 
-          public function actions()
-          {
-          // return external action classes, e.g.:
-          return array(
-          'action1'=>'path.to.ActionClass',
-          'action2'=>array(
-          'class'=>'path.to.AnotherActionClass',
-          'propertyName'=>'propertyValue',
-          ),
-          );
-          }
-         */
 }
