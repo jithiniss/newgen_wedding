@@ -11,9 +11,11 @@
  *
  * @author user
  */
-class BasicSearch extends CWidget {
+class AdvanceSearch extends CWidget {
 
         public $id = '';
+        public $sort = '';
+        public $view = '';
 
         public function run() {
 
@@ -80,7 +82,11 @@ class BasicSearch extends CWidget {
                 if ($search_details->disability != '' && $search_details->disability != 0 && $search_details->disability != -1) {
                         $condition .= ' AND disability	 = ' . $search_details->disability;
                 }
-
+                if ($this->sort != '') {
+                        $sort .= $this->sort;
+                } else {
+                        $sort .= 'id DESC';
+                }
                 $dataProvider = new CActiveDataProvider('UserDetails', array('criteria' => array(
                         'condition' => $condition
                     ),
@@ -89,10 +95,15 @@ class BasicSearch extends CWidget {
                     ),
                 ));
                 if ($dataProvider->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider,
-                        ));
+                        if ($this->view == 2) {
+                                $this->render('mymatches_list', array(
+                                    'dataProvider' => $dataProvider,
+                                ));
+                        } else {
+                                $this->render('mymatches', array(
+                                    'dataProvider' => $dataProvider,
+                                ));
+                        }
                 }
         }
 

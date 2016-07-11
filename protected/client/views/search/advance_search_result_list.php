@@ -204,10 +204,8 @@
 
                                 </div>
                         </div>
-
-
-                        <div class="col-lg-9 col-md-9 col-sm-8 search">
-                                <div class="row">
+                        <div class="col-lg-9 col-md-9 col-sm-8 search-result">
+                                <div class="">
                                         <h4>Your Search Results</h4>
 
 
@@ -220,7 +218,7 @@
                                                 <div class="col-xs-3 col-md-2 col-sm-2">
                                                         <div class="form-group">
 
-                                                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/AdvanceResult/id/<?php echo $this->encrypt_decrypt('encrypt', $id); ?>" id="search_form" method="POST">
+                                                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/AdvanceResultList/id/<?php echo $this->encrypt_decrypt('encrypt', $id); ?>" id="search_form" method="POST">
                                                                         <?php
                                                                         echo CHtml::dropDownList('sort', '', array(
                                                                             'id DESC' => "Default Order",
@@ -247,32 +245,14 @@
                                                         <span>2000 profiles found</span>
                                                 </div>
                                         </div>
-
-
-
-
-
-
-
-
-
-
-
                                         <?php
-                                        $this->widget("application.client.widgets.AdvanceSearch", array('id' => $id, 'sort' => $sort, 'view' => 1));
+                                        $this->widget("application.client.widgets.AdvanceSearch", array('id' => $id, 'sort' => $sort, 'view' => 2));
                                         ?>
-
-
-
                                 </div>
                         </div>
-
-
-
                 </div>
         </div>
 </section>
-
 <script>
         $(document).ready(function () {
                 var selectIds = $('#panel1,#panel2,#panel3,#panel4,#panel5,#panel6,#panel7,#panel8,#panel9');

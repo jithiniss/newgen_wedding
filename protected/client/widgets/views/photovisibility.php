@@ -28,7 +28,7 @@
                                 <h6>Visible on Accept</h6>
                         <?php } ?>
                         <?php
-                } else if ($partner->photo_visibility == 2) {
+                } else if ($partner->photo_visibility == 3) {
                         ?>
                         <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/w4.jpg">
                         <img class="lock" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">

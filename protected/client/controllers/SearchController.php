@@ -16,7 +16,7 @@ class SearchController extends Controller {
                         if ($model->validate()) {
                                 if ($model->save()) {
 
-                                        $this->redirect('Result/id/' . $this->encrypt_decrypt('encrypt', $model->id));
+                                        $this->redirect(Yii::app()->request->baseUrl . '/index.php/Search/Result/id/' . $this->encrypt_decrypt('encrypt', $model->id));
                                 }
                         }
                 }
@@ -36,7 +36,7 @@ class SearchController extends Controller {
                         if ($model->validate()) {
                                 if ($model->save()) {
 
-                                        $this->redirect('Result/id/' . $this->encrypt_decrypt('encrypt', $model->id));
+                                        $this->redirect(Yii::app()->request->baseUrl . '/index.php/Search/AdvanceResult/id/' . $this->encrypt_decrypt('encrypt', $model->id));
                                 }
                         }
                 }
@@ -44,13 +44,45 @@ class SearchController extends Controller {
         }
 
         public function actionResult($id) {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
                 $result_id = $this->encrypt_decrypt('decrypt', $id);
-                $this->render('search_result', array('id' => $result_id));
+
+                $this->render('search_result', array('id' => $result_id, 'sort' => $sort));
+        }
+
+        public function actionResultList($id) {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $result_id = $this->encrypt_decrypt('decrypt', $id);
+
+                $this->render('search_result_list', array('id' => $result_id, 'sort' => $sort));
         }
 
         public function actionAdvanceResult($id) {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
                 $result_id = $this->encrypt_decrypt('decrypt', $id);
-                $this->render('advance_search_result', array('id' => $result_id));
+                $this->render('advance_search_result', array('id' => $result_id, 'sort' => $sort));
+        }
+
+        public function actionAdvanceResultList($id) {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $result_id = $this->encrypt_decrypt('decrypt', $id);
+                $this->render('advance_search_result_list', array('id' => $result_id, 'sort' => $sort));
         }
 
         public function encrypt_decrypt($action, $string) {
@@ -74,6 +106,23 @@ class SearchController extends Controller {
                 }
 
                 return $output;
+        }
+
+        public function actionSaveSearch($partnerid) {
+                if ($partnerid != '') {
+                        $result_id = $this->encrypt_decrypt('decrypt', $partnerid);
+                        $model = SavedSearch::model()->findByPk($result_id);
+                        if (!empty($model)) {
+                                $model->status = 1;
+                                if ($model->save()) {
+                                        $saved_search = 1;
+                                }
+                        }
+                        Yii::app()->user->setFlash('save_success', "Saved your Search Criteria");
+                        $this->render('search_result', array('id' => $result_id));
+                }
+//                $result_id = $this->encrypt_decrypt('decrypt', $id);
+//                $this->render('search_result', array('id' => $result_id));
         }
 
 }

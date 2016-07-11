@@ -2,7 +2,7 @@
 
 $this->widget('zii.widgets.CListView', array(
     'dataProvider' => $dataProvider,
-    'itemView' => '_mymatches',
+    'itemView' => '_mymatches_list',
     'id' => 'search_item',
     'itemsCssClass' => 'table-class',
     'emptyText' => '<div class="col-md-12" style="background: #d2d2d2;padding:100px;text-align:center;color:#583402;">

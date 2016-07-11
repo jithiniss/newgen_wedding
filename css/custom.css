@@ -188,3 +188,21 @@ a.btc:hover{
         margin-top: 60px;
 
 }
+
+
+.profilez h5 {
+        padding-top: 0px;
+        color: #666666;
+        font-weight: 500;
+        margin-bottom: 5px;
+        font-size: 12px;
+        font-family: 'Roboto', sans-serif;
+        text-align: left;
+        margin-left: 12px;
+        margin-top: 15px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+}

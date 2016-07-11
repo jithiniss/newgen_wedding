@@ -14,6 +14,8 @@
 class BasicSearch extends CWidget {
 
         public $id = '';
+        public $sort = '';
+        public $view = '';
 
         public function run() {
 
@@ -44,18 +46,35 @@ class BasicSearch extends CWidget {
                 if ($search_details->country_living_in != '' && $search_details->country_living_in != 0 && $search_details->country_living_in != -1) {
                         $condition .= ' AND country = ' . $search_details->country_living_in;
                 }
+
+
+                if ($this->sort != '') {
+                        $sort .= $this->sort;
+                } else {
+                        $sort .= 'id DESC';
+                }
+
+
+
+
                 $dataProvider = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition
+                        'condition' => $condition,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 if ($dataProvider->getTotalItemCount() >= 1) {
-
-                        $this->render('mymatches', array(
-                            'dataProvider' => $dataProvider,
-                        ));
+                        if ($this->view == 2) {
+                                $this->render('mymatches_list', array(
+                                    'dataProvider' => $dataProvider,
+                                ));
+                        } else {
+                                $this->render('mymatches', array(
+                                    'dataProvider' => $dataProvider,
+                                ));
+                        }
                 }
         }
 
