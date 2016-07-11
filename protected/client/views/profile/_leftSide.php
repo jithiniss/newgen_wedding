@@ -9,11 +9,15 @@
                 $active2 = 'active';
         } else if($active_menu == 'profile/MyPhotos' || $active_menu == 'profile/PhotoSettings') {
                 $active3 = 'active';
+        } else if($active_menu == 'profile/HobbiesInterest') {
+                $active4 = 'active';
         }
         ?>
         <li class="<?= $active1; ?>"><?php echo CHtml::link('My Contact Details', array('settings/index')); ?></a></li>
         <li class="<?= $active2; ?>"><?php echo CHtml::link('My Profile', array('profile/MyProfile')); ?></li>
         <li class="<?= $active3; ?>"><?php echo CHtml::link('My Photos', array('Profile/MyPhotos')); ?></li>
+        <li class="<?= $active4; ?>"><?php echo CHtml::link('My Hobbies & Interests', array('profile/MyProfile', '#' => 'hobbies')); ?></li>
         <li><?php echo CHtml::link('My Partner Preferences', array('profile/MyProfile', '#' => 'partner')); ?></li>
+
     </ul>
 </div>

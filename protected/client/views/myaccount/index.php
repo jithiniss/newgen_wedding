@@ -248,7 +248,7 @@
                                 <div class="col-md-6">
                                     <ul class="list-unstyled control-labelz" style="line-height: 24px;">
                                         <li><i class='fa fa-caret-right'></i> Send Emails directly</li>
-                                        <li><i class='fa fa-caret-right'></i> Connect instantly via Shaadi Chat</li>
+                                        <li><i class='fa fa-caret-right'></i> Connect instantly</li>
                                         <li><i class='fa fa-caret-right'></i> Initiate Calls / Send SMS</li>
 
 

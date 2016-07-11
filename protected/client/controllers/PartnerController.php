@@ -3,13 +3,13 @@
 class PartnerController extends Controller {
 
         public function actionIndex() {
-                if (isset(Yii::app()->session['user'])) {
+                if(isset(Yii::app()->session['user'])) {
                         $this->render('index');
                 }
         }
 
         public function folderName($min, $max, $id) {
-                if ($id > $min && $id < $max) {
+                if($id > $min && $id < $max) {
                         return $max;
                 } else {
                         $xy = $this->folderName($min + 1000, $max + 1000, $id);
@@ -18,12 +18,14 @@ class PartnerController extends Controller {
         }
 
         public function actionPartnerdetails($userid) {
-                if (isset(Yii::app()->session['user'])) {
+                if(isset(Yii::app()->session['user'])) {
 
-                        if ($userid != '') {
+                        if($userid != '') {
                                 $user_details = UserDetails::model()->findByAttributes(array('user_id' => $userid));
                                 $current_user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                                 $partner_details = PartnerDetails::model()->findByAttributes(array('user_id' => $user_details->id));
+                                $interest = UserInterests::model()->findByAttributes(array('user_id' => $user_details->id));
+
                                 $similar_profile = $this->Similar($userid);
                                 $story = TellUsStory::model()->findAllByAttributes(array('admin_approval' => '1', 'status' => '1'));
                                 $profile_viewed = new ProfileVisitors;
@@ -34,7 +36,7 @@ class PartnerController extends Controller {
 //                                var_dump($profile_viewed->visited_id);
 //                                exit;
                                 $profile_viewed->save(FALSE);
-                                $this->render('index', array('user_details' => $user_details, 'partner_details' => $partner_details, 'current_user' => $current_user, 'similar_profiles' => $similar_profile, 'story' => $story));
+                                $this->render('index', array('user_details' => $user_details, 'partner_details' => $partner_details, 'current_user' => $current_user, 'similar_profiles' => $similar_profile, 'story' => $story, 'interest' => $interest));
                         } else {
                                 $this->redirect(array('site/error'));
                         }
@@ -105,21 +107,21 @@ class PartnerController extends Controller {
                     'religion' => $user->religion), array('condition' => 'user_id != "' . $userid . '"'));
 
 
-                if (!empty($similar_profile1)) {
+                if(!empty($similar_profile1)) {
                         return $similar_profile1;
-                } else if (!empty($similar_profile2)) {
+                } else if(!empty($similar_profile2)) {
                         return $similar_profile2;
-                } else if (!empty($similar_profile3)) {
+                } else if(!empty($similar_profile3)) {
                         return $similar_profile3;
-                } else if (!empty($similar_profile4)) {
+                } else if(!empty($similar_profile4)) {
                         return $similar_profile4;
-                } else if (!empty($similar_profile5)) {
+                } else if(!empty($similar_profile5)) {
                         return $similar_profile5;
-                } else if (!empty($similar_profile6)) {
+                } else if(!empty($similar_profile6)) {
                         return $similar_profile6;
-                } else if (!empty($similar_profile7)) {
+                } else if(!empty($similar_profile7)) {
                         return $similar_profile7;
-                } else if (!empty($similar_profile8)) {
+                } else if(!empty($similar_profile8)) {
                         return $similar_profile8;
                 } else {
                         return NULL;
@@ -155,14 +157,14 @@ class PartnerController extends Controller {
         public function actionPhotoRequest($data) {
                 $recevier_details = UserDetails::model()->findByAttributes(array('user_id' => $data));
                 $check = PhotoRequests::model()->findByAttributes(array('sender_id' => Yii::app()->session['user']['id'], 'receiver_id' => $recevier_details->id));
-                if (!empty($recevier_details)) {
-                        if (empty($check)) {
+                if(!empty($recevier_details)) {
+                        if(empty($check)) {
                                 $model = new PhotoRequests;
                                 $model->sender_id = Yii::app()->session['user']['id'];
                                 $model->receiver_id = $recevier_details->id;
                                 $model->status = 1;
                                 $model->date = date('Y-m-d');
-                                if ($model->save()) {
+                                if($model->save()) {
                                         Yii::app()->user->setFlash('success', "Your request is submitted");
                                         $this->redirect(Yii::app()->request->urlReferrer);
                                 }
@@ -173,24 +175,24 @@ class PartnerController extends Controller {
         }
 
         public function actionSendInterest($userid) {
-                if (isset(Yii::app()->session['user'])) {
-                        if ($userid != '') {
+                if(isset(Yii::app()->session['user'])) {
+                        if($userid != '') {
                                 $partner_details = UserDetails::model()->findByAttributes(array('user_id' => $userid));
-                                if (!empty($partner_details)) {
+                                if(!empty($partner_details)) {
                                         $plan_details = UserPlans::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
-                                        if ($plan_details->Interest == 1) {
+                                        if($plan_details->Interest == 1) {
 
                                                 /* check user send request to this partner */
                                                 $check = Requests::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id'], 'partner_id' => $userid));
                                                 /* add data to request table if invitation send */
-                                                if (empty($check)) {
+                                                if(empty($check)) {
 
                                                         $model = new Requests();
                                                         $model->user_id = Yii::app()->session['user']['id'];
                                                         $model->partner_id = $userid;
                                                         $model->status = 1;
                                                         $model->date = date('Y-m-d');
-                                                        if ($model->save()) {
+                                                        if($model->save()) {
                                                                 $this->MailToPartner($model->partner_id);
                                                                 $this->redirect(Yii::app()->request->urlReferrer);
                                                         }
@@ -213,7 +215,7 @@ class PartnerController extends Controller {
         public function MailToPartner($partner_id) {
                 $partner_details = UserDetails::model()->findByAttributes(array('user_id' => $partner_id));
                 $model = UserDetails::model()->findByAttributes(array('id' => Yii::app()->session['user']['id']));
-                if (!empty($partner_details)) {
+                if(!empty($partner_details)) {
                         $to = $partner_details->email;
 
                         $subject = 'info_NewGen';

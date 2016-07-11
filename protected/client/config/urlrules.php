@@ -12,6 +12,7 @@ return array(
     'profile-details' => 'Partner/Partnerdetails/userid',
     'edit-profile' => 'profile/EditProfile',
     'my-profile' => 'profile/MyProfile',
+    'hobbies-interest' => 'profile/HobbiesInterest',
     'partner-preference' => 'profile/PartnerPreference',
     'my-account' => 'Myaccount/Index',
     'photo-album' => 'Profile/MyPhotos',

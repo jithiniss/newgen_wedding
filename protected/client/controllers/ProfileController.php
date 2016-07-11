@@ -16,7 +16,7 @@ class ProfileController extends Controller {
                 $myProfile = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                 if(!empty($myProfile)) {
                         $partnerDetails = PartnerDetails::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
-
+                        $userInterest = UserInterests::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
                         if(isset($_FILES['UserDetails'])) {
 
                                 $image = CUploadedFile::getInstance($myProfile, 'photo');
@@ -32,7 +32,7 @@ class ProfileController extends Controller {
                                         exit;
                                 }
                         }
-                        $this->render('my_profile', array('myProfile' => $myProfile, 'partnerDetails' => $partnerDetails));
+                        $this->render('my_profile', array('myProfile' => $myProfile, 'partnerDetails' => $partnerDetails, 'userInterest' => $userInterest));
                 } else {
                         $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/login');
                 }
@@ -364,6 +364,50 @@ class ProfileController extends Controller {
                 }
         }
 
+        public function actionHobbiesInterest() {
+                $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                $userInterest = UserInterests::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
+                if(!empty($userInterest)) {
+                        if(isset($_POST['UserInterests'])) {
+                                $userInterest->attributes = $_POST['UserInterests'];
+
+                                if(!empty($_POST['UserInterests']['hobbies'])) {
+
+                                        $userInterest->hobbies = implode(',', $_POST['UserInterests']['hobbies']);
+                                } else {
+                                        $userInterest->hobbies = '';
+                                }
+
+                                if(!empty($_POST['UserInterests']['music'])) {
+
+                                        $userInterest->music = implode(',', $_POST['UserInterests']['music']);
+                                } else {
+                                        $userInterest->music = '';
+                                }
+                                if(!empty($_POST['UserInterests']['movies'])) {
+
+                                        $userInterest->movies = implode(',', $_POST['UserInterests']['movies']);
+                                } else {
+                                        $userInterest->movies = '';
+                                }
+                                if(!empty($_POST['UserInterests']['sports'])) {
+
+                                        $userInterest->sports = implode(',', $_POST['UserInterests']['sports']);
+                                } else {
+                                        $userInterest->sports = '';
+                                }
+                                if($userInterest->validate()) {
+                                        $userInterest->ub = $user->id;
+                                        if($userInterest->save(false))
+                                                Yii::app()->user->setFlash('my_interests', "Interests Changed Successfully");
+                                }
+                        }
+                        $this->render('user_interest', array('userInterest' => $userInterest, 'user' => $user));
+                } else {
+                        $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/login');
+                }
+        }
+
         public function uploadFiles($id, $image) {
                 if($image != "") {
                         $folder = Yii::app()->Upload->folderName(0, 1000, $id);
@@ -421,7 +465,7 @@ class ProfileController extends Controller {
                         $filename = $id . '_' . rand(100001, 999999) . '_album';
                         $path = array('uploads', 'user', $folder, $id, 'album');
                         $dimension[0] = array('width' => '116', 'height' => '155', 'name' => 'main');
-                        // $dimension[1] = array('width' => '100', 'height' => '130', 'name' => 'thumb');
+// $dimension[1] = array('width' => '100', 'height' => '130', 'name' => 'thumb');
 //                        $dimension[2] = array('width' => '580', 'height' => '775', 'name' => 'big');
 //                        $dimension[3] = array('width' => '3016', 'height' => '4030', 'name' => 'zoom');
 

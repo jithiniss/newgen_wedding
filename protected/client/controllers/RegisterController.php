@@ -25,6 +25,7 @@ class RegisterController extends Controller {
                                 UserDetails::model()->userId($firstStep->id)->save();
                                 $this->partnerDetails($firstStep->id)->save(false);
                                 $this->userPlan($firstStep->id)->save(false);
+                                $this->userInterest($firstStep->id)->save(false);
                                 $user = UserDetails::model()->findByPk($firstStep->id);
                                 $user->cb = $firstStep->id;
                                 $user->ub = $firstStep->id;
@@ -88,6 +89,18 @@ class RegisterController extends Controller {
                 $model->number_of_days_left = $plan_details->number_of_days;
                 $model->user_id = $id;
                 return $model;
+        }
+
+        public function userInterest($id) {
+                $user_details = UserDetails::model()->findByPk($id);
+                if(!empty($user_details)) {
+                        $model = new UserInterests;
+                        $model->cb = $id;
+                        $model->doc = date('Y-m-d');
+                        $model->status = 1;
+                } else {
+                        return FALSE;
+                }
         }
 
         /* mail to user and admin */
