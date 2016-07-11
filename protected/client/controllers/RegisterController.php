@@ -225,6 +225,7 @@ class RegisterController extends Controller {
                         if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
 
                                 $this->redirect(array('PlanPaymentSuccess', 'plan_id' => $plan_id));
+                                //  $this->redirect(array('PlanPaymentError', 'plan_id' => $plan_id));
                         } else {
                                 Yii::app()->session['unloggedUserPlan'] = $plan_id;
                                 $this->redirect(array('site/login'));
@@ -241,12 +242,18 @@ class RegisterController extends Controller {
                         $model = UserPlans::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
                         $model->attributes = $plans->attributes;
                         $model->plan_id = $plans->id;
-                        $model->featured = $plans->set_featured;
+                        $model->featured = $plans->featured;
                         $model->dou = date('Y-m-d H:i:s');
+                        $model->payment_status = 1;
+                        $model->view_contact_left = 0;
+                        $model->send_message_left = 0;
+                        $model->number_of_days_left = 0;
+                        $model->status = 1;
                         $model->save();
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $user->register_step = 5;
                         $user->save();
+                        $this->PlanSuccessMail($user, $model);
                         Yii::app()->session['user'] = $user;
                         Yii::app()->session['plan'] = $model;
                         Yii::app()->user->setFlash('plan_success', "Payment for  " . $plans->plan_name . " plan successfully placed");
@@ -257,12 +264,60 @@ class RegisterController extends Controller {
         }
 
         public function actionPlanPaymentError($plan_id) {
-                $plans = Plans::model()->findByPk($plan_id);
-                if(!empty($plans)) {
-
+                $plan = Plans::model()->findByPk($plan_id);
+                $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                if(!empty($plan)) {
+                        $this->PlanErrorMail($user, $plan);
                         Yii::app()->user->setFlash('plan_error', "Transaction Failed.Try again later");
                         $this->redirect(array('//Myaccount/Index'));
                 }
+        }
+
+        public function PlanSuccessMail($user, $plan) {
+                $user_email = $user->email;
+//                $user = 'sibys09@gmail.com';
+                $user_subject = 'newgen.com:Payment for account upgrade successfully completed';
+                $user_message = $this->renderPartial('mail/_plan_user_mail', array('user' => $user, 'plan' => $plan, 'status' => 1), true);
+
+
+
+
+// Always set content-type when sending HTML email
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+// More headers
+                $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
+//$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
+                // mail($user_email, $user_subject, $user_message, $headers);
+
+                $admin = 'sibys09@gmail.com';
+                $admin_subject = 'Payment for account upgrade got received';
+                $admin_message = $this->renderPartial('mail/_plan_admin_mail', array('user' => $user, 'plan' => $plan, 'status' => 1), true);
+
+                // mail($admin, $admin_subject, $admin_message, $headers);
+        }
+
+        public function PlanErrorMail($user, $plan) {
+                $user_email = $user->email;
+//                $user = 'sibys09@gmail.com';
+                $user_subject = 'newgen.com:Payment for account upgrade failed';
+                $user_message = $this->renderPartial('mail/_plan_user_mail', array('user' => $user, 'plan' => $plan, 'status' => 2), true);
+
+
+
+// Always set content-type when sending HTML email
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+// More headers
+                $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
+//$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
+                // mail($user_email, $user_subject, $user_message, $headers);
+
+                $admin = 'sibys09@gmail.com';
+                $admin_subject = 'Payment for account upgrade got failed';
+                $admin_message = $this->renderPartial('mail/_plan_admin_mail', array('user' => $user, 'plan' => $plan, 'status' => 2), true);
+
+                // mail($admin, $admin_subject, $admin_message, $headers);
         }
 
         public function actionVerify($m) {

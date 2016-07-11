@@ -51,8 +51,27 @@ class SiteController extends Controller {
                                                 Yii::app()->user->setFlash('login_error', "<h3>Access Denied</h3>.Please contact customer care");
                                         } else {
                                                 $plan = UserPlans::model()->findByAttributes(array('user_id' => $user_login->id));
+
+                                                if($plan->number_of_days != 0 && $plan->status != 0) {
+                                                        $curdate = date('Y-m-d');
+                                                        $plan_date = date('Y-m-d', strtotime($plan->dou));
+
+
+
+                                                        if($curdate > $plan_date) {
+                                                                $days = (strtotime($curdate) - strtotime($plan_date)) / (60 * 60 * 24);
+                                                                $plan->number_of_days_left = $days;
+
+                                                                if($days > $plan->number_of_days) {
+                                                                        $plan->status = 0;
+                                                                }
+                                                                $plan->save();
+                                                        }
+                                                }
                                                 Yii::app()->session['user'] = $user_login;
+
                                                 Yii::app()->session['plan'] = $plan;
+
                                                 if($user_login->register_step == 1) {
                                                         $this->redirect(array('//Register/SecondStep'));
                                                 } else if($user_login->register_step == 2) {

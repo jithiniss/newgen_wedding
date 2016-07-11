@@ -14,7 +14,7 @@
  * @property integer $sms_alerts
  * @property integer $email_alerts
  * @property integer $premium_tag
- * @property integer $set_featured
+ * @property integer $featured
  * @property integer $number_of_days
  * @property integer $status
  * @property integer $cb
@@ -38,12 +38,12 @@ class Plans extends CActiveRecord {
                 // NOTE: you should only define rules for those attributes that
                 // will receive user inputs.
                 return array(
-                    array('plan_name, amount, view_contact, send_message, search, Interest, sms_alerts, email_alerts, premium_tag, set_featured, number_of_days, status', 'required'),
-                    array('id, amount, view_contact, send_message, search, Interest, sms_alerts, email_alerts, premium_tag, set_featured, number_of_days, status, cb, ub', 'numerical', 'integerOnly' => true),
+                    array('plan_name, amount, view_contact, send_message, search, Interest, sms_alerts, email_alerts, premium_tag, featured, number_of_days, status', 'required'),
+                    array('id, amount, view_contact, send_message, search, Interest, sms_alerts, email_alerts, premium_tag, featured, number_of_days, status, cb, ub', 'numerical', 'integerOnly' => true),
                     array('plan_name', 'length', 'max' => 200),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id, plan_name, amount, view_contact, send_message, search, Interest, sms_alerts, email_alerts, premium_tag, set_featured, number_of_days, status, cb, ub, doc, dou', 'safe', 'on' => 'search'),
+                    array('id, plan_name, amount, view_contact, send_message, search, Interest, sms_alerts, email_alerts, premium_tag, featured, number_of_days, status, cb, ub, doc, dou', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -72,7 +72,7 @@ class Plans extends CActiveRecord {
                     'sms_alerts' => 'Sms Alerts',
                     'email_alerts' => 'Email Alerts',
                     'premium_tag' => 'Premium Tag',
-                    'set_featured' => 'Set Featured',
+                    'featured' => 'Set Featured',
                     'number_of_days' => 'Number Of Days',
                     'status' => 'Status',
                     'cb' => 'Cb',
@@ -109,7 +109,7 @@ class Plans extends CActiveRecord {
                 $criteria->compare('sms_alerts', $this->sms_alerts);
                 $criteria->compare('email_alerts', $this->email_alerts);
                 $criteria->compare('premium_tag', $this->premium_tag);
-                $criteria->compare('set_featured', $this->set_featured);
+                $criteria->compare('featured', $this->featured);
                 $criteria->compare('number_of_days', $this->number_of_days);
                 $criteria->compare('status', $this->status);
                 $criteria->compare('cb', $this->cb);

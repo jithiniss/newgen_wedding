@@ -76,9 +76,9 @@
         </div>
 
         <div class="form-group">
-            <?php echo $form->labelEx($model, 'set_featured'); ?>
-            <?php echo $form->dropDownList($model, 'set_featured', array('0' => 'No', '1' => 'Yes'), array('class' => 'form-control')); ?>
-            <?php echo $form->error($model, 'set_featured'); ?>
+            <?php echo $form->labelEx($model, 'featured'); ?>
+            <?php echo $form->dropDownList($model, 'featured', array('0' => 'No', '1' => 'Yes'), array('class' => 'form-control')); ?>
+            <?php echo $form->error($model, 'featured'); ?>
         </div>
 
         <div class="form-group">

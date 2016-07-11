@@ -81,7 +81,7 @@
                                                 }
                                                 ?>
                                                 <?php
-                                                if($plan->set_featured == 1) {
+                                                if($plan->featured == 1) {
 
                                                         echo " <li>Set as Featured Profile</li>";
                                                 }

@@ -26,6 +26,7 @@
  * @property integer $ub
  * @property string $doc
  * @property string $dou
+ * @property integer $payment_status
  */
 class UserPlans extends CActiveRecord {
 
@@ -44,11 +45,11 @@ class UserPlans extends CActiveRecord {
                 // will receive user inputs.
                 return array(
 //			array('plan_id, user_id, plan_name, amount, view_contact, view_contact_left, send_message, send_message_left, search, Interest, sms_alerts, email_alerts, premium_tag, featured, number_of_days, number_of_days_left, status, cb, ub, doc, dou', 'required'),
-                    array('plan_id, user_id, amount, view_contact, view_contact_left, send_message, send_message_left, search, Interest, sms_alerts, email_alerts, premium_tag, featured, number_of_days, number_of_days_left, status, cb, ub', 'numerical', 'integerOnly' => true),
+                    array('plan_id, user_id, amount, view_contact, view_contact_left, send_message, send_message_left, search, Interest, sms_alerts, email_alerts, premium_tag, featured, number_of_days, number_of_days_left, status, cb, ub,payment_status', 'numerical', 'integerOnly' => true),
                     array('plan_name', 'length', 'max' => 200),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id, plan_id, user_id, plan_name, amount, view_contact, view_contact_left, send_message, send_message_left, search, Interest, sms_alerts, email_alerts, premium_tag, featured, number_of_days, number_of_days_left, status, cb, ub, doc, dou', 'safe', 'on' => 'search'),
+                    array('id, plan_id, user_id, plan_name, amount, view_contact, view_contact_left, send_message, send_message_left, search, Interest, sms_alerts, email_alerts, premium_tag, featured, number_of_days, number_of_days_left, status, cb, ub, doc, dou,payment_status', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -89,6 +90,7 @@ class UserPlans extends CActiveRecord {
                     'ub' => 'Ub',
                     'doc' => 'Doc',
                     'dou' => 'Dou',
+                    'payment_status' => 'Payment Status',
                 );
         }
 
@@ -131,6 +133,7 @@ class UserPlans extends CActiveRecord {
                 $criteria->compare('ub', $this->ub);
                 $criteria->compare('doc', $this->doc, true);
                 $criteria->compare('dou', $this->dou, true);
+                $criteria->compare('payment_status', $this->payment_status);
 
                 return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
