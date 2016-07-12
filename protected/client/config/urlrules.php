@@ -27,7 +27,6 @@ return array(
     '2-way-matches' => 'Matches/TwoWayMatches',
     'looking-for-Me' => 'Matches/LookingMe',
     'contact-filters' => 'settings/ContactFilters',
-    'edit-contact-filters' => 'settings/EditContactFilters',
     'email-sms-alert' => 'settings/MailSmsAlert',
     '<controller:\w+>/<id:\d+>' => '<controller>/view',
     '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
