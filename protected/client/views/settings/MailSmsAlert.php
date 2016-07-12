@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-md-9 alert_sms">
                                 <h2>My Alerts Manager</h2>
-                                <p>Manage your subscriptions to Shaadi.com Alerts on email listed below. You can also subscribe to Shaadi.com and ShaadiTimes Newsletters</p>
+                                <p>Manage your subscriptions to Newgrn wedding Alerts on email listed below. You can also subscribe to Newgrn wedding and Newgrn wedding times Newsletters</p>
                                 <?php
                                 $form = $this->beginWidget('CActiveForm', array(
                                     'id' => 'mail-sms-alert-MailSmsAlert-form',
@@ -103,7 +103,7 @@
                                                                 <div class="col-sm-8 col-xs-10 zeros">
                                                                         <p>An email reminder containing Profiles you have Viewed recently but have not yet invited to Connect.</p>
                                                                 </div>
-                                                                <div class="col-sm-4 col-xs-2 zeros"> <?php echo $form->radioButtonList($model, 'recent_visitor_mail', array('1' => 'Daily', '2' => 'Unsubscribe'), array('class' => 'row'));
+                                                                <div class="col-sm-4 col-xs-2 zeros"> <?php echo $form->radioButtonList($model, 'viewed_profile_mail', array('1' => 'Daily', '2' => 'Unsubscribe'), array('class' => 'row'));
                                                                         ?>
                                                                         <?php echo $form->error($model, 'viewed_profile_mail'); ?></div>
                                                         </div>
@@ -148,7 +148,7 @@
                                                         </div>
                                                         <div class="common">
                                                                 <div class="col-sm-8 col-xs-10 zeros">
-                                                                        <p>Invitations, Discounts, and Offers just for Shaadi.com members. Offers range from free holidays to discounted jewellery. Delivered not more than twice a month.</p>
+                                                                        <p>Invitations, Discounts, and Offers just for Newgen wedding members. Offers range from free holidays to discounted jewellery. Delivered not more than twice a month.</p>
                                                                 </div>
                                                                 <div class="col-sm-4 col-xs-2 zeros"><?php echo $form->radioButtonList($model, 'notification_offers', array('1' => 'Occasionally - Not more than twice a month', '2' => 'Unsubscribe'), array('class' => 'row'));
                                                                         ?>
@@ -160,7 +160,7 @@
                                                         </div>
                                                         <div class="common">
                                                                 <div class="col-sm-8 col-xs-10 zeros">
-                                                                        <p>Advice and updates from Shaadi.com to help you get the most out of your Shaadi.com experience. A must-have.</p>
+                                                                        <p>Advice and updates from Newgen wedding to help you get the most out of your Newgen wedding experience. A must-have.</p>
                                                                 </div>
                                                                 <div class="col-sm-4 col-xs-2 zeros"> <?php echo $form->radioButtonList($model, 'newgen_insite_alert', array('1' => 'Monthly', '2' => 'Unsubscribe'), array('class' => 'row'));
                                                                         ?>

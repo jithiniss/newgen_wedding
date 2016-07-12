@@ -271,12 +271,15 @@ class SettingsController extends Controller {
         public function actionMailSmsAlert() {
                 $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                 $mail_alert = MailSmsAlert::model()->findByAttributes(array('cb' => $user->id));
-
                 if ($mail_alert != '') {
-
+                        $model = MailSmsAlert::model()->findByAttributes(array('cb' => $user->id));
+                        $model->attributes = $_POST['MailSmsAlert'];
+                        $model->ub = Yii::app()->session['user']['id'];
+                        $model->dou = date('Y-m-d');
+                        if ($model->validate()) {
+                                $model->save();
+                        }
                 } else {
-                        var_dump(Yii::app()->session['user']['id']);
-                        exit;
                         $model = new MailSmsAlert;
                         if (isset($_POST['MailSmsAlert'])) {
                                 $model->attributes = $_POST['MailSmsAlert'];
