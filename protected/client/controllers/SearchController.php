@@ -5,16 +5,16 @@ class SearchController extends Controller {
         public function actionIndex() {
 
                 $model = new SavedSearch();
-                if (isset($_POST['SavedSearch'])) {
+                if(isset($_POST['SavedSearch'])) {
                         $model->attributes = $_POST['SavedSearch'];
                         $model->user_id = Yii::app()->session['user']['id'];
-                        if ($_POST['SavedSearch']['gender'] == 2) {
+                        if($_POST['SavedSearch']['gender'] == 2) {
                                 $model->gender = 1;
                         } else {
                                 $model->gender = 2;
                         }
-                        if ($model->validate()) {
-                                if ($model->save()) {
+                        if($model->validate()) {
+                                if($model->save()) {
 
                                         $this->redirect(Yii::app()->request->baseUrl . '/index.php/Search/Result/id/' . $this->encrypt_decrypt('encrypt', $model->id));
                                 }
@@ -25,16 +25,16 @@ class SearchController extends Controller {
 
         public function actionAdvanced() {
                 $model = new SavedSearch();
-                if (isset($_POST['SavedSearch'])) {
+                if(isset($_POST['SavedSearch'])) {
                         $model->attributes = $_POST['SavedSearch'];
                         $model->user_id = Yii::app()->session['user']['id'];
-                        if ($_POST['SavedSearch']['gender'] == 2) {
+                        if($_POST['SavedSearch']['gender'] == 2) {
                                 $model->gender = 1;
                         } else {
                                 $model->gender = 2;
                         }
-                        if ($model->validate()) {
-                                if ($model->save()) {
+                        if($model->validate()) {
+                                if($model->save()) {
 
                                         $this->redirect(Yii::app()->request->baseUrl . '/index.php/Search/AdvanceResult/id/' . $this->encrypt_decrypt('encrypt', $model->id));
                                 }
@@ -44,7 +44,7 @@ class SearchController extends Controller {
         }
 
         public function actionSearchById() {
-                if (isset($_POST['sort'])) {
+                if(isset($_POST['sort'])) {
                         $sort = $_POST['sort'];
                 } else {
                         $sort = 'id DESC';
@@ -54,18 +54,37 @@ class SearchController extends Controller {
         }
 
         public function actionResult($id) {
-                if (isset($_POST['sort'])) {
+                if(isset($_POST['photo'])) {
+                        $photo = implode(',', $_POST['photo']);
+                }
+                if(isset($_POST['joined'])) {
+                        $joined = $_POST['joined'];
+                } else {
+                        $joined = 0;
+                }
+                if(isset($_POST['active_member'])) {
+                        $active_mem = $_POST['active_member'];
+                } else {
+                        $active_mem = 0;
+                }
+                if(isset($_POST['marital_status'])) {
+                        $marital_stat = implode(',', $_POST['marital_status']);
+                }
+                if(isset($_POST['profile_created_by'])) {
+                        $profile_crea = implode(',', $_POST['profile_created_by']);
+                }
+                if(isset($_POST['sort'])) {
                         $sort = $_POST['sort'];
                 } else {
                         $sort = 'id DESC';
                 }
                 $result_id = $this->encrypt_decrypt('decrypt', $id);
 
-                $this->render('search_result', array('id' => $result_id, 'sort' => $sort));
+                $this->render('search_result', array('id' => $result_id, 'sort' => $sort, 'photo' => $photo, 'joined' => $joined, 'active_mem' => $active_mem, 'marital_stat' => $marital_stat, 'profile_crea' => $profile_crea));
         }
 
         public function actionResultList($id) {
-                if (isset($_POST['sort'])) {
+                if(isset($_POST['sort'])) {
                         $sort = $_POST['sort'];
                 } else {
                         $sort = 'id DESC';
@@ -76,7 +95,7 @@ class SearchController extends Controller {
         }
 
         public function actionAdvanceResult($id) {
-                if (isset($_POST['sort'])) {
+                if(isset($_POST['sort'])) {
                         $sort = $_POST['sort'];
                 } else {
                         $sort = 'id DESC';
@@ -86,7 +105,7 @@ class SearchController extends Controller {
         }
 
         public function actionAdvanceResultList($id) {
-                if (isset($_POST['sort'])) {
+                if(isset($_POST['sort'])) {
                         $sort = $_POST['sort'];
                 } else {
                         $sort = 'id DESC';
@@ -108,10 +127,10 @@ class SearchController extends Controller {
 // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
                 $iv = substr(hash('sha256', $secret_iv), 0, 16);
 
-                if ($action == 'encrypt') {
+                if($action == 'encrypt') {
                         $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
                         $output = base64_encode($output);
-                } else if ($action == 'decrypt') {
+                } else if($action == 'decrypt') {
                         $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
                 }
 
@@ -119,14 +138,14 @@ class SearchController extends Controller {
         }
 
         public function actionSaveSearch($partnerid) {
-                if ($partnerid != '') {
+                if($partnerid != '') {
                         $search_name = $_POST['search_name'];
                         $result_id = $this->encrypt_decrypt('decrypt', $partnerid);
                         $model = SavedSearch::model()->findByAttributes(array('id' => $result_id), array('condition' => 'status != 1'));
-                        if (!empty($model)) {
+                        if(!empty($model)) {
                                 $model->status = 1;
                                 $model->search_name = $search_name;
-                                if ($model->save()) {
+                                if($model->save()) {
                                         $saved_search = 1;
                                         Yii::app()->user->setFlash('save_success', "Saved your Search Criteria");
                                 }
