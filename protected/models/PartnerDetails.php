@@ -72,6 +72,9 @@ class PartnerDetails extends CActiveRecord {
                 // class name for the relations automatically generated below.
                 return array(
                     'user' => array(self::BELONGS_TO, 'UserDetails', 'user_id'),
+                    'religion0' => array(self::BELONGS_TO, 'MasterReligion', 'religion'),
+                    'mothertongue' => array(self::BELONGS_TO, 'MasterMotherTongue', 'mothertongue'),
+                    'maritalstatus0' => array(self::BELONGS_TO, 'MasterMaritalStatus', 'marital_status'),
                 );
         }
 
