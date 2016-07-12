@@ -1,5 +1,5 @@
 <section class="banner">
-        <img src="<?php echo Yii::app()->request->baseUrl . '/uploads/static_pages/' . $banner->id . '/banner.' . $banner->banner; ?>">
+        <img src="<?php echo Yii::app()->request->baseUrl . '/uploads/static_pages/2/banner.jpg' ?>">
 </section>
 
 

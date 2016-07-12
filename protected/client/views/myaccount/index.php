@@ -337,8 +337,8 @@
                                                                                                                 ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
-                                                                                                                                <div class="profile">
-                                                                                                                                        <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                                <div class="profile ">
+                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                         <p>Visible on Accept/Sent</p>
                                                                                                                                 </div>
@@ -357,8 +357,8 @@
                                                                                                         <?php } if ($match->photo_visibility == 1) { ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
-                                                                                                                                <div class="profile">
-                                                                                                                                        <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $match->id; ?>/profile/<?= $match->photo ?>">
+                                                                                                                                <div class="profile ">
+                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $match->id; ?>/profile/<?= $match->photo ?>">
 
                                                                                                                                 </div>
                                                                                                                                 <h1><?= $match->first_name; ?></h1>
@@ -375,8 +375,8 @@
                                                                                                         <?php } if ($visitor->photo_visibility == 3) { ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
-                                                                                                                                <div class="profile">
-                                                                                                                                        <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                                <div class="profile ">
+                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                         <p>Password Protected</p>
                                                                                                                                 </div>
@@ -436,8 +436,8 @@
                                                                                                                 ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
-                                                                                                                                <div class="profile">
-                                                                                                                                        <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $twowaymatche->id; ?>/profile/<?= $twowaymatche->photo ?>">
+                                                                                                                                <div class="profile ">
+                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $twowaymatche->id; ?>/profile/<?= $twowaymatche->photo ?>">
 
                                                                                                                                 </div>
                                                                                                                                 <h1><?= $twowaymatche->first_name; ?></h1>
@@ -454,8 +454,8 @@
                                                                                                         <?php } if ($twowaymatche->photo_visibility == 2) { ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
-                                                                                                                                <div class="profile">
-                                                                                                                                        <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                                <div class="profile ">
+                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                         <p>Visible on Accept/Sent</p>
                                                                                                                                 </div>
@@ -472,8 +472,8 @@
                                                                                                         <?php } if ($visitor->photo_visibility == 3) { ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
-                                                                                                                                <div class="profile">
-                                                                                                                                        <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                                <div class="profile ">
+                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                         <p>Password Protected</p>
                                                                                                                                 </div>
@@ -536,8 +536,8 @@
                                                                                                                                 ?>
                                                                                                                                 <div class="item">
                                                                                                                                         <div class="main">
-                                                                                                                                                <div class="profile">
-                                                                                                                                                        <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                                                <div class="profile ">
+                                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
                                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                                         <p>Visible on Accept/sent</p>
                                                                                                                                                 </div>
@@ -556,8 +556,8 @@
 
                                                                                                                                 <div class="item">
                                                                                                                                         <div class="main">
-                                                                                                                                                <div class="profile">
-                                                                                                                                                        <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">
+                                                                                                                                                <div class="profile ">
+                                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">
 
                                                                                                                                                 </div>
                                                                                                                                                 <h1><?= $visitor->first_name; ?></h1>
@@ -573,8 +573,8 @@
                                                                                                                         <?php } if ($visitor->photo_visibility == 3) { ?>
                                                                                                                                 <div class="item">
                                                                                                                                         <div class="main">
-                                                                                                                                                <div class="profile">
-                                                                                                                                                        <img class="center-block file img-responsive fullz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                                                <div class="profile ">
+                                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
                                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                                         <p>Password Protected</p>
                                                                                                                                                 </div>
