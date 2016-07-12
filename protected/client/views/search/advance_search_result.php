@@ -214,7 +214,8 @@
 
                                         <div class="row">
                                                 <div class="col-xs-3 col-sm-4 col-md-3 col-md-offset-2 ">
-                                                        <a href="#" class="offset">Save this Search</a>
+                                                        <?php echo $this->renderPartial('_saved_search_link', array('id' => $id)); ?>
+
                                                 </div>
 
                                                 <div class="col-xs-3 col-md-2 col-sm-2">

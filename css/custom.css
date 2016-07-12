@@ -236,3 +236,17 @@ a.btc:hover{
         font-size: 13px;
         margin-top: 20px;
 }
+.saved_search_li ul li a {
+        color: #ffffff;
+        text-decoration: none;
+        font-family: 'Roboto', sans-serif;
+        font-size: 14px;
+}
+.saved_search_li ul li {
+        background-color: #ac99b9;
+        margin-bottom: 1px;
+        padding: 5px;
+}
+.saved_search_li ul li:hover{
+        background-color: #63536e
+}

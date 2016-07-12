@@ -19,7 +19,7 @@
                                                                 <ul class="list-unstyled">
                                                                         <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
                                                                         <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Visible Only on Invitation Sent/Accepted</li>
+                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
                                                                 </ul>
                                                         </div>
                                                 </div>
@@ -204,22 +204,31 @@
 
                                 </div>
                         </div>
-                        <div class="col-lg-9 col-md-9 col-sm-8 search-result">
-                                <div class="">
-                                        <h4>Your Search Results</h4>
 
+
+                        <div class="col-lg-9 col-md-9 col-sm-8 search">
+                                <div class="row">
+                                        <?php if (Yii::app()->user->hasFlash('save_success')): ?>
+                                                <div class="alert alert-success">
+                                                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                                                        <strong>Successfully!</strong>   <?php echo Yii::app()->user->getFlash('save_success'); ?>
+                                                </div>
+
+                                        <?php endif; ?>
+
+                                        <h4>Your Search Results</h4>
 
 
                                         <div class="row">
                                                 <div class="col-xs-3 col-sm-4 col-md-3 col-md-offset-2 ">
-
                                                         <?php echo $this->renderPartial('_saved_search_link', array('id' => $id)); ?>
+
                                                 </div>
 
                                                 <div class="col-xs-3 col-md-2 col-sm-2">
                                                         <div class="form-group">
 
-                                                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/AdvanceResultList/id/<?php echo $this->encrypt_decrypt('encrypt', $id); ?>" id="search_form" method="POST">
+                                                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/Result/id/<?php echo $this->encrypt_decrypt('encrypt', $id); ?>" id="search_form" method="POST">
                                                                         <?php
                                                                         echo CHtml::dropDownList('sort', '', array(
                                                                             'id DESC' => "Default Order",
@@ -235,25 +244,34 @@
                                                                 </form>
                                                         </div>
                                                 </div>
-
                                                 <div class="col-xs-1 col-md-1 col-sm-1 nop">
-                                                        <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/AdvanceResultList/id/<?php echo $this->encrypt_decrypt('encrypt', $id); ?>"><img class="center-block grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g2.jpg"></a>
+                                                        <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/ResultList/id/<?php echo $this->encrypt_decrypt('encrypt', $id); ?>"><img class="center-block grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g2.jpg"></a>
                                                 </div>
                                                 <div class="col-xs-1 col-md-1 col-sm-1 nop">
-                                                        <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/AdvanceResult/id/<?php echo $this->encrypt_decrypt('encrypt', $id); ?>"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
+                                                        <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/Result/id/<?php echo $this->encrypt_decrypt('encrypt', $id); ?>"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
                                                 </div>
                                                 <div class="col-xs-3 col-md-3 col-sm-4">
                                                         <span>2000 profiles found</span>
                                                 </div>
                                         </div>
+
+
+
                                         <?php
-                                        $this->widget("application.client.widgets.AdvanceSearch", array('id' => $id, 'sort' => $sort, 'view' => 2));
+                                        $this->widget("application.client.widgets.SearchById", array('id' => $id, 'sort' => $sort, 'view' => 1));
                                         ?>
+
+
+
                                 </div>
                         </div>
+
+
+
                 </div>
         </div>
 </section>
+
 <script>
         $(document).ready(function () {
                 var selectIds = $('#panel1,#panel2,#panel3,#panel4,#panel5,#panel6,#panel7,#panel8,#panel9');
@@ -262,7 +280,6 @@
                                 $(this).prev().find('.glyphicon').toggleClass('glyphicon-plus glyphicon-minus');
                         });
                 });
-
         });
         function changesearch() {
                 $('#search_form').submit();

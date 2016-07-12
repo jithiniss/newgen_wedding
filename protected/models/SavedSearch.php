@@ -28,6 +28,7 @@
  * @property integer $drink
  * @property string $body_type
  * @property string $skin_tone
+ * @property string $search_name
  * @property integer $disability
  * @property integer $HIV_positive
  * @property integer $status
@@ -59,7 +60,7 @@ class SavedSearch extends CActiveRecord {
                     array('marital_status, religion, caste, mothertongue, profile_created_by, country_living_in, residency_status, country_grew_up, education, working_with, profession_area, annual_income_from, annual_income_to, diet, body_type, skin_tone', 'length', 'max' => 99),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id, user_id, age_from, age_to, height_from, height_to, marital_status, religion, caste, mothertongue, profile_created_by, country_living_in, residency_status, country_grew_up, education, working_with, profession_area, annual_income_from, annual_income_to, diet, smoke, drink, body_type, skin_tone, disability, HIV_positive, status, cb, ub, doc, dou, gender', 'safe', 'on' => 'search'),
+                    array('id, user_id,search_name, age_from, age_to, height_from, height_to, marital_status, religion, caste, mothertongue, profile_created_by, country_living_in, residency_status, country_grew_up, education, working_with, profession_area, annual_income_from, annual_income_to, diet, smoke, drink, body_type, skin_tone, disability, HIV_positive, status, cb, ub, doc, dou, gender', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -105,6 +106,7 @@ class SavedSearch extends CActiveRecord {
                     'disability' => 'Disability',
                     'HIV_positive' => 'Hiv Positive',
                     'status' => 'Status',
+                    'search_name' => 'Search Name',
                     'cb' => 'Cb',
                     'ub' => 'Ub',
                     'doc' => 'Doc',
@@ -159,6 +161,7 @@ class SavedSearch extends CActiveRecord {
                 $criteria->compare('status', $this->status);
                 $criteria->compare('cb', $this->cb);
                 $criteria->compare('ub', $this->ub);
+                $criteria->compare('search_name', $this->search_name);
                 $criteria->compare('doc', $this->doc, true);
                 $criteria->compare('dou', $this->dou, true);
                 $criteria->compare('gender', $this->gender);

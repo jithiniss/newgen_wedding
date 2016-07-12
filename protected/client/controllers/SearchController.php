@@ -43,6 +43,16 @@ class SearchController extends Controller {
                 $this->render('advanced', array('model' => $model));
         }
 
+        public function actionSearchById() {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $user_id = $_POST['user_id'];
+                $this->render('search_by_id_result', array('id' => $user_id, 'sort' => $sort));
+        }
+
         public function actionResult($id) {
                 if (isset($_POST['sort'])) {
                         $sort = $_POST['sort'];
@@ -110,15 +120,18 @@ class SearchController extends Controller {
 
         public function actionSaveSearch($partnerid) {
                 if ($partnerid != '') {
+                        $search_name = $_POST['search_name'];
                         $result_id = $this->encrypt_decrypt('decrypt', $partnerid);
-                        $model = SavedSearch::model()->findByPk($result_id);
+                        $model = SavedSearch::model()->findByAttributes(array('id' => $result_id), array('condition' => 'status != 1'));
                         if (!empty($model)) {
                                 $model->status = 1;
+                                $model->search_name = $search_name;
                                 if ($model->save()) {
                                         $saved_search = 1;
+                                        Yii::app()->user->setFlash('save_success', "Saved your Search Criteria");
                                 }
                         }
-                        Yii::app()->user->setFlash('save_success', "Saved your Search Criteria");
+
                         $this->render('search_result', array('id' => $result_id));
                 }
 //                $result_id = $this->encrypt_decrypt('decrypt', $id);

@@ -33,15 +33,35 @@
                                                         <div class="col-sm-4 col-xs-3 zeros">
                                                                 <label for="textinput" class="control-label">Looking For</label>
                                                         </div>
+                                                        <?php if (isset(Yii::app()->session['user'])) { ?>
+                                                                <div class="col-sm-8 col-xs-9 zeros">
+                                                                        <?php if (Yii::app()->session['user']['gender'] == 1) { ?>
+                                                                                <label class="radio-inline sec">
+                                                                                        <input  readonly=""  checked="checked" type="radio" name="SavedSearch[gender]" value="2">Bride
+                                                                                </label>
+                                                                                <label class="radio-inline sec">
+                                                                                        <input disabled='disabled'type="radio" name="SavedSearch[gender]" value="1">Groom
+                                                                                </label>
+                                                                        <?php } else if (Yii::app()->session['user']['gender'] == 2) { ?>
+                                                                                <label class="radio-inline sec">
+                                                                                        <input disabled='disabled'  type="radio" name="SavedSearch[gender]" value="2">Bride
+                                                                                </label>
+                                                                                <label class="radio-inline sec">
+                                                                                        <input  readonly=""   checked="checked" type="radio" name="SavedSearch[gender]" value="1">Groom
+                                                                                </label>
+                                                                        <?php } ?>
 
-                                                        <div class="col-sm-8 col-xs-9 zeros">
-                                                                <label class="radio-inline sec">
-                                                                        <input required="" type="radio" name="SavedSearch[gender]" value="2" id="gender_bride">Bride
-                                                                </label>
-                                                                <label class="radio-inline sec">
-                                                                        <input type="radio" name="SavedSearch[gender]" value="1" id="gender_groom">Groom
-                                                                </label>
-                                                        </div>
+                                                                </div>
+                                                        <?php } else { ?>
+                                                                <div class="col-sm-8 col-xs-9 zeros">
+                                                                        <label class="radio-inline sec">
+                                                                                <input checked="checked"  type="radio" name="SavedSearch[gender]" value="2">Bride
+                                                                        </label>
+                                                                        <label class="radio-inline sec">
+                                                                                <input type="radio" name="SavedSearch[gender]" value="1">Groom
+                                                                        </label>
+                                                                </div>
+                                                        <?php } ?>
                                                 </div>
                                                 <div class="common">
                                                         <div class="col-sm-4 col-xs-3 zeros">
@@ -56,7 +76,7 @@
                                                                                 $age_from[sprintf("%02d", $i)] = sprintf("%02d", $i);
                                                                         }
                                                                         ?>
-                                                                        <?php echo $form->dropDownList($model, 'age_from', $age_from, array('empty' => 'Age From', 'class' => 'ages', 'required' => true)); ?>
+                                                                        <?php echo $form->dropDownList($model, 'age_from', $age_from, array('empty' => 'Age From', 'class' => 'ages', 'required' => true, 'options' => array(18 => array('selected' => 'selected')))); ?>
                                                                         <?php echo $form->error($model, 'age_from'); ?>
                                                                 </div>
                                                         </div>
@@ -71,7 +91,7 @@
                                                                                 $age_to[sprintf("%02d", $i)] = sprintf("%02d", $i);
                                                                         }
                                                                         ?>
-                                                                        <?php echo $form->dropDownList($model, 'age_to', $age_to, array('empty' => 'Age To', 'class' => 'ages', 'required' => true)); ?>
+                                                                        <?php echo $form->dropDownList($model, 'age_to', $age_to, array('empty' => 'Age To', 'class' => 'ages', 'required' => true, 'options' => array(25 => array('selected' => 'selected')))); ?>
                                                                         <?php echo $form->error($model, 'age_to'); ?>
 
 
@@ -891,21 +911,9 @@
                         </div>
                         <div class="clearfix visible-xs"></div>
                         <div class="col-md-4 col-sm-12">
-                                <h2>My Saved Searches</h2>
-                                <div class="right-box">
-                                        <p>You can access up to 5 Saved Searches as logged-in user<img class="question" src="<?php echo Yii::app()->request->baseUrl; ?>/images/question.jpg"></p>
-                                        <a href="#" class="frees">Sign Up Free</a>
-                                        <p>Already a member?<a href="#" class="logins">Login Now</a></p>
-                                </div>
-                                <h2>Profile ID Search</h2>
-                                <div class="right-box">
-                                        <form class="form-inline" role="form">
-                                                <div class="form-group">
-                                                        <input type="email" class="form-control" id="email" placeholder="Enter Profile ID">
-                                                </div>
-                                                <button type="submit" class="btn btn-default go">GO</button>
-                                        </form>
-                                </div>
+                                <?php echo $this->renderPartial('_saved_search'); ?>
+
+
                         </div>
                 </div>
         </div>
