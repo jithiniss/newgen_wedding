@@ -144,6 +144,7 @@ class UserDetails extends CActiveRecord {
                     'workingAs' => array(self::BELONGS_TO, 'MasterWorkingAs', 'working_as'),
                     'profileFor' => array(self::BELONGS_TO, 'MasterProfileFor', 'profile_for'),
                     'religion0' => array(self::BELONGS_TO, 'MasterReligion', 'religion'),
+                    'caste0' => array(self::BELONGS_TO, 'MasterCaste', 'caste'),
                     'mothertongue0' => array(self::BELONGS_TO, 'MasterMotherTongue', 'mothertongue'),
                     'growUpIn' => array(self::BELONGS_TO, 'MasterCountry', 'grow_up_in'),
                 );
