@@ -14,8 +14,12 @@
                 </div>
                 <div id="panel1" class="panel-collapse collapse in">
                     <div class="panel-body">
-
-                        <ul class="list-unstyled">
+                        <?php
+                        $any = array(
+                            0 => Yii::t('fim', 'Any'),
+                        );
+                        ?>
+                        <ul class = "list-unstyled">
                             <?php
                             if(!is_array($photo)) {
                                     $photo_setting = explode(',', $photo);
@@ -24,10 +28,10 @@
                             }
 
                             echo CHtml::checkboxList('photo', $photo_setting, array(
-                                0 => 'All',
-                                1 => 'Visible to all(100)',
-                                2 => 'Visible Only on Invitation Sent/Accepted(392)',
-                                3 => 'Password Protected (1000+)',
+                                0 => 'Any',
+                                1 => 'Visible to all',
+                                2 => 'Visible Only on Invitation Sent/Accepted',
+                                3 => 'Password Protected',
                                     ), array('template' => '<li>{input}{label}</li>',
                                 'separator' => '',
                                 'labelOptions' => array(
@@ -55,10 +59,10 @@
                         <ul class="list-unstyled">
                             <?php
                             echo CHtml::radioButtonList('joined', $joined, array(
-                                0 => 'All',
-                                1 => 'Within a day (39)',
-                                2 => 'Within a week (168)',
-                                3 => 'Within a month (341)',
+                                0 => 'Any',
+                                1 => 'Within a day',
+                                2 => 'Within a week',
+                                3 => 'Within a month',
                                     ), array('template' => '<li>{input}{label}</li>',
                                 'separator' => '',
                                 'labelOptions' => array(
@@ -87,10 +91,10 @@
                         <ul class="list-unstyled">
                             <?php
                             echo CHtml::radioButtonList('active_member', $active_mem, array(
-                                0 => 'All',
-                                1 => 'Within a day (39)',
-                                2 => 'Within a week (168)',
-                                3 => 'Within a month (341)',
+                                0 => 'Any',
+                                1 => 'Within a day',
+                                2 => 'Within a week',
+                                3 => 'Within a month',
                                     ), array('template' => '<li>{input}{label}</li>',
                                 'separator' => '',
                                 'labelOptions' => array(
@@ -128,7 +132,7 @@
                                     $marital_status = $marital_stat;
                             }
 
-                            echo CHtml::checkboxList('marital_status', $marital_status, CHtml::listData(MasterMaritalStatus::model()->findAll(array('condition' => 'status=1')), 'id', 'marital_status'), array('template' => '<li>{input}{label}</li>',
+                            echo CHtml::checkboxList('marital_status', $marital_status, $any + CHtml::listData(MasterMaritalStatus::model()->findAll(array('condition' => 'status=1')), 'id', 'marital_status'), array('template' => '<li>{input}{label}</li>',
                                 'separator' => '',
                                 'labelOptions' => array(
                                     'style' => 'color: #333;font-size: 12px;'),
@@ -184,7 +188,7 @@
                                     $profile_created = $profile_crea;
                             }
 
-                            echo CHtml::checkboxList('profile_created_by', $profile_created, CHtml::listData(MasterProfileFor::model()->findAll(array('condition' => 'status=1')), 'id', 'profile_for'), array('template' => '<li>{input}{label}</li>',
+                            echo CHtml::checkboxList('profile_created_by', $profile_created, $any + CHtml::listData(MasterProfileFor::model()->findAll(array('condition' => 'status=1')), 'id', 'profile_for'), array('template' => '<li>{input}{label}</li>',
                                 'separator' => '',
                                 'labelOptions' => array(
                                     'style' => 'color: #333;font-size: 12px;'),
@@ -209,9 +213,26 @@
                 <div id="panel7" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <ul class="list-unstyled">
-                            <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
-                            <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                            <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
+                            <?php
+                            if(!is_array($smoking)) {
+                                    $smokings = explode(',', $smoking);
+                            } else {
+                                    $smokings = $smoking;
+                            }
+
+                            echo CHtml::checkboxList('smoke', $smokings, array(
+                                0 => 'Any',
+                                1 => 'No',
+                                2 => 'Yes',
+                                3 => 'Occasionally',
+                                    ), array('template' => '<li>{input}{label}</li>',
+                                'separator' => '',
+                                'labelOptions' => array(
+                                    'style' => 'color: #333;font-size: 12px;'),
+                                'class' => 'chk',
+                                'onchange' => 'refinesearch()',
+                            ));
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -229,9 +250,26 @@
                 <div id="panel8" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <ul class="list-unstyled">
-                            <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
-                            <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                            <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
+                            <?php
+                            if(!is_array($drinking)) {
+                                    $drinks = explode(',', $drinking);
+                            } else {
+                                    $drinks = $drinking;
+                            }
+
+                            echo CHtml::checkboxList('drink', $drinks, array(
+                                0 => 'Any',
+                                1 => 'No',
+                                2 => 'Yes',
+                                3 => 'Occasionally',
+                                    ), array('template' => '<li>{input}{label}</li>',
+                                'separator' => '',
+                                'labelOptions' => array(
+                                    'style' => 'color: #333;font-size: 12px;'),
+                                'class' => 'chk',
+                                'onchange' => 'refinesearch()',
+                            ));
+                            ?>
                         </ul>
                     </div>
                 </div>
@@ -251,9 +289,21 @@
                 <div id="panel9" class="panel-collapse collapse in">
                     <div class="panel-body">
                         <ul class="list-unstyled">
-                            <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
-                            <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                            <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
+                            <?php
+                            if(!is_array($diets)) {
+                                    $diet = explode(',', $diets);
+                            } else {
+                                    $diet = $diets;
+                            }
+
+                            echo CHtml::checkboxList('diet', $diet, $any + CHtml::listData(MasterDiet::model()->findAll(array('condition' => 'status=1')), 'id', 'diet'), array('template' => '<li>{input}{label}</li>',
+                                'separator' => '',
+                                'labelOptions' => array(
+                                    'style' => 'color: #333;font-size: 12px;'),
+                                'class' => 'chk',
+                                'onchange' => 'refinesearch()',
+                            ));
+                            ?>
                         </ul>
                     </div>
                 </div>

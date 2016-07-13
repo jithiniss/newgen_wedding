@@ -21,6 +21,9 @@ class BasicSearch extends CWidget {
         public $active_mem = '';
         public $marital_stat = '';
         public $profile_crea = '';
+        public $smoking = '';
+        public $drinking = '';
+        public $diets = '';
 
         public function run() {
 
@@ -60,8 +63,6 @@ class BasicSearch extends CWidget {
                 }
                 if(!empty($this->photo)) {
                         $condition .= ' AND photo_visibility IN (' . $this->photo . ')';
-                } else {
-                        $condition .= ' AND photo_visibility IN (0,1,2,3)';
                 }
                 if($this->joined != '') {
                         if($this->joined == 1) {
@@ -73,8 +74,6 @@ class BasicSearch extends CWidget {
                         }
                         if($joined_date != '') {
                                 $condition .= ' AND doc >= "' . $joined_date . '"';
-                        } else {
-                                $condition .= ' AND doc <= "' . date('Y-m-d') . '"';
                         }
                 }
                 if($this->active_mem != '') {
@@ -87,8 +86,6 @@ class BasicSearch extends CWidget {
                         }
                         if($active_members != '') {
                                 $condition .= ' AND last_login >= "' . $active_members . '"';
-                        } else {
-                                $condition .= ' AND last_login <= "' . date('Y-m-d') . '"';
                         }
                 }
 
@@ -97,6 +94,15 @@ class BasicSearch extends CWidget {
                 }
                 if(!empty($this->profile_crea)) {
                         $condition .= ' AND profile_for IN (' . $this->profile_crea . ')';
+                }
+                if(!empty($this->smoking)) {
+                        $condition .= ' AND smoke IN (' . $this->smoking . ')';
+                }
+                if(!empty($this->drinking)) {
+                        $condition .= ' AND drink IN (' . $this->drinking . ')';
+                }
+                if(!empty($this->diets)) {
+                        $condition .= ' AND diet IN (' . $this->diets . ')';
                 }
                 $dataProvider = new CActiveDataProvider('UserDetails', array('criteria' => array(
                         'condition' => $condition,

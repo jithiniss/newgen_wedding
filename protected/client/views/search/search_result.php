@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <?php
-            $this->renderPartial('refine_search', array('id' => $id, 'photo' => $photo, 'joined' => $joined, 'active_mem' => $active_mem, 'marital_stat' => $marital_stat, 'profile_crea' => $profile_crea));
+            $this->renderPartial('refine_search', array('id' => $id, 'photo' => $photo, 'joined' => $joined, 'active_mem' => $active_mem, 'marital_stat' => $marital_stat, 'profile_crea' => $profile_crea, 'smoking' => $smoking, 'drinking' => $drinking, 'diets' => $diets));
             ?>
 
 
@@ -59,7 +59,7 @@
 
 
                     <?php
-                    $this->widget("application.client.widgets.BasicSearch", array('id' => $id, 'sort' => $sort, 'view' => 1, 'photo' => $photo, 'joined' => $joined, 'active_mem' => $active_mem, 'marital_stat' => $marital_stat, 'profile_crea' => $profile_crea));
+                    $this->widget("application.client.widgets.BasicSearch", array('id' => $id, 'sort' => $sort, 'view' => 1, 'photo' => $photo, 'joined' => $joined, 'active_mem' => $active_mem, 'marital_stat' => $marital_stat, 'profile_crea' => $profile_crea, 'smoking' => $smoking, 'drinking' => $drinking, 'diets' => $diets));
                     ?>
 
 
