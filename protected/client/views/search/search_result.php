@@ -21,9 +21,7 @@
 
                     <div class="row">
                         <div class="col-xs-3 col-sm-4 col-md-3 col-md-offset-2 ">
-                            <?php if(SavedSearch::model()->findByPk($id)->status != 1) { ?>
-                                    <?php echo CHtml::link('Save this Search', array('SaveSearch', 'partnerid' => $this->encrypt_decrypt('encrypt', $id)), array('class' => 'offset')); ?>
-                            <?php } ?>
+                            <?php echo $this->renderPartial('_saved_search_link', array('id' => $id)); ?>
                         </div>
 
                         <div class="col-xs-3 col-md-2 col-sm-2">

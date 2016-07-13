@@ -44,77 +44,16 @@ class SearchController extends Controller {
         }
 
         public function actionSearchById() {
-                if(isset($_POST['photo'])) {
-                        $ph = $_POST['photo'];
-                        if(count($ph) > 1) {
-                                if(($key1 = array_search(0, $ph)) !== false) {
-                                        unset($ph[$key1]);
-                                }
+                if(isset($_REQUEST['user_id'])) {
+                        $user_details = UserDetails::model()->findByAttributes(array('user_id' => $_REQUEST['user_id']));
+                        if(!empty($user_details)) {
+                                $this->redirect(array('/Partner/Partnerdetails', 'userid' => $_REQUEST['user_id']));
+                        } else {
+                                $this->redirect(array('site/error'));
                         }
-                        $photo = implode(',', $ph);
-                }
-                if(isset($_POST['joined'])) {
-                        $joined = $_POST['joined'];
                 } else {
-                        $joined = 0;
+                        $this->redirect(array('Search/index'));
                 }
-                if(isset($_POST['active_member'])) {
-                        $active_mem = $_POST['active_member'];
-                } else {
-                        $active_mem = 0;
-                }
-                if(isset($_POST['marital_status'])) {
-                        $ms = $_POST['marital_status'];
-                        if(count($ms) > 1) {
-                                if(($key = array_search(0, $ms)) !== false) {
-                                        unset($ms[$key]);
-                                }
-                        }
-                        $marital_stat = implode(',', $ms);
-                }
-                if(isset($_POST['profile_created_by'])) {
-                        $pcb = $_POST['profile_created_by'];
-                        if(count($pcb) > 1) {
-                                if(($key2 = array_search(0, $pcb)) !== false) {
-                                        unset($pcb[$key2]);
-                                }
-                        }
-                        $profile_crea = implode(',', $pcb);
-                }
-                if(isset($_POST['smoke'])) {
-                        $smk = $_POST['smoke'];
-                        if(count($smk) > 1) {
-                                if(($key3 = array_search(0, $smk)) !== false) {
-                                        unset($smk[$key3]);
-                                }
-                        }
-                        $smoking = implode(',', $smk);
-                }
-                if(isset($_POST['drink'])) {
-                        $drk = $_POST['drink'];
-                        if(count($drk) > 1) {
-                                if(($key4 = array_search(0, $drk)) !== false) {
-                                        unset($drk[$key4]);
-                                }
-                        }
-                        $drinking = implode(',', $drk);
-                }
-                if(isset($_POST['diet'])) {
-                        $dit = $_POST['diet'];
-                        if(count($dit) > 1) {
-                                if(($key5 = array_search(0, $dit)) !== false) {
-                                        unset($dit[$key5]);
-                                }
-                        }
-                        $diets = implode(',', $dit);
-                }
-                if(isset($_POST['sort'])) {
-                        $sort = $_POST['sort'];
-                } else {
-                        $sort = 'id DESC';
-                }
-                $user_id = $_POST['user_id'];
-                $this->render('search_by_id_result', array('id' => $user_id, 'sort' => $sort, 'photo' => $photo, 'joined' => $joined, 'active_mem' => $active_mem, 'marital_stat' => $marital_stat, 'profile_crea' => $profile_crea, 'smoking' => $smoking, 'drinking' => $drinking, 'diets' => $diets));
         }
 
         public function actionResult($id) {
