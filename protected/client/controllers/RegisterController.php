@@ -98,6 +98,7 @@ class RegisterController extends Controller {
                         $model->cb = $id;
                         $model->doc = date('Y-m-d');
                         $model->status = 1;
+                        return $model;
                 } else {
                         return FALSE;
                 }
