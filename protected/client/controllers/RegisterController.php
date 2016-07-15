@@ -3,20 +3,20 @@
 class RegisterController extends Controller {
 
         public function actionFirstStep() {
-                if(!isset(Yii::app()->session['user']) && Yii::app()->session['user'] == NULL && Yii::app()->session['user'] == '') {
+                if (!isset(Yii::app()->session['user']) && Yii::app()->session['user'] == NULL && Yii::app()->session['user'] == '') {
                         $firstStep = new UserDetails('userFirstStep');
                 } else {
                         $firstStep = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                        if(!empty($firstStep)) {
+                        if (!empty($firstStep)) {
                                 $firstStep->scenario = 'userFirstStep';
                         } else {
                                 $firstStep = new UserDetails('userFirstStep');
                         }
                 }
                 $this->performAjaxValidation($firstStep, 'register-one-form');
-                if(isset($_POST['UserDetails'])) {
+                if (isset($_POST['UserDetails'])) {
                         $firstStep = $this->setFirstStep($firstStep, $_POST['UserDetails']);
-                        if($firstStep->validate()) {
+                        if ($firstStep->validate()) {
 
 
                                 //  $transaction = Yii::app()->db->beginTransaction();
@@ -58,14 +58,14 @@ class RegisterController extends Controller {
 
         public function partnerDetails($id) {
                 $user_details = UserDetails::model()->findByPk($id);
-                if(!empty($user_details)) {
+                if (!empty($user_details)) {
                         $age = date('Y') - date('Y', strtotime($user_details->dob_year));
                         $model = new PartnerDetails;
                         $model->user_id = $user_details->id;
-                        if($user_details->gender == 1) {
+                        if ($user_details->gender == 1) {
                                 $model->age_from = 18;
                                 $model->age_to = $age;
-                        } else if($user_details->gender == 2) {
+                        } else if ($user_details->gender == 2) {
                                 $model->age_from = $age;
                                 $model->age_to = $age;
                         }
@@ -93,7 +93,7 @@ class RegisterController extends Controller {
 
         public function userInterest($id) {
                 $user_details = UserDetails::model()->findByPk($id);
-                if(!empty($user_details)) {
+                if (!empty($user_details)) {
                         $model = new UserInterests;
                         $model->cb = $id;
                         $model->doc = date('Y-m-d');
@@ -120,7 +120,7 @@ class RegisterController extends Controller {
                 $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
 //$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
                 // mail($user, $user_subject, $user_message, $headers);
-                if($s == 1) {
+                if ($s == 1) {
                         $admin = 'sibys09@gmail.com';
                         $admin_subject = $model->first_name . ' registered with NEWGEN.com';
                         $admin_message = $this->renderPartial('mail/_register_admin_mail', array('model' => $model), true);
@@ -130,7 +130,7 @@ class RegisterController extends Controller {
         }
 
         public function actionResendMail() {
-                if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL && Yii::app()->session['user'] != '') {
+                if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL && Yii::app()->session['user'] != '') {
                         $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $this->RegisterMail($model, 0);
                         $this->redirect(Yii::app()->request->urlReferrer);
@@ -140,15 +140,15 @@ class RegisterController extends Controller {
         }
 
         public function actionSecondStep() {
-                if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
+                if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
                         $secondStep = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $secondStep->scenario = 'userSecondStep';
                         $this->performAjaxValidation($secondStep, 'register-two-form');
-                        if(isset($_POST['UserDetails'])) {
+                        if (isset($_POST['UserDetails'])) {
 
                                 $secondStep = $this->setSecondStep($secondStep, $_POST['UserDetails']);
-                                if($secondStep->validate()) {
-                                        if($secondStep->save()) {
+                                if ($secondStep->validate()) {
+                                        if ($secondStep->save()) {
                                                 $this->redirect(array('ThirdStep'));
                                         } else {
                                                 Yii::app()->user->setFlash('register_error2', "Some Error Occured.Try Again");
@@ -168,15 +168,15 @@ class RegisterController extends Controller {
         }
 
         public function actionThirdStep() {
-                if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
+                if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
                         $thirdStep = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $thirdStep->scenario = 'userThirdStep';
                         $this->performAjaxValidation($thirdStep, 'register-three-form');
-                        if(isset($_POST['UserDetails'])) {
+                        if (isset($_POST['UserDetails'])) {
 
                                 $thirdStep = $this->setThirdStep($thirdStep, $_POST['UserDetails']);
-                                if($thirdStep->validate()) {
-                                        if($thirdStep->save()) {
+                                if ($thirdStep->validate()) {
+                                        if ($thirdStep->save()) {
                                                 $this->redirect(array('FourthStep'));
                                         } else {
                                                 Yii::app()->user->setFlash('register_error3', "Some Error Occured.Try Again");
@@ -196,12 +196,12 @@ class RegisterController extends Controller {
         }
 
         public function actionFourthStep() {
-                if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
+                if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
                         $fourthStep = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                        if(isset($_POST['UserDetails'])) {
+                        if (isset($_POST['UserDetails'])) {
                                 $fourthStep = $this->setFourthStep($fourthStep, $_POST['UserDetails']);
-                                if($fourthStep->validate()) {
-                                        if($fourthStep->save()) {
+                                if ($fourthStep->validate()) {
+                                        if ($fourthStep->save()) {
                                                 $this->redirect(array('FifthStep'));
                                         } else {
                                                 Yii::app()->user->setFlash('register_error4', "Some Error Occured.Try Again");
@@ -223,7 +223,7 @@ class RegisterController extends Controller {
 
         public function actionFifthStep() {
                 $plans = Plans::model()->findAllByAttributes(array('status' => 1), array('condition' => 'amount!=0', 'order' => 'amount desc'));
-                if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
+                if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
                         $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                 } else {
                         $this->redirect('//site/index');
@@ -234,8 +234,8 @@ class RegisterController extends Controller {
         public function actionUpgradePlan($plan) {
                 $plan_id = $this->encrypt_decrypt('decrypt', $plan);
                 $plans = Plans::model()->findByPk($plan_id);
-                if(!empty($plans)) {
-                        if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
+                if (!empty($plans)) {
+                        if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
 
                                 $this->redirect(array('PlanPaymentSuccess', 'plan_id' => $plan_id));
                                 //  $this->redirect(array('PlanPaymentError', 'plan_id' => $plan_id));
@@ -250,7 +250,7 @@ class RegisterController extends Controller {
 
         public function actionPlanPaymentSuccess($plan_id) {
                 $plans = Plans::model()->findByPk($plan_id);
-                if(!empty($plans)) {
+                if (!empty($plans)) {
 
                         $model = UserPlans::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
                         $model->attributes = $plans->attributes;
@@ -279,7 +279,7 @@ class RegisterController extends Controller {
         public function actionPlanPaymentError($plan_id) {
                 $plan = Plans::model()->findByPk($plan_id);
                 $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
-                if(!empty($plan)) {
+                if (!empty($plan)) {
                         $this->PlanErrorMail($user, $plan);
                         Yii::app()->user->setFlash('plan_error', "Transaction Failed.Try again later");
                         $this->redirect(array('//Myaccount/Index'));
@@ -334,13 +334,13 @@ class RegisterController extends Controller {
         }
 
         public function actionVerify($m) {
-                if($m != '') {
+                if ($m != '') {
                         $user_id = $this->encrypt_decrypt('decrypt', $m);
                         $model = UserDetails::model()->findByPk($user_id);
-                        if(!empty($model)) {
-                                if($model->email_verification == 0) {
+                        if (!empty($model)) {
+                                if ($model->email_verification == 0) {
                                         $model->email_verification = 1;
-                                        if($model->save()) {
+                                        if ($model->save()) {
                                                 Yii::app()->user->setFlash('email_verified', "Your account has been successfully verified.");
                                                 $this->ReturnUrl($model);
                                         }
@@ -357,15 +357,15 @@ class RegisterController extends Controller {
         }
 
         public function ReturnUrl($model) {
-                if($model->register_step == 1) {
+                if ($model->register_step == 1) {
                         $this->redirect(array('//Register/SecondStep'));
-                } else if($model->register_step == 2) {
+                } else if ($model->register_step == 2) {
                         $this->redirect(array('//Register/ThirdStep'));
-                } else if($model->register_step == 3) {
+                } else if ($model->register_step == 3) {
                         $this->redirect(array('//Register/FourthStep'));
-                } else if($model->register_step == 4) {
+                } else if ($model->register_step == 4) {
                         $this->redirect(array('//Register/FifthStep'));
-                } else if($model->register_step == 5) {
+                } else if ($model->register_step == 5) {
                         $this->redirect(array('//Myaccount/Index'));
                 } else {
                         $this->redirect(array('//site/Index'));
@@ -377,7 +377,7 @@ class RegisterController extends Controller {
          * @param UserDetails $model the model to be validated
          */
         protected function performAjaxValidation($model, $model_id) {
-                if(isset($_POST['ajax']) && $_POST['ajax'] === $model_id) {
+                if (isset($_POST['ajax']) && $_POST['ajax'] === $model_id) {
                         echo CActiveForm::validate($model);
                         Yii::app()->end();
                 }
@@ -402,10 +402,10 @@ class RegisterController extends Controller {
 // iv - encrypt method AES-256-CBC expects 16 bytes - else you will get a warning
                 $iv = substr(hash('sha256', $secret_iv), 0, 16);
 
-                if($action == 'encrypt') {
+                if ($action == 'encrypt') {
                         $output = openssl_encrypt($string, $encrypt_method, $key, 0, $iv);
                         $output = base64_encode($output);
-                } else if($action == 'decrypt') {
+                } else if ($action == 'decrypt') {
                         $output = openssl_decrypt(base64_decode($string), $encrypt_method, $key, 0, $iv);
                 }
 

@@ -241,7 +241,7 @@
                                         <li class="link-2"><a href="#"><i class="fa email fa-facebook"></i>Signup with Facebook</a></li>
                                 </ul>
 
-                                <p>Already a Member<a class="log" href="#">Login</a></p>
+                                <p>Already a Member<?php echo CHtml::link('Login', array('site/login'), array('class' => 'log')); ?></p>
                         </div>
 
                 </div>
@@ -270,12 +270,12 @@
                                                 <label>I'm looking for</label>
                                                 <select class="look" name="carlist" form="carform">
                                                         <option value="volvo">Bride</option>
-                                                        <option value="saab">Bridegroom</option>
+                                                        <option value="saab">Groom</option>
 
                                                 </select>
                                         </div>
                                         <div class="form-group hidden-xs">
-                                                <label>Aged</label>
+                                                <label>Age</label>
                                                 <select class="age" name="carlist" form="carform">
                                                         <option value="volvo">20</option>
                                                         <option value="saab">21</option>
@@ -449,62 +449,65 @@
         <div class="container ones">
                 <h1>Success <span class="story">Stories</span></h1>
                 <div class="" id="my-gallery-container">
-                        <div class="items h150" data-order="7">
-                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/images/a9.jpg">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <h2>Sheeba Vijayan & Viji</h2>
-                        </div>
-                        <div class="items h100" data-order="6">
-                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/images/a8.jpg">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <h2>Sheeba Vijayan & Viji</h2>
-                        </div>
-                        <div class="items" data-order="5">
-                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/images/a6.jpg">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <h2>Sheeba Vijayan & Viji</h2>
-                        </div>
-                        <div class="items h200" data-order="4">
-                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/images/a5.jpg">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <h2>Sheeba Vijayan & Viji</h2>
-                        </div>
-                        <div class="items h150" data-order="3">
-                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/images/a4.jpg">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <h2>Sheeba Vijayan & Viji</h2>
-                        </div>
-                        <div class="items" data-order="2">
-                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/images/a3.jpg">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <h2>Sheeba Vijayan & Viji</h2>
-                        </div>
-                        <div class="items h150" data-order="1">
-                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/images/a2.jpg">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <h2>Sheeba Vijayan & Viji</h2>
-                        </div>
-                        <div class="items" data-order="0">
-                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/images/a1.jpg">
-                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                        sed do eiusmod tempor incididunt ut labore et
-                                        dolore magna aliqua. Ut enim ad minim veniam, quis nostrud</p>
-                                <h2>Sheeba Vijayan & Viji</h2>
-                        </div>
+                        <?php
+                        $i == 0;
+                        foreach ($story as $success) {
+                                if ($i < 4) {
+                                        if ($i % 2 == 0) {
+                                                ?>
+
+                                                <div class="items success_story1" data-order="<?php echo $i; ?>">
+                                                        <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        <p><?php echo substr($success->feedback, 0, 170); ?></p>
+                                                        <h2><?php echo $success->name; ?> & <?php echo $success->partner_name; ?></h2>
+                                                </div>
+                                        <?php }
+                                        ?>
+                                        <?php
+                                        if ($i % 2 != 0) {
+                                                ?>
+
+                                                <div class="items success_story2" data-order="<?php echo $i; ?>">
+                                                        <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        <p><?php echo substr($success->feedback, 0, 170); ?></p>
+                                                        <h2><?php echo $success->name; ?> & <?php echo $success->partner_name; ?></h2>
+                                                </div>
+                                                <?php
+                                        }
+                                }
+                                ?>
+                                <?php
+                                if ($i >= 4) {
+                                        if ($i % 2 == 0) {
+                                                ?>
+
+                                                <div class="items success_story2" data-order="<?php echo $i; ?>">
+                                                        <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        <p><?php echo substr($success->feedback, 0, 170); ?></p>
+                                                        <h2><?php echo $success->name; ?> & <?php echo $success->partner_name; ?></h2>
+                                                </div>
+                                                <?php
+                                        }
+                                        ?>
+                                        <?php
+                                        if ($i % 2 != 0) {
+                                                ?>
+
+                                                <div class="items success_story1" data-order="<?php echo $i; ?>">
+                                                        <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        <p><?php echo substr($success->feedback, 0, 170); ?></p>
+                                                        <h2><?php echo $success->name; ?> & <?php echo $success->partner_name; ?></h2>
+                                                </div>
+                                                <?php
+                                        }
+                                }
+                                ?>
+
+
+                                <?php
+                                $i++;
+                        }
+                        ?>
                 </div>
         </div>
 

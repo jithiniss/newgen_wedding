@@ -72,10 +72,15 @@ class TwoWayMatches extends CWidget {
                         }
                         $selected_ids = rtrim($selected_ids, ',');
                 }
-
-                $selectcondition = 'gender = ' . $gender
-                        . ' AND  id  IN(' . $selected_ids . ')'
-                        . ' AND status = 1';
+                if (!empty($selected_ids)) {
+                        $selectcondition = 'gender = ' . $gender
+                                . ' AND  id  IN(' . $selected_ids . ')'
+                                . ' AND status = 1';
+                } else {
+                        $selectcondition = 'gender = ' . $gender
+                                . ' AND  id  IN(0)'
+                                . ' AND status = 1';
+                }
                 $dataProvider1 = new CActiveDataProvider('UserDetails', array('criteria' => array(
                         'condition' => $selectcondition
                     ),

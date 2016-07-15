@@ -28,7 +28,8 @@ class SiteController extends Controller {
                 $this->layout = '//layouts/main_home';
                 $plans = Plans::model()->findAllByAttributes(array('status' => 1), array('condition' => 'amount!=0', 'order' => 'amount desc'));
                 $featured = UserPlans::model()->findAllByAttributes(array('featured' => 1));
-                $this->render('index', array('plans' => $plans, 'featured' => $featured));
+                $story = TellUsStory::model()->findAllByAttributes(array('status' => 1, 'admin_approval' => 1), array('limit' => 8));
+                $this->render('index', array('plans' => $plans, 'featured' => $featured, 'story' => $story));
         }
 
         public function actionLogin() {
