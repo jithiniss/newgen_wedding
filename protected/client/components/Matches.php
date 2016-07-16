@@ -23,82 +23,98 @@ class Matches extends CWidget {
                 } else {
                         $gender = 1;
                 }
+                $date_from = date('Y') - $partner->age_from;
+                $date_to = date('Y') - $partner->age_to;
                 $condition1 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $partner->age_from
-                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND dob_year <= ' . $date_from
+                        . ' AND dob_year >= ' . $date_to
                         . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
+                        . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
+                        . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
+                        . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
+                        . ' AND FIND_IN_SET(grow_up_in,"' . $partner->country_grew_up . '")'
                         . ' AND city = ' . $user->city
-                        . ' AND FIND_IN_SET("' . $partner->working_with . '",working_with)'
-                        . ' AND FIND_IN_SET("' . $partner->profession_area . '",working_as)'
-                        . ' AND FIND_IN_SET("' . $partner->education . '",education_field)';
+                        . ' AND FIND_IN_SET(working_with,"' . $partner->working_with . '")'
+                        . ' AND FIND_IN_SET(working_as,"' . $partner->profession_area . '")'
+                        . ' AND FIND_IN_SET(education_field,"' . $partner->education . '")'
+                        . ' AND status = 1';
                 $condition2 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $partner->age_from
-                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND dob_year <= ' . $date_from
+                        . ' AND dob_year >= ' . $date_to
                         . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
+                        . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
+                        . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
+                        . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
+                        . ' AND FIND_IN_SET(grow_up_in,"' . $partner->country_grew_up . '")'
                         . ' AND city = ' . $user->city
-                        . ' AND FIND_IN_SET("' . $partner->working_with . '",working_with)'
-                        . ' AND FIND_IN_SET("' . $partner->profession_area . '",working_as)';
+                        . ' AND FIND_IN_SET(working_with,"' . $partner->working_with . '")'
+                        . ' AND FIND_IN_SET(working_as,"' . $partner->profession_area . '")'
+                        . ' AND status = 1';
                 $condition3 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $partner->age_from
-                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND dob_year <= ' . $date_from
+                        . ' AND dob_year >= ' . $date_to
                         . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
+                        . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
+                        . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
+                        . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
+                        . ' AND FIND_IN_SET(grow_up_in,"' . $partner->country_grew_up . '")'
                         . ' AND city = ' . $user->city
-                        . ' AND FIND_IN_SET("' . $partner->working_with . '",working_with)';
+                        . ' AND FIND_IN_SET(working_with,"' . $partner->working_with . '")'
+                        . ' AND status = 1';
                 $condition4 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $partner->age_from
-                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND dob_year <= ' . $date_from
+                        . ' AND dob_year >= ' . $date_to
                         . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)'
-                        . ' AND city = ' . $user->city;
+                        . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
+                        . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
+                        . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
+                        . ' AND FIND_IN_SET(grow_up_in,"' . $partner->country_grew_up . '")'
+                        . ' AND city = ' . $user->city
+                        . ' AND status = 1';
                 $condition5 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $partner->age_from
-                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND dob_year <= ' . $date_from
+                        . ' AND dob_year >= ' . $date_to
                         . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)'
-                        . ' AND FIND_IN_SET("' . $partner->country_grew_up . '",grow_up_in)';
+                        . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
+                        . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
+                        . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
+                        . ' AND FIND_IN_SET(grow_up_in,"' . $partner->country_grew_up . '")'
+                        . ' AND status = 1';
                 $condition6 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $partner->age_from
-                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND dob_year <= ' . $date_from
+                        . ' AND dob_year >= ' . $date_to
                         . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)'
-                        . ' AND FIND_IN_SET("' . $partner->residency_status . '",state)';
+                        . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
+                        . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
+                        . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
+                        . ' AND status = 1';
                 $condition7 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $partner->age_from
-                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND dob_year <= ' . $date_from
+                        . ' AND dob_year >= ' . $date_to
                         . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)'
-                        . ' AND FIND_IN_SET("' . $partner->country_living_in . '",country)';
+                        . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
+                        . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
+                        . ' AND status = 1';
                 $condition8 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $partner->age_from
-                        . ' AND dob_year >= ' . $partner->age_to
+                        . ' AND dob_year <= ' . $date_from
+                        . ' AND dob_year >= ' . $date_to
                         . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
-                        . ' AND FIND_IN_SET("' . $partner->caste . '",caste)';
+                        . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
+                        . ' AND status = 1';
                 $condition9 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $partner->age_from
-                        . ' AND dob_year >= ' . $partner->age_to;
+                        . ' AND dob_year <= ' . $date_from
+                        . ' AND dob_year >= ' . $date_to
+                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND status = 1';
 
                 $condition10 = 'gender = ' . $gender
-                        . ' AND dob_year <= ' . $partner->age_from;
+                        . ' AND dob_year <= ' . $date_from
+                        . ' AND dob_year >= ' . $date_to
+                        . ' AND status = 1';
 
-                $condition11 = 'gender = ' . $gender;
+
+                $condition11 = 'gender = ' . $gender
+                        . ' AND status = 1';
 
                 $matchprofile1 = UserDetails::model()->findAll(array('condition' => $condition1));
                 $matchprofile2 = UserDetails::model()->findAll(array('condition' => $condition2));

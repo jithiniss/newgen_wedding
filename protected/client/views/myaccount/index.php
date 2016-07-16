@@ -372,7 +372,7 @@
 
                                                                                                                         </div>
                                                                                                                 </div>
-                                                                                                        <?php } if ($visitor->photo_visibility == 3) { ?>
+                                                                                                        <?php } if ($match->photo_visibility == 3) { ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
                                                                                                                                 <div class="profile ">
@@ -380,11 +380,11 @@
                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                         <p>Password Protected</p>
                                                                                                                                 </div>
-                                                                                                                                <h1><?= $visitor->first_name; ?></h1>
-                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($visitor->dob_year)); ?>
+                                                                                                                                <h1><?= $match->first_name; ?></h1>
+                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($match->dob_year)); ?>
                                                                                                                                         <?php
-                                                                                                                                        if ($visitor->height != 0) {
-                                                                                                                                                echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
+                                                                                                                                        if ($match->height != 0) {
+                                                                                                                                                echo "," . MasterHeight::model()->findByPk($match->height)->height;
                                                                                                                                         }
                                                                                                                                         ?></h1>
                                                                                                                                 <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
@@ -438,7 +438,6 @@
                                                                                                                         <div class="main">
                                                                                                                                 <div class="profile ">
                                                                                                                                         <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $twowaymatche->id; ?>/profile/<?= $twowaymatche->photo ?>">
-
                                                                                                                                 </div>
                                                                                                                                 <h1><?= $twowaymatche->first_name; ?></h1>
                                                                                                                                 <h1><?php echo date('Y') - date('Y', strtotime($twowaymatche->dob_year)); ?>
@@ -469,7 +468,7 @@
                                                                                                                                 <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
                                                                                                                         </div>
                                                                                                                 </div>
-                                                                                                        <?php } if ($visitor->photo_visibility == 3) { ?>
+                                                                                                        <?php } if ($twowaymatche->photo_visibility == 3) { ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
                                                                                                                                 <div class="profile ">
@@ -477,11 +476,11 @@
                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                         <p>Password Protected</p>
                                                                                                                                 </div>
-                                                                                                                                <h1><?= $visitor->first_name; ?></h1>
-                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($visitor->dob_year)); ?>
+                                                                                                                                <h1><?= $twowaymatche->first_name; ?></h1>
+                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($twowaymatche->dob_year)); ?>
                                                                                                                                         <?php
-                                                                                                                                        if ($visitor->height != 0) {
-                                                                                                                                                echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
+                                                                                                                                        if ($twowaymatche->height != 0) {
+                                                                                                                                                echo "," . MasterHeight::model()->findByPk($twowaymatche->height)->height;
                                                                                                                                         }
                                                                                                                                         ?></h1>
                                                                                                                                 <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>

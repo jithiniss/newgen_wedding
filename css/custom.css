@@ -280,3 +280,7 @@ input.btn.btn-default.mat:hover {
         background-color: #ff9900;
         border: 0;
 }
+.load .side{
+        width: 261px;
+        height: 346px;
+}

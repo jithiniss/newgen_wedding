@@ -208,7 +208,7 @@
 
                         <div class="col-lg-9 col-md-9 col-sm-8 search">
                                 <div class="row">
-                                        <h4>Your Profile Visitors</h4>
+                                        <h4>Your Profile Visited</h4>
                                         <form action="action_page.php">
                                                 <div class=row>
                                                         <div class="col-xs-3 col-sm-4 col-md-3 col-md-offset-2 ">

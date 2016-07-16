@@ -1,5 +1,5 @@
 <?php if (SavedSearch::model()->findByPk($id)->status != 1) { ?>
-        <?php //echo CHtml::link('Save this Search', array('SaveSearch', 'partnerid' => $this->encrypt_decrypt('encrypt', $id)), array('class' => 'offset save_link'));                           ?>
+        <?php //echo CHtml::link('Save this Search', array('SaveSearch', 'partnerid' => $this->encrypt_decrypt('encrypt', $id)), array('class' => 'offset save_link'));                            ?>
         <a href="#" id="save_link" class="offset ">Save this Search</a>
 <?php } else { ?>
         <a href="#" class="offset">You Saved This Search</a>
@@ -11,10 +11,10 @@
                 });
         });
 </script>
-<div id="saved_search_name" class="modal fade" role="dialog">
+<!--<div id="saved_search_name" class="modal fade" role="dialog">
         <div class="modal-dialog">
 
-                <!-- Modal content-->
+                 Modal content
                 <div class="modal-content dialogs">
                         <div class="modal-header">
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -36,4 +36,4 @@
                 </div>
 
         </div>
-</div>
+</div>-->
