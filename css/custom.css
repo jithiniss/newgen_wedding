@@ -266,3 +266,17 @@ figure img{
         width: 265px;
         height: 313px;
 }
+input.btn.btn-default.mat{
+        background-color: #603779;
+        width: 114px;
+        color: #fff;
+        margin-top: 22px;
+        border-radius: 0;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        border: 0;
+}
+input.btn.btn-default.mat:hover {
+        background-color: #ff9900;
+        border: 0;
+}

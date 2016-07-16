@@ -237,7 +237,7 @@
                                 <h1>The New Way to find your</h1>
                                 <h2>Partner & Plan your Wedding</h2>
                                 <ul class="list-inline list-unstyled">
-                                        <li class="link-1"><a href="#"><i class="fa email fa-envelope"></i>Signup with Email</a></li>
+                                        <li class="link-1"><?php echo CHtml::link('<i class="fa email fa-envelope"></i>Signup with Email', array('site/login')); ?></li>
                                         <li class="link-2"><a href="#"><i class="fa email fa-facebook"></i>Signup with Facebook</a></li>
                                 </ul>
 
@@ -265,89 +265,67 @@
                         </div>
 
                         <div class="col-lg-10 col-md-12">
-                                <form class="form-inline" role="form">
+                                <form class="form-inline" name="SearchResult" role="form" action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/site/SearchResult" method="post">
                                         <div class="form-group">
                                                 <label>I'm looking for</label>
-                                                <select class="look" name="carlist" form="carform">
-                                                        <option value="volvo">Bride</option>
-                                                        <option value="saab">Groom</option>
-
+                                                <select class="look" name="gender">
+                                                        <option value="2">Bride</option>
+                                                        <option value="1">Groom</option>
                                                 </select>
                                         </div>
                                         <div class="form-group hidden-xs">
                                                 <label>Age</label>
-                                                <select class="age" name="carlist" form="carform">
-                                                        <option value="volvo">20</option>
-                                                        <option value="saab">21</option>
-                                                        <option value="opel">22</option>
-                                                        <option value="audi">23</option>
+                                                <select class="age" name="age_from" >
+                                                        <?php
+                                                        for ($i = 18; $i <= 50; $i++) {
+                                                                ?>
+                                                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                        <?php }
+                                                        ?>
                                                 </select>
                                         </div>
 
                                         <div class="form-group to hidden-xs">
                                                 <label class="audi">To</label>
 
-                                                <select class="aged" name="carlist" form="carform">
-                                                        <option value="volvo">25</option>
-                                                        <option value="saab">Saab</option>
-                                                        <option value="opel">Opel</option>
-                                                        <option value="audi">Audi</option>
+                                                <select class="aged" name="age_to" >
+                                                        <?php
+                                                        for ($i = 18; $i <= 50; $i++) {
+                                                                ?>
+                                                                <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
+                                                        <?php }
+                                                        ?>
                                                 </select>
                                         </div>
-
-
-                                        <ul class="list-inline list-unstyled visible-xs">
-                                                <li>
-                                                        <div class="form-group">
-                                                                <label>Aged : from</label>
-                                                                <select class="age" name="carlist" form="carform">
-                                                                        <option value="volvo">20</option>
-                                                                        <option value="saab">21</option>
-                                                                        <option value="opel">22</option>
-                                                                        <option value="audi">23</option>
-                                                                </select>
-                                                        </div>
-                                                </li>
-                                                <li>
-                                                        <div class="form-group">
-                                                                <label>To</label>
-                                                                <select class="age" name="carlist" form="carform">
-                                                                        <option value="volvo">20</option>
-                                                                        <option value="saab">21</option>
-                                                                        <option value="opel">22</option>
-                                                                        <option value="audi">23</option>
-                                                                </select>
-                                                        </div>
-                                                </li>
-                                        </ul>
-
-
-
                                         <div class="form-group">
                                                 <label>Religion</label>
-                                                <select class="chris-select" name="carlist" form="carform">
-                                                        <option value="volvo">Select</option>
-                                                        <option value="saab">Saab</option>
-                                                        <option value="opel">Opel</option>
-                                                        <option value="audi">Audi</option>
+                                                <select class="chris-select" name="religion">
+                                                        <option value="0">Select</option>
+                                                        <?php
+                                                        $religions = MasterReligion::model()->findAllByAttributes(array('status' => 1));
+                                                        foreach ($religions as $religion) {
+                                                                ?>
+                                                                <option value="<?php echo $religion->id; ?>"><?php echo $religion->religion; ?></option>
+
+                                                        <?php } ?>
                                                 </select>
                                         </div>
 
                                         <div class="form-group">
                                                 <label>Mother Tongue</label>
-                                                <select class="look" name="carlist" form="carform">
-                                                        <option value="volvo">Select</option>
-                                                        <option value="saab">Saab</option>
-                                                        <option value="opel">Opel</option>
-                                                        <option value="audi">Audi</option>
+                                                <select class="look" name="mothertongue">
+                                                        <option value="0">Select</option>
+                                                        <?php
+                                                        $mothertongue = MasterMotherTongue::model()->findAllByAttributes(array('status' => 1));
+                                                        foreach ($mothertongue as $language) {
+                                                                ?>
+                                                                <option value="<?php echo $language->id; ?>"><?php echo $language->mother_tongue; ?></option>
+
+                                                        <?php } ?>
                                                 </select>
                                         </div>
 
-
-                                        <button type="submit" class="btn btn-default mat">Submit</button>
-
-
-
+                                        <input type="submit" class="btn btn-default mat" name="SearchResult" />
                                 </form>
                         </div>
                 </div>
@@ -450,7 +428,7 @@
                 <h1>Success <span class="story">Stories</span></h1>
                 <div class="" id="my-gallery-container">
                         <?php
-                        $i == 0;
+                        $i = 0;
                         foreach ($story as $success) {
                                 if ($i < 4) {
                                         if ($i % 2 == 0) {
@@ -478,10 +456,10 @@
                                 ?>
                                 <?php
                                 if ($i >= 4) {
-                                        if ($i % 2 == 0) {
+                                        if ($i % 2 != 0) {
                                                 ?>
 
-                                                <div class="items success_story2" data-order="<?php echo $i; ?>">
+                                                <div class="items success_story1" data-order="<?php echo $i; ?>">
                                                         <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
                                                         <p><?php echo substr($success->feedback, 0, 170); ?></p>
                                                         <h2><?php echo $success->name; ?> & <?php echo $success->partner_name; ?></h2>
@@ -490,10 +468,10 @@
                                         }
                                         ?>
                                         <?php
-                                        if ($i % 2 != 0) {
+                                        if ($i % 2 == 0) {
                                                 ?>
 
-                                                <div class="items success_story1" data-order="<?php echo $i; ?>">
+                                                <div class="items success_story2" data-order="<?php echo $i; ?>">
                                                         <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
                                                         <p><?php echo substr($success->feedback, 0, 170); ?></p>
                                                         <h2><?php echo $success->name; ?> & <?php echo $success->partner_name; ?></h2>
@@ -536,11 +514,11 @@
                                                         }
                                                         ?></h3>
                                                 <p><?php
-                                                        if ($plan->amount == 0) {
-
-                                                        } else {
-                                                                echo "Rs. " . $plan->amount;
-                                                        }
+//                                                        if ($plan->amount == 0) {
+//
+//                                                        } else {
+//                                                                echo "Rs. " . $plan->amount;
+//                                                        }
                                                         ?></p>
                                         </div>
                                         <ul class="list-inline list-unstyled">
