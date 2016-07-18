@@ -26,7 +26,8 @@ if (!empty($data)) {
                                                         <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
                                                 <?php } else { ?>
                                                         <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                                <?php } ?>                                                  <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                <?php } ?>
+                                                <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                 <p>Password Protected</p>
                                         </div>
                                 <?php } ?>
@@ -43,7 +44,11 @@ if (!empty($data)) {
                                 <h3>Grew up in <?= $visitor->country0->country; ?></h3>
 
                                 <div class="connect">
-                                        <h5>Connect with her?</h5>
+                                        <?php if ($visitor->gender == 1) { ?>
+                                                <h5>Connect with him?</h5>
+                                        <?php } else { ?>
+                                                <h5>Connect with her?</h5>
+                                        <?php } ?>
 
 
                                         <div class="f2"><a href="#" class="connect-1">Yes</a></div>

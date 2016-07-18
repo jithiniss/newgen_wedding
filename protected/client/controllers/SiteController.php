@@ -119,7 +119,7 @@ class SiteController extends Controller {
         public function actionAwards() {
                 $criteria = new CDbCriteria(array('order' => 'sort_order ASC'));
                 $about = Awards::model()->findAllByAttributes(array('status' => '1'), $criteria);
-                $banner = $model = StaticPage::model()->findByAttributes(array('canonical_name' => 'awards'));
+                $banner = StaticPage::model()->findByAttributes(array('canonical_name' => 'awards'));
                 $this->render('awards', ['about' => $about, 'banner' => $banner]);
         }
 
@@ -178,126 +178,6 @@ class SiteController extends Controller {
                 $headers .= 'From:Newgen Wedding Matrimony <no-reply@intersmarthosting.in>' . "\r\n";
 
                 mail($user, $user_subject, $user_message, $headers);
-        }
-
-        public function actionEnquiry() {
-
-                if (isset($_REQUEST['Enquiry'])) {
-                        $name = $_REQUEST['name'];
-                        $email = $_REQUEST['email'];
-                        $phones = $_REQUEST['phones'];
-                        $subject = $_REQUEST['subject'];
-                        $coment = $_REQUEST['coment'];
-                        $subject = "Enquiry";
-                        $model = new Enquiry;
-                        $model->name = $name;
-                        $model->email = $email;
-                        $model->mobile = $phones;
-                        $model->subject = $subject;
-                        $model->message = $coment;
-                        if ($model->save()) {
-                                // if ($this->SendMail($name, $email, $subject, $phones, $coment)) {
-                                //   $this->SendMail1($name, $email, $phones);
-
-                                $this->redirect(Yii::app()->request->urlReferrer);
-                                //  }
-                        }
-                }
-        }
-
-        public function SendMail($name, $email, $subject, $phones, $coment) {
-
-
-
-                $to = "dhanya@intersmartsolutions.com";
-                $subject = $subject;
-                $message = '<html>
-
-    <body>
-        <table border="0" style="border-spacing: 20px;    background-color: rgba(250, 200, 59, 0.77);">
-
-            <tr>
-                <td colspan="2">Enquiry Details</td>
-            </tr>
-
-            <tr>
-                <td>Name</td> <td>: ' . $name . '</td>
-            </tr>
-   <tr>
-                <td>Email</td> <td>: ' . $email . '</td>
-            </tr>
-
-   <tr>
-                <td>Phone</td> <td>: ' . $phones . '</td>
-            </tr>
-
-   <tr>
-                <td>Subject </td> <td>: ' . $subject . '</td>
-            </tr>
-
-   <tr>
-                <td>Message</td> <td>: ' . $coment . '</td>
-            </tr>
-
-
-        </table>
-
-
-    </body>
-</html>';
-// Always set content-type when sending HTML email
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-// More headers
-                $headers .= 'From: Newgen Matrimony<no-reply@intersmarthosting.in>' . "\r\n";
-                if (mail($to, $subject, $message, $headers)) {
-                        return true;
-                } else {
-                        return false;
-                }
-        }
-
-        public function SendMail1($name, $email, $phones) {
-
-
-
-                $to = $email;
-                $subject = $subject;
-                $message = '<html>
-
-    <body>
-        <table border="0" style="border-spacing: 20px;    background-color: rgba(250, 200, 59, 0.77);">
-<tr>
-                <td>Dear ' . $name . ',</td>
-            </tr>
-            <tr>
-                <td>Thank You for your enquiry. We will contact you soon.</td>
-            </tr>
-<tr>
-                <td>Thanks and regards</td>
-            </tr>
-
-                <tr>
-                <td>Newgen Matrimony Team</td>
-            </tr>
-
-        </table>
-
-
-    </body>
-</html>';
-// Always set content-type when sending HTML email
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-// More headers
-                $headers .= 'From: Newgen Matrimony<no-reply@intersmarthosting.in>' . "\r\n";
-                if (mail($to, $subject, $message, $headers)) {
-                        return true;
-                } else {
-                        return false;
-                }
         }
 
         public function actionLogout() {

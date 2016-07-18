@@ -42,8 +42,11 @@ if (!empty($data)) {
                                 <h3>Grew up in <?= $visitor->country0->country; ?></h3>
 
                                 <div class="connect">
-                                        <h5>Connect with her?</h5>
-
+                                        <?php if ($visitor->gender == 1) { ?>
+                                                <h5>Connect with him?</h5>
+                                        <?php } else { ?>
+                                                <h5>Connect with her?</h5>
+                                        <?php } ?>
 
                                         <div class="f2"><a href="#" class="connect-1">Yes</a></div>
                                         <div class="f3"><a href="#" class="connect-2">No</a></div>
