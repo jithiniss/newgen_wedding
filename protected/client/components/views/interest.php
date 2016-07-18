@@ -115,7 +115,7 @@
                         <div class="modal-dialog">
 
                                 <!-- Modal content-->
-                                <div class="modal-content dialogs">
+                                <div class="modal-content dialogs report">
                                         <div class="modal-header">
                                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
 
@@ -123,13 +123,11 @@
                                         <div class="modal-body">
 
 
-                                                <div class="common">
-                                                        <h4>Please Upgrade Your plan to  Message this user</h4>
-                                                        <a href=""  class="btn btn-info offsets-btn" >Upgrade</a>
+                                                <span class="newpops">Please Upgrade Your Plan To See The Contact Details</span>
 
-                                                </div>
+                                                <?php echo CHtml::link('Upgrade', array('register/FifthStep'), array('class' => 'btn btn-info ui-pops')); ?><a href="" class="btn btn-info ui-pops">Upgrade</a>
+
                                         </div>
-
 
                                 </div>
 
@@ -139,23 +137,13 @@
 
                 <div id="guest_user_search" class="modal fade" role="dialog">
                         <div class="modal-dialog">
-
                                 <!-- Modal content-->
-                                <div class="modal-content dialogs">
-
+                                <div class="modal-content dialogs report">
                                         <div class="modal-body">
-
-
-                                                <div class="common">
-                                                        <h4>Please Login to see the search result</h4>
-                                                        <a href=""  class="btn btn-info offsets-btn" >Login</a>
-
-                                                </div>
+                                                <span class="newpops">Please Login to see the search result</span>
+                                                <?php echo CHtml::link('Login', array('site/login'), array('class' => 'btn btn-info ui-pops')); ?>
                                         </div>
-
-
                                 </div>
-
                         </div>
                 </div>
         <?php } ?>
