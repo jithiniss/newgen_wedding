@@ -1,3 +1,43 @@
+<style>
+        span.newpops {
+                padding-top: 0px;
+                color: #0e8e81;
+                font-weight: 500;
+                font-family: 'Roboto', sans-serif;
+                margin-bottom: 2px;
+                font-size: 19px;
+                text-align: center !important;
+                padding-top: 12%;
+                margin-top: 9px;
+                margin-left: 0px;
+                /* text-transform: uppercase; */
+                padding-left: 0;
+                padding-right: 0;
+                margin-bottom: 18px;
+                line-height: 24px;
+                display: block;
+        }
+        .modal-content.dialogs.report {
+                top: 200px;
+                height: 324px;
+                padding-left: 20px;
+                padding-right: 20px;
+                background-color: #f1f1f1;
+                border:0;
+        }
+        a.btn.btn-info.ui-pops {
+                background-color: #fb719a;
+                border: 0;
+                width: 100%;
+                max-width: 133px;
+                margin: auto;
+                display: block;
+                text-transform: uppercase;
+                font-weight: 500;
+                margin-top: 6%;
+                font-size: 17px;
+        }
+</style>
 <?php if (Yii::app()->user->hasFlash('success')): ?>
         <div class="alert alert-success">
                 <strong>Success!</strong> <?php echo Yii::app()->user->getFlash('success'); ?>

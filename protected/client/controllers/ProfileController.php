@@ -367,45 +367,53 @@ class ProfileController extends Controller {
         public function actionHobbiesInterest() {
                 $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                 $userInterest = UserInterests::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
-                if (!empty($userInterest)) {
-                        if (isset($_POST['UserInterests'])) {
-                                $userInterest->attributes = $_POST['UserInterests'];
-
-                                if (!empty($_POST['UserInterests']['hobbies'])) {
-
-                                        $userInterest->hobbies = implode(',', $_POST['UserInterests']['hobbies']);
-                                } else {
-                                        $userInterest->hobbies = '';
-                                }
-
-                                if (!empty($_POST['UserInterests']['music'])) {
-
-                                        $userInterest->music = implode(',', $_POST['UserInterests']['music']);
-                                } else {
-                                        $userInterest->music = '';
-                                }
-                                if (!empty($_POST['UserInterests']['movies'])) {
-
-                                        $userInterest->movies = implode(',', $_POST['UserInterests']['movies']);
-                                } else {
-                                        $userInterest->movies = '';
-                                }
-                                if (!empty($_POST['UserInterests']['sports'])) {
-
-                                        $userInterest->sports = implode(',', $_POST['UserInterests']['sports']);
-                                } else {
-                                        $userInterest->sports = '';
-                                }
-                                if ($userInterest->validate()) {
-                                        $userInterest->ub = $user->id;
-                                        if ($userInterest->save(false))
-                                                Yii::app()->user->setFlash('my_interests', "Interests Changed Successfully");
-                                }
+                if (empty($userInterest)) {
+                        $userInterest = new UserInterests;
+                        $userInterest->attributes = $_POST['UserInterests'];
+                        $userInterest->user_id = Yii::app()->session['user']['id'];
+                        if ($userInterest->validate()) {
+                                $userInterest->cb = $user->id;
+                                $userInterest->status = 1;
+                                if ($userInterest->save(false))
+                                        Yii::app()->user->setFlash('my_interests', "Interests Changed Successfully");
                         }
-                        $this->render('user_interest', array('userInterest' => $userInterest, 'user' => $user));
-                } else {
-                        $this->redirect(Yii::app()->request->baseUrl . '/index.php/site/login');
                 }
+                if (isset($_POST['UserInterests'])) {
+                        $userInterest->attributes = $_POST['UserInterests'];
+
+                        if (!empty($_POST['UserInterests']['hobbies'])) {
+
+                                $userInterest->hobbies = implode(',', $_POST['UserInterests']['hobbies']);
+                        } else {
+                                $userInterest->hobbies = '';
+                        }
+
+                        if (!empty($_POST['UserInterests']['music'])) {
+
+                                $userInterest->music = implode(',', $_POST['UserInterests']['music']);
+                        } else {
+                                $userInterest->music = '';
+                        }
+                        if (!empty($_POST['UserInterests']['movies'])) {
+
+                                $userInterest->movies = implode(',', $_POST['UserInterests']['movies']);
+                        } else {
+                                $userInterest->movies = '';
+                        }
+                        if (!empty($_POST['UserInterests']['sports'])) {
+
+                                $userInterest->sports = implode(',', $_POST['UserInterests']['sports']);
+                        } else {
+                                $userInterest->sports = '';
+                        }
+                        if ($userInterest->validate()) {
+                                $userInterest->ub = $user->id;
+                                $userInterest->status = 1;
+                                if ($userInterest->save(false))
+                                        Yii::app()->user->setFlash('my_interests', "Interests Changed Successfully");
+                        }
+                }
+                $this->render('user_interest', array('userInterest' => $userInterest, 'user' => $user));
         }
 
         public function uploadFiles($id, $image) {

@@ -12,9 +12,9 @@
                                 </tr>
                                 <tr>
                                         <td style="padding:40px 20px; font-family:'Open Sans',arial, sans-serif; font-size:13px"><p style="font-size:14px; font-weight:bold;">Reset Password</p>
-                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">We heard that you lost your Laksyah password. Sorry about that!<br><br>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">We heard that you lost your Newgen password. Sorry about that!<br><br>
                                                         But don’t worry! You can use the following link within the next day to reset your password:
-                                                        <a href="http://newgenwedding.com/index.php/ForgotPassword/Changepassword/token/<?php echo $token; ?>">Click Here to Reset Password</a><br><br>
+                                                        <a href="http://intersmarthosting.in/newgen/index.php/ForgotPassword/Changepassword/token/<?php echo $token; ?>">Click Here to Reset Password</a><br><br>
                                                         Thanks
                                                 </p>
 

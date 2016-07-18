@@ -126,13 +126,58 @@ class SiteController extends Controller {
         public function actionFaq() {
                 // $criteria = new CDbCriteria(array('order' => 'sort_order ASC'));
                 $about = Faq::model()->findAll(['order' => 'id ASC']);
-                $banner = $model = StaticPage::model()->findByAttributes(array('canonical_name' => 'faq'));
+                $banner = StaticPage::model()->findByAttributes(array('canonical_name' => 'faq'));
                 $this->render('faq', ['about' => $about, 'banner' => $banner]);
         }
 
         public function actionContact() {
-                $banner = $model = StaticPage::model()->findByAttributes(array('canonical_name' => 'contact-us'));
-                $this->render('contactus', ['banner' => $banner]);
+                $model = new Enquiry;
+                if (isset($_POST['Enquiry'])) {
+                        $model->attributes = $_POST['Enquiry'];
+                        $model->date = date("Y-m-d");
+                        $model->name = $_POST['name'];
+                        $model->email = $_POST['email'];
+                        $model->mobile = $_POST['phones'];
+                        $model->subject = $_POST['subject'];
+                        $model->message = $_POST['coment'];
+                        if ($model->save(false)) {
+                                $this->contactmail_admin($model);
+                                $this->contactmail_user($model);
+                                Yii::app()->user->setFlash('success', " Your Contact sent successfully");
+                        } else {
+                                Yii::app()->user->setFlash('error', "Error Occured");
+                        }
+                        $this->redirect(array('site/contact'));
+                }
+                $this->render('contactus', array('model' => $model));
+        }
+
+        public function contactmail_admin($model) {
+                $admin = 'shahana@intersmart.in';
+//                $admin = AdminUser::model()->findByPk(4)->email;
+                $admin_subject = 'Newgen Wedding Matrimony:New Enquiry Recieved';
+                $admin_message = $this->renderPartial('mail/_admin_contact_email', array('model' => $model), true);
+                // Always set content-type when sending HTML email
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                // More headers
+                $headers .= 'From:Newgen Wedding Matrimony <no-reply@intersmarthosting.in>' . "\r\n";
+
+                mail($admin, $admin_subject, $admin_message, $headers);
+        }
+
+        public function contactmail_user($model) {
+//                $user = 'shahana@intersmart.in';
+                $user = $model->email;
+                $user_subject = 'Newgen Wedding Matrimony:New Enquiry Recieved';
+                $user_message = $this->renderPartial('mail/_user_contact_email', array('model' => $model), true);
+                // Always set content-type when sending HTML email
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                // More headers
+                $headers .= 'From:Newgen Wedding Matrimony <no-reply@intersmarthosting.in>' . "\r\n";
+
+                mail($user, $user_subject, $user_message, $headers);
         }
 
         public function actionEnquiry() {
@@ -260,6 +305,12 @@ class SiteController extends Controller {
 
                 Yii::app()->user->logout();
                 $this->redirect(array('site/index'));
+        }
+
+        public function siteURL() {
+                $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+                $domainName = $_SERVER['HTTP_HOST'];
+                return $protocol . $domainName . '/newgen/';
         }
 
         public function actionError() {

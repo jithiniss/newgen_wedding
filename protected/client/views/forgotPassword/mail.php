@@ -7,5 +7,4 @@
         <div class="alert alert-success alert-dismissible" role="alert">
 
                 Password reset link sent successfully!! Please check your mail. </div>
-        <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/ForgotPassword/Changepassword/token/<?php echo $token ?>">Click Here to Reset Password</a><br><br>
 </section>

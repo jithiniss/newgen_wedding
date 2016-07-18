@@ -11,14 +11,21 @@ if (!empty($data)) {
                                         <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">
                                 <?php } if ($visitor->photo_visibility == 2) { ?>
                                         <div class="profile mynewgenz ">
-                                                <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                <?php if ($visitor->gender == 1) { ?>
+                                                        <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
+                                                <?php } else { ?>
+                                                        <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                <?php } ?>
                                                 <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                 <p>Visible on Accept/Sent</p>
                                         </div>
                                 <?php } if ($visitor->photo_visibility == 3) { ?>
                                         <div class="profile mynewgenz ">
-                                                <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                                <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                <?php if ($visitor->gender == 1) { ?>
+                                                        <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
+                                                <?php } else { ?>
+                                                        <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                <?php } ?>                                                <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                 <p>Password Protected</p>
                                         </div>
                                 <?php } ?>

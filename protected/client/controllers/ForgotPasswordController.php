@@ -15,12 +15,11 @@ class ForgotPasswordController extends Controller {
                                 $forgot->status = 1;
                                 $forgot->doc = date('Y-m-d');
                                 if ($forgot->save(FALSE)) {
-//                                        $this->SuccessMail($forgot, $token, $details);
-//
-//                                        $this->render('mail');
-                                        $this->render('mail', array('token' => $token));
+                                        $this->SuccessMail($forgot, $token, $details);
+                                        $this->render('mail');
+//                                        $this->render('mail', array('token' => $token));
                                 } else {
-//                                        $this->render('sorry');
+                                        $this->render('sorry');
                                 }exit;
                         } else {
                                 Yii::app()->user->setFlash('error', "Inavlid user,..");
@@ -89,7 +88,7 @@ class ForgotPasswordController extends Controller {
         public function siteURL() {
                 $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
                 $domainName = $_SERVER['HTTP_HOST'];
-                return $protocol . $domainName;
+                return $protocol . $domainName . '/newgen/';
         }
 
 }
