@@ -107,7 +107,7 @@ class RegisterController extends Controller {
 
         /* mail to user and admin */
 
-        public function RegisterMail($model, $s) {
+        public function RegisterMail($model, $s = '') {
                 $user = $model->email;
 //                $user = 'sibys09@gmail.com';
                 $user_subject = 'Welcome to NEWGEN.com!';
@@ -121,13 +121,13 @@ class RegisterController extends Controller {
 // More headers
                 $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
 //$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
-                // mail($user, $user_subject, $user_message, $headers);
+                mail($user, $user_subject, $user_message, $headers);
                 if ($s == 1) {
                         $admin = 'sibys09@gmail.com';
                         $admin_subject = $model->first_name . ' registered with NEWGEN.com';
                         $admin_message = $this->renderPartial('mail/_register_admin_mail', array('model' => $model), true);
 
-                        // mail($admin, $admin_subject, $admin_message, $headers);
+                        mail($admin, $admin_subject, $admin_message, $headers);
                 }
         }
 
@@ -151,6 +151,7 @@ class RegisterController extends Controller {
                                 $secondStep = $this->setSecondStep($secondStep, $_POST['UserDetails']);
                                 if ($secondStep->validate()) {
                                         if ($secondStep->save()) {
+                                                Yii::app()->session['user'] = $secondStep;
                                                 $this->redirect(array('ThirdStep'));
                                         } else {
                                                 Yii::app()->user->setFlash('register_error2', "Some Error Occured.Try Again");
@@ -179,6 +180,7 @@ class RegisterController extends Controller {
                                 $thirdStep = $this->setThirdStep($thirdStep, $_POST['UserDetails']);
                                 if ($thirdStep->validate()) {
                                         if ($thirdStep->save()) {
+                                                Yii::app()->session['user'] = $thirdStep;
                                                 $this->redirect(array('FourthStep'));
                                         } else {
                                                 Yii::app()->user->setFlash('register_error3', "Some Error Occured.Try Again");
@@ -204,6 +206,7 @@ class RegisterController extends Controller {
                                 $fourthStep = $this->setFourthStep($fourthStep, $_POST['UserDetails']);
                                 if ($fourthStep->validate()) {
                                         if ($fourthStep->save()) {
+                                                Yii::app()->session['user'] = $fourthStep;
                                                 $this->redirect(array('FifthStep'));
                                         } else {
                                                 Yii::app()->user->setFlash('register_error4', "Some Error Occured.Try Again");
@@ -228,7 +231,7 @@ class RegisterController extends Controller {
                 if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
                         $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                 } else {
-                        $this->redirect('//site/index');
+                        $this->redirect(array('//site/index'));
                 }
                 $this->render('step_5', array('model' => $model, 'plans' => $plans));
         }
@@ -303,13 +306,13 @@ class RegisterController extends Controller {
 // More headers
                 $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
 //$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
-                // mail($user_email, $user_subject, $user_message, $headers);
+                mail($user_email, $user_subject, $user_message, $headers);
 
                 $admin = 'sibys09@gmail.com';
                 $admin_subject = 'Payment for account upgrade got received';
                 $admin_message = $this->renderPartial('mail/_plan_admin_mail', array('user' => $user, 'plan' => $plan, 'status' => 1), true);
 
-                // mail($admin, $admin_subject, $admin_message, $headers);
+                mail($admin, $admin_subject, $admin_message, $headers);
         }
 
         public function PlanErrorMail($user, $plan) {
@@ -326,13 +329,13 @@ class RegisterController extends Controller {
 // More headers
                 $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
 //$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
-                // mail($user_email, $user_subject, $user_message, $headers);
+                mail($user_email, $user_subject, $user_message, $headers);
 
                 $admin = 'sibys09@gmail.com';
                 $admin_subject = 'Payment for account upgrade got failed';
                 $admin_message = $this->renderPartial('mail/_plan_admin_mail', array('user' => $user, 'plan' => $plan, 'status' => 2), true);
 
-                // mail($admin, $admin_subject, $admin_message, $headers);
+                mail($admin, $admin_subject, $admin_message, $headers);
         }
 
         public function actionVerify($m) {
@@ -341,12 +344,14 @@ class RegisterController extends Controller {
                         $model = UserDetails::model()->findByPk($user_id);
                         if (!empty($model)) {
                                 if ($model->email_verification == 0) {
+
                                         $model->email_verification = 1;
                                         if ($model->save()) {
                                                 Yii::app()->user->setFlash('email_verified', "Your account has been successfully verified.");
                                                 $this->ReturnUrl($model);
                                         }
                                 } else {
+
                                         Yii::app()->user->setFlash('email_verified', "You have already verified your account.");
                                         $this->ReturnUrl($model);
                                 }
@@ -360,16 +365,22 @@ class RegisterController extends Controller {
 
         public function ReturnUrl($model) {
                 if ($model->register_step == 1) {
+                        Yii::app()->session['user'] = $model;
                         $this->redirect(array('//Register/SecondStep'));
                 } else if ($model->register_step == 2) {
+                        Yii::app()->session['user'] = $model;
                         $this->redirect(array('//Register/ThirdStep'));
                 } else if ($model->register_step == 3) {
+                        Yii::app()->session['user'] = $model;
                         $this->redirect(array('//Register/FourthStep'));
                 } else if ($model->register_step == 4) {
+                        Yii::app()->session['user'] = $model;
                         $this->redirect(array('//Register/FifthStep'));
                 } else if ($model->register_step == 5) {
+                        Yii::app()->session['user'] = $model;
                         $this->redirect(array('//Myaccount/Index'));
                 } else {
+
                         $this->redirect(array('//site/Index'));
                 }
         }
@@ -388,7 +399,7 @@ class RegisterController extends Controller {
         public function siteURL() {
                 $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
                 $domainName = $_SERVER['HTTP_HOST'];
-                return $protocol . $domainName . '/newgen_wedding/';
+                return $protocol . $domainName . '/newgen/';
         }
 
         public function encrypt_decrypt($action, $string) {

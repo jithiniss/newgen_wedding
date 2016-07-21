@@ -52,93 +52,26 @@
                                                 }
                                                 ?>
 
-                                        <?php } else if ($user_details->gender == 1) { ?>
-                                                <img class = "img-responsive fulls" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/pp.jpg" />
-                                        <?php } else { ?>
-                                                <img class = "img-responsive fulls" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
-                                        <?php } ?>
+                                                <?php
+                                        } else {
+                                                if ($user_details->gender == 1) {
+                                                        ?>
+                                                        <img class = "img-responsive fulls" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/pp.jpg" />
+                                                <?php } else { ?>
+                                                        <img class = "img-responsive fulls" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
+                                                        <?php
+                                                }
+                                        }
+                                        ?>
 
                                         <?php if ($user_details->photo != '') { ?>
-                                                <a class="doc1" href="#" ><img class="albums" src="<?php echo Yii::app()->request->baseUrl; ?>/images/album.png">View Album</a>
+                                                <a class="doc1" href="#"><img class="albums" src="<?php echo Yii::app()->request->baseUrl; ?>/images/album.png">View Album</a>
                                         <?php } else {
                                                 ?>
                                                 <?php echo CHtml::link('Request Photo', array('Partner/PhotoRequest', 'data' => $user_details->user_id), array('class' => 'doc1')); ?>
                                         <?php } ?>
 
-                                        <a class="doc3" href="#" data-toggle="modal" data-target="#myModal_misuse">
-                                                <img class="album" src="<?php echo Yii::app()->request->baseUrl; ?>/images/d3.png">
-                                                <?php
-//                                                $report_details = ReportMisuse::model()->findByAttributes(array('report_id' => $user_details->id));
-                                                ?>
-                                                Report Misuse
-                                        </a>  |
-                                        <a class="doc3" data-toggle="modal" data-target="#myModal_block" href="#">
-                                                <?php
-                                                $block_details = BlockedMembers::model()->findByAttributes(array('block_id' => $user_details->id));
-                                                ?>
-                                                <?php if ($block_details->status == 0) { ?>Block<?php } else { ?>Unblock<?php } ?> <?php if ($user_details->gender == 1) { ?>him<?php }if ($user_details->gender == 2) { ?>her<?php } ?>
-                                        </a>
-                                        <div id="myModal_misuse" class="modal fade" role="dialog">
-                                                <div class="modal-dialog">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content dialogs report">
-                                                                <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                        <?php if ($block_details->status == 0) { ?><span class="newpops_blocked">Report this Profile for misuse privately</span>
-                                                                                <select class="" name="reason">
-                                                                                        <option value=""></option>
-                                                                                </select>
-                                                                                <p>Blocked Members will not be able to view your Profile or contact you on newgen.com</p>
-                                                                        <?php } else { ?>
-                                                                                <span class="newpops_blocked">Are you sure you want to Un Block this Member ?</span>
-                                                                                <p>Un Blocked Members will not be able to view your Profile or contact you on newgen.com</p>
-                                                                        <?php } ?>
-                                                                        <div class="row">
-                                                                                <?php if ($block_details->status == 0) { ?>
-                                                                                        <div class="col-md-6"><?php echo CHtml::link('Confirm', array('partner/BlockedMembers', 'id' => $user_details->id), array('class' => 'connect-3')); ?></div>
-                                                                                <?php } else { ?>
-                                                                                        <div class="col-md-6"><?php echo CHtml::link('Confirm', array('partner/UnBlockedMembers', 'id' => $block_details->id), array('class' => 'connect-3')); ?></div>
-                                                                                <?php } ?>
-                                                                                <div class="col-md-6"><a href="#" class="connect-4" data-dismiss="modal" id="cancel_block">Cancel</a></div>
-                                                                        </div>
-                                                                </div>
-
-                                                        </div>
-
-                                                </div>
-                                        </div>
-                                        <div id="myModal_block" class="modal fade" role="dialog">
-                                                <div class="modal-dialog">
-
-                                                        <!-- Modal content-->
-                                                        <div class="modal-content dialogs report">
-                                                                <div class="modal-header">
-                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                        <?php if ($block_details->status == 0) { ?><span class="newpops_blocked">Are you sure you want to Block this Member ?</span>
-                                                                                <p>Blocked Members will not be able to view your Profile or contact you on newgen.com</p>
-                                                                        <?php } else { ?>
-                                                                                <span class="newpops_blocked">Are you sure you want to Un Block this Member ?</span>
-                                                                                <p>Un Blocked Members will not be able to view your Profile or contact you on newgen.com</p>
-                                                                        <?php } ?>
-                                                                        <div class="row">
-                                                                                <?php if ($block_details->status == 0) { ?>
-                                                                                        <div class="col-md-6"><?php echo CHtml::link('Confirm', array('partner/BlockedMembers', 'id' => $user_details->id), array('class' => 'connect-3')); ?></div>
-                                                                                <?php } else { ?>
-                                                                                        <div class="col-md-6"><?php echo CHtml::link('Confirm', array('partner/UnBlockedMembers', 'id' => $block_details->id), array('class' => 'connect-3')); ?></div>
-                                                                                <?php } ?>
-                                                                                <div class="col-md-6"><a href="#" class="connect-4" data-dismiss="modal" id="cancel_block">Cancel</a></div>
-                                                                        </div>
-                                                                </div>
-
-                                                        </div>
-
-                                                </div>
-                                        </div>
+                                        <a class="doc2" href="#"><img class="album" src="<?php echo Yii::app()->request->baseUrl; ?>/images/d3.png">Report Misuse</a>
                                         <div class="clearfix">  </div>
                                         <?php if (!empty($similar_profiles)) { ?>
                                                 <h1>Similar Profiles</h1>
@@ -523,38 +456,88 @@
                                                                         <th style="border-right:0;">
                                                                                 <?php
                                                                                 if ($user_details->photo != '') {
+
                                                                                         $folder = Yii::app()->Upload->folderName(0, 1000, $user_details->id);
                                                                                         $user_details_pic = explode('.', $user_details->photo);
                                                                                         ?>
-                                                                                        <img class="her" src="<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $user_details->id . '/profile/' . $user_details_pic[0] . '_100_130.' . $user_details_pic[1]; ?>" />
-                                                                                <?php } else if ($user_details->gender == 1) { ?>
-                                                                                        <img class = "him" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/pp.jpg" />
-                                                                                <?php } else { ?>
-                                                                                        <img class = "him" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
-                                                                                <?php } ?>
-<!--                                                                                <img class="her" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p1.jpg">--><br>
-                                                                                <span class="lift-1"> Her Preferences</span>
-                                                                        </th>
-                                                                        <th>
-                                                                                <span class="lift">You match 8/8 of her Preferences</span>
-                                                                        </th>
-                                                                        <th>
-                                                                                <?php
-                                                                                if ($current_user->photo != '') {
-                                                                                        $folder = Yii::app()->Upload->folderName(0, 1000, $current_user->id);
-                                                                                        $current_user_pic = explode('.', $current_user->photo);
-                                                                                        ?>
-                                                                                        <img class="him" src="<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $current_user->id . '/profile/' . $current_user_pic[0] . '_100_130.' . $current_user_pic[1]; ?>" />
-                                                                                        <br>
-                                                                                <?php } else if ($current_user->gender == 1) { ?>
-                                                                                        <img class = "him" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/pp.jpg" />
-                                                                                <?php } else { ?>
-                                                                                        <img class = "him" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
-                                                                                <?php } ?>
-                                                                                <span class = "lift-3"> You Match</span>
-                                                                        </th>
+                                                                                        <?php if ($user_details->gender == 1) { ?>
+                                                                                                <?php if ($user_details->photo_visibility == 1) { ?>
+                                                                                                        <img class="him" src="<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $user_details->id . '/profile/' . $user_details_pic[0] . '_100_130.' . $user_details_pic[1]; ?>" />
 
-                                                                </tr>
+                                                                                                <?php }if ($user_details->photo_visibility == 2) { ?>
+                                                                                <div class="profile mynewgenz ">
+                                                                                        <img class="him side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
+                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                                                        <!--<p>Visible on Accept/Sent</p>-->
+                                                                                </div>
+                                                                        <?php }if ($user_details->photo_visibility == 3) { ?>
+                                                                                <div class="profile mynewgenz ">
+                                                                                        <img class="center-block img-responsive him side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
+                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                                                        <p>Password Protected</p>
+                                                                                </div>
+                                                                                <?php
+                                                                        }
+                                                                } else {
+                                                                        ?>
+                                                                        <?php if ($user_details->photo_visibility == 1) { ?>
+                                                                                <img class="her" src="<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $user_details->id . '/profile/' . $user_details_pic[0] . '_100_130.' . $user_details_pic[1]; ?>" />
+
+                                                                        <?php }if ($user_details->photo_visibility == 2) { ?>
+                                                                                <div class="profile mynewgenz ">
+                                                                                        <img class="center-block img-responsive her side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                                                        <!--<p>Visible on Accept/Sent</p>-->
+                                                                                </div>
+                                                                        <?php }if ($user_details->photo_visibility == 3) { ?>
+                                                                                <div class="profile mynewgenz ">
+                                                                                        <img class="center-block img-responsive her  side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                                                        <p>Password Protected</p>
+                                                                                </div>
+
+                                                                                <?php
+                                                                        }
+                                                                }
+                                                                ?>
+
+                                                                <?php
+                                                        } else {
+                                                                if ($user_details->gender == 1) {
+                                                                        ?>
+                                                                        <img class = "img-responsive fulls" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/pp.jpg" />
+                                                                <?php } else { ?>
+                                                                        <img class = "img-responsive fulls" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
+                                                                        <?php
+                                                                }
+                                                        }
+                                                        ?>
+
+
+
+<!--                                                                                <img class="her" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p1.jpg">--><br>
+                                                        <span class="lift-1"> Her Preferences</span>
+                                                        </th>
+                                                        <th>
+                                                                <span class="lift">You match <span class="val1"></span>/<span class="val2"></span> of her Preferences</span>
+                                                        </th>
+                                                        <th>
+                                                                <?php
+                                                                if ($current_user->photo != '') {
+                                                                        $folder = Yii::app()->Upload->folderName(0, 1000, $current_user->id);
+                                                                        $current_user_pic = explode('.', $current_user->photo);
+                                                                        ?>
+                                                                        <img class="him" src="<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $current_user->id . '/profile/' . $current_user_pic[0] . '_100_130.' . $current_user_pic[1]; ?>" />
+                                                                        <br>
+                                                                <?php } else if ($current_user->gender == 1) { ?>
+                                                                        <img class = "him" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/pp.jpg" />
+                                                                <?php } else { ?>
+                                                                        <img class = "him" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
+                                                                <?php } ?>
+                                                                <span class = "lift-3"> You Match</span>
+                                                        </th>
+
+                                                        </tr>
                                                         </thead>
 
 
@@ -562,20 +545,35 @@
 
                                                                 <tr>
                                                                         <td style = "borde">Age </td>
+                                                                        <?php
+                                                                        $totcnt = 0;
+                                                                        $matchcnt = 0;
+                                                                        ?>
                                                                         <td><?php echo $partner_details->age_from; ?> to <?php echo $partner_details->age_to; ?></td>
-                                                                        <td><?php if (($partner_details->age_from < (date('Y') - $current_user->dob_year)) && (date('Y') - $current_user->dob_year) < ($partner_details->age_to)) { ?>
+                                                                        <td><?php
+                                                                                $totcnt += 1;
+                                                                                if (($partner_details->age_from < (date('Y') - $current_user->dob_year)) && (date('Y') - $current_user->dob_year) < ($partner_details->age_to)) {
+
+                                                                                        $matchcnt += 1;
+                                                                                        ?>
                                                                                         <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
                                                                                 <?php } else { ?>
                                                                                         <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
                                                                                 <?php } ?></td>
 
                                                                 </tr>
-                                                                <?php if ($partner_details->height_from != 0 && $partner_details->height_to != 0) { ?>
+                                                                <?php
+                                                                if ($partner_details->height_from != 0 && $partner_details->height_to != 0) {
+                                                                        $totcnt += 1;
+                                                                        ?>
                                                                         <tr>
                                                                                 <td>Height</td>
                                                                                 <td><?php echo $partner_details->height_from; ?> cm to <?php echo $partner_details->height_to; ?> cm</td>
                                                                                 <td>
-                                                                                        <?php if (($partner_details->height_from < (date('Y') - $current_user->height)) && (date('Y') - $current_user->height) < ($partner_details->height_from)) { ?>
+                                                                                        <?php
+                                                                                        if (($partner_details->height_from < (date('Y') - $current_user->height)) && (date('Y') - $current_user->height) < ($partner_details->height_from)) {
+                                                                                                $matchcnt += 1;
+                                                                                                ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
                                                                                         <?php } else { ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
@@ -584,12 +582,17 @@
 
                                                                         </tr>
                                                                 <?php } ?>
-                                                                <?php if ($partner_details->marital_status != 0) { ?>
+                                                                <?php
+                                                                if ($partner_details->marital_status != 0) {
+                                                                        $totcnt += 1;
+                                                                        ?>
                                                                         <tr>
                                                                                 <td>Marital Status</td>
                                                                                 <td><?php echo MasterMaritalStatus::model()->findByPk($partner_details->marital_status)->marital_status; ?></td>
                                                                                 <td>
-                                                                                        <?php if ($partner_details->marital_status == $current_user->marital_status) {
+                                                                                        <?php
+                                                                                        if ($partner_details->marital_status == $current_user->marital_status) {
+                                                                                                $matchcnt += 1;
                                                                                                 ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
                                                                                         <?php } else { ?>
@@ -597,12 +600,17 @@
                                                                                         <?php } ?>
                                                                         </tr>
                                                                 <?php } ?>
-                                                                <?php if ($partner_details->religion != 0) { ?>
+                                                                <?php
+                                                                if ($partner_details->religion != 0) {
+                                                                        $totcnt += 1;
+                                                                        ?>
                                                                         <tr>
                                                                                 <td>Religion / Community</td>
                                                                                 <td><?php echo MasterReligion::model()->findByPk($partner_details->religion)->religion; ?></td>
-                                                                                <td> <?php if ($partner_details->religion == $current_user->religion) {
-                                                                                ?>
+                                                                                <td> <?php
+                                                                                        if ($partner_details->religion == $current_user->religion) {
+                                                                                                $matchcnt += 1;
+                                                                                                ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
                                                                                         <?php } else { ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
@@ -611,12 +619,17 @@
                                                                         </tr>
 
                                                                 <?php } ?>
-                                                                <?php if ($partner_details->mothertongue != 0) { ?>
+                                                                <?php
+                                                                if ($partner_details->mothertongue != 0) {
+                                                                        $totcnt += 1;
+                                                                        ?>
                                                                         <tr>
                                                                                 <td>Mother Tongue </td>
                                                                                 <td><?php echo MasterMotherTongue::model()->findByPk($partner_details->mothertongue)->mother_tongue; ?></td>
-                                                                                <td><?php if ($partner_details->mothertongue == $current_user->mothertongue) {
-                                                                                ?>
+                                                                                <td><?php
+                                                                                        if ($partner_details->mothertongue == $current_user->mothertongue) {
+                                                                                                $matchcnt += 1;
+                                                                                                ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
                                                                                         <?php } else { ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
@@ -624,12 +637,17 @@
 
                                                                         </tr>
                                                                 <?php } ?>
-                                                                <?php if ($partner_details->profession_area != 0) { ?>
+                                                                <?php
+                                                                if ($partner_details->profession_area != 0) {
+                                                                        $totcnt += 1;
+                                                                        ?>
                                                                         <tr>
                                                                                 <td>Education </td>
                                                                                 <td><?php echo MasterEducationLevel::model()->findByPk($partner_details->profession_area)->education_level; ?></td>
-                                                                                <td><?php if ($partner_details->profession_area == $current_user->education_level) {
-                                                                                ?>
+                                                                                <td><?php
+                                                                                        if ($partner_details->profession_area == $current_user->education_level) {
+                                                                                                $matchcnt += 1;
+                                                                                                ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
                                                                                         <?php } else { ?>
                                                                                                 <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
@@ -647,10 +665,16 @@
                                                                                         echo 'Occasionally';
                                                                                 }
                                                                                 ?></td>
-                                                                        <td><?php if ($partner_details->smoke == $current_user->smoke) {
+                                                                        <td><?php
+                                                                                if ($partner_details->smoke == $current_user->smoke) {
+                                                                                        $totcnt += 1;
+                                                                                        $matchcnt += 1;
                                                                                         ?>
                                                                                         <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
-                                                                                <?php } else { ?>
+                                                                                        <?php
+                                                                                } else {
+                                                                                        $totcnt += 1;
+                                                                                        ?>
                                                                                         <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
                                                                                 <?php } ?></td>
                                                                 </tr>
@@ -666,10 +690,16 @@
                                                                                         echo 'Occasionally';
                                                                                 }
                                                                                 ?></td>
-                                                                        <td><?php if ($partner_details->drink == $current_user->drink) {
+                                                                        <td><?php
+                                                                                if ($partner_details->drink == $current_user->drink) {
+                                                                                        $totcnt += 1;
+                                                                                        $matchcnt += 1;
                                                                                         ?>
                                                                                         <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/tick.png">
-                                                                                <?php } else { ?>
+                                                                                        <?php
+                                                                                } else {
+                                                                                        $totcnt += 1;
+                                                                                        ?>
                                                                                         <img class = "never" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/cross.png">
                                                                                 <?php } ?></td>
                                                                 </tr>
@@ -686,7 +716,17 @@
                 </div>
         </div>
 </section>
+<input type="hidden" value="<?php echo $matchcnt; ?>" class="match_cnt" />
+<input type="hidden" value="<?php echo $totcnt; ?>" class="tot_cnt" />
+<script>
 
+        $(document).ready(function () {
+                var val1 = $(".match_cnt").val();
+                var val2 = $(".tot_cnt").val();
+                $(".val1").html(val1);
+                $(".val2").html(val2);
+        });
+</script>
 <script>
 
         $(document).ready(function () {
