@@ -28,6 +28,7 @@ return array(
     'looking-for-Me' => 'Matches/LookingMe',
     'contact-filters' => 'settings/ContactFilters',
     'email-sms-alert' => 'settings/MailSmsAlert',
+    'block-member' => 'partner/BlockedMembers/id',
     '<controller:\w+>/<id:\d+>' => '<controller>/view',
 //    '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

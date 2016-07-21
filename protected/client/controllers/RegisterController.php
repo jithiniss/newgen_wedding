@@ -29,6 +29,7 @@ class RegisterController extends Controller {
                                 $user = UserDetails::model()->findByPk($firstStep->id);
                                 $user->cb = $firstStep->id;
                                 $user->ub = $firstStep->id;
+                                $user->photo_visibility = 1;
                                 $user->save(FALSE);
                                 $plan = UserPlans::model()->findByAttributes(array('user_id' => $user->id));
                                 Yii::app()->session['user'] = $user;

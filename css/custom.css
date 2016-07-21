@@ -149,6 +149,41 @@ button.btn.new-btn.btn-default{
         margin-top: 0px;
         line-height: 33px;
 }
+
+a.doc3 {
+        text-align: center;
+        /* display: block; */
+        margin-top: 23px;
+        margin-bottom: 5px;
+        color: #333;
+        padding-bottom: 19px;
+        /*padding-left: 17px;*/
+        font-size: 15px;
+        font-weight: bolder;
+        text-decoration: underline;
+}
+span.newpops_blocked {
+        padding-top: 0px;
+        color: #0e8e81;
+        font-weight: 500;
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 2px;
+        font-size: 19px;
+        padding-top: 12%;
+        margin-top: -59px;
+        margin-left: 0px;
+        /* text-transform: uppercase; */
+        padding-left: 0;
+        padding-right: 0;
+        margin-bottom: 18px;
+        line-height: 24px;
+        display: block;
+}
+.modal-body p{
+        font-weight: 400;
+        color: #666;
+}
+
 @media screen and (min-width: 480px) {
         .tokenize-sample { width: 300px }
 }

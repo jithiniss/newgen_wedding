@@ -233,4 +233,38 @@ class PartnerController extends Controller {
                 }
         }
 
+        public function actionBlockedMembers($id) {
+                $block_details = BlockedMembers::model()->findByAttributes(array('block_id' => $id));
+                if (empty($block_details)) {
+                        $model = new BlockedMembers;
+                        $model->user_id = Yii::app()->session['user']['id'];
+                        $model->block_id = $id;
+                        $model->status = 1;
+                        $model->doc = date('Y-m-d');
+                        $model->cb = Yii::app()->session['user']['id'];
+                        if ($model->validate()) {
+                                if ($model->save()) {
+                                        $this->redirect(Yii::app()->request->urlReferrer);
+                                }
+                        }
+                } else {
+                        $block_details->ub = Yii::app()->session['user']['id'];
+                        $block_details->status = 1;
+                        $block_details->dou = date('Y-m-d');
+                        if ($block_details->save()) {
+                                $this->redirect(Yii::app()->request->urlReferrer);
+                        }
+                }
+        }
+
+        public function actionUnBlockedMembers($id) {
+                $model = BlockedMembers::model()->findByPk($id);
+                $model->status = 0;
+                $model->dou = Yii::app()->session['user']['id'];
+                $model->dou = date('Y-m-d');
+                if ($model->save()) {
+                        $this->redirect(Yii::app()->request->urlReferrer);
+                }
+        }
+
 }

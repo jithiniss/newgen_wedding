@@ -165,7 +165,7 @@
 
                                                 <span class="newpops">Please Upgrade Your Plan To See The Contact Details</span>
 
-                                                <?php echo CHtml::link('Upgrade', array('register/FifthStep'), array('class' => 'btn btn-info ui-pops')); ?><a href="" class="btn btn-info ui-pops">Upgrade</a>
+                                                <?php echo CHtml::link('Upgrade', array('register/FifthStep'), array('class' => 'btn btn-info ui-pops')); ?>
 
                                         </div>
 
