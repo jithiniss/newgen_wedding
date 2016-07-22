@@ -214,4 +214,22 @@ class MyaccountController extends Controller {
                 }
         }
 
+        public function actionListBlockedMembers() {
+                if (isset(Yii::app()->session['user'])) {
+                        $dataProvider = new CActiveDataProvider('BlockedMembers', array(
+                            'criteria' => array(
+                                'condition' => 'user_id="' . Yii::app()->session['user']['id'] . '"AND status = 1',
+                            ),
+                            'pagination' => array(
+                                'pageSize' => 8,
+                            ),
+                                )
+                        );
+                        $this->render('blocked_members', array('dataProvider' => $dataProvider));
+                } else {
+                        $this->redirect(array('site/login'));
+                }
+//                $blocked_details = BlockedMembers::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
+        }
+
 }

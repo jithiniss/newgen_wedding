@@ -71,7 +71,81 @@
                                                 <?php echo CHtml::link('Request Photo', array('Partner/PhotoRequest', 'data' => $user_details->user_id), array('class' => 'doc1')); ?>
                                         <?php } ?>
 
-                                        <a class="doc2" href="#"><img class="album" src="<?php echo Yii::app()->request->baseUrl; ?>/images/d3.png">Report Misuse</a>
+                                        <a class="doc3" href="#" data-toggle="modal" data-target="#myModal_misuse">
+                                                <img class="album" src="<?php echo Yii::app()->request->baseUrl; ?>/images/d3.png">
+                                                <?php
+//                                                $report_details = ReportMisuse::model()->findByAttributes(array('report_id' => $user_details->id));
+//                                                $block_details = BlockedMembers::model()->findByAttributes(array('block_id' => $mat->id, 'user_id' => Yii::app()->session['user']['id'], 'status' => 0));
+                                                ?>
+                                                Report Misuse
+                                        </a>  |
+                                        <a class="doc3" data-toggle="modal" data-target="#myModal_block" href="#">
+                                                <?php
+                                                $block_details = BlockedMembers::model()->findByAttributes(array('block_id' => $user_details->id));
+                                                ?>
+                                                <?php if ($block_details->status == 0) { ?>Block<?php } else { ?>Unblock<?php } ?> <?php if ($user_details->gender == 1) { ?>him<?php }if ($user_details->gender == 2) { ?>her<?php } ?>
+                                        </a>
+                                        <div id="myModal_misuse" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content dialogs report">
+                                                                <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                        <span class="newpops_blocked">Report this Profile for misuse privately</span>
+                                                                        <select class="aps" name="reason">
+                                                                                <option value="0">Select reason for reporting this profile</option>
+                                                                                <option value="1">Fake or misleading information</option>
+                                                                                <option value="2">Multiple Profiles</option>
+                                                                                <option value="3">Phone number is incorrect</option>
+                                                                                <option value="4">Photos are fake or obscene</option>
+                                                                                <option value="5">Has sent abusive Emails/Chat</option>
+                                                                                <option value="6">Is already married/engaged</option>
+                                                                                <option value="7">Asking for money/scammer</option>
+                                                                                <option value="8">Other misuse reason</option>
+                                                                        </select>
+                                                                        <textarea name="misuse_description" class="form-control" rows="5" cols="50"></textarea>
+                                                                        <div class="row">
+                                                                                <div class="col-md-6"><?php echo CHtml::link('Confirm', array('partner/BlockedMembers', 'id' => $user_details->id), array('class' => 'connect-3')); ?></div>
+                                                                                <div class="col-md-6"><a href="#" class="connect-4" data-dismiss="modal" id="cancel_block">Cancel</a></div>
+                                                                        </div>
+                                                                </div>
+
+                                                        </div>
+
+                                                </div>
+                                        </div>
+                                        <div id="myModal_block" class="modal fade" role="dialog">
+                                                <div class="modal-dialog">
+
+                                                        <!-- Modal content-->
+                                                        <div class="modal-content dialogs report">
+                                                                <div class="modal-header">
+                                                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                                </div>
+                                                                <div class="modal-body">
+                                                                        <?php if ($block_details->status == 0) { ?><span class="newpops_blocked">Are you sure you want to Block this Member ?</span>
+                                                                                <p>Blocked Members will not be able to view your Profile or contact you on newgen.com</p>
+                                                                        <?php } else { ?>
+                                                                                <span class="newpops_blocked">Are you sure you want to Un Block this Member ?</span>
+                                                                                <p>Un Blocked Members will not be able to view your Profile or contact you on newgen.com</p>
+                                                                        <?php } ?>
+                                                                        <div class="row">
+                                                                                <?php if ($block_details->status == 0) { ?>
+                                                                                        <div class="col-md-6"><?php echo CHtml::link('Confirm', array('partner/BlockedMembers', 'id' => $user_details->id), array('class' => 'connect-3')); ?></div>
+                                                                                <?php } else { ?>
+                                                                                        <div class="col-md-6"><?php echo CHtml::link('Confirm', array('partner/UnBlockedMembers', 'id' => $block_details->id), array('class' => 'connect-3')); ?></div>
+                                                                                <?php } ?>
+                                                                                <div class="col-md-6"><a href="#" class="connect-4" data-dismiss="modal" id="cancel_block">Cancel</a></div>
+                                                                        </div>
+                                                                </div>
+
+                                                        </div>
+
+                                                </div>
+                                        </div>
                                         <div class="clearfix">  </div>
                                         <?php if (!empty($similar_profiles)) { ?>
                                                 <h1>Similar Profiles</h1>

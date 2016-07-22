@@ -311,7 +311,7 @@
                                 </ul>
                                 <h3>Explore</h3>
                                 <ul class="list-unstyled">
-                                        <li><?php echo CHtml::link('Blocked Members', array('Myaccount/Message')); ?></li>
+                                        <li><?php echo CHtml::link('Blocked Members', array('Myaccount/ListBlockedMembers'), array('target' => 'blank')); ?></li>
                                         <li><?php echo CHtml::link('Favorite List', array('Myaccount/SentInvitations')); ?></li>
                                 </ul>
 
