@@ -305,4 +305,40 @@ class PartnerController extends Controller {
                 return $model;
         }
 
+        public function actionReportMisuse($id) {
+                $model = new ReportMisuse;
+                $model->attributes = $_POST['report_misuse'];
+                $model->user_id = Yii::app()->session['user']['id'];
+                $model->report_id = $id;
+                $model->status = 1;
+                $model->report_reason = $_POST['misuse_reason'];
+                $model->description = $_POST['misuse_description'];
+                $model->cb = Yii::app()->session['user']['id'];
+                $model->doc = date('Y-m-d');
+
+                if ($model->save(false)) {
+//                        $this->SuccessMail($model);
+                        $this->redirect(Yii::app()->request->urlReferrer);
+                }
+        }
+
+        public function SuccessMail($model) {
+                $user_details = UserDetails::model()->findByAttributes(array('id' => $model->user_id));
+                $report_details = UserDetails::model()->findByAttributes(array('id' => $model->report_id));
+                $admin = 'shahana@intersmart.in';
+                $admin_subject = $user_details->first_name . ' reported a misuse with NEWGEN.com';
+                $admin_message = $this->renderPartial('_report_admin_mail', array('model' => $model, 'user_details' => $user_details, 'report_details' => $report_details), true);
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+// More headers
+                $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
+                mail($admin, $admin_subject, $admin_message, $headers);
+        }
+
+        public function siteURL() {
+                $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+                $domainName = $_SERVER['HTTP_HOST'];
+                return $protocol . $domainName . '/newgen/';
+        }
+
 }

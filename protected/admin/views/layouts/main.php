@@ -341,6 +341,18 @@
                                                                 </li>
                                                         </ul>
                                                 </li>
+                                                <li>
+                                                        <a href="">
+
+                                                                <i class="fa fa-flag" aria-hidden="true"></i>
+                                                                <span class="title" >Misuse Report</span>
+                                                        </a>
+                                                        <ul>
+                                                                <li>
+                                                                        <?php echo CHtml::link('Misuse Report', array('/ReportMisuse/admin')); ?>
+                                                                </li>
+                                                        </ul>
+                                                </li>
 
                                         </ul>
 

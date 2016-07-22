@@ -94,23 +94,25 @@
                                                                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                        <span class="newpops_blocked">Report this Profile for misuse privately</span>
-                                                                        <select class="aps" name="reason">
-                                                                                <option value="0">Select reason for reporting this profile</option>
-                                                                                <option value="1">Fake or misleading information</option>
-                                                                                <option value="2">Multiple Profiles</option>
-                                                                                <option value="3">Phone number is incorrect</option>
-                                                                                <option value="4">Photos are fake or obscene</option>
-                                                                                <option value="5">Has sent abusive Emails/Chat</option>
-                                                                                <option value="6">Is already married/engaged</option>
-                                                                                <option value="7">Asking for money/scammer</option>
-                                                                                <option value="8">Other misuse reason</option>
-                                                                        </select>
-                                                                        <textarea name="misuse_description" class="form-control" rows="5" cols="50"></textarea>
-                                                                        <div class="row">
-                                                                                <div class="col-md-6"><?php echo CHtml::link('Confirm', array('partner/BlockedMembers', 'id' => $user_details->id), array('class' => 'connect-3')); ?></div>
-                                                                                <div class="col-md-6"><a href="#" class="connect-4" data-dismiss="modal" id="cancel_block">Cancel</a></div>
-                                                                        </div>
+                                                                        <form action="<?= Yii::app()->baseUrl; ?>/index.php/partner/ReportMisuse?id=<?php echo $user_details->id ?>" method="post" id="misuse_report">
+                                                                                <span class="newpops_blocked">Report this Profile for misuse privately</span>
+                                                                                <select class="aps" name="misuse_reason">
+                                                                                        <option value="0">Select reason for reporting this profile</option>
+                                                                                        <option value="1">Fake or misleading information</option>
+                                                                                        <option value="2">Multiple Profiles</option>
+                                                                                        <option value="3">Phone number is incorrect</option>
+                                                                                        <option value="4">Photos are fake or obscene</option>
+                                                                                        <option value="5">Has sent abusive Emails/Chat</option>
+                                                                                        <option value="6">Is already married/engaged</option>
+                                                                                        <option value="7">Asking for money/scammer</option>
+                                                                                        <option value="8">Other misuse reason</option>
+                                                                                </select>
+                                                                                <textarea name="misuse_description" class="form-control" placeholder="Description" rows="5" cols="50"></textarea>
+                                                                                <div class="row">
+                                                                                        <div class="col-md-6"><a href="#" class="connect-3"  data-dismiss="modal" id="cancel_block">Confirm</a></div>
+                                                                                        <div class="col-md-6"><a href="#" class="connect-4" data-dismiss="modal" id="cancel_block">Cancel</a></div>
+                                                                                </div>
+                                                                        </form>
                                                                 </div>
 
                                                         </div>
@@ -800,6 +802,15 @@
                 $(".val1").html(val1);
                 $(".val2").html(val2);
         });
+</script>
+<script>
+        $(document).ready(function () {
+                $(".connect-3").on('click', function () {
+                        $("form#misuse_report").submit();
+                        alert("Submit Successfully");
+                });
+        });
+
 </script>
 <script>
 
