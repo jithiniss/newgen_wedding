@@ -16,7 +16,7 @@ class Matches extends CWidget {
         public $id = '';
 
         public function run() {
-
+                $block_details = BlockedMembers::model()->findByAttributes(array('user_id' => $this->id));
                 $user = UserDetails::model()->findByAttributes(array('id' => $this->id));
                 $partner = PartnerDetails::model()->findByAttributes(array('user_id' => $this->id));
                 if ($user->gender == 1) {
@@ -194,7 +194,6 @@ class Matches extends CWidget {
                         'pageSize' => 25,
                     ),
                 ));
-
 
 
 

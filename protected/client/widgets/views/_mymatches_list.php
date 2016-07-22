@@ -117,7 +117,7 @@
 
                         <div class="commonz">
                                 <div class="col-sm-3 col-xs-3 zeros">
-                                        <label for="textinput" class="control-labelz">Profession	</label>
+                                        <label for="textinput" class="control-labelz">Profession</label>
                                 </div>
                                 <div class="col-sm-1 col-xs-1 zeros">
                                         <label for="textinput" class="control-labelz">:</label>
