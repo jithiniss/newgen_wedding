@@ -27,7 +27,7 @@ class PartnerController extends Controller {
                                 $interest = UserInterests::model()->findByAttributes(array('user_id' => $user_details->id));
 
                                 $similar_profile = $this->Similar($userid);
-                                $story = TellUsStory::model()->findAllByAttributes(array('admin_approval' => '1', 'status' => '1'));
+                                $story = TellUsStory::model()->findAllByAttributes(array('admin_approval' => '1', 'status' => '1'), array('limit' => 3));
                                 $profile_viewed = new ProfileVisitors;
                                 $profile_viewed->user_id = $current_user->user_id;
                                 $profile_viewed->visited_id = $userid;
