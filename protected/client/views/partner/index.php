@@ -65,7 +65,7 @@
                                         ?>
 
                                         <?php if ($user_details->photo != '') { ?>
-                                                <a class="doc1" href="#"><img class="albums" src="<?php echo Yii::app()->request->baseUrl; ?>/images/album.png">View Album</a>
+                                                <a class="doc1" href="#" data-toggle="modal" data-target="#lightbox"><img class="albums" src="<?php echo Yii::app()->request->baseUrl; ?>/images/album.png">View Album</a>
                                         <?php } else {
                                                 ?>
                                                 <?php echo CHtml::link('Request Photo', array('Partner/PhotoRequest', 'data' => $user_details->user_id), array('class' => 'doc1')); ?>
@@ -85,6 +85,41 @@
                                                 ?>
                                                 <?php if ($block_details->status == 0) { ?>Block<?php } else { ?>Unblock<?php } ?> <?php if ($user_details->gender == 1) { ?>him<?php }if ($user_details->gender == 2) { ?>her<?php } ?>
                                         </a>
+                                        <div class="modal fade carousel slide" id="lightbox">
+                                                <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                                <div class="modal-body">
+                                                                        <ol class="carousel-indicators">
+                                                                                <li data-target="#lightbox" data-slide-to="0" class="active"></li>
+                                                                                <li data-target="#lightbox" data-slide-to="1"></li>
+                                                                                <li data-target="#lightbox" data-slide-to="2"></li>
+                                                                                <li data-target="#lightbox" data-slide-to="3"></li>
+                                                                        </ol>
+                                                                        <div class="carousel-inner">
+                                                                                <div class="item active">
+                                                                                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/4.jpg" alt="First slide">
+                                                                                </div>
+                                                                                <div class="item">
+                                                                                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/3.jpg" alt="Second slide">
+                                                                                </div>
+                                                                                <div class="item">
+                                                                                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/2.jpg" alt="Third slide">
+                                                                                </div>
+                                                                                <div class="item">
+                                                                                        <img src="<?php echo Yii::app()->request->baseUrl; ?>/images/1.jpg" alt="Third slide">
+                                                                                </div>
+                                                                        </div><!-- /.carousel-inner -->
+                                                                        <a class="left carousel-control" href="#lightbox" role="button" data-slide="prev">
+                                                                                <span class="glyphicon glyphicon-chevron-left"></span>
+                                                                        </a>
+                                                                        <a class="right carousel-control" href="#lightbox" role="button" data-slide="next">
+                                                                                <span class="glyphicon glyphicon-chevron-right"></span>
+                                                                        </a>
+                                                                </div><!-- /.modal-body -->
+                                                        </div><!-- /.modal-content -->
+                                                </div><!-- /.modal-dialog -->
+                                        </div><!-- /.modal -->
+
                                         <div id="myModal_misuse" class="modal fade" role="dialog">
                                                 <div class="modal-dialog">
 
@@ -807,7 +842,7 @@
         $(document).ready(function () {
                 $(".connect-3").on('click', function () {
                         $("form#misuse_report").submit();
-                        alert("Submit Successfully");
+//                        alert("Submit Successfully");
                 });
         });
 

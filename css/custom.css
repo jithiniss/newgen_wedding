@@ -183,7 +183,10 @@ span.newpops_blocked {
         font-weight: 400;
         color: #666;
 }
+.carousel-inner img{
+        margin-left: 115px;
 
+}
 @media screen and (min-width: 480px) {
         .tokenize-sample { width: 300px }
 }
