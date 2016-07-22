@@ -29,7 +29,7 @@
                                                         <?php } else if ($user->gender == 2) { ?>
                                                                 <img class="center-block line" src="<?php echo Yii::app()->request->baseUrl; ?>/images/demo-female.jpg">
 
-                                                        <?php
+                                                                <?php
                                                         }
                                                 }
                                                 ?>
@@ -48,16 +48,16 @@
                                 <h4><?php echo $user->first_name; ?> <span class="ng">| <?php echo $user->user_id; ?></span> </h4>
 
 
-                                        <?php if (Yii::app()->user->hasFlash('plan_success')): ?>
+                                <?php if (Yii::app()->user->hasFlash('plan_success')): ?>
                                         <div class="alert alert-success">
-                                        <?php echo Yii::app()->user->getFlash('plan_success'); ?>
+                                                <?php echo Yii::app()->user->getFlash('plan_success'); ?>
                                         </div>
                                 <?php endif; ?>
-                                        <?php if (Yii::app()->user->hasFlash('plan_error')): ?>
+                                <?php if (Yii::app()->user->hasFlash('plan_error')): ?>
                                         <div class="alert alert-danger">
-                                        <?php echo Yii::app()->user->getFlash('plan_error'); ?>
+                                                <?php echo Yii::app()->user->getFlash('plan_error'); ?>
                                         </div>
-<?php endif; ?>
+                                <?php endif; ?>
 
                                 <div class="prog-1">
                                         <span class="may">Your Profile Complete  </span>
@@ -120,14 +120,14 @@
                                                 </div>
 
                                                 <div class="rel-2">
-                                                                <?php if ($my_plan->status != 0) { ?>
+                                                        <?php if ($my_plan->status != 0) { ?>
                                                                 <h6>
-                                                                <?php echo CHtml::link('Upgrade<i class="fa cart fa-caret-right"></i>', array('register/FifthStep'), array("class" => "edits")); ?>
+                                                                        <?php echo CHtml::link('Upgrade<i class="fa cart fa-caret-right"></i>', array('register/FifthStep'), array("class" => "edits")); ?>
                                                                 </h6>
-<?php } ?>
+                                                        <?php } ?>
                                                 </div>
                                         </div>
-<?php if ($my_plan->status != 0) { ?>
+                                        <?php if ($my_plan->status != 0) { ?>
                                                 <div class="strip-paddingz">
 
 
@@ -178,7 +178,7 @@
                                                                 </div>
                                                         </div>
                                                         <div class="col-md-6">
-        <?php if ($my_plan->view_contact != 0) { ?>
+                                                                <?php if ($my_plan->view_contact != 0) { ?>
                                                                         <div class="run">
 
                                                                                 <div class="col-sm-5 col-xs-6 zeros">
@@ -198,7 +198,7 @@
                                                                                                 ?></label>
                                                                                 </div>
                                                                         </div>
-        <?php } ?>
+                                                                <?php } ?>
 
                                                                 <div class="run">
                                                                         <div class="col-sm-5 col-xs-6 zeros">
@@ -218,7 +218,7 @@
                                                                                         ?>
                                                                         </div>
                                                                 </div>
-        <?php if ($my_plan->send_message != 0) { ?>
+                                                                <?php if ($my_plan->send_message != 0) { ?>
                                                                         <div class="run">
                                                                                 <div class="col-sm-5 col-xs-6 zeros">
                                                                                         <label for="textinput" class="control-labelz">Send	Message </label>
@@ -237,7 +237,7 @@
                                                                                                 ?>
                                                                                 </div>
                                                                         </div>
-        <?php } ?>
+                                                                <?php } ?>
                                                                 <div class="run">
                                                                         <div class="col-sm-5 col-xs-6 zeros">
                                                                                 <label for="textinput" class="control-labelz">Search</label>
@@ -309,6 +309,11 @@
                                         $this->renderPartial('_leftSideQuickLinks');
                                         ?>
                                 </ul>
+                                <h3>Explore</h3>
+                                <ul class="list-unstyled">
+                                        <li><?php echo CHtml::link('Blocked Members', array('Myaccount/Message')); ?></li>
+                                        <li><?php echo CHtml::link('Favorite List', array('Myaccount/SentInvitations')); ?></li>
+                                </ul>
 
                         </div>
                         <div class="col-md-9 mynewgenz actions">
@@ -325,7 +330,7 @@
 
 
                                                 <!--****-->
-<?php if (!empty($matches)) { ?>
+                                                <?php if (!empty($matches)) { ?>
                                                         <div class="listen">
                                                                 <div class="match">
                                                                         <div class="rel-1">
@@ -355,7 +360,7 @@
                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
                                                                                                                                         <?php } else { ?>
                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                        <?php } ?>
+                                                                                                                                        <?php } ?>
                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                         <p>Visible on Accept/Sent</p>
                                                                                                                                 </div>
@@ -366,12 +371,12 @@
                                                                                                                                                 echo "," . MasterHeight::model()->findByPk($match->height)->height;
                                                                                                                                         }
                                                                                                                                         ?></h1>
-                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
                                                                                                                                 <!--<a class="viewallz" href="#">Full profile</a>-->
                                                                                                                         </div>
                                                                                                                 </div>
 
-                <?php } if ($match->photo_visibility == 1) { ?>
+                                                                                                        <?php } if ($match->photo_visibility == 1) { ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
                                                                                                                                 <div class="profile ">
@@ -385,11 +390,11 @@
                                                                                                                                                 echo "," . MasterHeight::model()->findByPk($match->height)->height;
                                                                                                                                         }
                                                                                                                                         ?></h1>
-                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
 
                                                                                                                         </div>
                                                                                                                 </div>
-                <?php } if ($match->photo_visibility == 3) { ?>
+                                                                                                        <?php } if ($match->photo_visibility == 3) { ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
                                                                                                                                 <div class="profile ">
@@ -397,7 +402,7 @@
                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
                                                                                                                                         <?php } else { ?>
                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                        <?php } ?>                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                                                                                                        <?php } ?>                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                         <p>Password Protected</p>
                                                                                                                                 </div>
                                                                                                                                 <h1><?= $match->first_name; ?></h1>
@@ -407,7 +412,7 @@
                                                                                                                                                 echo "," . MasterHeight::model()->findByPk($match->height)->height;
                                                                                                                                         }
                                                                                                                                         ?></h1>
-                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
                                                                                                                         </div>
                                                                                                                 </div>
                                                                                                                 <?php
@@ -422,7 +427,7 @@
 
                                                         </div>
 
-<?php } ?>
+                                                <?php } ?>
 
 
 
@@ -431,7 +436,7 @@
 
 
                                                 <!--****-->
-<?php if (!empty($twowaymatche)) { ?>
+                                                <?php if (!empty($twowaymatche)) { ?>
                                                         <div class="listen">
                                                                 <div class="match">
                                                                         <div class="rel-1">
@@ -466,11 +471,11 @@
                                                                                                                                                 echo "," . MasterHeight::model()->findByPk($twowaymatche->height)->height;
                                                                                                                                         }
                                                                                                                                         ?></h1>
-                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
                                                                                                                         </div>
                                                                                                                 </div>
 
-                <?php } if ($twowaymatche->photo_visibility == 2) { ?>
+                                                                                                        <?php } if ($twowaymatche->photo_visibility == 2) { ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
                                                                                                                                 <div class="profile ">
@@ -478,7 +483,7 @@
                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
                                                                                                                                         <?php } else { ?>
                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                        <?php } ?>                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                                                                                                        <?php } ?>                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                         <p>Visible on Accept/Sent</p>
                                                                                                                                 </div>
                                                                                                                                 <h1><?= $twowaymatche->first_name; ?></h1>
@@ -488,10 +493,10 @@
                                                                                                                                                 echo "," . MasterHeight::model()->findByPk($twowaymatche->height)->height;
                                                                                                                                         }
                                                                                                                                         ?></h1>
-                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
                                                                                                                         </div>
                                                                                                                 </div>
-                <?php } if ($twowaymatche->photo_visibility == 3) { ?>
+                                                                                                        <?php } if ($twowaymatche->photo_visibility == 3) { ?>
                                                                                                                 <div class="item">
                                                                                                                         <div class="main">
                                                                                                                                 <div class="profile ">
@@ -499,7 +504,7 @@
                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
                                                                                                                                         <?php } else { ?>
                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                        <?php } ?>                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                                                                                                        <?php } ?>                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                         <p>Password Protected</p>
                                                                                                                                 </div>
                                                                                                                                 <h1><?= $twowaymatche->first_name; ?></h1>
@@ -509,7 +514,7 @@
                                                                                                                                                 echo "," . MasterHeight::model()->findByPk($twowaymatche->height)->height;
                                                                                                                                         }
                                                                                                                                         ?></h1>
-                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
                                                                                                                         </div>
                                                                                                                 </div>
                                                                                                                 <?php
@@ -523,7 +528,7 @@
                                                                 </div>
 
                                                         </div>
-<?php } ?>
+                                                <?php } ?>
 
 
 
@@ -531,7 +536,7 @@
 
 
                                                 <!--****-->
-<?php if (!empty($profile_visitors)) { ?>
+                                                <?php if (!empty($profile_visitors)) { ?>
                                                         <div class="listen">
                                                                 <div class="match">
                                                                         <div class="rel-1">
@@ -566,7 +571,7 @@
                                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
                                                                                                                                                         <?php } else { ?>
                                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                        <?php } ?>                                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                                                                                                                        <?php } ?>                                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                                         <p>Visible on Accept/sent</p>
                                                                                                                                                 </div>
                                                                                                                                                 <h1><?= $visitor->first_name; ?></h1>
@@ -576,10 +581,10 @@
                                                                                                                                                                 echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
                                                                                                                                                         }
                                                                                                                                                         ?></h1>
-                                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $visitor->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $visitor->user_id), array('class' => 'viewallz')); ?>
                                                                                                                                         </div>
                                                                                                                                 </div>
-                                <?php } if ($visitor->photo_visibility == 1) { ?>
+                                                                                                                        <?php } if ($visitor->photo_visibility == 1) { ?>
 
 
                                                                                                                                 <div class="item">
@@ -595,10 +600,10 @@
                                                                                                                                                                 echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
                                                                                                                                                         }
                                                                                                                                                         ?></h1>
-                                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $visitor->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $visitor->user_id), array('class' => 'viewallz')); ?>
                                                                                                                                         </div>
                                                                                                                                 </div>
-                                <?php } if ($visitor->photo_visibility == 3) { ?>
+                                                                                                                        <?php } if ($visitor->photo_visibility == 3) { ?>
                                                                                                                                 <div class="item">
                                                                                                                                         <div class="main">
                                                                                                                                                 <div class="profile ">
@@ -606,7 +611,7 @@
                                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
                                                                                                                                                         <?php } else { ?>
                                                                                                                                                                 <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                        <?php } ?>                                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
+                                                                                                                                                        <?php } ?>                                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
                                                                                                                                                         <p>Password Protected</p>
                                                                                                                                                 </div>
                                                                                                                                                 <h1><?= $visitor->first_name; ?></h1>
@@ -616,7 +621,7 @@
                                                                                                                                                                 echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
                                                                                                                                                         }
                                                                                                                                                         ?></h1>
-                                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $visitor->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $visitor->user_id), array('class' => 'viewallz')); ?>
                                                                                                                                         </div>
                                                                                                                                 </div>
 
@@ -634,7 +639,7 @@
                                                                 </div>
 
                                                         </div>
-<?php } ?>
+                                                <?php } ?>
 
 
 
