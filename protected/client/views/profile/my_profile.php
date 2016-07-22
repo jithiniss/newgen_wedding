@@ -41,7 +41,7 @@
 
                                     </div>
                                     <?php
-                                    if($myProfile->photo != "") {
+                                    if ($myProfile->photo != "") {
                                             $folder = Yii::app()->Upload->folderName(0, 1000, $myProfile->id);
                                             $userPic = explode('.', $myProfile->photo);
 
@@ -75,7 +75,7 @@
                                 <div class="col-sm-7 col-xs-7 zeros">
                                     <label for="textinput" class="control-labelz"><?php echo date('Y') - date('Y', strtotime($myProfile->dob_year)); ?>
                                         <?php
-                                        if($myProfile->height != 0) {
+                                        if ($myProfile->height != 0) {
                                                 echo " / " . MasterHeight::model()->findByPk($myProfile->height)->height;
                                         }
                                         ?>
@@ -93,7 +93,7 @@
                                 <div class="col-sm-7 col-xs-7 zeros">
                                     <label for="textinput" class="control-labelz">
                                         <?php
-                                        if($myProfile->marital_status != 0) {
+                                        if ($myProfile->marital_status != 0) {
                                                 echo MasterMaritalStatus::model()->findByPk($myProfile->marital_status)->marital_status;
                                         } else {
                                                 echo '--';
@@ -114,7 +114,7 @@
                                     <label for="textinput" class="control-labelz">
 
                                         <?php
-                                        if($myProfile->profile_for != 0) {
+                                        if ($myProfile->profile_for != 0) {
                                                 echo MasterProfileFor::model()->findByPk($myProfile->profile_for)->profile_for;
                                         } else {
                                                 echo '--';
@@ -134,12 +134,12 @@
                                 <div class="col-sm-7 col-xs-7 zeros">
                                     <label for="textinput" class="control-labelz">
                                         <?php
-                                        if($myProfile->religion != 0) {
+                                        if ($myProfile->religion != 0) {
                                                 echo MasterReligion::model()->findByPk($myProfile->religion)->religion;
                                         }
                                         ?>
                                         <?php
-                                        if($myProfile->caste != 0) {
+                                        if ($myProfile->caste != 0) {
                                                 echo " / " . MasterCaste::model()->findByPk($myProfile->caste)->caste;
                                         }
                                         ?>
@@ -158,7 +158,7 @@
                                 <div class="col-sm-7 col-xs-7 zeros">
                                     <label for="textinput" class="control-labelz">
                                         <?php
-                                        if($myProfile->city != 0 || $myProfile->city != "") {
+                                        if ($myProfile->city != 0 || $myProfile->city != "") {
 
                                                 echo MasterCity::model()->findByPk($myProfile->city)->city;
                                         } else {
@@ -239,7 +239,7 @@
                                     <div class="col-sm-12 col-xs-12 zeros">
                                         <p>
                                             <?php
-                                            if($myProfile->about_me != "") {
+                                            if ($myProfile->about_me != "") {
                                                     echo $myProfile->about_me;
                                             } else {
                                                     echo "Write about Personality, Family Details, Career, Partner Expectations etc.";
@@ -296,7 +296,7 @@
                                         </div>
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz"><?php
-                                                if($myProfile->dob != '0000-00-00') {
+                                                if ($myProfile->dob != '0000-00-00') {
                                                         echo date('d-F-Y', strtotime($myProfile->dob));
                                                 } else {
                                                         echo '--';
@@ -316,7 +316,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->marital_status != 0) {
+                                                if ($myProfile->marital_status != 0) {
                                                         echo MasterMaritalStatus::model()->findByPk($myProfile->marital_status)->marital_status;
                                                 } else {
                                                         echo '--';
@@ -337,7 +337,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->height != 0) {
+                                                if ($myProfile->height != 0) {
                                                         echo MasterHeight::model()->findByPk($myProfile->height)->height;
                                                 } else {
                                                         echo '--';
@@ -358,7 +358,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->skin_tone != 0) {
+                                                if ($myProfile->skin_tone != 0) {
                                                         echo MasterSkinTone::model()->findByPk($myProfile->skin_tone)->skin_tone;
                                                 } else {
                                                         echo '--';
@@ -379,7 +379,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->body_type != 0) {
+                                                if ($myProfile->body_type != 0) {
                                                         echo MasterBodyType::model()->findByPk($myProfile->body_type)->body_type;
                                                 } else {
                                                         echo '--';
@@ -399,7 +399,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->weight != 0) {
+                                                if ($myProfile->weight != 0) {
                                                         echo $myProfile->weight . ' kgs';
                                                 } else {
                                                         echo '--';
@@ -418,7 +418,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->grow_up_in != 0) {
+                                                if ($myProfile->grow_up_in != 0) {
                                                         echo MasterCountry::model()->findByPk($myProfile->grow_up_in)->country;
                                                 } else {
                                                         echo '--';
@@ -448,7 +448,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->diet != 0) {
+                                                if ($myProfile->diet != 0) {
                                                         echo MasterDiet::model()->findByPk($myProfile->diet)->diet;
                                                 } else {
                                                         echo '--';
@@ -469,11 +469,11 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->drink == 1) {
+                                                if ($myProfile->drink == 1) {
                                                         $drink = 'No';
-                                                } else if($myProfile->drink == 2) {
+                                                } else if ($myProfile->drink == 2) {
                                                         $drink = 'Yes';
-                                                } else if($myProfile->drink == 3) {
+                                                } else if ($myProfile->drink == 3) {
                                                         $drink = 'Occasionally';
                                                 } else {
                                                         $drink = '--';
@@ -495,11 +495,11 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->smoke == 1) {
+                                                if ($myProfile->smoke == 1) {
                                                         $smoke = 'No';
-                                                } else if($myProfile->smoke == 2) {
+                                                } else if ($myProfile->smoke == 2) {
                                                         $smoke = 'Yes';
-                                                } else if($myProfile->smoke == 3) {
+                                                } else if ($myProfile->smoke == 3) {
                                                         $smoke = 'Occasionally';
                                                 } else {
                                                         $smoke = '--';
@@ -532,7 +532,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->nakshatra != 0) {
+                                                if ($myProfile->nakshatra != 0) {
                                                         echo MasterNakshatra::model()->findByPk($myProfile->nakshatra)->nakshatra;
                                                 } else {
                                                         echo '--';
@@ -553,7 +553,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->blood_group != 0) {
+                                                if ($myProfile->blood_group != 0) {
                                                         echo MasterBloodGroup::model()->findByPk($myProfile->blood_group)->blood_group;
                                                 } else {
                                                         echo '--';
@@ -573,7 +573,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->health_info != 0) {
+                                                if ($myProfile->health_info != 0) {
                                                         echo MasterHealthInformation::model()->findByPk($myProfile->health_info)->health_info;
                                                 } else {
                                                         echo '--';
@@ -594,9 +594,9 @@
                                             <label for="textinput" class="control-labelz">
 
                                                 <?php
-                                                if($myProfile->disablity == 1) {
+                                                if ($myProfile->disablity == 1) {
                                                         $disablity = 'No';
-                                                } else if($myProfile->disablity == 2) {
+                                                } else if ($myProfile->disablity == 2) {
                                                         $disablity = 'Physically Disabled';
                                                 } else {
                                                         $disablity = '--';
@@ -644,7 +644,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->religion != 0) {
+                                                if ($myProfile->religion != 0) {
                                                         echo MasterReligion::model()->findByPk($myProfile->religion)->religion;
                                                 } else {
                                                         echo '--';
@@ -666,7 +666,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->caste != 0) {
+                                                if ($myProfile->caste != 0) {
                                                         echo MasterCaste::model()->findByPk($myProfile->caste)->caste;
                                                 } else {
                                                         echo '--';
@@ -675,7 +675,7 @@
                                             </label>
                                         </div>
                                     </div>
-                                    <?php if($myProfile->sub_caste != 0) { ?>
+                                    <?php if ($myProfile->sub_caste != 0) { ?>
                                             <div class="copyz">
                                                 <div class="col-sm-5 col-xs-3 zeros">
                                                     <label for="textinput" class="control-labelz">Sub community </label>
@@ -686,7 +686,7 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($myProfile->sub_caste != 0) {
+                                                        if ($myProfile->sub_caste != 0) {
                                                                 echo MasterSubCaste::model()->findByPk($myProfile->sub_caste)->sub_caste;
                                                         } else {
                                                                 echo '--';
@@ -722,7 +722,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->mothertongue != 0) {
+                                                if ($myProfile->mothertongue != 0) {
                                                         echo MasterMotherTongue::model()->findByPk($myProfile->mothertongue)->mother_tongue;
                                                 } else {
                                                         echo '--';
@@ -743,11 +743,11 @@
                                             <label for="textinput" class="control-labelz">
 
                                                 <?php
-                                                if($myProfile->suddha_jadhagam == 1) {
+                                                if ($myProfile->suddha_jadhagam == 1) {
                                                         $suddha_jadhagam = 'Yes';
-                                                } else if($myProfile->suddha_jadhagam == 2) {
+                                                } else if ($myProfile->suddha_jadhagam == 2) {
                                                         $suddha_jadhagam = 'No';
-                                                } else if($myProfile->suddha_jadhagam == 3) {
+                                                } else if ($myProfile->suddha_jadhagam == 3) {
                                                         $suddha_jadhagam = 'Dont No';
                                                 } else {
                                                         $suddha_jadhagam = '--';
@@ -793,7 +793,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->father_status != 0) {
+                                                if ($myProfile->father_status != 0) {
                                                         echo MasterParentStatus::model()->findByPk($myProfile->father_status)->parent_status;
                                                 } else {
                                                         echo '--';
@@ -818,7 +818,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->mother_status != 0) {
+                                                if ($myProfile->mother_status != 0) {
                                                         echo MasterParentStatus::model()->findByPk($myProfile->mother_status)->parent_status;
                                                 } else {
                                                         echo '--';
@@ -839,7 +839,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->city != 0) {
+                                                if ($myProfile->city != 0) {
 
                                                         echo MasterCity::model()->findByPk($myProfile->city)->city;
                                                 } else {
@@ -862,7 +862,7 @@
                                             <label for="textinput" class="control-labelz">
 
                                                 <?php
-                                                if($myProfile->home_town != '') {
+                                                if ($myProfile->home_town != '') {
                                                         echo $myProfile->home_town;
                                                 } else {
                                                         echo '--';
@@ -893,7 +893,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->num_of_unmarried_brother != 0 || $myProfile->num_of_married_brother != 0) {
+                                                if ($myProfile->num_of_unmarried_brother != 0 || $myProfile->num_of_married_brother != 0) {
                                                         echo $myProfile->num_of_unmarried_brother . ' of which married ' . $myProfile->num_of_married_brother;
                                                 } else {
                                                         echo 0;
@@ -914,7 +914,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->num_of_unmarried_sister != 0 || $myProfile->num_of_married_sister != 0) {
+                                                if ($myProfile->num_of_unmarried_sister != 0 || $myProfile->num_of_married_sister != 0) {
                                                         echo $myProfile->num_of_unmarried_sister . ' of which married ' . $myProfile->num_of_married_sister;
                                                 } else {
                                                         echo 0;
@@ -935,7 +935,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->family_type != 0) {
+                                                if ($myProfile->family_type != 0) {
                                                         echo MasterFamilyType::model()->findByPk($myProfile->family_type)->family_type;
                                                 } else {
                                                         echo '--';
@@ -955,7 +955,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->family_value != 0) {
+                                                if ($myProfile->family_value != 0) {
                                                         echo MasterFamilyValue::model()->findByPk($myProfile->family_value)->family_value;
                                                 } else {
                                                         echo '--';
@@ -975,7 +975,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->affluence_level != 0) {
+                                                if ($myProfile->affluence_level != 0) {
                                                         echo MasterAffluenceLevel::model()->findByPk($myProfile->affluence_level)->affluence_level;
                                                 } else {
                                                         echo '--';
@@ -1017,10 +1017,10 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->education_level != 0) {
+                                                if ($myProfile->education_level != 0) {
                                                         echo MasterEducationLevel::model()->findByPk($myProfile->education_level)->education_level;
                                                 }
-                                                if($myProfile->education_field != 0) {
+                                                if ($myProfile->education_field != 0) {
                                                         echo " - " . MasterEducationField::model()->findByPk($myProfile->education_field)->education_field;
                                                 }
                                                 ?>
@@ -1043,7 +1043,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->working_with != 0) {
+                                                if ($myProfile->working_with != 0) {
                                                         echo MasterWorkingWith::model()->findByPk($myProfile->working_with)->working_with;
                                                 } else {
                                                         echo '--';
@@ -1068,7 +1068,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->working_as != 0) {
+                                                if ($myProfile->working_as != 0) {
                                                         echo MasterWorkingAs::model()->findByPk($myProfile->working_as)->working_as;
                                                 } else {
                                                         echo '--';
@@ -1089,7 +1089,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->annual_income != 0) {
+                                                if ($myProfile->annual_income != 0) {
                                                         echo MasterAnnualIncome::model()->findByPk($myProfile->annual_income)->income_from;
                                                 } else {
                                                         echo '--';
@@ -1136,7 +1136,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->city != 0) {
+                                                if ($myProfile->city != 0) {
                                                         echo MasterCity::model()->findByPk($myProfile->city)->city;
                                                 } else {
                                                         echo '--';
@@ -1161,7 +1161,7 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($myProfile->state != 0) {
+                                                if ($myProfile->state != 0) {
                                                         echo MasterState::model()->findByPk($myProfile->state)->state;
                                                 } else {
                                                         echo '--';
@@ -1181,7 +1181,7 @@
                                             <label for="textinput" class="control-labelz">
 
                                                 <?php
-                                                if($myProfile->zip_code != '' || $myProfile->zip_code != 0) {
+                                                if ($myProfile->zip_code != '' || $myProfile->zip_code != 0) {
                                                         echo $myProfile->zip_code;
                                                 } else {
                                                         echo '--';
@@ -1224,12 +1224,12 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($userInterest->hobbies != '') {
+                                                if ($userInterest->hobbies != '') {
 
                                                         $userInterests = explode(',', $userInterest->hobbies);
                                                         $hs = 1;
-                                                        foreach($userInterests as $userInterestss) {
-                                                                if($hs == 1) {
+                                                        foreach ($userInterests as $userInterestss) {
+                                                                if ($hs == 1) {
                                                                         echo MasterHobbies::model()->findByPk($userInterestss)->hobbies;
                                                                 } else {
                                                                         echo ", " . MasterHobbies::model()->findByPk($userInterestss)->hobbies;
@@ -1260,12 +1260,12 @@
                                         <div class="col-sm-6 col-xs-8 zeros">
                                             <label for="textinput" class="control-labelz">
                                                 <?php
-                                                if($userInterest->music != '') {
+                                                if ($userInterest->music != '') {
 
                                                         $usermusic = explode(',', $userInterest->music);
                                                         $umu = 1;
-                                                        foreach($usermusic as $usermusics) {
-                                                                if($umu == 1) {
+                                                        foreach ($usermusic as $usermusics) {
+                                                                if ($umu == 1) {
                                                                         echo MasterMusic::model()->findByPk($usermusics)->music;
                                                                 } else {
                                                                         echo ", " . MasterMusic::model()->findByPk($usermusics)->music;
@@ -1292,12 +1292,12 @@
                                             <label for="textinput" class="control-labelz">
 
                                                 <?php
-                                                if($userInterest->movies != '') {
+                                                if ($userInterest->movies != '') {
 
                                                         $usermovies = explode(',', $userInterest->movies);
                                                         $umm = 1;
-                                                        foreach($usermovies as $usermovie) {
-                                                                if($umm == 1) {
+                                                        foreach ($usermovies as $usermovie) {
+                                                                if ($umm == 1) {
                                                                         echo MasterMovies::model()->findByPk($usermovie)->movies;
                                                                 } else {
                                                                         echo ", " . MasterMovies::model()->findByPk($usermovie)->movies;
@@ -1322,12 +1322,12 @@
                                             <label for="textinput" class="control-labelz">
 
                                                 <?php
-                                                if($userInterest->sports != '') {
+                                                if ($userInterest->sports != '') {
 
                                                         $usersports = explode(',', $userInterest->sports);
                                                         $ums = 1;
-                                                        foreach($usersports as $usersport) {
-                                                                if($ums == 1) {
+                                                        foreach ($usersports as $usersport) {
+                                                                if ($ums == 1) {
                                                                         echo MasterSports::model()->findByPk($usersport)->sports;
                                                                 } else {
                                                                         echo ", " . MasterSports::model()->findByPk($usersport)->sports;
@@ -1352,7 +1352,7 @@
 
                         </div>
                         <?php
-                        if(!empty($partnerDetails)) {
+                        if (!empty($partnerDetails)) {
                                 ?>
                                 <div class="strip stripsss">
                                     <h2 class="partner_det ">Partner Preference</h2>
@@ -1402,14 +1402,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->marital_status != '') {
-                                                                if($partnerDetails->marital_status == '-1') {
+                                                        if ($partnerDetails->marital_status != '') {
+                                                                if ($partnerDetails->marital_status == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $partner_marital_status = explode(',', $partnerDetails->marital_status);
                                                                         $pms = 1;
-                                                                        foreach($partner_marital_status as $partner_marital_s) {
-                                                                                if($pms == 1) {
+                                                                        foreach ($partner_marital_status as $partner_marital_s) {
+                                                                                if ($pms == 1) {
                                                                                         echo MasterMaritalStatus::model()->findByPk($partner_marital_s)->marital_status;
                                                                                 } else {
                                                                                         echo ", " . MasterMaritalStatus::model()->findByPk($partner_marital_s)->marital_status;
@@ -1452,14 +1452,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->skin_tone != '') {
-                                                                if($partnerDetails->skin_tone == '-1') {
+                                                        if ($partnerDetails->skin_tone != '') {
+                                                                if ($partnerDetails->skin_tone == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $profile_skin = explode(',', $partnerDetails->skin_tone);
                                                                         $ho = 1;
-                                                                        foreach($profile_skin as $profile_skins) {
-                                                                                if($ho == 1) {
+                                                                        foreach ($profile_skin as $profile_skins) {
+                                                                                if ($ho == 1) {
                                                                                         echo MasterSkinTone::model()->findByPk($profile_skins)->skin_tone;
                                                                                 } else {
                                                                                         echo ", " . MasterSkinTone::model()->findByPk($profile_skins)->skin_tone;
@@ -1485,14 +1485,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->body_type != '') {
-                                                                if($partnerDetails->body_type == '-1') {
+                                                        if ($partnerDetails->body_type != '') {
+                                                                if ($partnerDetails->body_type == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $profile_body = explode(',', $partnerDetails->body_type);
                                                                         $hi = 1;
-                                                                        foreach($profile_body as $profile_bodys) {
-                                                                                if($hi == 1) {
+                                                                        foreach ($profile_body as $profile_bodys) {
+                                                                                if ($hi == 1) {
                                                                                         echo MasterBodyType::model()->findByPk($profile_bodys)->body_type;
                                                                                 } else {
                                                                                         echo ", " . MasterBodyType::model()->findByPk($profile_bodys)->body_type;
@@ -1519,14 +1519,14 @@
                                                     <label for="textinput" class="control-labelz">
 
                                                         <?php
-                                                        if($partnerDetails->country_grew_up != '') {
-                                                                if($partnerDetails->country_grew_up == '-1') {
+                                                        if ($partnerDetails->country_grew_up != '') {
+                                                                if ($partnerDetails->country_grew_up == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $country_grew_up = explode(',', $partnerDetails->country_grew_up);
                                                                         $cgp = 1;
-                                                                        foreach($country_grew_up as $country_grew_ups) {
-                                                                                if($cgp == 1) {
+                                                                        foreach ($country_grew_up as $country_grew_ups) {
+                                                                                if ($cgp == 1) {
                                                                                         echo MasterCountry::model()->findByPk($country_grew_ups)->country;
                                                                                 } else {
                                                                                         echo ", " . MasterCountry::model()->findByPk($country_grew_ups)->country;
@@ -1558,14 +1558,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->profile_created_by != '') {
-                                                                if($partnerDetails->profile_created_by == '-1') {
+                                                        if ($partnerDetails->profile_created_by != '') {
+                                                                if ($partnerDetails->profile_created_by == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $profile_cret = explode(',', $partnerDetails->profile_created_by);
                                                                         $hh = 1;
-                                                                        foreach($profile_cret as $profile_crets) {
-                                                                                if($hh == 1) {
+                                                                        foreach ($profile_cret as $profile_crets) {
+                                                                                if ($hh == 1) {
                                                                                         echo MasterProfileFor::model()->findByPk($profile_crets)->profile_for;
                                                                                 } else {
                                                                                         echo ", " . MasterProfileFor::model()->findByPk($profile_crets)->profile_for;
@@ -1606,12 +1606,12 @@
                                                     <label for="textinput" class="control-labelz">
 
                                                         <?php
-                                                        if($partnerDetails->drink != '') {
-                                                                if($partnerDetails->drink == 1) {
+                                                        if ($partnerDetails->drink != '') {
+                                                                if ($partnerDetails->drink == 1) {
                                                                         echo 'No';
-                                                                } elseif($partnerDetails->drink == 2) {
+                                                                } elseif ($partnerDetails->drink == 2) {
                                                                         echo 'Yes';
-                                                                } elseif($partnerDetails->drink == 3) {
+                                                                } elseif ($partnerDetails->drink == 3) {
                                                                         echo 'Occasionally';
                                                                 } else {
                                                                         echo "Doesn't Matter";
@@ -1633,14 +1633,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->diet != '') {
-                                                                if($partnerDetails->diet == '-1') {
+                                                        if ($partnerDetails->diet != '') {
+                                                                if ($partnerDetails->diet == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $profile_diet = explode(',', $partnerDetails->diet);
                                                                         $hs = 1;
-                                                                        foreach($profile_diet as $profile_diets) {
-                                                                                if($hs == 1) {
+                                                                        foreach ($profile_diet as $profile_diets) {
+                                                                                if ($hs == 1) {
                                                                                         echo MasterDiet::model()->findByPk($profile_diets)->diet;
                                                                                 } else {
                                                                                         echo ", " . MasterDiet::model()->findByPk($profile_diets)->diet;
@@ -1667,12 +1667,12 @@
                                                     <label for="textinput" class="control-labelz">
 
                                                         <?php
-                                                        if($partnerDetails->smoke != 0) {
-                                                                if($partnerDetails->smoke == 1) {
+                                                        if ($partnerDetails->smoke != 0) {
+                                                                if ($partnerDetails->smoke == 1) {
                                                                         echo 'No';
-                                                                } elseif($partnerDetails->smoke == 2) {
+                                                                } elseif ($partnerDetails->smoke == 2) {
                                                                         echo 'Yes';
-                                                                } elseif($partnerDetails->smoke == 3) {
+                                                                } elseif ($partnerDetails->smoke == 3) {
                                                                         echo 'Occasionally';
                                                                 } else {
                                                                         echo "Doesn't Matter";
@@ -1719,14 +1719,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->religion != '') {
-                                                                if($partnerDetails->religion == '-1') {
+                                                        if ($partnerDetails->religion != '') {
+                                                                if ($partnerDetails->religion == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $partner_religion = explode(',', $partnerDetails->religion);
                                                                         $hsr = 1;
-                                                                        foreach($partner_religion as $partner_religions) {
-                                                                                if($hsr == 1) {
+                                                                        foreach ($partner_religion as $partner_religions) {
+                                                                                if ($hsr == 1) {
                                                                                         echo MasterReligion::model()->findByPk($partner_religions)->religion;
                                                                                 } else {
                                                                                         echo ", " . MasterReligion::model()->findByPk($partner_religions)->religion;
@@ -1757,14 +1757,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->caste != '') {
-                                                                if($partnerDetails->caste == '-1') {
+                                                        if ($partnerDetails->caste != '') {
+                                                                if ($partnerDetails->caste == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $partner_caste = explode(',', $partnerDetails->caste);
                                                                         $hsb = 1;
-                                                                        foreach($partner_caste as $partner_castes) {
-                                                                                if($hsb == 1) {
+                                                                        foreach ($partner_caste as $partner_castes) {
+                                                                                if ($hsb == 1) {
                                                                                         echo MasterCaste::model()->findByPk($partner_castes)->caste;
                                                                                 } else {
                                                                                         echo ", " . MasterCaste::model()->findByPk($partner_castes)->caste;
@@ -1804,14 +1804,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->mothertongue != '') {
-                                                                if($partnerDetails->mothertongue == '-1') {
+                                                        if ($partnerDetails->mothertongue != '') {
+                                                                if ($partnerDetails->mothertongue == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $profile_mothertongue = explode(',', $partnerDetails->mothertongue);
                                                                         $mt = 1;
-                                                                        foreach($profile_mothertongue as $profile_mothertongues) {
-                                                                                if($mt == 1) {
+                                                                        foreach ($profile_mothertongue as $profile_mothertongues) {
+                                                                                if ($mt == 1) {
                                                                                         echo MasterMotherTongue::model()->findByPk($profile_mothertongues)->mother_tongue;
                                                                                 } else {
                                                                                         echo ", " . MasterMotherTongue::model()->findByPk($profile_mothertongues)->mother_tongue;
@@ -1863,14 +1863,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->education != '') {
-                                                                if($partnerDetails->education == '-1') {
+                                                        if ($partnerDetails->education != '') {
+                                                                if ($partnerDetails->education == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $partner_education = explode(',', $partnerDetails->education);
                                                                         $hpe = 1;
-                                                                        foreach($partner_education as $partner_educations) {
-                                                                                if($hpe == 1) {
+                                                                        foreach ($partner_education as $partner_educations) {
+                                                                                if ($hpe == 1) {
                                                                                         echo MasterEducationField::model()->findByPk($partner_educations)->education_field;
                                                                                 } else {
                                                                                         echo ", " . MasterEducationField::model()->findByPk($partner_educations)->education_field;
@@ -1901,14 +1901,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->working_with != '') {
-                                                                if($partnerDetails->working_with == '-1') {
+                                                        if ($partnerDetails->working_with != '') {
+                                                                if ($partnerDetails->working_with == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $partner_working_with = explode(',', $partnerDetails->working_with);
                                                                         $ww = 1;
-                                                                        foreach($partner_working_with as $partner_working) {
-                                                                                if($ww == 1) {
+                                                                        foreach ($partner_working_with as $partner_working) {
+                                                                                if ($ww == 1) {
                                                                                         echo MasterWorkingWith::model()->findByPk($partner_working)->working_with;
                                                                                 } else {
                                                                                         echo ", " . MasterWorkingWith::model()->findByPk($partner_working)->working_with;
@@ -1945,14 +1945,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->profession_area != '') {
-                                                                if($partnerDetails->profession_area == '-1') {
+                                                        if ($partnerDetails->profession_area != '') {
+                                                                if ($partnerDetails->profession_area == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $partner_profession_area = explode(',', $partnerDetails->profession_area);
                                                                         $ppa = 1;
-                                                                        foreach($partner_profession_area as $partner_profession_areas) {
-                                                                                if($ppa == 1) {
+                                                                        foreach ($partner_profession_area as $partner_profession_areas) {
+                                                                                if ($ppa == 1) {
                                                                                         echo MasterWorkingAs::model()->findByPk($partner_profession_areas)->working_as;
                                                                                 } else {
                                                                                         echo ", " . MasterWorkingAs::model()->findByPk($partner_profession_areas)->working_as;
@@ -1978,14 +1978,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->annual_income_from != '') {
-                                                                if($partnerDetails->annual_income_from == '-1') {
+                                                        if ($partnerDetails->annual_income_from != '') {
+                                                                if ($partnerDetails->annual_income_from == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $p_annual_income_from = explode(',', $partnerDetails->annual_income_from);
                                                                         $aif = 1;
-                                                                        foreach($p_annual_income_from as $p_annual_income_froms) {
-                                                                                if($aif == 1) {
+                                                                        foreach ($p_annual_income_from as $p_annual_income_froms) {
+                                                                                if ($aif == 1) {
                                                                                         echo MasterAnnualIncome::model()->findByPk($p_annual_income_froms)->income_from;
                                                                                 } else {
                                                                                         echo ", " . MasterAnnualIncome::model()->findByPk($p_annual_income_froms)->income_from;
@@ -2035,14 +2035,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->country_living_in != '') {
-                                                                if($partnerDetails->country_living_in == '-1') {
+                                                        if ($partnerDetails->country_living_in != '') {
+                                                                if ($partnerDetails->country_living_in == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $country_living_in = explode(',', $partnerDetails->country_living_in);
                                                                         $cli = 1;
-                                                                        foreach($country_living_in as $country_living_ins) {
-                                                                                if($cli == 1) {
+                                                                        foreach ($country_living_in as $country_living_ins) {
+                                                                                if ($cli == 1) {
                                                                                         echo MasterCountry::model()->findByPk($country_living_ins)->country;
                                                                                 } else {
                                                                                         echo ", " . MasterCountry::model()->findByPk($country_living_ins)->country;
@@ -2073,14 +2073,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->residency_status != '') {
-                                                                if($partnerDetails->residency_status == '-1') {
+                                                        if ($partnerDetails->residency_status != '') {
+                                                                if ($partnerDetails->residency_status == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $residency_status = explode(',', $partnerDetails->residency_status);
                                                                         $rs = 1;
-                                                                        foreach($residency_status as $residency_statuss) {
-                                                                                if($rs == 1) {
+                                                                        foreach ($residency_status as $residency_statuss) {
+                                                                                if ($rs == 1) {
                                                                                         echo MasterState::model()->findByPk($residency_statuss)->state;
                                                                                 } else {
                                                                                         echo ", " . MasterState::model()->findByPk($residency_statuss)->state;
@@ -2117,14 +2117,14 @@
                                                 <div class="col-sm-6 col-xs-8 zeros">
                                                     <label for="textinput" class="control-labelz">
                                                         <?php
-                                                        if($partnerDetails->country_grew_up != '') {
-                                                                if($partnerDetails->country_grew_up == '-1') {
+                                                        if ($partnerDetails->country_grew_up != '') {
+                                                                if ($partnerDetails->country_grew_up == '-1') {
                                                                         echo "Doesn't Matter";
                                                                 } else {
                                                                         $p_country_grew_up = explode(',', $partnerDetails->country_grew_up);
                                                                         $cgu = 1;
-                                                                        foreach($p_country_grew_up as $p_country_grew_ups) {
-                                                                                if($cgu == 1) {
+                                                                        foreach ($p_country_grew_up as $p_country_grew_ups) {
+                                                                                if ($cgu == 1) {
                                                                                         echo MasterCountry::model()->findByPk($p_country_grew_ups)->country;
                                                                                 } else {
                                                                                         echo ", " . MasterCountry::model()->findByPk($p_country_grew_ups)->country;
