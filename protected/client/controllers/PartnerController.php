@@ -45,6 +45,34 @@ class PartnerController extends Controller {
                 }
         }
 
+        public function actionFavorites($userid) {
+                $user_details = UserDetails::model()->findByAttributes(array('user_id' => $userid));
+                $favrt = Favorites::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id'], 'partner_id' => $user_details->id));
+                if (!empty($favrt)) {
+                        $model = $this->loadModel($userid);
+                        $model->status = 1;
+                        if ($model->save(FALSE)) {
+                                $this->redirect(array('partnerdetails?userid=' . $userid));
+                        }
+                } else {
+                        $model = new Favorites;
+                        $model->user_id = Yii::app()->session['user']['id'];
+                        $model->partner_id = $user_details->id;
+                        $model->doc = date('Y-m-d');
+                        if ($model->save(FALSE)) {
+                                $this->redirect(array('partnerdetails?userid=' . $userid));
+                        }
+                }
+        }
+
+        public function actionRemove($userid) {
+                $model = $this->loadModel($userid);
+                $model->status = 0;
+                if ($model->save(FALSE)) {
+                        $this->redirect(array('partnerdetails?userid=' . $userid));
+                }
+        }
+
         public function Similar($userid) {
                 $user = UserDetails::model()->findByAttributes(array('user_id' => $userid));
                 $similar_profile1 = UserDetails::model()->findAllByAttributes(array(
@@ -265,6 +293,16 @@ class PartnerController extends Controller {
                 if ($model->save()) {
                         $this->redirect(Yii::app()->request->urlReferrer);
                 }
+        }
+
+        public function loadModel($id) {
+//                $model = Favorites::model()->findByPk($id);
+                $user_details = UserDetails::model()->findByAttributes(array('user_id' => $id));
+                $model = Favorites::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id'], 'partner_id' => $user_details->id));
+
+                if ($model === null)
+                        throw new CHttpException(404, 'The requested page does not exist.');
+                return $model;
         }
 
 }
