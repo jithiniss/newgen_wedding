@@ -140,9 +140,9 @@ class SiteController extends Controller {
         }
 
         public function actionOut() {
-                unset(Yii::app()->session['b2b']);
+                unset(Yii::app()->session['admin']);
+                $_SESSION['admin'];
 
-                Yii::app()->user->logout();
                 $this->redirect('index');
         }
 
