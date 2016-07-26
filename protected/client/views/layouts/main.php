@@ -188,8 +188,23 @@
 
                 <?php
                 if (isset(Yii::app()->session['user']['id'])) {
+                        $requestssents = Requests::model()->findAll(array("condition" => "user_id = " . Yii::app()->session['user']['id'] . " AND status = 2 "));
+                        $requestsrecievs = Requests::model()->findAll(array("condition" => "partner_id =  '" . Yii::app()->session['user']['user_id'] . "'"));
 
-                        $this->renderPartial('//chat/chat');
+                        if (!empty($requestssents)) {
+                                foreach ($requestssents as $requestssent) {
+                                        $user_ids .= UserDetails::model()->findByAttributes(array('user_id' => $requestssent->partner_id))->id . ',';
+                                }
+                        }
+                        if (!empty($requestsrecievs)) {
+                                foreach ($requestsrecievs as $requestsreciev) {
+                                        $user_ids .= $requestsreciev->user_id . ',';
+                                }
+                        }
+                        $user_ids = trim($user_ids, ",");
+
+                        $model = UserDetails::model()->findAll(array('condition' => 'FIND_IN_SET(id, "' . $user_ids . '")'));
+                        $this->renderPartial('//chat/chat', array('models' => $model));
                 }
                 ?>
 
