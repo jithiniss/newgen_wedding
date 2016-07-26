@@ -73,6 +73,22 @@ class PartnerController extends Controller {
                 }
         }
 
+        public function actionFavoritelist() {
+//                $favrt = Favorites::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
+                $dataProvider = new CActiveDataProvider('Favorites', array(
+                    'criteria' => array(
+                        'condition' => 'user_id="' . Yii::app()->session['user']['id'] . '" AND status = 1',
+//                        'order' => 'doc desc',
+//                        'group' => 'user_id',
+//                        'distinct' => TRUE
+                    ),
+                    'pagination' => array(
+                        'pageSize' => 4,
+                    ),
+                ));
+                $this->render('favorite', array('dataProvider' => $dataProvider));
+        }
+
         public function Similar($userid) {
                 $user = UserDetails::model()->findByAttributes(array('user_id' => $userid));
                 $similar_profile1 = UserDetails::model()->findAllByAttributes(array(
