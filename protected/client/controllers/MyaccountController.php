@@ -232,4 +232,10 @@ class MyaccountController extends Controller {
 //                $blocked_details = BlockedMembers::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
         }
 
+        public function actionMembershipdetails() {
+                $detail = UserPlans::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
+
+                $this->render('membership', array('detail' => $detail));
+        }
+
 }

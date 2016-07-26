@@ -313,6 +313,7 @@
                 <ul class="list-unstyled">
                     <li><?php echo CHtml::link('Blocked Members', array('Myaccount/ListBlockedMembers'), array('target' => 'blank')); ?></li>
                     <li><?php echo CHtml::link('Favorite List', array('Partner/Favoritelist')); ?></li>
+                    <li><?php echo CHtml::link('Membership Details', array('Myaccount/Membershipdetails')); ?></li>
                 </ul>
 
             </div>

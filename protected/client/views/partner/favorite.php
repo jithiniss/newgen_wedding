@@ -32,7 +32,7 @@
                                 <a href="#"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
                             </div>
                             <div class="col-xs-3 col-md-3 col-sm-4">
-                                <span>2000 profiles found</span>
+                                <!--<span>2000 profiles found</span>-->
                             </div>
                         </div>
 
