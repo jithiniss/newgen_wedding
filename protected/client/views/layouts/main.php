@@ -16,6 +16,7 @@
                 <link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl ?>/css/simpleMobileMenu.css" />
                 <link href="<?= Yii::app()->baseUrl ?>/css/style.css" rel="stylesheet">
                 <link href="<?= Yii::app()->baseUrl ?>/css/custom.css" rel="stylesheet">
+                <link href="<?= Yii::app()->baseUrl ?>/css/chat.css" rel="stylesheet">
                 <link href="<?= Yii::app()->baseUrl ?>/css/slick.css" rel="stylesheet">
                 <link href="<?= Yii::app()->baseUrl ?>/css/slick-theme.css" rel="stylesheet">
                 <script>
@@ -80,7 +81,7 @@
                                 <div class="container">
                                         <div class="row">
                                                 <div class="hidden-xs hidden-sm">
-                                                        <div class="col-md-3 col-sm-4">
+                                                        <div class="col-md-2 col-sm-4">
                                                                 <div class="dropdown">
                                                                         <?php echo CHtml::link('<img class="bars" src="' . Yii::app()->baseUrl . '/images/logo.png">', array('site/index')); ?>
 
@@ -91,7 +92,7 @@
                                                                         </ul>
                                                                 </div>
                                                         </div>
-                                                        <div class="col-md-9 col-sm-8">
+                                                        <div class="col-md-10 col-sm-8">
                                                                 <nav class="navbar navbar-inverse">
                                                                         <div class="nop">
                                                                                 <ul class="nav navbar-nav">
@@ -185,7 +186,12 @@
                         </section>
                 </div>
 
+                <?php
+                if (isset(Yii::app()->session['user']['id'])) {
 
+                        $this->renderPartial('//chat/chat');
+                }
+                ?>
 
 
 
