@@ -49,18 +49,24 @@ class MyaccountController extends Controller {
         }
 
         public function actionPending() {
-                $dataProvider = new CActiveDataProvider('Requests', array(
-                    'criteria' => array(
-                        'condition' => 'partner_id="' . Yii::app()->session['user']['user_id'] . '" AND status = 1',
-                        'order' => 'date desc',
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 4,
-                    ),
-                        )
-                );
-                // $accepted = Requests::model()->findAllByAttributes(array(), array('condition' => '(partner_id = "' . Yii::app()->session['user']['user_id'] . '" AND status = 2)'));
-                $this->render('pending', array('dataProvider' => $dataProvider));
+                if (Yii::app()->session['user'] != "") {
+//                        echo 'hii';
+//                        exit;
+                        $dataProvider = new CActiveDataProvider('Requests', array(
+                            'criteria' => array(
+                                'condition' => 'partner_id="' . Yii::app()->session['user']['user_id'] . '" AND status = 1',
+                                'order' => 'date desc',
+                            ),
+                            'pagination' => array(
+                                'pageSize' => 4,
+                            ),
+                                )
+                        );
+                        // $accepted = Requests::model()->findAllByAttributes(array(), array('condition' => '(partner_id = "' . Yii::app()->session['user']['user_id'] . '" AND status = 2)'));
+                        $this->render('pending', array('dataProvider' => $dataProvider));
+                } else {
+                        $this->redirect(array('site/login'));
+                }
         }
 
         public function actionAccept($id) {
