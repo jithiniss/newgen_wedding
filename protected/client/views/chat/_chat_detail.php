@@ -12,12 +12,12 @@ foreach ($chats as $chat) {
 
                                         <img alt="New Gen" class="img-circle"  src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $user_details->id . '/profile/' . $user_details->photo; ?>">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!--<img src="<?= Yii::app()->baseUrl ?>/images/a1.jpg" alt="User Avatar" class="img-circle" />-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!--<img src="<?= Yii::app()->baseUrl ?>/images/a1.jpg" alt="User Avatar" class="img-circle" />-->
                                 </span>
                                 <div class="chat-body clearfix">
                                         <div class="header">
                                                 <strong class="primary-font"><?php echo $user_details->first_name . ' ' . $user_details->last_name; ?> </strong> <small class="pull-right text-muted">
-                                                        <span class="glyphicon glyphicon-time"></span>12 mins ago</small>
+                                                        <span class="glyphicon glyphicon-time"></span><?php echo $this->time_elapsed_string($chat->date); ?></small>
                                         </div>
                                         <p>
                                                 <?php if ($chat->feild1 == '') { ?>
