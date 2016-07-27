@@ -159,10 +159,9 @@
                                     </label>
                                 </div>
                             </div>
-                            <?php // if ($remaining_day <= 10) { ?>
-                            <?php echo CHtml::link('<button class="btn btn-default mat">Upgrade Now</button>', array('site/index', '#' => 'upgrade')) ?>
-                            <!--<button class="btn btn-default mat">Upgrade Now</button>-->
-                            <?php // } ?>
+                            <?php if ($remaining_day <= 10) { ?>
+                                    <?php echo CHtml::link('<button class="btn btn-default mat">Upgrade Now</button>', array('site/index', '#' => 'upgrade')) ?>
+                            <?php } ?>
                             <?php echo CHtml::link('Membership Plan Details', 'Plan/plan', array('class' => 'btn btn-default plan')) ?>
 
                         </div>

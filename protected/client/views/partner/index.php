@@ -69,8 +69,8 @@
                     }
                     ?>
 
-                    <?php if ($user_details->photo != '') { ?>
-                            <?php // if ($user_details->photo_visibility == 1) { ?>
+                    <?php // if ($user_details->photo != '') { ?>
+                    <?php if ($user_details->photo_visibility == 1) { ?>
                             <a class="doc1" href="#" data-toggle="modal" data-target="#lightbox"><img class="albums" src="<?php echo Yii::app()->request->baseUrl; ?>/images/album.png">View Album</a>
                     <?php } else {
                             ?>
@@ -112,13 +112,13 @@
                                                 </div>
                                         <?php } ?>
                                         <!--                                        <div class="item">
-                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                      ?>/images/3.jpg" alt="Second slide">
+                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                       ?>/images/3.jpg" alt="Second slide">
                                                                                 </div>
                                                                                 <div class="item">
-                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                      ?>/images/2.jpg" alt="Third slide">
+                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                       ?>/images/2.jpg" alt="Third slide">
                                                                                 </div>
                                                                                 <div class="item">
-                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                      ?>/images/1.jpg" alt="Third slide">
+                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                       ?>/images/1.jpg" alt="Third slide">
                                                                                 </div>-->
                                     </div><!-- /.carousel-inner -->
                                     <a class="left carousel-control" href="#lightbox" role="button" data-slide="prev">

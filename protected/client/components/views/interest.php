@@ -80,9 +80,13 @@
             <?php } else { ?>
                     <a href="#" data-toggle="modal" data-target="#myModal1" class="offsets"><i class="fa car fa-envelope"></i>Send a message<i class="fa car fa-caret-right"></i></a>
             <?php } ?>
-            <button type="button" class="btn btn-info offsets-btn" data-toggle="modal" data-target="#myModal"><i class="fa car fa-phone"></i>View  Contacts<i class="fa car fa-caret-right"></i></button>
+            <button type="button" class="btn btn-info offsets-btn" data-toggle="modal" data-target="#myModal"><i class="fa car fa-contao"></i>View  Contacts<i class="fa car fa-caret-right"></i></button>
             <?php
             $user_details = UserDetails::model()->findByAttributes(array('user_id' => $id));
+
+            echo CHtml::link('<button type = "button" class = "btn btn-info offsets-btn" data-toggle = "modal" data-target = "#myModal"><i class = "fa car fa-phone"></i>Call Member<i class = "fa car fa-caret-right"></i></button>', '/../' . $user_details->mobile_number);
+            ?>
+            <?php
             $favorite = Favorites::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id'], 'partner_id' => $user_details->id, 'status' => 1));
 
             if (empty($favorite)) {
