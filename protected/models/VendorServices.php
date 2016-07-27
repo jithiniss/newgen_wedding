@@ -47,7 +47,7 @@ class VendorServices extends CActiveRecord {
                 // NOTE: you should only define rules for those attributes that
                 // will receive user inputs.
                 return array(
-                    array('vendor_id, category_id, name, address, description, phn_no, email, featured, status', 'required'),
+                    array('vendor_id, category_id, name, address, description, phn_no, email, status', 'required'),
                     array('vendor_id, category_id, featured, status, cb, ub', 'numerical', 'integerOnly' => true),
                     array('name, address, video, image', 'length', 'max' => 200),
                     array('phn_no, email', 'length', 'max' => 100),

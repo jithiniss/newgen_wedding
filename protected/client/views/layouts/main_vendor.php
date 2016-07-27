@@ -15,7 +15,6 @@
         <link rel="stylesheet" type="text/css" href="<?= Yii::app()->baseUrl ?>/css/simpleMobileMenu.css" />
         <link href="<?= Yii::app()->baseUrl ?>/css/style.css" rel="stylesheet">
         <link href="<?= Yii::app()->baseUrl ?>/css/custom.css" rel="stylesheet">
-        <link href="<?= Yii::app()->baseUrl ?>/css/chat.css" rel="stylesheet">
         <link href="<?= Yii::app()->baseUrl ?>/css/slick.css" rel="stylesheet">
         <link href="<?= Yii::app()->baseUrl ?>/css/slick-theme.css" rel="stylesheet">
         <script>
@@ -24,40 +23,7 @@
         </script>
         <script src="<?= Yii::app()->baseUrl ?>/js/custom.js"></script>
 
-        <style>
-            #mask {
-                background-color: #e4007d;
-                bottom: 0;
-                height: 100%;
-                left: 0;
-                position: fixed;
-                right: 0;
-                top: 0;
-                z-index: 100000;
-            }
 
-            #loader {
-                background-image: url(<?= Yii::app()->baseUrl ?>/images/loader.gif);
-                background-position: center center;
-                background-repeat: no-repeat;
-                height: 200px;
-                left: 50%;
-                margin: -100px 0 0 -100px;
-                position: absolute;
-                top: 50%;
-                width: 200px;
-            }
-
-            .dropup {
-                position: fixed;
-                width: 100%;
-                margin: 0 auto;
-                z-index: 200000;
-                top: 0;
-                box-shadow: 1px 1px 11px 1px rgba(0, 0, 0, 0.26);
-            }
-
-        </style>
 
 
 
@@ -66,21 +32,13 @@
 
     <body id="home-1">
 
-        <div id="mask">
-            <div id="loader">
-            </div>
-        </div>
-
-
-
-
 
         <div id="static_cnt" class="">
             <section class="main-head-2">
                 <div class="container">
                     <div class="row">
                         <div class="hidden-xs hidden-sm">
-                            <div class="col-md-2 col-sm-4">
+                            <div class="col-md-3 col-sm-4">
                                 <div class="dropdown">
                                     <?php echo CHtml::link('<img class="bars" src="' . Yii::app()->baseUrl . '/images/logo.png">', array('site/index')); ?>
 
@@ -91,41 +49,21 @@
                                     </ul>
                                 </div>
                             </div>
-                            <div class="col-md-10 col-sm-8">
+                            <div class="col-md-9 col-sm-8">
                                 <nav class="navbar navbar-inverse">
                                     <div class="nop">
                                         <ul class="nav navbar-nav">
                                             <li class="active"><?php echo CHtml::link('Home', array('site/index')); ?></li>
                                             <li><a href="#">Wedding Planner</a></li>
-                                            <li><?php echo CHtml::link('Membership Plans', array('site/index', '#' => 'upgrade')); ?></li>
-                                            <li><?php echo CHtml::link('Search', array('Search/index')); ?></li>
+
 
                                             <li><a href="#">Contact Us</a></li>
-                                            <li class="colors"><a href="#">Couples</a></li>
 
-                                            <?php
-                                            if(isset(Yii::app()->session['user']['id']) && Yii::app()->session['user']['id'] != '') {
-                                                    if(Yii::app()->session['user']['register_step'] == 4 || Yii::app()->session['user']['register_step'] == 5) {
-                                                            ?>
-                                                            <li class="colors">
-                                                                <?php echo CHtml::link('<i class="fa locks fa-user"></i>Hi, ' . Yii::app()->session['user']['first_name'], array('Myaccount/Index')); ?></li>
+                                            <li class="colors">
+                                                <?php echo CHtml::link('<i class="fa locks fa-user"></i>Hi, ' . Yii::app()->session['vendor']['first_name'], array('vendor/index')); ?></li>
 
+                                            <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Log Out', array('vendor/logout')); ?></li>
 
-                                                            <?php
-                                                    } else {
-                                                            ?>
-                                                            <li class="colors"><a ><i class="fa locks fa-user"></i>Hi, <?php echo Yii::app()->session['user']['first_name']; ?></a></li>
-
-                                                            <?php
-                                                    }
-                                                    ?><li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Log Out', array('site/logout')); ?></li>
-                                                    <?php
-                                            } else {
-                                                    ?>
-                                                    <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Vendor', array('vendor/index')); ?></li>
-                                                    <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Login', array('site/login')); ?></li>
-                                                    <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-user-plus"></i>Register', array('register/FirstStep')); ?></li>
-                                            <?php } ?>
                                         </ul>
                                     </div>
                                 </nav>
@@ -185,27 +123,7 @@
             </section>
         </div>
 
-        <?php
-        if(isset(Yii::app()->session['user']['id'])) {
-                $requestssents = Requests::model()->findAll(array("condition" => "user_id = " . Yii::app()->session['user']['id'] . " AND status = 2 "));
-                $requestsrecievs = Requests::model()->findAll(array("condition" => "partner_id =  '" . Yii::app()->session['user']['user_id'] . "'"));
 
-                if(!empty($requestssents)) {
-                        foreach($requestssents as $requestssent) {
-                                $user_ids .= UserDetails::model()->findByAttributes(array('user_id' => $requestssent->partner_id))->id . ',';
-                        }
-                }
-                if(!empty($requestsrecievs)) {
-                        foreach($requestsrecievs as $requestsreciev) {
-                                $user_ids .= $requestsreciev->user_id . ',';
-                        }
-                }
-                $user_ids = trim($user_ids, ",");
-
-                $model = UserDetails::model()->findAll(array('condition' => 'FIND_IN_SET(id, "' . $user_ids . '")'));
-                $this->renderPartial('//chat/chat', array('models' => $model));
-        }
-        ?>
 
 
 
@@ -408,45 +326,7 @@
 
         </script>
 
-        <script>
 
-                (function () {
-                    "use strict";
-
-                    $(window).load(function () {
-                        $("#loader").fadeOut();
-                        $("#mask").delay(10000).fadeOut("slow");
-                    });
-                })(jQuery);
-
-                window.onload = function () {
-                    document.getElementById('mask').style.display = 'none';
-                };
-        </script>
-<!--        <script type="text/javascript">
-                $(document).ready(function () {
-                    setTimeout(function () {
-                        $("#myModal").modal('show');
-                    }, 4000);
-
-
-                });
-        </script>-->
     </body>
 
 </html>
-<?php
-if($email_verify != '') {
-        if($email_verify->email_verification == 0 && $email_verify->register_step == 4) {
-                ?>
-                <script type="text/javascript">
-                        $(document).ready(function () {
-
-                            $("#emailVerification").modal({backdrop: 'static', keyboard: false});
-
-                        });
-                </script>
-                <?php
-        }
-}
-?>

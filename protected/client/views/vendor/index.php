@@ -42,7 +42,7 @@
                     <div class="col-md-6 col-sm-6 col-xs-6 padd">
 
                         <a class="new">New to Newgen</a>
-                        <?php echo CHtml::link('Sign Up Free', array('register/FirstStep'), array('class' => 'free')); ?>
+                        <?php echo CHtml::link('Sign Up Free', array('vendor/register'), array('class' => 'free')); ?>
 
                     </div>
 

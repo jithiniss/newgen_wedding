@@ -9,6 +9,22 @@
     .table td{
         text-align: center;
     }
+    tr.pink
+    {
+        background: #FFCCCC;
+    }
+    tr.green
+    {
+        background: #CCFF99;
+    }
+    tr.yellow
+    {
+        background: #FFFF99;
+    }
+    tr.white
+    {
+        background: #FFFFFF;
+    }
 </style>
 
 
@@ -47,7 +63,7 @@
         <div class="panel panel-default">
             <?php
             $this->widget('booster.widgets.TbGridView', array(
-                'type' => ' bordered condensed hover',
+                'type' => ' bordered condensed',
                 'id' => 'vendor-details-grid',
                 'dataProvider' => $model->search(),
                 'filter' => $model,
@@ -80,12 +96,13 @@
                     ),
                     array(
                         'name' => 'approval_status',
+                        'type' => 'raw',
                         'filter' => array(0 => 'Pending', 1 => 'Approved', 2 => 'Declined'),
                         'value' => function($data) {
                         if($data->approval_status == 0) {
-                                return 'Pending';
+                                return '<b style="color:red;">Pending</b>';
                         } else if($data->approval_status == 1) {
-                                return 'Approved';
+                                return '<b style="color:green;">Approved</b>';
                         } else if($data->approval_status == 2) {
                                 return 'Declined';
                         }
@@ -120,7 +137,6 @@
                       'dou',
                      */
                     array(
-                        'htmlOptions' => array('nowrap' => 'nowrap'),
                         'class' => 'booster.widgets.TbButtonColumn',
                         'header' => '<th>Services</th><th>Edit</th><th>Delete</th>',
                         'template' => '<td>{service}</td><td>{update}</td><td>{delete}</td>',
