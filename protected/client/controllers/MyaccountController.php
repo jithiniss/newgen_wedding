@@ -244,4 +244,44 @@ class MyaccountController extends Controller {
                 $this->render('membership', array('detail' => $detail));
         }
 
+        public function actionShareNewgen() {
+                if (isset(Yii::app()->session['user'])) {
+                        $model = new SocialMediaShare;
+                        $model->attributes = $_POST['social_share'];
+                        $model->user_id = Yii::app()->session['user']['id'];
+                        $model->email = $_POST['email'];
+                        $model->status = 1;
+                        $model->cb = Yii::app()->session['user']['id'];
+                        $model->doc = date('Y-m-d');
+                        if ($model->validate()) {
+                                if ($model->save()) {
+//                                        $this->ShareMail($model);
+                                        Yii::app()->user->setFlash('success', "Successfully shared.");
+                                        $this->redirect(Yii::app()->request->urlReferrer);
+                                } else {
+                                        Yii::app()->user->setFlash('error', "Invalid Email id");
+                                        $this->redirect(Yii::app()->request->urlReferrer);
+                                }
+                        } else {
+                                $this->redirect(Yii::app()->request->urlReferrer);
+                        }
+                } else {
+                        $this->redirect(array('site/login'));
+                }
+        }
+
+        public function ShareMail($model) {
+//                $user = 'shahana@intersmart.in';
+                $user = $model->email;
+                $user_subject = 'Newgen Wedding Matrimony:Your friend shared';
+                $user_message = $this->renderPartial('mail/_user_shared_email', array('model' => $model), true);
+                // Always set content-type when sending HTML email
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                // More headers
+                $headers .= 'From:Newgen Wedding Matrimony <no-reply@intersmarthosting.in>' . "\r\n";
+
+                mail($user, $user_subject, $user_message, $headers);
+        }
+
 }

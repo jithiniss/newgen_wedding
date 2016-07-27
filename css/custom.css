@@ -187,6 +187,68 @@ span.newpops_blocked {
         margin-left: 115px;
 
 }
+.newgen_visibility p {
+        padding-top: 0px;
+        color: #f5ecec;
+        font-weight: 400;
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 2px;
+        font-size: 11px;
+        text-align: center;
+        padding-top: 0;
+        margin-top: -38px;
+        margin-left: 52px;
+        padding-left: 17px;
+        padding-right: 17px;
+        margin-bottom: 30px;
+        line-height: 16px;
+}
+img.img_lock{
+        width: 19px;
+        height: 23px;
+}
+img.img_lock {
+        position: absolute;
+        top: 24px;
+        right: 0;
+        left: 0;
+        margin: auto;
+        bottom: 0;
+}
+#myModal_share ul{
+        margin-top: 48px;
+}
+.button_modal{
+        padding-top: 50px;
+        float: right;
+        padding-right: 17px;
+}
+.modal-body.modal_span span{
+        padding-top: 0px;
+        color: #564661;
+        font-weight: 500;
+        font-family: 'Roboto', sans-serif;
+        margin-bottom: 2px;
+        font-size: 19px;
+        padding-top: 12%;
+        margin-top: -59px;
+        margin-left: 0px;
+        padding-left: 0;
+        padding-right: 0;
+        margin-bottom: 18px;
+        line-height: 24px;
+        display: block;
+}
+.button_modal input {
+        background-color: #63536e;
+        padding-left: 36px;
+        padding-right: 36px;
+        padding-top: 3px;
+        padding-bottom: 4px;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 500;
+}
 @media screen and (min-width: 480px) {
         .tokenize-sample { width: 300px }
 }
@@ -362,14 +424,14 @@ i.fa.fa-paper-plane {
         padding-right: 50px;
 }
 .add_new.btn.sub-btn.btn-default {
-    background-color: #0e6382;
-    width: 100%;
-    border: 0;
-    border-radius: 0;
-    color: #fff;
-    padding-top: 10px;
-    padding-bottom: 10px;
-    margin-bottom: 33px;
-    font-family: 'Roboto', sans-serif;
-    margin-top: 10px;
+        background-color: #0e6382;
+        width: 100%;
+        border: 0;
+        border-radius: 0;
+        color: #fff;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 33px;
+        font-family: 'Roboto', sans-serif;
+        margin-top: 10px;
 }      
