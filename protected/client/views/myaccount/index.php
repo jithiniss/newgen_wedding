@@ -352,72 +352,33 @@
                                                                                         <div class="girls">
                                                                                                 <?php
                                                                                                 foreach ($matches as $match) {
-                                                                                                        if ($match->photo_visibility == 2) {
-                                                                                                                ?>
-                                                                                                                <div class="item">
-                                                                                                                        <div class="main">
-                                                                                                                                <div class="profile ">
-                                                                                                                                        <?php if ($match->gender == 1) { ?>
-                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
-                                                                                                                                        <?php } else { ?>
-                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                                                                                                                        <?php } ?>
-                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
-                                                                                                                                        <p>Visible on Accept/Sent</p>
-                                                                                                                                </div>
-                                                                                                                                <h1><?= $match->first_name; ?></h1>
-                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($match->dob_year)); ?>
-                                                                                                                                        <?php
-                                                                                                                                        if ($match->height != 0) {
-                                                                                                                                                echo "," . MasterHeight::model()->findByPk($match->height)->height;
-                                                                                                                                        }
-                                                                                                                                        ?></h1>
-                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
-                                                                                                                                <!--<a class="viewallz" href="#">Full profile</a>-->
-                                                                                                                        </div>
-                                                                                                                </div>
+                                                                                                        ?>
+                                                                                                        <div class="item">
+                                                                                                                <div class="main">
+                                                                                                                        <div class="profile ">
+                                                                                                                                <?php
+                                                                                                                                $this->widget("application.client.widgets.PhotoVisibility", array(
+                                                                                                                                    'id' => $match->id,
+                                                                                                                                ));
+                                                                                                                                ?>
 
-                                                                                                        <?php } if ($match->photo_visibility == 1) { ?>
-                                                                                                                <div class="item">
-                                                                                                                        <div class="main">
-                                                                                                                                <div class="profile ">
-                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $match->id; ?>/profile/<?= $match->photo ?>">
 
-                                                                                                                                </div>
-                                                                                                                                <h1><?= $match->first_name; ?></h1>
-                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($match->dob_year)); ?>
-                                                                                                                                        <?php
-                                                                                                                                        if ($match->height != 0) {
-                                                                                                                                                echo "," . MasterHeight::model()->findByPk($match->height)->height;
-                                                                                                                                        }
-                                                                                                                                        ?></h1>
-                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
 
                                                                                                                         </div>
+                                                                                                                        <h1><?= $match->first_name; ?></h1>
+                                                                                                                        <h1><?php echo date('Y') - date('Y', strtotime($match->dob_year)); ?>
+                                                                                                                                <?php
+                                                                                                                                if ($match->height != 0) {
+                                                                                                                                        echo "," . MasterHeight::model()->findByPk($match->height)->height;
+                                                                                                                                }
+                                                                                                                                ?></h1>
+                                                                                                                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                        <!--<a class="viewallz" href="#">Full profile</a>-->
                                                                                                                 </div>
-                                                                                                        <?php } if ($match->photo_visibility == 3) { ?>
-                                                                                                                <div class="item">
-                                                                                                                        <div class="main">
-                                                                                                                                <div class="profile ">
-                                                                                                                                        <?php if ($match->gender == 1) { ?>
-                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
-                                                                                                                                        <?php } else { ?>
-                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                                                                                                                        <?php } ?>                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
-                                                                                                                                        <p>Password Protected</p>
-                                                                                                                                </div>
-                                                                                                                                <h1><?= $match->first_name; ?></h1>
-                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($match->dob_year)); ?>
-                                                                                                                                        <?php
-                                                                                                                                        if ($match->height != 0) {
-                                                                                                                                                echo "," . MasterHeight::model()->findByPk($match->height)->height;
-                                                                                                                                        }
-                                                                                                                                        ?></h1>
-                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $match->user_id), array('class' => 'viewallz')); ?>
-                                                                                                                        </div>
-                                                                                                                </div>
-                                                                                                                <?php
-                                                                                                        }
+                                                                                                        </div>
+
+
+                                                                                                        <?php
                                                                                                 }
                                                                                                 ?>
                                                                                         </div>
@@ -663,7 +624,7 @@
                                         <div class="modal-body">
                                                 <h1>Share with your friend</h1>
                                                 <ul class="list-inline list-unstyled">
-                                                        <!--<li class="link-1"><?php // echo CHtml::link('<i class="fa email fa-envelope"></i>Signup with Email', array('site/login'));                                                                                                                      ?></li>-->
+                                                        <!--<li class="link-1"><?php // echo CHtml::link('<i class="fa email fa-envelope"></i>Signup with Email', array('site/login'));                                                                                                                             ?></li>-->
                                                         <li class="link-1"><a href="#"  data-toggle="modal" data-target="#myModal_share_email"><i class="fa email fa-envelope"></i>Share with Email</a></li>
                                                         <li class="link-2"><a onclick="popWindow('https://www.facebook.com/sharer/sharer.php?u=http://newgen.com', 'facebook', 'width=1000,height=200,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');"><i class="fa email fa-facebook"></i>Share with Facebook</a></li>
                                                         <!--<li class="link-2"><a href="#"><i class="fa email fa-facebook"></i>Share with Facebook</a></li>-->

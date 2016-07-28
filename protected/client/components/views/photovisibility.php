@@ -1,4 +1,4 @@
-<div class="profile">
+<div class="profile nnn">
 
         <?php
         if ($partner->photo != '') {
@@ -31,7 +31,10 @@
                 <?php } else { ?>
                         <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg">
                 <?php } ?>
-        <?php } else {
+                <?php
+        } else {
+                var_dump($partner->photo);
+                exit;
                 ?>
                 <img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg">
         <?php } ?>
