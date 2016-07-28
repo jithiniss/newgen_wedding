@@ -54,6 +54,18 @@
                 'columns' => array(
                     'name',
                     array(
+                        'name' => 'field',
+                        'value' => function($data) {
+                                if($data->field == "") {
+
+                                } else {
+
+                                        return '<img width="65" height="65" style="border: 2px solid #d2d2d2;" src="' . Yii::app()->baseUrl . '/uploads/services/' . $data->id . '/' . $data->field . '" />';
+                                }
+                        },
+                        'type' => 'raw'
+                    ),
+                    array(
                         'name' => 'status',
                         'filter' => array(1 => 'Enabled', 0 => 'Disabled'),
                         'value' => function($data) {

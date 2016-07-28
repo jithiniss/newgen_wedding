@@ -96,20 +96,21 @@
                                     <div class="nop">
                                         <ul class="nav navbar-nav">
                                             <li class="active"><?php echo CHtml::link('Home', array('site/index')); ?></li>
-                                            <li><a href="#">Wedding Planner</a></li>
-                                            <li><?php echo CHtml::link('Membership Plans', array('site/index', '#' => 'upgrade')); ?></li>
-                                            <li><?php echo CHtml::link('Search', array('Search/index')); ?></li>
-
+                                            <li><?php echo CHtml::link('Wedding Planner', array('weddingPlanner/index')); ?></li>
+                                            <?php if(!isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] == '') { ?>
+                                                    <li><?php echo CHtml::link('Membership Plans', array('site/index', '#' => 'upgrade')); ?></li>
+                                                    <li><?php echo CHtml::link('Search', array('Search/index')); ?></li>
+                                            <?php } ?>
                                             <li><a href="#">Contact Us</a></li>
-                                            <li class="colors"><a href="#">Couples</a></li>
-
+                                            <?php if(!isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] == '') { ?>
+                                                    <li class="colors"><a href="#">Couples</a></li>
+                                            <?php } ?>
                                             <?php
-                                            if(isset(Yii::app()->session['user']['id']) && Yii::app()->session['user']['id'] != '') {
+                                            if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != '') {
                                                     if(Yii::app()->session['user']['register_step'] == 4 || Yii::app()->session['user']['register_step'] == 5) {
                                                             ?>
                                                             <li class="colors">
                                                                 <?php echo CHtml::link('<i class="fa locks fa-user"></i>Hi, ' . Yii::app()->session['user']['first_name'], array('Myaccount/Index')); ?></li>
-
 
                                                             <?php
                                                     } else {
@@ -118,7 +119,15 @@
 
                                                             <?php
                                                     }
-                                                    ?><li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Log Out', array('site/logout')); ?></li>
+                                                    ?>
+
+                                                    <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Log Out', array('site/logout')); ?></li>
+                                            <?php } else if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') { ?>
+                                                    <li class="colors">
+                                                        <?php echo CHtml::link('<i class="fa locks fa-user"></i>Hi, ' . Yii::app()->session['vendor']['first_name'], array('vendor/index')); ?></li>
+
+                                                    <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Log Out', array('vendor/logout')); ?></li>
+
                                                     <?php
                                             } else {
                                                     ?>

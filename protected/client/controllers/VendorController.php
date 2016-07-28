@@ -68,7 +68,7 @@ class VendorController extends Controller {
         public function actionHome() {
                 if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
 
-                        $this->layout = '//layouts/main_vendor';
+
                         $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
                         $services = VendorServices::model()->findAll();
                         $this->render('home', array('model' => $model, 'services' => $services));
@@ -80,7 +80,7 @@ class VendorController extends Controller {
         public function actionAddNewService() {
                 if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
 
-                        $this->layout = '//layouts/main_vendor';
+
                         $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
                         $service = new VendorServices;
                         $this->performAjaxValidation($service, 'service-form');
@@ -106,7 +106,7 @@ class VendorController extends Controller {
         public function actionUpdateService($id) {
                 if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
 
-                        $this->layout = '//layouts/main_vendor';
+
                         $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
                         $service = VendorServices::model()->findByAttributes(array('vendor_id' => $model->id, 'id' => $id));
                         if(!empty($service)) {
@@ -140,7 +140,7 @@ class VendorController extends Controller {
         public function actionMyProfile() {
                 if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
 
-                        $this->layout = '//layouts/main_vendor';
+
                         $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
 
                         if(!empty($model)) {
@@ -227,8 +227,8 @@ class VendorController extends Controller {
                         $filename = $id . '_' . rand(100001, 999999);
                         $path = array('uploads', 'vendor', $folder, $vendor_id, 'services', $id);
 
-                        $dimension[0] = array('width' => '116', 'height' => '155', 'name' => 'main');
-//                        $dimension[1] = array('width' => '100', 'height' => '130', 'name' => 'thumb');
+                        $dimension[0] = array('width' => '246', 'height' => '172', 'name' => 'thumb');
+                        $dimension[1] = array('width' => '809', 'height' => '342', 'name' => 'main');
 //                        $dimension[2] = array('width' => '72', 'height' => '79', 'name' => 'similarprofile');
 //                        $dimension[3] = array('width' => '163', 'height' => '212', 'name' => 'profile');
 //                        $dimension[4] = array('width' => '396', 'height' => '317', 'name' => 'featured');

@@ -10,6 +10,7 @@ Yii::setPathOfAlias('admin', $admin);
 Yii::setPathOfAlias('booster', dirname(__FILE__) . '/../extensions/yiibooster');
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__) . '/../extensions/bootstrap');
 Yii::setPathOfAlias('phpthumb', dirname(__FILE__) . '/../extensions/EPhpThumb/EPhpThumb');
+//Yii::setPathOfAlias('infiniteScroll', dirname(__FILE__) . '/../extensions/yiiinfiniteScroll');
 return array(
     'basePath' => $frontend,
     'controllerPath' => $admin . '/controllers',
@@ -23,6 +24,7 @@ return array(
         'admin.components.*',
         'application.components.*',
         'admin.extensions.easyimage.EasyImage',
+        'application.client.extensions.yiiinfiniteScroll.YiinfiniteScroller',
     ),
     'modulePath' => $admin . '/modules/',
     'modules' => array(

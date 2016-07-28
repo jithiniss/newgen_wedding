@@ -135,7 +135,8 @@ class VendorServicesController extends Controller {
                         $filename = $id . '_' . rand(100001, 999999);
                         $path = array('uploads', 'vendor', $folder, $vendor_id, 'services', $id);
 
-                        $dimension[0] = array('width' => '116', 'height' => '155', 'name' => 'main');
+                        $dimension[0] = array('width' => '246', 'height' => '172', 'name' => 'thumb');
+                        $dimension[1] = array('width' => '809', 'height' => '342', 'name' => 'main');
 //                        $dimension[1] = array('width' => '100', 'height' => '130', 'name' => 'thumb');
 //                        $dimension[2] = array('width' => '72', 'height' => '79', 'name' => 'similarprofile');
 //                        $dimension[3] = array('width' => '163', 'height' => '212', 'name' => 'profile');

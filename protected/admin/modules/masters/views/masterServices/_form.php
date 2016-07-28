@@ -9,6 +9,7 @@
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'master-services-form',
+        'htmlOptions' => array('enctype' => 'multipart/form-data'),
         // Please note: When you enable ajax validation, make sure the corresponding
         // controller action is handling ajax validation correctly.
         // There is a call to performAjaxValidation() commented in generated controller code.
@@ -28,7 +29,17 @@
             <?php echo $form->error($model, 'name'); ?>
         </div>
 
+        <div class="form-group">
+            <?php echo $form->labelEx($model, 'field'); ?>
+            <?php echo $form->fileField($model, 'field', array('size' => 60, 'maxlength' => 99, 'class' => 'form-control')); ?>
+            <?php
+            if($model->field != '' && $model->id != "") {
 
+                    echo '<img width="125" style="border: 2px solid #d2d2d2;" src="' . Yii::app()->baseUrl . '/uploads/services/' . $model->id . '/' . $model->field . '" />';
+            }
+            ?>
+            <?php echo $form->error($model, 'field'); ?>
+        </div>
 
         <div class="form-group">
             <?php echo $form->labelEx($model, 'status'); ?>

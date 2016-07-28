@@ -1,0 +1,351 @@
+.wed-plan {
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.51);
+    margin-bottom: 17px;
+    margin-top: 17px;
+}
+a.connect-86 {
+    background-color: #0e6382;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 6px;
+    padding-bottom: 6px;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 400;
+    max-width: 111px;
+    /* margin: auto; */
+    display: block;
+    margin-top: 0;
+    float: left;
+    margin-bottom: 17px;
+}
+img.img-responsive.bor {
+    margin: auto;
+}
+section.detail-list {
+    background-color: #fff;
+    padding-top: 2%;
+    padding-bottom: 0%;
+}
+.plan-hover {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background-color: #fff;
+    left: 0;
+    transition: all .5s ease;
+    height: 56px;
+}
+.wed-plan:hover .plan-hover{
+        position: absolute;
+    bottom:0px;
+    width:100%;
+    background-color: #fff;
+    left:0;
+    transition: all .5s ease;
+    height: 100px;
+}
+
+i.fa.violets.fa-angle-right {
+    position: absolute;
+    right: 10px;
+    background-color: #63526e;
+    /* padding: 13px; */
+    border-radius: 50%;
+    padding-left: 13px;
+    height: 30px;
+    color: #fff;
+    width: 30px;
+    padding-top: 7px;
+    top: 15px;
+}
+
+a.readzz{
+    display: none;
+     transition: all .5s ease;
+}
+.wed-plan:hover a.readzz {
+    display: block;
+    position: absolute;
+    right: 10px;
+    bottom: 11px;
+    background-color: #63526e;
+    color: #fff;
+    padding: 7px;
+    font-size: 12px;
+    min-width: 98px;
+    border-radius: 22px;
+    transition: all .5s ease;
+}
+.wed-plan:hover i.fa.violets.fa-angle-right{
+     display: none;
+}
+.scales {
+    overflow: hidden;
+    position: relative;
+}
+img.img-responsive.maps {
+    transform: scale(1.2);
+    transition: all .5s ease;
+    cursor: pointer;
+    width: 100%;
+     margin-bottom: 0px;
+    margin-top: 4px;
+}
+.scales:hover img.img-responsive.maps {
+    transform: scale(1);
+    transition: all .5s ease;
+}
+
+
+
+.addi {
+    padding-bottom: 50px;
+}
+
+
+.detail-list h2 {
+    padding-top: 0px;
+    color: #666;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0;
+    font-size: 16px;
+    text-align: justify;
+    padding-top: 11px;
+    margin-top: 9px;
+    margin-left: 0px;
+    padding-left: 19px;
+    line-height: 23px;
+    border-bottom: 0;
+    background-color: #f5f7fa;
+    padding-bottom: 10px;
+    border: 1px solid #ccc;
+    border-bottom: 0;
+}
+.detail-list h1 {
+    padding-top: 0px;
+    color: #666;
+    font-weight: 100;
+    margin-bottom: 30px;
+    font-size: 40px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin-left: 0;
+    margin-top: 18px;
+}
+.detail-list h4 {
+    padding-top: 0px;
+    color: #666;
+    font-weight: 300;
+    margin-bottom: 0;
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    margin-left: 11px;
+    margin-top: 12px;
+    font-style: italic;
+    float: left;
+    width: 75%;
+    line-height: 18px;
+}
+.detail-list p {
+    padding-top: 0px;
+    color: #666;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0;
+    font-size: 14px;
+    text-align: justify;
+    padding-top: 0;
+    margin-top: 23px;
+    margin-left: 0px;
+    line-height: 23px;
+}
+.detail-list h3 {
+    padding-top: 0px;
+    color: #666;
+    font-weight: 400;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 17px;
+    font-size: 18px;
+    text-align: justify;
+    padding-top: 5px;
+    margin-top: 17px;
+    margin-left: 0px;
+    line-height: 23px;
+    text-transform: uppercase;
+}
+.feat {
+    float: left;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 22px;
+    margin-bottom: 35px;
+    padding-bottom: 53px;
+}
+a.connect-85 {
+    background-color: #ff8019;
+    padding-left: 12px;
+    padding-right: 12px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    color: #fff;
+    font-size: 15px;
+    font-weight: 400;
+    max-width: 111px;
+    margin: auto;
+    display: block;
+    margin-top: 50px;
+}
+.is_stuck {
+    top: 90px !important;
+    transition: all .5s ease;
+}
+.sticky-div{
+    float:left;
+    margin-left: 0%;
+    transition: all .5s ease;
+}
+
+.model-ui {
+    float: left;
+    width: 100%;
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    background-color: #f5f7fa;
+}
+
+.case-wrp h1 {
+    padding-top: 0px;
+    color: #666;
+    font-weight: 100;
+    margin-bottom: 63px;
+    font-size: 40px;
+    font-family: 'Roboto', sans-serif;
+    text-align: center;
+    margin-left: 0;
+    margin-top: 0;
+}
+.vendormy {
+    float: left;
+    width: 100%;
+    border: 1px solid #ccc;
+    padding: 22px;
+    padding-top:0;
+}
+
+.vendor_1 {
+    float: left;
+    width: 100%;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 24px;
+    padding-top: 24px;
+}
+
+
+img.ven{
+    float:left;
+    padding-right:20px;
+}
+
+
+.list-f1 {
+    float: left;
+    width: 50%;
+}
+
+
+.list-f2 {
+    float: left;
+    width: 50%;
+}
+
+            
+
+.wed-plan img{
+    width:100%;
+     transition: all .8s ease;
+}
+
+.wed-plan img:hover{
+    transform: scale(1.2);
+    transition: all .8s ease;
+}
+
+.teamx {
+    float: left;
+    width: 30%;
+    margin-left: 21px;
+    margin-top: 0;
+}
+section.vendors {
+    background-color: #fff;
+    padding-top: 50px;
+    padding-bottom: 50px;
+}
+
+.vendors p {
+    padding-top: 0px;
+    color: #666;
+    font-weight: 400;
+    margin-bottom: 0;
+    font-size: 13px;
+    font-family: 'Roboto', sans-serif;
+    text-align: left;
+    margin-left: 11px;
+    margin-top: 0;
+    line-height: 22px;
+}
+
+
+
+@media(max-width: 991px) and (min-width: 768px) {
+.vendormy {
+  
+    margin-top: 33px;
+}
+}
+@media (max-width:767px){
+    .vendormy {
+   
+    margin-top: 33px;
+}
+}
+@media (max-width:600px){
+.list-f1 {
+    float: left;
+    width: 100%;
+}
+.teamx {
+    float: left;
+    width: 45%;
+    margin-left: 0;
+    margin-top: 0;
+    margin: 10px;
+}
+
+
+}
+
+@media (max-width:480px){
+    
+    img.ven {
+    float: none;
+    padding-right: 0px;
+    margin: auto;
+    display: block;
+    margin-bottom: 20px;
+}
+.teamx {
+    float: none;
+    width: 80%;
+    margin-left: 0;
+    margin-top: 0;
+    margin: 0;
+    margin: auto;
+}
+
+}
