@@ -246,8 +246,20 @@ img.img_lock {
         padding-top: 3px;
         padding-bottom: 4px;
         color: #fff;
-        font-size: 15px;
+        font-size: 13px;
         font-weight: 500;
+        border: none;
+}
+.button_modal a {
+        background-color: #63536e;
+        padding-left: 36px;
+        padding-right: 36px;
+        padding-top: 3px;
+        padding-bottom: 4px;
+        color: #fff;
+        font-size: 13px;
+        font-weight: 500;
+        border: none;
 }
 @media screen and (min-width: 480px) {
         .tokenize-sample { width: 300px }
@@ -434,4 +446,40 @@ i.fa.fa-paper-plane {
         margin-bottom: 33px;
         font-family: 'Roboto', sans-serif;
         margin-top: 10px;
-}      
+} 
+.modal-content.dialogs {
+        top: 200px;
+        height: 324px;
+        padding-left: 20px;
+        padding-right: 20px;
+        background-color: #fff;
+        /* padding: 20px; */
+        border: 5px solid #7c5c70;
+        border-radius: 0px;
+}
+.modal-header .close {
+        margin-top: -2px;
+        border: 2px solid #7c5c70;
+        color: #7c5c70;
+        border-radius: 50%;
+        width: 27px;
+        height: 27px;
+        /* line-height: 27px; */
+        text-align: center;
+        font-size: 22px;
+}
+.modal-body h4 {
+        font-size: 16px;
+}
+.modal-body a,.modal-body button {
+        background-color: #63536e;
+        padding-left: 36px;
+        padding-right: 36px;
+        padding-top: 3px;
+        padding-bottom: 4px;
+        color: #fff;
+        font-size: 15px;
+        font-weight: 500;
+        border: none;
+        height: 32px !important;
+}
