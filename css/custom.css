@@ -449,7 +449,7 @@ i.fa.fa-paper-plane {
 } 
 .modal-content.dialogs {
         top: 200px;
-        height: 324px;
+        height: 380px;
         padding-left: 20px;
         padding-right: 20px;
         background-color: #fff;
@@ -471,7 +471,7 @@ i.fa.fa-paper-plane {
 .modal-body h4 {
         font-size: 16px;
 }
-.modal-body a,.modal-body button {
+.modal-body a,.modal-body button{
         background-color: #63536e;
         padding-left: 36px;
         padding-right: 36px;

@@ -8,6 +8,11 @@ class FeaturedstoryController extends Controller {
                 $this->render('featured_story', array('story' => $story));
         }
 
+        public function actionProfile() {
+                $featured = UserPlans::model()->findAllByAttributes(array('featured' => 1));
+                $this->render('profile', ['featured' => $featured]);
+        }
+
         // Uncomment the following methods and override them if needed
         /*
           public function filters()

@@ -357,4 +357,39 @@ class PartnerController extends Controller {
                 return $protocol . $domainName . '/newgen/';
         }
 
+        public function actionContact() {
+                if (isset($_POST['partner'])) {
+                        $user = Yii::app()->session['user']['id'];
+                        $partner = $_POST['partner'];
+                        $contacts = UserPlans::model()->findByAttributes(array('user_id' => $user));
+                        $contact_left = $contacts->view_contact_left;
+                        $check_contact = ContactedPartner::model()->findByAttributes(array('user_id' => $user, 'partner_id' => $partner));
+                        if (empty($check_contact)) {
+                                $model1 = new ContactedPartner();
+                                $model1->user_plan_id = $contacts->id;
+                                $model1->user_id = $user;
+                                $model1->partner_id = $partner;
+                                $model1->doc = date('Y-m-d');
+                                $contact_left = $contact_left - 1;
+                                if ($model1->save()) {
+
+                                }
+                        }
+                        $model = $this->loadModels($user);
+                        $model->view_contact_left = $contact_left;
+                        if ($model->save()) {
+
+                        }
+                        echo $contact_left;
+                        exit;
+                }
+        }
+
+        public function loadModels($id) {
+                $model = UserPlans::model()->findByAttributes(array('user_id' => $id));
+                if ($model === null)
+                        throw new CHttpException(404, 'The requested page does not exist.');
+                return $model;
+        }
+
 }

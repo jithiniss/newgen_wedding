@@ -80,12 +80,8 @@
             <?php } else { ?>
                     <a href="#" data-toggle="modal" data-target="#myModal1" class="offsets"><i class="fa car fa-envelope"></i>Send a message<i class="fa car fa-caret-right"></i></a>
             <?php } ?>
-            <button type="button" class="btn btn-info offsets-btn" data-toggle="modal" data-target="#myModal"><i class="fa car fa-contao"></i>View  Contacts<i class="fa car fa-caret-right"></i></button>
-            <?php
-            $user_details = UserDetails::model()->findByAttributes(array('user_id' => $id));
+            <button type="button" class="btn btn-info offsets-btn view_contact" id="<?php echo $id; ?>" data-toggle="modal" data-target="#myModal"><i class="fa car fa-contao"></i>View  Contacts<i class="fa car fa-caret-right"></i></button>
 
-            echo CHtml::link('<button type = "button" class = "btn btn-info offsets-btn" data-toggle = "modal" data-target = "#myModal"><i class = "fa car fa-phone"></i>Call Member<i class = "fa car fa-caret-right"></i></button>', '/../' . $user_details->mobile_number);
-            ?>
             <?php
             $favorite = Favorites::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id'], 'partner_id' => $user_details->id, 'status' => 1));
 
@@ -132,7 +128,8 @@
                                 </div>
                                 <div class="col-sm-8 col-xs-8 zeros">
                                     <div class="form-group do">
-                                        <input type="text" class="grd web" id="email" readonly="" placeholder="<?php echo $partner->contact_number; ?>">
+                                        <a class="grd web" href="tel:<?php echo $partner->contact_number; ?>"><?php echo $partner->contact_number; ?></a>
+                                        <!--<input type="text" class="grd web" id="email" readonly="" placeholder="<?php echo $partner->contact_number; ?>">-->
                                     </div>
                                 </div>
                             </div>
@@ -154,6 +151,9 @@
                                 </div>
 
                             </div>
+                            <b>Remaining Contacts : <b id="remaining"></b></b>
+
+
                     <?php } else { ?>
                             <div class="common">
                                 <h4>Please Upgrade Your plan to see the contact Details</h4>

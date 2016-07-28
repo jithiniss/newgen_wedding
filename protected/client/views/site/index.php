@@ -277,7 +277,7 @@
                         <label>Age</label>
                         <select class="age" name="age_from" >
                             <?php
-                            for($i = 18; $i <= 50; $i++) {
+                            for ($i = 18; $i <= 50; $i++) {
                                     ?>
                                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                             <?php }
@@ -290,7 +290,7 @@
 
                         <select class="aged" name="age_to" >
                             <?php
-                            for($i = 18; $i <= 50; $i++) {
+                            for ($i = 18; $i <= 50; $i++) {
                                     ?>
                                     <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
                             <?php }
@@ -303,7 +303,7 @@
                             <option value="0">Select</option>
                             <?php
                             $religions = MasterReligion::model()->findAllByAttributes(array('status' => 1));
-                            foreach($religions as $religion) {
+                            foreach ($religions as $religion) {
                                     ?>
                                     <option value="<?php echo $religion->id; ?>"><?php echo $religion->religion; ?></option>
 
@@ -317,7 +317,7 @@
                             <option value="0">Select</option>
                             <?php
                             $mothertongue = MasterMotherTongue::model()->findAllByAttributes(array('status' => 1));
-                            foreach($mothertongue as $language) {
+                            foreach ($mothertongue as $language) {
                                     ?>
                                     <option value="<?php echo $language->id; ?>"><?php echo $language->mother_tongue; ?></option>
 
@@ -351,13 +351,14 @@
                 <figcaption>
 
                     <p><span class="names">Featured Profile</span></p>
-                    <h4>View All</h4>
+                    <h4><?php echo CHtml::link('View All', 'Featuredstory/profile', array('class' => 'featured_link')) ?></h4>
+                    <!--<h4>View All</h4>-->
 
                 </figcaption>
             </figure>
         </div>
         <?php
-        foreach($featured as $feature) {
+        foreach ($featured as $feature) {
                 $userDetail = UserDetails::model()->findByPk($feature->user_id);
                 ?>
                 <div class="col-lg-3 col-md-4 col-sm-6 nop">
@@ -429,9 +430,9 @@
         <div class="" id="my-gallery-container">
             <?php
             $i = 0;
-            foreach($story as $success) {
-                    if($i < 4) {
-                            if($i % 2 == 0) {
+            foreach ($story as $success) {
+                    if ($i < 4) {
+                            if ($i % 2 == 0) {
                                     ?>
 
                                     <div class="items success_story1" data-order="<?php echo $i; ?>">
@@ -442,7 +443,7 @@
                             <?php }
                             ?>
                             <?php
-                            if($i % 2 != 0) {
+                            if ($i % 2 != 0) {
                                     ?>
 
                                     <div class="items success_story2" data-order="<?php echo $i; ?>">
@@ -455,8 +456,8 @@
                     }
                     ?>
                     <?php
-                    if($i >= 4) {
-                            if($i % 2 != 0) {
+                    if ($i >= 4) {
+                            if ($i % 2 != 0) {
                                     ?>
 
                                     <div class="items success_story1" data-order="<?php echo $i; ?>">
@@ -468,7 +469,7 @@
                             }
                             ?>
                             <?php
-                            if($i % 2 == 0) {
+                            if ($i % 2 == 0) {
                                     ?>
 
                                     <div class="items success_story2" data-order="<?php echo $i; ?>">
@@ -499,15 +500,15 @@
     <div class="container dotted full-width hidden-xs">
         <h1>Membership <span class="plans">Plans</span></h1>
         <?php
-        if(!empty($plans)) {
-                foreach($plans as $plan) {
+        if (!empty($plans)) {
+                foreach ($plans as $plan) {
                         ?>
 
                         <div class="col-md-4 col-sm-6">
                             <div class="mem">
                                 <h2><?php echo $plan->plan_name; ?></h2>
                                 <h3><?php
-                                    if($plan->number_of_days == 0) {
+                                    if ($plan->number_of_days == 0) {
 
                                     } else {
                                             echo $plan->number_of_days / 30 . " months";
@@ -523,45 +524,45 @@
                             </div>
                             <ul class="list-inline list-unstyled">
                                 <?php
-                                if($plan->view_contact > 0) {
+                                if ($plan->view_contact > 0) {
 
                                         echo "<li>View contact detail upto " . $plan->view_contact . "</li>";
                                 }
                                 ?>
 
                                 <?php
-                                if($plan->send_message == 1) {
+                                if ($plan->send_message == 1) {
 
                                         echo " <li>Send Messages</li>";
                                 }
                                 ?>
                                 <?php
-                                if($plan->search == 1) {
+                                if ($plan->search == 1) {
 
                                         echo " <li>Search Unlimited Profiles</li>";
                                 }
                                 ?>
 
                                 <?php
-                                if($plan->Interest == 1) {
+                                if ($plan->Interest == 1) {
 
                                         echo " <li>Send and receive Interests</li>";
                                 }
                                 ?>
                                 <?php
-                                if($plan->sms_alerts == 1) {
+                                if ($plan->sms_alerts == 1) {
 
                                         echo " <li>SMS Alert Available</li>";
                                 }
                                 ?>
                                 <?php
-                                if($plan->email_alerts == 1) {
+                                if ($plan->email_alerts == 1) {
 
                                         echo " <li>Email Alert Available</li>";
                                 }
                                 ?>
                                 <?php
-                                if($plan->featured == 1) {
+                                if ($plan->featured == 1) {
 
                                         echo " <li>Set as Featured Profile</li>";
                                 }
@@ -585,22 +586,22 @@
         <div class="row">
             <div class="gold">
                 <?php
-                if(!empty($plans)) {
-                        foreach($plans as $plan) {
+                if (!empty($plans)) {
+                        foreach ($plans as $plan) {
                                 ?>
                                 <div class="item">
                                     <div class="main">
                                         <div class="mem">
                                             <h2><?php echo $plan->plan_name; ?></h2>
                                             <h3><?php
-                                                if($plan->number_of_days == 0) {
+                                                if ($plan->number_of_days == 0) {
 
                                                 } else {
                                                         echo $plan->number_of_days / 30 . " months";
                                                 }
                                                 ?></h3>
                                             <p><?php
-                                                if($plan->amount == 0) {
+                                                if ($plan->amount == 0) {
 
                                                 } else {
                                                         echo "Rs. " . $plan->amount;
@@ -609,45 +610,45 @@
                                         </div>
                                         <ul class="list-inline list-unstyled">
                                             <?php
-                                            if($plan->view_contact > 0) {
+                                            if ($plan->view_contact > 0) {
 
                                                     echo "<li>View contact detail upto " . $plan->view_contact . "</li>";
                                             }
                                             ?>
 
                                             <?php
-                                            if($plan->send_message == 1) {
+                                            if ($plan->send_message == 1) {
 
                                                     echo " <li>Send Messages</li>";
                                             }
                                             ?>
                                             <?php
-                                            if($plan->search == 1) {
+                                            if ($plan->search == 1) {
 
                                                     echo " <li>Search Unlimited Profiles</li>";
                                             }
                                             ?>
 
                                             <?php
-                                            if($plan->Interest == 1) {
+                                            if ($plan->Interest == 1) {
 
                                                     echo " <li>Send and receive Interests</li>";
                                             }
                                             ?>
                                             <?php
-                                            if($plan->sms_alerts == 1) {
+                                            if ($plan->sms_alerts == 1) {
 
                                                     echo " <li>SMS Alert Available</li>";
                                             }
                                             ?>
                                             <?php
-                                            if($plan->email_alerts == 1) {
+                                            if ($plan->email_alerts == 1) {
 
                                                     echo " <li>Email Alert Available</li>";
                                             }
                                             ?>
                                             <?php
-                                            if($plan->featured == 1) {
+                                            if ($plan->featured == 1) {
 
                                                     echo " <li>Set as Featured Profile</li>";
                                             }
@@ -759,7 +760,7 @@
 <script type="text/javascript" src="<?= Yii::app()->baseUrl ?>/js/mp.mansory.js"></script>
 <script type="text/javascript">
         $(document).ready(function () {
-<?php if(!isset(Yii::app()->session['user']) && Yii::app()->session['user'] == '') { ?>
+<?php if (!isset(Yii::app()->session['user']) && Yii::app()->session['user'] == '') { ?>
                     setTimeout(function () {
                         $("#myModal").modal('show');
                     }, 4000);
@@ -880,43 +881,43 @@
         jQuery(window).scroll(function ()
 
 
-        {
-
-            if ($(window).width() > 991)
-            {
-                var scrlTop = jQuery(window).scrollTop();
-
-
-                $window = jQuery(window);
-
-                function myanimations(doelement, doclass) {
-                    $element = jQuery(doelement);
-
-                    $element.each(function () {
-                        $thisone = jQuery(this);
-                        if ($thisone.offset().top + 200 < ($window.height() + $window.scrollTop()) &&
-                                ($thisone.offset().top + $element.outerHeight()) + 170 > $window.scrollTop())
                         {
-                            $thisone.removeClass('fadeOut');
-                            $thisone.addClass('animated');
-                            $thisone.addClass(doclass);
-                        } else {
-                            $thisone.removeClass(doclass);
-                            $thisone.addClass('fadeOut');
-                        }
-                    });
-                }
-                myanimations('.success h1', 'zoomIn');
-                myanimations('.membership h1', 'zoomIn');
-                myanimations('.quick h2', 'fadeInUp m2');
 
-                myanimations('.more h1', 'fadeInLeft m2');
-                myanimations('.groom h3', 'fadeInRight m3');
+                            if ($(window).width() > 991)
+                            {
+                                var scrlTop = jQuery(window).scrollTop();
 
-                myanimations('.couples h1', 'fadeInLeft m2');
-                myanimations('.couples p', 'fadeInRight m3');
-            }
-        });
+
+                                $window = jQuery(window);
+
+                                function myanimations(doelement, doclass) {
+                                    $element = jQuery(doelement);
+
+                                    $element.each(function () {
+                                        $thisone = jQuery(this);
+                                        if ($thisone.offset().top + 200 < ($window.height() + $window.scrollTop()) &&
+                                                ($thisone.offset().top + $element.outerHeight()) + 170 > $window.scrollTop())
+                                        {
+                                            $thisone.removeClass('fadeOut');
+                                            $thisone.addClass('animated');
+                                            $thisone.addClass(doclass);
+                                        } else {
+                                            $thisone.removeClass(doclass);
+                                            $thisone.addClass('fadeOut');
+                                        }
+                                    });
+                                }
+                                myanimations('.success h1', 'zoomIn');
+                                myanimations('.membership h1', 'zoomIn');
+                                myanimations('.quick h2', 'fadeInUp m2');
+
+                                myanimations('.more h1', 'fadeInLeft m2');
+                                myanimations('.groom h3', 'fadeInRight m3');
+
+                                myanimations('.couples h1', 'fadeInLeft m2');
+                                myanimations('.couples p', 'fadeInRight m3');
+                            }
+                        });
 
 
 
