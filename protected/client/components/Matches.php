@@ -17,6 +17,19 @@ class Matches extends CWidget {
 
         public function MyMatches() {
                 $user = UserDetails::model()->findByPk(array('id' => Yii::app()->session['user']['id']));
+                $blocked_members = BlockedMembers::model()->findAllByAttributes(array('user_id' => Yii::app()->session['user']['id'], 'status' => 1));
+                foreach ($blocked_members as $blocked) {
+                        $optionsid = $blocked->block_id . ',';
+                        $opt.=$optionsid;
+                }
+                $blocked_ids = rtrim($opt, ',');
+                if (!empty($blocked_ids)) {
+                        $blocked_ids = rtrim($opt, ',');
+                } else {
+                        $blocked_ids = 0;
+                }
+//                var_dump($blocked_ids);
+//                exit;
                 $partner = PartnerDetails::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
                 if ($user->gender == 1) {
                         $gender = 2;
@@ -28,7 +41,7 @@ class Matches extends CWidget {
                 $condition1 = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->religion . '" , religion)'
                         . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
                         . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
                         . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
@@ -37,11 +50,12 @@ class Matches extends CWidget {
                         . ' AND FIND_IN_SET(working_with,"' . $partner->working_with . '")'
                         . ' AND FIND_IN_SET(working_as,"' . $partner->profession_area . '")'
                         . ' AND FIND_IN_SET(education_field,"' . $partner->education . '")'
+                        . ' AND id NOT IN (' . $blocked_ids . ')   '
                         . ' AND status = 1';
                 $condition2 = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->religion . '" , religion)'
                         . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
                         . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
                         . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
@@ -49,73 +63,84 @@ class Matches extends CWidget {
                         . ' AND city = ' . $user->city
                         . ' AND FIND_IN_SET(working_with,"' . $partner->working_with . '")'
                         . ' AND FIND_IN_SET(working_as,"' . $partner->profession_area . '")'
+                        . ' AND id NOT IN (' . $blocked_ids . ')   '
                         . ' AND status = 1';
                 $condition3 = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->religion . '" , religion)'
                         . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
                         . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
                         . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
                         . ' AND FIND_IN_SET(grow_up_in,"' . $partner->country_grew_up . '")'
                         . ' AND city = ' . $user->city
                         . ' AND FIND_IN_SET(working_with,"' . $partner->working_with . '")'
+                        . ' AND id NOT IN (' . $blocked_ids . ')  '
                         . ' AND status = 1';
                 $condition4 = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->religion . '" , religion)'
                         . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
                         . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
                         . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
                         . ' AND FIND_IN_SET(grow_up_in,"' . $partner->country_grew_up . '")'
                         . ' AND city = ' . $user->city
+                        . ' AND id NOT IN (' . $blocked_ids . ')  '
                         . ' AND status = 1';
                 $condition5 = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->religion . '" , religion)'
                         . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
                         . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
                         . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
                         . ' AND FIND_IN_SET(grow_up_in,"' . $partner->country_grew_up . '")'
+                        . ' AND id NOT IN (' . $blocked_ids . ')  '
                         . ' AND status = 1';
                 $condition6 = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->religion . '" , religion)'
                         . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
                         . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
                         . ' AND FIND_IN_SET(state,"' . $partner->residency_status . '")'
+                        . ' AND id NOT IN (' . $blocked_ids . ')  '
                         . ' AND status = 1';
                 $condition7 = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->religion . '" , religion)'
                         . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
                         . ' AND FIND_IN_SET(country,"' . $partner->country_living_in . '")'
+                        . ' AND id NOT IN (' . $blocked_ids . ')  '
                         . ' AND status = 1';
                 $condition8 = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->religion . '" , religion)'
                         . ' AND FIND_IN_SET(caste,"' . $partner->caste . '")'
+                        . ' AND id NOT IN (' . $blocked_ids . ') '
                         . ' AND status = 1';
                 $condition9 = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
-                        . ' AND  FIND_IN_SET("' . $partner->religion . '",religion)'
+                        . ' AND FIND_IN_SET("' . $partner->religion . '" , religion)'
+                        . ' AND id NOT IN (' . $blocked_ids . ') '
                         . ' AND status = 1';
 
                 $condition10 = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to
+                        . ' AND FIND_IN_SET("' . $partner->religion . '" , religion)'
+                        . ' AND id NOT IN (' . $blocked_ids . ') '
                         . ' AND status = 1';
 
 
                 $condition11 = 'gender = ' . $gender
+                        . ' AND id NOT IN (' . $blocked_ids . ') '
                         . ' AND status = 1';
-
+//                $block_user = 'id NOT IN ("' . $blocked_ids . '")  AND ';
                 $matchprofile1 = UserDetails::model()->findAll(array('condition' => $condition1));
                 $matchprofile2 = UserDetails::model()->findAll(array('condition' => $condition2));
                 $matchprofile3 = UserDetails::model()->findAll(array('condition' => $condition3));
@@ -128,7 +153,8 @@ class Matches extends CWidget {
                 $matchprofile10 = UserDetails::model()->findAll(array('condition' => $condition10));
                 $matchprofile11 = UserDetails::model()->findAll(array('condition' => $condition11));
 
-
+//                var_dump($condition10);
+//                exit;
                 if (!empty($matchprofile1)) {
                         return $matchprofile1;
                 } else if (!empty($matchprofile2)) {
