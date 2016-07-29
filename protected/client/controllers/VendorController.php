@@ -137,32 +137,29 @@ class VendorController extends Controller {
 
                         $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
 
-                        if(!empty($model)) {
-                                $photo = $model->photo;
-                                $this->performAjaxValidation($model, 'vendor-edit-form');
-                                if(isset($_POST['VendorDetails'])) {
-                                        $model->attributes = $_POST['VendorDetails'];
-                                        $model->dob = date('Y-m-d', strtotime($_POST['VendorDetails']['dob']));
-                                        $model->company_address = $_POST['VendorDetails']['company_address'];
-                                        $model->ub = Yii::app()->session['admin']['id'];
-                                        $image = CUploadedFile::getInstance($model, 'photo');
-                                        if(!isset($image)) {
-                                                $model->photo = $photo;
-                                        }
-                                        if($model->save()) {
-                                                if(isset($image)) {
 
-                                                        if(!$this->uploadMyPic($model->id, $image)) {
-                                                                throw new CHttpException(403, 'Forbidden');
-                                                        }
-                                                }
-                                                $this->redirect(array('vendor/myProfile'));
-                                        }
+                        $photo = $model->photo;
+                        $this->performAjaxValidation($model, 'vendor-edit-form');
+                        if(isset($_POST['VendorDetails'])) {
+                                $model->attributes = $_POST['VendorDetails'];
+                                $model->dob = date('Y-m-d', strtotime($_POST['VendorDetails']['dob']));
+                                $model->company_address = $_POST['VendorDetails']['company_address'];
+                                $model->ub = Yii::app()->session['user']['id'];
+                                $image = CUploadedFile::getInstance($model, 'photo');
+                                if(!isset($image)) {
+                                        $model->photo = $photo;
                                 }
-                                $this->render('profile', array('model' => $model));
-                        } else {
-                                $this->redirect(array('home'));
+                                if($model->save()) {
+                                        if(isset($image)) {
+
+                                                if(!$this->uploadMyPic($model->id, $image)) {
+                                                        throw new CHttpException(403, 'Forbidden');
+                                                }
+                                        }
+                                        $this->redirect(array('vendor/myProfile'));
+                                }
                         }
+                        $this->render('profile', array('model' => $model));
                 } else {
                         $this->redirect(array('logout'));
                 }
@@ -170,12 +167,150 @@ class VendorController extends Controller {
 
         public function actionEnquiry() {
                 if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
-                        $enquiry = WeddingPlannerEnquiry::model()->findAllByAttributes(array('vendor_id' => Yii::app()->session['vendor']['id']));
+                        $criteria = new CDbCriteria;
+                        $criteria->condition = 'vendor_id =' . Yii::app()->session['vendor']['id'] . ' order by id desc';
+                        $total = WeddingPlannerEnquiry::model()->count(array('condition' => 'vendor_id =' . Yii::app()->session['vendor']['id'] . ' order by id desc'));
+                        if(!empty($total)) {
+                                $pages = new CPagination($total);
+                                $pages->pageSize = 4;
+                                $pages->applyLimit($criteria);
+
+                                $enquiry = WeddingPlannerEnquiry::model()->findAll($criteria);
+                        }
+
                         $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
-                        $this->render('enquiry', array('enquiry' => $enquiry, 'model' => $model));
+                        $this->render('enquiry', array('enquiry' => $enquiry, 'model' => $model, 'pages' => $pages,));
                 } else {
                         $this->redirect(array('logout'));
                 }
+        }
+
+        public function actionChangePassword() {
+                if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
+                        $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
+                        $old_password = $model->password;
+                        $model->setScenario('changePwd');
+                        $this->performAjaxValidation($model, 'vendor-change-password-form');
+                        if(isset($_POST['VendorDetails'])) {
+
+                                $model->attributes = $_POST['VendorDetails'];
+
+                                $model->password = $_POST['VendorDetails']['repeat_password'];
+
+                                // $model->ub = Yii::app()->session['user']['id'];
+                                if($_POST['VendorDetails']['old_password'] == $old_password) {
+                                        if($model->validate()) {
+                                                $model->save(false);
+                                                $model->repeat_password = '';
+                                                $model->new_password = '';
+                                                $model->old_password = '';
+                                                Yii::app()->user->setFlash('vendor_change_success', 'Password Changed Successfully.');
+                                        }
+                                } else {
+                                        $model->addError('old_password', 'Incorrect Current Password');
+                                }
+                        }
+
+                        $this->render('change_password', array('model' => $model));
+                } else {
+                        $this->redirect(array('logout'));
+                }
+        }
+
+        public function actionForgotPassword() {
+                if(isset($_POST['btn_submit'])) {
+                        $email = $_POST['email'];
+                        $user = VendorDetails::model()->findByAttributes(array('email' => $email));
+                        if($user != '') {
+
+                                $forgot = new ForgotPassword;
+                                $forgot->user_id = $user->id;
+                                $forgot->code = rand(10000, 1000000);
+                                $token = base64_encode($forgot->user_id . ':' . $forgot->code);
+                                $forgot->status = 1;
+                                $forgot->doc = date('Y-m-d');
+                                if($forgot->save(FALSE)) {
+                                        $this->SuccessMail($token, $user);
+                                        Yii::app()->user->setFlash('success1', ' We’ve sent you a link to change your password');
+                                        Yii::app()->user->setFlash('success2', ' We’ve sent you an email that will allow you to reset your password quickly and easily.');
+
+//                                        $this->render('mail', array('token' => $token));
+                                } else {
+                                        Yii::app()->user->setFlash('error', "Invalid Email Id. Try again later..");
+                                }
+                        } else {
+                                Yii::app()->user->setFlash('error', "Invalid Email Id. Try again later..");
+                        }
+                }
+                $this->render('forgot_password');
+        }
+
+        public function SuccessMail($token, $vendor) {
+
+                $user = $vendor->email;
+                //$user = 'shahana@intersmart.in';
+                $user_subject = 'Please Reset Your Password';
+                echo $user_message = $this->renderPartial('mail/_forgot_password_mail_user', array('token' => $token, 'vendor' => $vendor), true);
+
+                exit;
+                // Always set content-type when sending HTML email
+                $headers = "MIME-Version: 1.0" . "\r\n";
+                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                // More headers
+                $headers .= 'From: <no-reply@newgen.com/>' . "\r\n";
+                mail($user, $user_subject, $user_message, $headers);
+        }
+
+        public function actionChangeOldPassword($token) {
+                $var = base64_decode($token);
+                $arr = explode(':', $var);
+
+                $id = $arr[0];
+                $token2 = $arr[1];
+                $token_test = ForgotPassword::model()->findByAttributes(array('code' => $token2, 'user_id' => $id));
+
+                if($token_test != '') {
+                        Yii::app()->session['frgt_venderid'] = $id;
+                        $token_test->delete();
+                        $this->render('changepassword');
+                } else {
+                        Yii::app()->user->setFlash('error', "Session Expired. Try again later..");
+                        $this->redirect(array('ForgotPassword'));
+                }
+        }
+
+        public function actionNewpassword() {
+                if(isset(Yii::app()->session['frgt_venderid']) && Yii::app()->session['frgt_venderid'] != '') {
+                        if(isset($_POST['btn_submit'])) {
+
+
+
+                                $id = Yii::app()->session['frgt_venderid'];
+                                $pass1 = VendorDetails::model()->findByPk($id);
+                                $newpass = $_POST['password1'];
+                                $pass1->password = $newpass;
+                                $pass1->update(array('password'));
+                                if($pass1->save()) {
+                                        Yii::app()->user->setFlash('success', "Your password changed successfully. Please login");
+                                        $this->redirect(array('vendor/index'));
+                                } else {
+
+                                        Yii::app()->user->setFlash('error', "Inavlid user,..");
+                                }
+                                Yii::app()->session['frgt_venderid'] = '';
+                                $_SESSION['frgt_venderid'] = '';
+                        }
+                        $this->render('changepassword');
+                } else {
+                        Yii::app()->user->setFlash('error', "Session Expired. Try again later..");
+                        $this->redirect(array('ForgotPassword'));
+                }
+        }
+
+        public function siteURL() {
+                $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+                $domainName = $_SERVER['HTTP_HOST'];
+                return $protocol . $domainName . '/newgen_wedding';
         }
 
         public function uploadMyPic($id, $image) {

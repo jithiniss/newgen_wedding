@@ -5,6 +5,11 @@
 
                 <div class="new_form">
                     <h1>Vendor Login</h1>
+                    <?php if(Yii::app()->user->hasFlash('success')): ?>
+                            <div class="alert alert-success login_error">
+                                <?php echo Yii::app()->user->getFlash('success'); ?>
+                            </div>
+                    <?php endif; ?>
                     <?php if(Yii::app()->user->hasFlash('vendor_login_error')): ?>
                             <div class="alert alert-danger login_error">
                                 <?php echo Yii::app()->user->getFlash('vendor_login_error'); ?>
@@ -36,7 +41,7 @@
                     <?php $this->endWidget(); ?>
 
                     <div class="col-md-6 col-sm-6 col-xs-6 padd">
-                        <?php echo CHtml::link('Forgot Password', array('ForgotPassword/index'), array('class' => 'forgot')); ?>
+                        <?php echo CHtml::link('Forgot Password', array('vendor/forgotPassword'), array('class' => 'forgot')); ?>
                     </div>
 
                     <div class="col-md-6 col-sm-6 col-xs-6 padd">

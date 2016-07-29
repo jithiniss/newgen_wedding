@@ -21,7 +21,7 @@
     <h3>Account Settings</h3>
     <ul class="list-unstyled">
         <li>   <?php echo CHtml::link('My Profile', array('vendor/myProfile')); ?></li>
-        <li>   <?php echo CHtml::link('Change Password', array('vendor/myProfile')); ?></li>
+        <li>   <?php echo CHtml::link('Change Password', array('vendor/changePassword')); ?></li>
     </ul>
     <h3>Services</h3>
     <ul class="list-unstyled">

@@ -3,10 +3,10 @@
 class ForgotPasswordController extends Controller {
 
         public function actionIndex() {
-                if (isset($_POST['btn_submit'])) {
+                if(isset($_POST['btn_submit'])) {
                         $email = $_POST['email'];
                         $user = UserDetails::model()->findByAttributes(array('email' => $email));
-                        if ($user != '') {
+                        if($user != '') {
                                 $details = UserDetails::model()->findByPk($user->id);
                                 $forgot = new ForgotPassword;
                                 $forgot->user_id = $details->id;
@@ -14,7 +14,7 @@ class ForgotPasswordController extends Controller {
                                 $token = base64_encode($forgot->user_id . ':' . $forgot->code);
                                 $forgot->status = 1;
                                 $forgot->doc = date('Y-m-d');
-                                if ($forgot->save(FALSE)) {
+                                if($forgot->save(FALSE)) {
                                         $this->SuccessMail($forgot, $token, $details);
                                         $this->render('mail');
 //                                        $this->render('mail', array('token' => $token));
@@ -35,14 +35,14 @@ class ForgotPasswordController extends Controller {
                 $user = $details->email;
                 //$user = 'shahana@intersmart.in';
                 $user_subject = 'Please Reset Your Password';
-                $user_message = $this->renderPartial('mail/_forgot_password_mail_user', array('token' => $token), true);
-
+                echo $user_message = $this->renderPartial('mail/_forgot_password_mail_user', array('token' => $token), true);
+                exit;
 
                 // Always set content-type when sending HTML email
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 // More headers
-                $headers .= 'From: <no-reply@beta.laksyah.com/>' . "\r\n";
+                $headers .= 'From: <no-reply@newgen.com/>' . "\r\n";
                 mail($user, $user_subject, $user_message, $headers);
         }
 
@@ -54,7 +54,7 @@ class ForgotPasswordController extends Controller {
                 $token2 = $arr[1];
                 $token_test = ForgotPassword::model()->findByAttributes(array('code' => $token2, 'user_id' => $id));
                 $pass1 = UserDetails::model()->findByPk($id);
-                if ($token_test != '') {
+                if($token_test != '') {
                         Yii::app()->session['frgt_usrid'] = $id;
                         $token_test->delete();
                         $this->render('changepassword');
@@ -64,16 +64,16 @@ class ForgotPasswordController extends Controller {
         }
 
         public function actionNewpassword() {
-                if (isset($_POST['btn_submit'])) {
+                if(isset($_POST['btn_submit'])) {
 
-                        if (isset(Yii::app()->session['frgt_usrid'])) {
+                        if(isset(Yii::app()->session['frgt_usrid'])) {
 
                                 $id = Yii::app()->session['frgt_usrid'];
                                 $pass1 = UserDetails::model()->findByPk($id);
                                 $newpass = $_POST['password1'];
                                 $pass1->password = $newpass;
                                 $pass1->update(array('password'));
-                                if ($pass1->save()) {
+                                if($pass1->save()) {
                                         Yii::app()->user->setFlash('success', "Your password changed.....<a href='" . Yii::app()->baseUrl . "/index.php/site/login'><u>Click here to login</u></a>");
                                 } else {
 

@@ -39,6 +39,7 @@
 
                     <div class="list-f1">
                         <h3>CONTACT INFO</h3>
+                        <h4><?php echo $vendor_details->company_name; ?> </h4>
                         <?php
                         $serviceAddrsss = explode(',', $service_detail->address);
                         $r = count($serviceAddrsss);
@@ -164,7 +165,11 @@
 
                         </div>
                     </div>
-                    <a  class="connect-85" data-toggle="modal" data-target="#serviceModal" style="cursor: pointer">Enquire Now</a>
+                    <?php
+                    if(isset(Yii::app()->session['user']) && Yii::app()->session['user'] != '') {
+                            ?>
+                            <a  class="connect-85" data-toggle="modal" data-target="#serviceModal" style="cursor: pointer">Enquire Now</a>
+                    <?php } ?>
                 </div>
 
                 <div class="clearfix"></div>

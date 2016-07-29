@@ -40,6 +40,10 @@
  */
 class VendorDetails extends CActiveRecord {
 
+        public $old_password;
+        public $new_password;
+        public $repeat_password;
+
         /**
          * @return string the associated database table name
          */
@@ -57,6 +61,8 @@ class VendorDetails extends CActiveRecord {
                     array('first_name, last_name, user_name, password, email, country, state, city, street, dob, gender, phone_no1, phone_no2, fax, business_type,  our_services, approval_status, status', 'required'),
                     array('id, country, state, city, gender, business_type, approval_status, status, cb, ub', 'numerical', 'integerOnly' => true),
                     array('first_name, last_name, user_name, password, email, dob, phone_no1, phone_no2, fax', 'length', 'max' => 50),
+                    array('old_password,new_password,repeat_password', 'required', 'on' => 'changePwd'),
+                    array('repeat_password', 'compare', 'compareAttribute' => 'new_password', 'message' => 'New password does not match', 'on' => 'changePwd'),
                     array('email', 'email'),
                     array('email,user_name', 'unique'),
                     array('street', 'length', 'max' => 100),

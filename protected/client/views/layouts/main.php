@@ -415,22 +415,23 @@
 
 
         </script>
+        <?php if(!isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] == '') { ?>
+                <script>
 
-        <script>
+                        (function () {
+                            "use strict";
 
-                (function () {
-                    "use strict";
+                            $(window).load(function () {
+                                $("#loader").fadeOut();
+                                $("#mask").delay(10000).fadeOut("slow");
+                            });
+                        })(jQuery);
 
-                    $(window).load(function () {
-                        $("#loader").fadeOut();
-                        $("#mask").delay(10000).fadeOut("slow");
-                    });
-                })(jQuery);
-
-                window.onload = function () {
-                    document.getElementById('mask').style.display = 'none';
-                };
-        </script>
+                        window.onload = function () {
+                            document.getElementById('mask').style.display = 'none';
+                        };
+                </script>
+        <?php } ?>
 <!--        <script type="text/javascript">
                 $(document).ready(function () {
                     setTimeout(function () {

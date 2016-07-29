@@ -2,13 +2,13 @@
 
 class WeddingPlannerController extends Controller {
 
-        public function init() {
-                if(isset(Yii::app()->session['user']) && Yii::app()->session['user']['id'] != '') {
-
-                } else {
-                        $this->redirect(array('//site/index'));
-                }
-        }
+//        public function init() {
+//                if(isset(Yii::app()->session['user']) && Yii::app()->session['user']['id'] != '') {
+//
+//                } else {
+//                        $this->redirect(array('//site/index'));
+//                }
+//        }
 
         public function actionIndex() {
                 //$planner = VendorServices::model()->findAll(array('condition' => 'vendor_id  in (select id from vendor_details where status=1 and approval_status=1)'));
@@ -62,8 +62,9 @@ class WeddingPlannerController extends Controller {
                                         Yii::app()->user->setFlash('enquire_success1', 'Enquiry Submitted Successfully. We will contact you soon..');
                                 }
                         }
+                        $vendor_details = VendorDetails::model()->findByPk($service_detail->vendor_id);
                         $similar_services = VendorServices::model()->findAllByAttributes(array('category_id' => $service_detail->category_id), array('condition' => 'id!=' . $service_detail->id . ' and (vendor_id  in (select id from vendor_details where status=1 and approval_status=1))', 'limit' => 6));
-                        $this->render('plan_details', array('service_detail' => $service_detail, 'similar_services' => $similar_services, 'model' => $model));
+                        $this->render('plan_details', array('service_detail' => $service_detail, 'similar_services' => $similar_services, 'model' => $model, 'vendor_details' => $vendor_details));
                 } else {
                         $this->redirect(array('index'));
                 }
