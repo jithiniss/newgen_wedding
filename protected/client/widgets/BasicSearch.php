@@ -29,7 +29,7 @@ class BasicSearch extends CWidget {
 
                 $search_details = SavedSearch::model()->findByPk($this->id);
 //                $partner = PartnerDetails::model()->findByAttributes(array('user_id' => $this->id));
-                if($search_details->gender == 1) {
+                if ($search_details->gender == 1) {
                         $gender = 2;
                 } else {
                         $gender = 1;
@@ -39,69 +39,69 @@ class BasicSearch extends CWidget {
                 $condition = 'gender = ' . $gender
                         . ' AND dob_year <= ' . $date_from
                         . ' AND dob_year >= ' . $date_to;
-                if($search_details->marital_status != '' && $search_details->marital_status != 0 && $search_details->marital_status != -1) {
+                if ($search_details->marital_status != '' && $search_details->marital_status != 0 && $search_details->marital_status != -1) {
                         $condition .= ' AND  marital_status = ' . $search_details->marital_status;
                 }
-                if($search_details->religion != '' && $search_details->religion != 0 && $search_details->religion != -1) {
+                if ($search_details->religion != '' && $search_details->religion != 0 && $search_details->religion != -1) {
                         $condition .= ' AND  religion = ' . $search_details->religion;
                 }
-                if($search_details->caste != '' && $search_details->caste != 0 && $search_details->caste != -1) {
+                if ($search_details->caste != '' && $search_details->caste != 0 && $search_details->caste != -1) {
                         $condition .= ' AND caste = ' . $search_details->caste;
                 }
-                if($search_details->mothertongue != '' && $search_details->mothertongue != 0 && $search_details->mothertongue != -1) {
+                if ($search_details->mothertongue != '' && $search_details->mothertongue != 0 && $search_details->mothertongue != -1) {
                         $condition .= ' AND mothertongue = ' . $search_details->mothertongue;
                 }
-                if($search_details->country_living_in != '' && $search_details->country_living_in != 0 && $search_details->country_living_in != -1) {
+                if ($search_details->country_living_in != '' && $search_details->country_living_in != 0 && $search_details->country_living_in != -1) {
                         $condition .= ' AND country = ' . $search_details->country_living_in;
                 }
 
 
-                if($this->sort != '') {
+                if ($this->sort != '') {
                         $sort .= $this->sort;
                 } else {
                         $sort .= 'id DESC';
                 }
-                if(!empty($this->photo)) {
+                if (!empty($this->photo)) {
                         $condition .= ' AND photo_visibility IN (' . $this->photo . ')';
                 }
-                if($this->joined != '') {
-                        if($this->joined == 1) {
+                if ($this->joined != '') {
+                        if ($this->joined == 1) {
                                 $joined_date = date("Y-m-d", strtotime(date('Y-m-d') . " -1 days"));
-                        } else if($this->joined == 2) {
+                        } else if ($this->joined == 2) {
                                 $joined_date = date("Y-m-d", strtotime(date('Y-m-d') . " -7 days"));
-                        } else if($this->joined == 3) {
+                        } else if ($this->joined == 3) {
                                 $joined_date = date("Y-m-d", strtotime(date('Y-m-d') . " -30 days"));
                         }
-                        if($joined_date != '') {
+                        if ($joined_date != '') {
                                 $condition .= ' AND doc >= "' . $joined_date . '"';
                         }
                 }
-                if($this->active_mem != '') {
-                        if($this->active_mem == 1) {
+                if ($this->active_mem != '') {
+                        if ($this->active_mem == 1) {
                                 $active_members = date("Y-m-d", strtotime(date('Y-m-d') . " -1 days"));
-                        } else if($this->active_mem == 2) {
+                        } else if ($this->active_mem == 2) {
                                 $active_members = date("Y-m-d", strtotime(date('Y-m-d') . " -7 days"));
-                        } else if($this->active_mem == 3) {
+                        } else if ($this->active_mem == 3) {
                                 $active_members = date("Y-m-d", strtotime(date('Y-m-d') . " -30 days"));
                         }
-                        if($active_members != '') {
+                        if ($active_members != '') {
                                 $condition .= ' AND last_login >= "' . $active_members . '"';
                         }
                 }
 
-                if(!empty($this->marital_stat)) {
+                if (!empty($this->marital_stat)) {
                         $condition .= ' AND marital_status IN (' . $this->marital_stat . ')';
                 }
-                if(!empty($this->profile_crea)) {
+                if (!empty($this->profile_crea)) {
                         $condition .= ' AND profile_for IN (' . $this->profile_crea . ')';
                 }
-                if(!empty($this->smoking)) {
+                if (!empty($this->smoking)) {
                         $condition .= ' AND smoke IN (' . $this->smoking . ')';
                 }
-                if(!empty($this->drinking)) {
+                if (!empty($this->drinking)) {
                         $condition .= ' AND drink IN (' . $this->drinking . ')';
                 }
-                if(!empty($this->diets)) {
+                if (!empty($this->diets)) {
                         $condition .= ' AND diet IN (' . $this->diets . ')';
                 }
                 $dataProvider = new CActiveDataProvider('UserDetails', array('criteria' => array(
@@ -113,7 +113,7 @@ class BasicSearch extends CWidget {
                     ),
                 ));
                 // if($dataProvider->getTotalItemCount() >= 1) {
-                if($this->view == 2) {
+                if ($this->view == 2) {
                         $this->render('mymatches_list', array(
                             'dataProvider' => $dataProvider,
                         ));
