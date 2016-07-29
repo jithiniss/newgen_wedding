@@ -1,8 +1,10 @@
 <div class="col-md-4 col-sm-6 col-xs-6 sized">
-        <div class="load">
+        <div class="load search_class">
                 <?php
                 $this->widget("application.client.widgets.PhotoVisibility", array(
                     'id' => $data->id,
+                    'width' => 262,
+                    'height' => 257,
                 ));
                 ?>
                 <h1>  <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $data->user_id; ?>"><?php echo $data->first_name; ?> - <?php echo $data->id; ?></a></h1>

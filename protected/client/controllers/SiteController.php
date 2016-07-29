@@ -253,6 +253,7 @@ class SiteController extends Controller {
                         $model->age_to = $_POST['age_to'];
                         $model->religion = $_POST['religion'];
                         $model->mothertongue = $_POST['mothertongue'];
+                        $model->doc = date('Y-m-d');
                         if ($_POST['gender'] == 2) {
                                 $model->gender = "1";
                         } else {
@@ -268,7 +269,6 @@ class SiteController extends Controller {
         }
 
         public function actionResult($id) {
-
                 if (isset($_POST['photo'])) {
                         $ph = $_POST['photo'];
                         if (count($ph) > 1) {
@@ -339,7 +339,8 @@ class SiteController extends Controller {
                         $sort = 'id DESC';
                 }
                 $result_id = $this->encrypt_decrypt('decrypt', $id);
-
+//                echo $result_id;
+//                exit;
                 $this->render('search_result', array('id' => $result_id, 'sort' => $sort, 'photo' => $photo, 'joined' => $joined, 'active_mem' => $active_mem, 'marital_stat' => $marital_stat, 'profile_crea' => $profile_crea, 'smoking' => $smoking, 'drinking' => $drinking, 'diets' => $diets));
         }
 

@@ -550,7 +550,7 @@
                                         <div class="modal-body">
                                                 <h1>Share with your friend</h1>
                                                 <ul class="list-inline list-unstyled">
-                                                        <!--<li class="link-1"><?php // echo CHtml::link('<i class="fa email fa-envelope"></i>Signup with Email', array('site/login'));                                                                                                                                            ?></li>-->
+                                                        <!--<li class="link-1"><?php // echo CHtml::link('<i class="fa email fa-envelope"></i>Signup with Email', array('site/login'));                                                                                                                                             ?></li>-->
                                                         <li class="link-1"><a href="#"  data-toggle="modal" data-target="#myModal_share_email"><i class="fa email fa-envelope"></i>Share with Email</a></li>
                                                         <li class="link-2"><a onclick="popWindow('https://www.facebook.com/sharer/sharer.php?u=http://newgen.com', 'facebook', 'width=1000,height=200,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');"><i class="fa email fa-facebook"></i>Share with Facebook</a></li>
                                                         <!--<li class="link-2"><a href="#"><i class="fa email fa-facebook"></i>Share with Facebook</a></li>-->

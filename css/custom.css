@@ -393,9 +393,14 @@ input.btn.btn-default.mat:hover {
         background-color: #ff9900;
         border: 0;
 }
-.load .side{
-        width: 261px;
-        height: 346px;
+.search_class p{
+        margin-top: -26px;
+        margin-left: 79px;
+        color: #fff;
+}
+.effect-goliath a {
+        text-decoration: none;
+        color: #fff;
 }
 .profile .sime{
         width: 14px;

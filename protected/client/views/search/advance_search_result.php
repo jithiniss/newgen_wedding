@@ -60,7 +60,18 @@
 
 
                                         <?php
-                                        $this->widget("application.client.widgets.AdvanceSearch", array('id' => $id, 'sort' => $sort, 'view' => 1, 'photo' => $photo, 'joined' => $joined, 'active_mem' => $active_mem, 'marital_stat' => $marital_stat, 'profile_crea' => $profile_crea, 'smoking' => $smoking, 'drinking' => $drinking, 'diets' => $diets));
+                                        $this->widget("application.client.widgets.AdvanceSearch", array(
+                                            'id' => $id,
+                                            'sort' => $sort,
+                                            'view' => 1,
+                                            'photo' => $photo,
+                                            'joined' => $joined,
+                                            'active_mem' => $active_mem,
+                                            'marital_stat' => $marital_stat,
+                                            'profile_crea' => $profile_crea,
+                                            'smoking' => $smoking,
+                                            'drinking' => $drinking,
+                                            'diets' => $diets));
                                         ?>
 
 
