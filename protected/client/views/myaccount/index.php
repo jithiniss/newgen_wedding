@@ -19,8 +19,12 @@
 
                                 <div class="messagez">
                                         <form method="post" id="photo_update" enctype="multipart/form-data"  >
-                                                <?php if ($user->photo != '') { ?>
-                                                        <img class="center-block line" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $user->id; ?>/profile/<?= $user->photo ?>">
+                                                <?php
+                                                if ($user->photo != '') {
+                                                        $userPic = explode('.', $user->photo);
+                                                        $folder = Yii::app()->Upload->folderName(0, 1000, $user->id);
+                                                        ?>
+                                                        <img class="center-block line" src="<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $user->id . '/profile/' . $userPic[0] . '_149_178' . '.' . $userPic[1]; ?>">
                                                 <?php } else {
                                                         ?>
                                                         <?php if ($user->gender == 1) { ?>
@@ -359,6 +363,8 @@
                                                                                                                                 <?php
                                                                                                                                 $this->widget("application.client.widgets.PhotoVisibility", array(
                                                                                                                                     'id' => $match->id,
+                                                                                                                                    'width' => 180,
+                                                                                                                                    'height' => 238,
                                                                                                                                 ));
                                                                                                                                 ?>
 
@@ -419,68 +425,28 @@
                                                                                         <div class="girls">
                                                                                                 <?php
                                                                                                 foreach ($twowaymatches as $twowaymatche) {
-                                                                                                        if ($twowaymatche->photo_visibility == 1) {
-                                                                                                                ?>
-                                                                                                                <div class="item">
-                                                                                                                        <div class="main">
-                                                                                                                                <div class="profile ">
-                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $twowaymatche->id; ?>/profile/<?= $twowaymatche->photo ?>">
-                                                                                                                                </div>
-                                                                                                                                <h1><?= $twowaymatche->first_name; ?></h1>
-                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($twowaymatche->dob_year)); ?>
-                                                                                                                                        <?php
-                                                                                                                                        if ($twowaymatche->height != 0) {
-                                                                                                                                                echo "," . MasterHeight::model()->findByPk($twowaymatche->height)->height;
-                                                                                                                                        }
-                                                                                                                                        ?></h1>
-                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
-                                                                                                                        </div>
+                                                                                                        ?>
+                                                                                                        <div class="item">
+                                                                                                                <div class="main">
+                                                                                                                        <div class="profile ">
+                                                                                                                                <?php
+                                                                                                                                $this->widget("application.client.widgets.PhotoVisibility", array(
+                                                                                                                                    'id' => $twowaymatche->id,
+                                                                                                                                    'width' => 180,
+                                                                                                                                    'height' => 238,
+                                                                                                                                ));
+                                                                                                                                ?>                                                                                                                                </div>
+                                                                                                                        <h1><?= $twowaymatche->first_name; ?></h1>
+                                                                                                                        <h1><?php echo date('Y') - date('Y', strtotime($twowaymatche->dob_year)); ?>
+                                                                                                                                <?php
+                                                                                                                                if ($twowaymatche->height != 0) {
+                                                                                                                                        echo "," . MasterHeight::model()->findByPk($twowaymatche->height)->height;
+                                                                                                                                }
+                                                                                                                                ?></h1>
+                                                                                                                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
                                                                                                                 </div>
-
-                                                                                                        <?php } if ($twowaymatche->photo_visibility == 2) { ?>
-                                                                                                                <div class="item">
-                                                                                                                        <div class="main">
-                                                                                                                                <div class="profile ">
-                                                                                                                                        <?php if ($twowaymatche->gender == 1) { ?>
-                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
-                                                                                                                                        <?php } else { ?>
-                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                                                                                                                        <?php } ?>                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
-                                                                                                                                        <p>Visible on Accept/Sent</p>
-                                                                                                                                </div>
-                                                                                                                                <h1><?= $twowaymatche->first_name; ?></h1>
-                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($twowaymatche->dob_year)); ?>
-                                                                                                                                        <?php
-                                                                                                                                        if ($twowaymatche->height != 0) {
-                                                                                                                                                echo "," . MasterHeight::model()->findByPk($twowaymatche->height)->height;
-                                                                                                                                        }
-                                                                                                                                        ?></h1>
-                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
-                                                                                                                        </div>
-                                                                                                                </div>
-                                                                                                        <?php } if ($twowaymatche->photo_visibility == 3) { ?>
-                                                                                                                <div class="item">
-                                                                                                                        <div class="main">
-                                                                                                                                <div class="profile ">
-                                                                                                                                        <?php if ($twowaymatche->gender == 1) { ?>
-                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
-                                                                                                                                        <?php } else { ?>
-                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                                                                                                                        <?php } ?>                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
-                                                                                                                                        <p>Password Protected</p>
-                                                                                                                                </div>
-                                                                                                                                <h1><?= $twowaymatche->first_name; ?></h1>
-                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($twowaymatche->dob_year)); ?>
-                                                                                                                                        <?php
-                                                                                                                                        if ($twowaymatche->height != 0) {
-                                                                                                                                                echo "," . MasterHeight::model()->findByPk($twowaymatche->height)->height;
-                                                                                                                                        }
-                                                                                                                                        ?></h1>
-                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $twowaymatche->user_id), array('class' => 'viewallz')); ?>
-                                                                                                                        </div>
-                                                                                                                </div>
-                                                                                                                <?php
-                                                                                                        }
+                                                                                                        </div>
+                                                                                                        <?php
                                                                                                 }
                                                                                                 ?>
                                                                                         </div>
@@ -524,71 +490,31 @@
                                                                                                                 foreach ($visitors as $visitor) {
 //                                                                                                                var_dump($visitor);
 //                                                                                                                exit;
-                                                                                                                        if ($visitor->photo_visibility == 2) {
-                                                                                                                                ?>
-                                                                                                                                <div class="item">
-                                                                                                                                        <div class="main">
-                                                                                                                                                <div class="profile ">
-                                                                                                                                                        <?php if ($visitor->gender == 1) { ?>
-                                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
-                                                                                                                                                        <?php } else { ?>
-                                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                                                                                                                                        <?php } ?>                                                                                                                                                        <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
-                                                                                                                                                        <p>Visible on Accept/sent</p>
-                                                                                                                                                </div>
-                                                                                                                                                <h1><?= $visitor->first_name; ?></h1>
-                                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($visitor->dob_year)); ?>
-                                                                                                                                                        <?php
-                                                                                                                                                        if ($visitor->height != 0) {
-                                                                                                                                                                echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
-                                                                                                                                                        }
-                                                                                                                                                        ?></h1>
-                                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $visitor->user_id), array('class' => 'viewallz')); ?>
+                                                                                                                        ?>
+                                                                                                                        <div class="item">
+                                                                                                                                <div class="main">
+                                                                                                                                        <div class="profile ">
+                                                                                                                                                <?php
+                                                                                                                                                $this->widget("application.client.widgets.PhotoVisibility", array(
+                                                                                                                                                    'id' => $visitor->id,
+                                                                                                                                                    'width' => 180,
+                                                                                                                                                    'height' => 238,
+                                                                                                                                                ));
+                                                                                                                                                ?>
                                                                                                                                         </div>
+                                                                                                                                        <h1><?= $visitor->first_name; ?></h1>
+                                                                                                                                        <h1><?php echo date('Y') - date('Y', strtotime($visitor->dob_year)); ?>
+                                                                                                                                                <?php
+                                                                                                                                                if ($visitor->height != 0) {
+                                                                                                                                                        echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
+                                                                                                                                                }
+                                                                                                                                                ?></h1>
+                                                                                                                                        <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $visitor->user_id), array('class' => 'viewallz')); ?>
                                                                                                                                 </div>
-                                                                                                                        <?php } if ($visitor->photo_visibility == 1) { ?>
+                                                                                                                        </div>
 
 
-                                                                                                                                <div class="item">
-                                                                                                                                        <div class="main">
-                                                                                                                                                <div class="profile ">
-                                                                                                                                                        <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">
-
-                                                                                                                                                </div>
-                                                                                                                                                <h1><?= $visitor->first_name; ?></h1>
-                                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($visitor->dob_year)); ?>
-                                                                                                                                                        <?php
-                                                                                                                                                        if ($visitor->height != 0) {
-                                                                                                                                                                echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
-                                                                                                                                                        }
-                                                                                                                                                        ?></h1>
-                                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $visitor->user_id), array('class' => 'viewallz')); ?>
-                                                                                                                                        </div>
-                                                                                                                                </div>
-                                                                                                                        <?php } if ($visitor->photo_visibility == 3) { ?>
-                                                                                                                                <div class="item">
-                                                                                                                                        <div class="main">
-                                                                                                                                                <div class="profile ">
-                                                                                                                                                        <?php if ($visitor->gender == 1) { ?>
-                                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
-                                                                                                                                                        <?php } else { ?>
-                                                                                                                                                                <img class="center-block file img-responsive fullz img_profile" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
-                                                                                                                                                        <?php } ?>                                                                                                                                                         <img class="lockz" src="<?php echo Yii::app()->request->baseUrl; ?>/images/lock.png">
-                                                                                                                                                        <p>Password Protected</p>
-                                                                                                                                                </div>
-                                                                                                                                                <h1><?= $visitor->first_name; ?></h1>
-                                                                                                                                                <h1><?php echo date('Y') - date('Y', strtotime($visitor->dob_year)); ?>
-                                                                                                                                                        <?php
-                                                                                                                                                        if ($visitor->height != 0) {
-                                                                                                                                                                echo "," . MasterHeight::model()->findByPk($visitor->height)->height;
-                                                                                                                                                        }
-                                                                                                                                                        ?></h1>
-                                                                                                                                                <?php echo CHtml::link('Full profile', array('Partner/Partnerdetails', 'userid' => $visitor->user_id), array('class' => 'viewallz')); ?>
-                                                                                                                                        </div>
-                                                                                                                                </div>
-
-                                                                                                                                <?php
-                                                                                                                        }
+                                                                                                                        <?php
                                                                                                                 }
                                                                                                         }
                                                                                                 }
@@ -624,7 +550,7 @@
                                         <div class="modal-body">
                                                 <h1>Share with your friend</h1>
                                                 <ul class="list-inline list-unstyled">
-                                                        <!--<li class="link-1"><?php // echo CHtml::link('<i class="fa email fa-envelope"></i>Signup with Email', array('site/login'));                                                                                                                             ?></li>-->
+                                                        <!--<li class="link-1"><?php // echo CHtml::link('<i class="fa email fa-envelope"></i>Signup with Email', array('site/login'));                                                                                                                                            ?></li>-->
                                                         <li class="link-1"><a href="#"  data-toggle="modal" data-target="#myModal_share_email"><i class="fa email fa-envelope"></i>Share with Email</a></li>
                                                         <li class="link-2"><a onclick="popWindow('https://www.facebook.com/sharer/sharer.php?u=http://newgen.com', 'facebook', 'width=1000,height=200,left=0,top=0,location=no,status=yes,scrollbars=yes,resizable=yes');"><i class="fa email fa-facebook"></i>Share with Facebook</a></li>
                                                         <!--<li class="link-2"><a href="#"><i class="fa email fa-facebook"></i>Share with Facebook</a></li>-->
@@ -688,14 +614,14 @@
 </script>
 <script>
         $(document).ready(function () {
-//                $(".connect-3").on('click', function () {
-//                        $("form#social_share").submit();
-//                });
-//                $(".email_click").on('click', function () {
-////                        alert();
-//////                        $("div#myModal_share").disable();
-//                        $('#myModal_share *').prop('disabled', true);
-//                });
+                //                $(".connect-3").on('click', function () {
+                //                        $("form#social_share").submit();
+                //                });
+                //                $(".email_click").on('click', function () {
+                ////                        alert();
+                //////                        $("div#myModal_share").disable();
+                //                        $('#myModal_share *').prop('disabled', true);
+                //                });
 
 
         });
