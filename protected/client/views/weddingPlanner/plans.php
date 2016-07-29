@@ -37,10 +37,18 @@
 
                                 <div class="case-box-img img-inner">
                                     <?php
-                                    $folder = Yii::app()->Upload->folderName(0, 1000, $post->id);
-                                    $servicePic = explode('.', $post->image);
+                                    if($post->image != '') {
+                                            $folder = Yii::app()->Upload->folderName(0, 1000, $post->id);
+                                            $servicePic = explode('.', $post->image);
+                                            ?>
+                                            <img class="img-responsive bor" src="<?php echo Yii::app()->baseUrl . '/uploads/vendor/' . $folder . '/' . $post->vendor_id . '/services/' . $post->id . '/' . $servicePic[0] . '_246_172.' . $servicePic[1]; ?>">
+                                    <?php } else {
+                                            ?>
+                                            <img class="img-responsive bor" src="<?php echo Yii::app()->baseUrl . '/uploads/service_246x172.jpg' ?>">
+
+                                            <?php
+                                    }
                                     ?>
-                                    <img class="img-responsive bor" src="<?php echo Yii::app()->baseUrl . '/uploads/vendor/' . $folder . '/' . $post->vendor_id . '/services/' . $post->id . '/' . $servicePic[0] . '_246_172.' . $servicePic[1]; ?>">
                                 </div>
 
                                 <h6>Ayurveda Name: Gradhrasi</h6>

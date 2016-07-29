@@ -65,13 +65,13 @@
     </head>
 
     <body id="home-1">
+        <?php if(!isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] == '') { ?>
+                <div id="mask">
+                    <div id="loader">
+                    </div>
+                </div>
 
-        <div id="mask">
-            <div id="loader">
-            </div>
-        </div>
-
-
+        <?php } ?>
 
 
 
@@ -95,14 +95,13 @@
                                 <nav class="navbar navbar-inverse">
                                     <div class="nop">
                                         <ul class="nav navbar-nav">
-                                            <li class="active"><?php echo CHtml::link('Home', array('site/index')); ?></li>
-                                            <li><?php echo CHtml::link('Wedding Planner', array('weddingPlanner/index')); ?></li>
                                             <?php if(!isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] == '') { ?>
+                                                    <li class="active"><?php echo CHtml::link('Home', array('site/index')); ?></li>
+                                                    <li><?php echo CHtml::link('Wedding Planner', array('weddingPlanner/index')); ?></li>
+
                                                     <li><?php echo CHtml::link('Membership Plans', array('site/index', '#' => 'upgrade')); ?></li>
                                                     <li><?php echo CHtml::link('Search', array('Search/index')); ?></li>
-                                            <?php } ?>
-                                            <li><a href="#">Contact Us</a></li>
-                                            <?php if(!isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] == '') { ?>
+                                                    <li><a href="#">Contact Us</a></li>
                                                     <li class="colors"><a href="#">Couples</a></li>
                                             <?php } ?>
                                             <?php
@@ -124,7 +123,7 @@
                                                     <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Log Out', array('site/logout')); ?></li>
                                             <?php } else if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') { ?>
                                                     <li class="colors">
-                                                        <?php echo CHtml::link('<i class="fa locks fa-user"></i>Hi, ' . Yii::app()->session['vendor']['first_name'], array('vendor/index')); ?></li>
+                                                        <?php echo CHtml::link('<i class="fa locks fa-user"></i>Hi, ' . Yii::app()->session['vendor']['first_name'] . ' ' . Yii::app()->session['vendor']['last_name'], array('vendor/index')); ?></li>
 
                                                     <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Log Out', array('vendor/logout')); ?></li>
 

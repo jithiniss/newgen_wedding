@@ -1,3 +1,71 @@
+
+i.fa.dev.fa-facebook {
+    background-color: #4e71a8;
+    padding-top: 7px;
+    border-radius: 20px;
+    padding-bottom: 7px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #fff;
+}
+
+i.fa.dev.fa-twitter {
+    background-color: #1cb7eb;
+    padding-top: 7px;
+   border-radius: 20px;
+    padding-bottom: 7px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #fff;
+}
+
+
+i.fa.dev.fa-google-plus {
+    background-color: #e3411f;
+    padding-top: 7px;
+    border-radius: 20px;
+    padding-bottom: 7px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #fff;
+}
+
+i.fa.dev.fa-linkedin {
+    background-color: #1686b0;
+    padding-top: 7px;
+    border-radius: 20px;
+    padding-bottom: 7px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #fff;
+}
+.detail-list h4 {
+    padding-top: 0px;
+    color: #666;
+    font-weight: 300;
+    font-family: 'Roboto', sans-serif;
+    margin-bottom: 0;
+    font-size: 14px;
+    text-align: justify;
+    padding-top: 0;
+    margin-top: 5px;
+    margin-left: 0px;
+    line-height: 23px;
+}
+.detail-list ul {
+    list-style: none;
+    padding-left: 6px;
+    margin-top: 26px;
+}
+
+
+.detail-list ul li{
+ 
+    display: inline-block;
+    margin-left: 6px;
+}
+
+
 .wed-plan {
     position: relative;
     overflow: hidden;
@@ -141,12 +209,12 @@ img.img-responsive.maps {
     color: #666;
     font-weight: 300;
     margin-bottom: 0;
-    font-size: 13px;
+    font-size: 14px;
     font-family: 'Roboto', sans-serif;
     text-align: left;
     margin-left: 11px;
     margin-top: 12px;
-    font-style: italic;
+    /* font-style: italic; */
     float: left;
     width: 75%;
     line-height: 18px;
@@ -312,6 +380,10 @@ section.vendors {
     .vendormy {
    
     margin-top: 33px;
+}
+.list-f2 {
+float: left;
+width: 100%;
 }
 }
 @media (max-width:600px){

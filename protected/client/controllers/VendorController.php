@@ -67,10 +67,8 @@ class VendorController extends Controller {
 
         public function actionHome() {
                 if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
-
-
                         $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
-                        $services = VendorServices::model()->findAll();
+                        $services = VendorServices::model()->findAll(array('order' => 'id desc'));
                         $this->render('home', array('model' => $model, 'services' => $services));
                 } else {
                         $this->redirect(array('logout'));
@@ -79,8 +77,6 @@ class VendorController extends Controller {
 
         public function actionAddNewService() {
                 if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
-
-
                         $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
                         $service = new VendorServices;
                         $this->performAjaxValidation($service, 'service-form');
@@ -105,7 +101,6 @@ class VendorController extends Controller {
 
         public function actionUpdateService($id) {
                 if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
-
 
                         $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
                         $service = VendorServices::model()->findByAttributes(array('vendor_id' => $model->id, 'id' => $id));
@@ -140,7 +135,6 @@ class VendorController extends Controller {
         public function actionMyProfile() {
                 if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
 
-
                         $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
 
                         if(!empty($model)) {
@@ -169,6 +163,16 @@ class VendorController extends Controller {
                         } else {
                                 $this->redirect(array('home'));
                         }
+                } else {
+                        $this->redirect(array('logout'));
+                }
+        }
+
+        public function actionEnquiry() {
+                if(isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
+                        $enquiry = WeddingPlannerEnquiry::model()->findAllByAttributes(array('vendor_id' => Yii::app()->session['vendor']['id']));
+                        $model = VendorDetails::model()->findByPk(Yii::app()->session['vendor']['id']);
+                        $this->render('enquiry', array('enquiry' => $enquiry, 'model' => $model));
                 } else {
                         $this->redirect(array('logout'));
                 }
@@ -229,8 +233,8 @@ class VendorController extends Controller {
 
                         $dimension[0] = array('width' => '246', 'height' => '172', 'name' => 'thumb');
                         $dimension[1] = array('width' => '809', 'height' => '342', 'name' => 'main');
-//                        $dimension[2] = array('width' => '72', 'height' => '79', 'name' => 'similarprofile');
-//                        $dimension[3] = array('width' => '163', 'height' => '212', 'name' => 'profile');
+                        $dimension[2] = array('width' => '194', 'height' => '136', 'name' => 'thumb2');
+                        $dimension[3] = array('width' => '271', 'height' => '263', 'name' => 'similar');
 //                        $dimension[4] = array('width' => '396', 'height' => '317', 'name' => 'featured');
 //                        $dimension[2] = array('width' => '580', 'height' => '775', 'name' => 'big');
 //                        $dimension[3] = array('width' => '3016', 'height' => '4030', 'name' => 'zoom');

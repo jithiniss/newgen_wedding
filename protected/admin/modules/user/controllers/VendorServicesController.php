@@ -137,6 +137,8 @@ class VendorServicesController extends Controller {
 
                         $dimension[0] = array('width' => '246', 'height' => '172', 'name' => 'thumb');
                         $dimension[1] = array('width' => '809', 'height' => '342', 'name' => 'main');
+                        $dimension[2] = array('width' => '194', 'height' => '136', 'name' => 'thumb2');
+                        $dimension[3] = array('width' => '271', 'height' => '263', 'name' => 'similar');
 //                        $dimension[1] = array('width' => '100', 'height' => '130', 'name' => 'thumb');
 //                        $dimension[2] = array('width' => '72', 'height' => '79', 'name' => 'similarprofile');
 //                        $dimension[3] = array('width' => '163', 'height' => '212', 'name' => 'profile');

@@ -14,12 +14,11 @@
 
 
             <div class="col-md-9">
-                <?php echo CHtml::link('Add New', array('vendor/addNewService'), array('class' => 'connect-86')); ?>
 
                 <div class="vendormy case-box-main">
                     <?php
-                    if(!empty($services)) {
-                            foreach($services as $service) {
+                    if(!empty($enquiry)) {
+                            foreach($enquiry as $enquirys) {
                                     ?>
                                     <div class="vendor_1">
 
