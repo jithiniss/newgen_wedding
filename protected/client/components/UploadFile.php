@@ -67,10 +67,13 @@ class UploadFile extends CApplicationComponent {
                         foreach ($paths as $value) {
                                 $full_path .= $value . '/';
                                 if (!is_dir(Yii::app()->basePath . $full_path)) {
+
                                         mkdir(Yii::app()->basePath . $full_path);
+                                        chmod(Yii::app()->basePath . $full_path, 0777);
                                 }
-                                chmod(Yii::app()->basePath . $full_path, 0777);
                         }
+
+
                         if ($uploadfile->saveAs(Yii::app()->basePath . $full_path . $filename . '.' . $uploadfile->extensionName)) {
                                 chmod(Yii::app()->basePath . $full_path . $filename . '.' . $uploadfile->extensionName, 0777);
                                 if (!empty($dimensions)) {
@@ -83,6 +86,7 @@ class UploadFile extends CApplicationComponent {
 
                                 return true;
                         } else {
+
                                 return false;
                         }
                 }

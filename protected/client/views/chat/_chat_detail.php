@@ -7,12 +7,13 @@ foreach ($chats as $chat) {
                 <li class="right clearfix"><span class="chat-img pull-right">
                         <?php } else { ?>
                                 <li class="left clearfix"><span class="chat-img pull-left">
-                                        <?php }
+                                                <?php
+                                        }
                                         ?>
 
                                         <img alt="New Gen" class="img-circle"  src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $user_details->id . '/profile/' . $user_details->photo; ?>">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!--<img src="<?= Yii::app()->baseUrl ?>/images/a1.jpg" alt="User Avatar" class="img-circle" />-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!--<img src="<?= Yii::app()->baseUrl ?>/images/a1.jpg" alt="User Avatar" class="img-circle" />-->
                                 </span>
                                 <div class="chat-body clearfix">
                                         <div class="header">
@@ -20,13 +21,13 @@ foreach ($chats as $chat) {
                                                         <span class="glyphicon glyphicon-time"></span><?php echo $this->time_elapsed_string($chat->date); ?></small>
                                         </div>
                                         <p>
-                                                <?php if ($chat->feild1 == '') { ?>
 
-                                                        <?php echo $chat->message; ?>
-                                                <?php } else { ?>
-                                                        <img src="<?= Yii::app()->baseUrl ?>/images/a1.jpg" alt="User Avatar" class="img-circle" />
 
-                                                <?php } ?>
+                                                <?php
+                                                echo $chat->message;
+                                                echo $up_image;
+                                                ?>
+
                                         </p>
                                 </div>
                         </li>

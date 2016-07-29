@@ -34,6 +34,7 @@
 
                                                         $folder = Yii::app()->Upload->folderName(0, 1000, $chat->id);
                                                         $user_details = UserDetails::model()->findByPk($chat->sender);
+//                                                        $folder = Yii::app()->Upload->folderName(0, 1000, $chat->id);
                                                         if ($chat->sender == Yii::app()->session['user']['id']) {
                                                                 ?>
 
@@ -47,7 +48,7 @@
 
                                                                                         <img alt="New Gen" class="img-circle"  src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $user_details->id . '/profile/' . $user_details->photo; ?>">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <!--<img src="<?= Yii::app()->baseUrl ?>/images/a1.jpg" alt="User Avatar" class="img-circle" />-->
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!--<img src="<?= Yii::app()->baseUrl ?>/images/a1.jpg" alt="User Avatar" class="img-circle" />-->
                                                                                 </span>
                                                                                 <div class="chat-body clearfix">
                                                                                         <div class="header">
@@ -58,18 +59,22 @@
                                                                                                 <?php if ($chat->feild1 == '') { ?>
 
                                                                                                         <?php echo $chat->message; ?>
-                                                                                                <?php } else { ?>
-                                                                                                <div style="
-                                                                                                     position: absolute;
-                                                                                                     height: 212px;
-                                                                                                     top: 0px;
-                                                                                                     left: 0px;
-                                                                                                     padding: 81px;display: none;background-color:#d2d2d2;background-image: url(<?= Yii::app()->baseUrl; ?>/images/profile_loader.gif); background-repeat: no-repeat;background-position: center; " id="loading_prof">
+                                                                                                <?php } else {
+                                                                                                        ?>
+
+                                                                                                        <img src = "<?php echo Yii::app()->baseUrl; ?>/uploads/chat/<?php echo $folder; ?>/<?php echo $chat->id; ?>/chatimage/<?php echo $chat->feild1; ?> " width = '100px;'/>
+
+                                                                                                        <!--                                                                                                <div style="
+                                                                                                                                                                                                             position: absolute;
+                                                                                                                                                                                                             height: 212px;
+                                                                                                                                                                                                             top: 0px;
+                                                                                                                                                                                                             left: 0px;
+                                                                                                                                                                                                             padding: 81px;display: none;background-color:#d2d2d2;background-image: url(<?= Yii::app()->baseUrl; ?>/images/profile_loader.gif); background-repeat: no-repeat;background-position: center; " id="loading_prof">
 
 
-                                                                                                </div>
+                                                                                                                                                                                                        </div>-->
 
-                                                                                                <div class="ajax_pics"><img src="<?= Yii::app()->baseUrl ?>/images/a1.jpg" alt="User Avatar" class="img-circle" /></div>
+                                                                                                <div class="ajax_pics"></div>
 
                                                                                         <?php } ?>
                                                                                         </p>
@@ -113,13 +118,13 @@
 
                                                 </div>
                                                 <!--<textarea required="" id="btn-input" type="text" class="form-control input-sm chat-area" name="chat-message" placeholder="Type your message here..." ></textarea>-->
-                                                <!--                                                <form method="post" enctype="multipart/form-data"  id="chat-form">
+                                                <form method="post" enctype="multipart/form-data"  id="chat-form">
+                                                        <input  name="ChatBox[reciever]" type="hidden" class="recieveclass" value="<?php echo $partner; ?>"/>
+                                                        <input type="file" name="ChatBox[feild1]" id="file-6" class="inputfile inputfile-5 chat_pics"/>
 
-                                                                                                        <input type="file" name="ChatBox[feild1]" id="file-6" class="inputfile inputfile-5 chat_pics"/>
 
-
-                                                                                                </form>-->
-                                                <input id="btn-input" required="" type="text" class="form-control input-sm chat-area" name="chat-message" placeholder="Type your message here..." />
+                                                </form>
+                                                <input id="btn-input" required="" type="text" autocomplete="off" class="form-control input-sm chat-area" name="chat-message" placeholder="Type your message here..." />
                                                 <span class="input-group-btn">
                                                         <button type="submit" class="btn btn-warning btn-sm bchat" id="btn-chat">
                                                                 <i class="fa fa-paper-plane"></i></button>
@@ -147,7 +152,7 @@
                                         }
                                 });
                                 var statusIntervalId = window.setInterval(update, 1000);
-                                $("#scores").load("ashik");
+                                //$("#scores").load("ashik");
 //                                var $scores = $("#scores");
 //                                setInterval(function () {
 //                                        $scores.load("index.php #scores");
@@ -174,44 +179,44 @@
                                 });
                         }
 
-                        function sibychat() {
-                                //                        var sender = <?php Yii::app()->session['user']['id']; ?>;
-                                var message = $(".chat-area").val();
-                                var sender = $("#sender").val();
-                                var reciever = $("#reciever").val();
-                                if (message == "") {
-                                        return false;
-                                }
-//                                alert(sender);
-                                $.ajax({
-                                        url: '<?php echo Yii::app()->createUrl("Chat/Chatoperation"); ?>',
-                                        type: 'POST',
-                                        data: {sender: sender, reciever: reciever, message: message},
-                                        datatype: 'json',
-                                        // async: false,
-                                        beforeSend: function () {
-                                                // $('#loading_prof').show();
-                                        },
-                                        success: function (data) {
-                                                $(".chatdet").append(data);
-                                                $(".chat-area").val('');
-                                                $("#panel_bd").scrollTop($("#panel_bd")[0].scrollHeight);
-                                                $('#last_id').val(parseFloat($('#last_id').val()) + 1);
-                                                $('#panel_bd').scrollTop($('#panel_bd')[0].scrollHeight);
-//                                                        location.reload();
-                                                // on success do some validation or refresh the content div to display the uploaded images
-                                                //     $("#ajax_pics").html(data);
-                                        },
-                                        complete: function () {
-                                                // success alerts
-                                                // $('#loading_prof').hide();
-                                                // alert('Image uploaded successfully')
-                                        },
-//                                                error: function (data) {
-//                                                        alert("There may a error on uploading. Try again later");
-//                                                },
-                                });
-                        }
+//                        function sibychat() {
+//                                //                        var sender = <?php Yii::app()->session['user']['id']; ?>;
+//                                var message = $(".chat-area").val();
+//                                var sender = $("#sender").val();
+//                                var reciever = $("#reciever").val();
+//                                if (message == "") {
+//                                        return false;
+//                                }
+////                                alert(sender);
+//                                $.ajax({
+//                                        url: '<?php echo Yii::app()->createUrl("Chat/Chatoperation"); ?>',
+//                                        type: 'POST',
+//                                        data: {sender: sender, reciever: reciever, message: message},
+//                                        datatype: 'json',
+//                                        // async: false,
+//                                        beforeSend: function () {
+//                                                // $('#loading_prof').show();
+//                                        },
+//                                        success: function (data) {
+//                                                $(".chatdet").append(data);
+//                                                $(".chat-area").val('');
+//                                                $("#panel_bd").scrollTop($("#panel_bd")[0].scrollHeight);
+//                                                $('#last_id').val(parseFloat($('#last_id').val()) + 1);
+//                                                $('#panel_bd').scrollTop($('#panel_bd')[0].scrollHeight);
+////                                                        location.reload();
+//                                                // on success do some validation or refresh the content div to display the uploaded images
+//                                                //     $("#ajax_pics").html(data);
+//                                        },
+//                                        complete: function () {
+//                                                // success alerts
+//                                                // $('#loading_prof').hide();
+//                                                // alert('Image uploaded successfully')
+//                                        },
+////                                                error: function (data) {
+////                                                        alert("There may a error on uploading. Try again later");
+////                                                },
+//                                });
+//                        }
                 </script>
                 <script type="text/javascript">
                         $(document).ready(function () {
@@ -219,6 +224,7 @@
                                 $(".chat_pics").change(function () {
                                         var fd = new FormData();
                                         fd.append("ChatBox[feild1]", $(".chat_pics")[0].files[0]);
+                                        fd.append("ChatBox[reciever]", $(".recieveclass").val());
 
                                         $.ajax({
                                                 url: '<?php echo Yii::app()->createUrl("Chat/ChatImage"); ?>',
@@ -231,8 +237,8 @@
                                                 },
                                                 success: function (data) {
 
-                                                        // on success do some validation or refresh the content div to display the uploaded images
-                                                        $("#ajax_pics").html(data);
+                                                        $(".chatdet").append(data);
+                                                        $('#panel_bd').scrollTop($('#panel_bd')[0].scrollHeight);
                                                 },
                                                 complete: function () {
                                                         // success alerts

@@ -10,7 +10,7 @@
  * @property string $message
  * @property string $date
  * @property integer $status
- * @property integer $feild1
+ * @property string $feild1
  */
 class ChatBox extends CActiveRecord {
 
@@ -29,7 +29,7 @@ class ChatBox extends CActiveRecord {
                 // will receive user inputs.
                 return array(
 //			array('sender, reciever, message, date, status, feild1', 'required'),
-                    array('sender, reciever, status, feild1', 'numerical', 'integerOnly' => true),
+                    array('sender, reciever, status', 'numerical', 'integerOnly' => true),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
                     array('id, sender, reciever, message, date, status, feild1', 'safe', 'on' => 'search'),
@@ -84,7 +84,7 @@ class ChatBox extends CActiveRecord {
                 $criteria->compare('message', $this->message, true);
                 $criteria->compare('date', $this->date, true);
                 $criteria->compare('status', $this->status);
-                $criteria->compare('feild1', $this->feild1);
+                $criteria->compare('feild1', $this->feild1, true);
 
                 return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
