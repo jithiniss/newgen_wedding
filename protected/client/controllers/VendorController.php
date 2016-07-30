@@ -310,7 +310,7 @@ class VendorController extends Controller {
         public function siteURL() {
                 $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
                 $domainName = $_SERVER['HTTP_HOST'];
-                return $protocol . $domainName . '/beta/';
+                return $protocol . $domainName . '/beta';
         }
 
         public function uploadMyPic($id, $image) {

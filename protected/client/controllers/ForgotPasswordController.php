@@ -16,15 +16,14 @@ class ForgotPasswordController extends Controller {
                                 $forgot->doc = date('Y-m-d');
                                 if ($forgot->save(FALSE)) {
                                         $this->SuccessMail($forgot, $token, $details);
-                                        $this->render('mail');
+                                        Yii::app()->user->setFlash('success1', ' We’ve sent you a link to change your password');
+                                        Yii::app()->user->setFlash('success2', ' We’ve sent you an email that will allow you to reset your password quickly and easily.');
 //                                        $this->render('mail', array('token' => $token));
                                 } else {
-                                        $this->render('sorry');
-                                }exit;
+                                        Yii::app()->user->setFlash('error', "Invalid Email Id. Try again later..");
+                                }
                         } else {
-                                Yii::app()->user->setFlash('error', "Inavlid user,..");
-                                $this->render('index');
-                                exit;
+                                Yii::app()->user->setFlash('error', "Invalid Email Id. Try again later..");
                         }
                 }
                 $this->render('index');
@@ -59,7 +58,8 @@ class ForgotPasswordController extends Controller {
                         $token_test->delete();
                         $this->render('changepassword');
                 } else {
-                        echo'...Invalid user..';
+                        Yii::app()->user->setFlash('error', "Session Expired. Try again later..");
+                        $this->redirect(array('index'));
                 }
         }
 
@@ -74,13 +74,18 @@ class ForgotPasswordController extends Controller {
                                 $pass1->password = $newpass;
                                 $pass1->update(array('password'));
                                 if ($pass1->save()) {
-                                        Yii::app()->user->setFlash('success', "Your password changed.....<a href='" . Yii::app()->baseUrl . "/index.php/site/login'><u>Click here to login</u></a>");
+                                        Yii::app()->user->setFlash('success', "Your password changed successfully. Please login");
+                                        $this->redirect(array('site/login'));
                                 } else {
-
                                         Yii::app()->user->setFlash('error', "Inavlid user,..");
-                                        //$this->render('changepassword');
                                 }
+                                Yii::app()->session['frgt_usrid'] = '';
+                                $_SESSION['frgt_usrid'] = '';
                         }
+                        $this->render('changepassword');
+                } else {
+                        Yii::app()->user->setFlash('error', "Session Expired. Try again later..");
+                        $this->redirect(array('ForgotPassword'));
                 }
                 $this->render('changepassword');
         }
@@ -88,7 +93,7 @@ class ForgotPasswordController extends Controller {
         public function siteURL() {
                 $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
                 $domainName = $_SERVER['HTTP_HOST'];
-                return $protocol . $domainName . '/beta/';
+                return $protocol . $domainName . '/beta';
         }
 
 }

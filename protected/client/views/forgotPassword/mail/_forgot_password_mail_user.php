@@ -11,12 +11,17 @@
                                         <td><a href="http://newgenwedding.com"><img src="<?php echo $this->siteURL(); ?>/images/emailer_01.jpg" width="776" height="102" alt=""></a></td>
                                 </tr>
                                 <tr>
-                                        <td style="padding:40px 20px; font-family:'Open Sans',arial, sans-serif; font-size:13px"><p style="font-size:14px; font-weight:bold;">Reset Password</p>
-                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">We heard that you lost your Newgen password. Sorry about that!<br><br>
-                                                        But don’t worry! You can use the following link within the next day to reset your password:
-                                                        <a href="http://intersmarthosting.in/newgen/index.php/ForgotPassword/Changepassword/token/<?php echo $token; ?>">Click Here to Reset Password</a><br><br>
-                                                        Thanks
-                                                </p>
+                                        <td style="padding:40px 20px; font-family:'Open Sans',arial, sans-serif; font-size:13px"><p style="font-size:14px; font-weight:bold;">Reset Your Password</p>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">Dear <b><?php echo $vendor->first_name; ?></b>,</p>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">You recently requested to reset your password for your NEWGEN Vendor Account.Click the button below to reset it.</p>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;"><button style="display: table;margin: 0 auto;background: #0e6382;padding: 10px;padding-left:20px;padding-right:20px;margin-bottom:20px;border: 0px solid #1C1B1C;border-radius: 3px 3px 3px 3px;">
+
+                                                                <a href="<?php echo $this->siteURL(); ?>/index.php/ForgotPassword/Changepassword/token/<?php echo $token; ?>" style="text-decoration:none;color:#fff;font-weight: bold;font-size: 15px;">Reset Password</a>
+                                                        </button></p>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">If you did not request a password reset, please ignore this email or reply to let us know. This password reset is only valid for the next 24 hours.</p>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">Thanks,</p>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;font-weight:bold;">NEWGEN Team</p>
+
 
                                         </td>
                                 </tr>
