@@ -34,7 +34,7 @@ class RegisterController extends Controller {
                                 $plan = UserPlans::model()->findByAttributes(array('user_id' => $user->id));
                                 Yii::app()->session['user'] = $user;
                                 Yii::app()->session['plan'] = $plan;
-                                $this->RegisterMail($firstStep, 1);
+                                $this->RegisterMail($user, 1);
                                 //$transaction->commit();
 
                                 $this->redirect(array('SecondStep'));
