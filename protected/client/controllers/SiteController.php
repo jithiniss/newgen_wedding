@@ -200,7 +200,7 @@ class SiteController extends Controller {
         public function siteURL() {
                 $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
                 $domainName = $_SERVER['HTTP_HOST'];
-                return $protocol . $domainName . '/newgen/';
+                return $protocol . $domainName . '/beta/';
         }
 
         public function actionError() {
