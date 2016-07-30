@@ -274,7 +274,7 @@ class RegisterController extends Controller {
                         $this->PlanSuccessMail($user, $model);
                         Yii::app()->session['user'] = $user;
                         Yii::app()->session['plan'] = $model;
-                        Yii::app()->user->setFlash('plan_success', "Payment for  " . $plans->plan_name . " plan successfully placed");
+                        Yii::app()->user->setFlash('plan_success', "Payment for  " . $plans->plan_name . "  successfully placed");
                         Yii::app()->session['unloggedUserPlan'] = '';
                         unset(Yii::app()->session['unloggedUserPlan']);
                         $this->redirect(array('//Myaccount/Index'));
