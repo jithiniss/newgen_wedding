@@ -80,7 +80,7 @@
                 <?php } else { ?>
                         <a href="#" data-toggle="modal" data-target="#myModal1" class="offsets"><i class="fa car fa-envelope"></i>Send a message<i class="fa car fa-caret-right"></i></a>
                 <?php } ?>
-                <button type="button" class="btn btn-info offsets-btn view_contact" id="<?php echo $id; ?>" data-toggle="modal" data-target="#myModal"><i class="fa car fa-contao"></i>View  Contacts<i class="fa car fa-caret-right"></i></button>
+                <button type="button" class="btn btn-info offsets-btn view_contact" id="<?php echo $id; ?>" data-toggle="modal" data-target="#myModal"><i class="fa car fa-phone"></i>View  Contacts<i class="fa car fa-caret-right"></i></button>
 
                 <?php
                 $favorite = Favorites::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id'], 'partner_id' => $user_details->id, 'status' => 1));
@@ -157,8 +157,7 @@
                                         <?php } else { ?>
                                                 <div class="common">
                                                         <h4>Please Upgrade Your plan to see the contact Details</h4>
-                                                        <a href=""  class="btn btn-info offsets-btn" >Upgrade</a>
-
+                                                        <?php echo CHtml::link('Upgrade', array('register/FifthStep'), array("class" => "btn btn-info offsets-btn")); ?>
                                                 </div>
                                         <?php } ?>
                                 </div>

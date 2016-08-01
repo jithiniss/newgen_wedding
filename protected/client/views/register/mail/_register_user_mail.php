@@ -41,7 +41,8 @@
                                                                                                                           text-decoration: none;
                                                                                                                           display: block;
                                                                                                                           margin: 0 auto;">VERIFY ACCOUNT</a></p>
-                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;font-weight:bold;">Please<a href="<?php echo $this->siteURL() . 'index.php/register/verify?m=' . $this->encrypt_decrypt('encrypt', $model->id); ?>"> click </a>this link to activate your account if you are unable to use verify button</p>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;font-weight:bold;">Please copy this link to activate your account if you are unable to use verify button <br>
+                                                        " <?php echo $this->siteURL() . 'index.php/register/verify?m=' . $this->encrypt_decrypt('encrypt', $model->id); ?>"</p>
                                                 <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;font-weight:bold;">If you are already verified your account, Please ignore this mail.</p>
                                                 <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">All the best for your Partner Search! </p>
                                                 <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">

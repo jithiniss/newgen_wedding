@@ -42,9 +42,16 @@
                         <?php
                 } else {
                         ?>
-                        <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $partner->user_id; ?>">
-                                <img class="center-block img-responsive side" style="width:<?php echo $width . 'px' ?>;height:<?php echo $height . 'px' ?>" src="<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg">
-                        </a>
+                        <?php if ($partner->gender == 1) { ?>
+                                <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $partner->user_id; ?>">
+                                        <img class="center-block img-responsive side" style="width:<?php echo $width . 'px' ?>;height:<?php echo $height . 'px' ?>" src="<?php echo Yii::app()->request->baseUrl; ?>/images/demo-male.jpg">
+                                </a>
+                        <?php } else { ?>
+                                <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $partner->user_id; ?>">
+                                        <img class="center-block img-responsive side" style="width:<?php echo $width . 'px' ?>;height:<?php echo $height . 'px' ?>" src="<?php echo Yii::app()->request->baseUrl; ?>/images/demo-female.jpg">
+                                </a>
+                        <?php } ?>
+
                 <?php } ?>
                 <?php
         } else {
