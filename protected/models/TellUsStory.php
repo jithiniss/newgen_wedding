@@ -41,6 +41,7 @@ class TellUsStory extends CActiveRecord {
                     array('image', 'file', 'allowEmpty' => FALSE, 'types' => 'jpg,jpeg,gif,png', 'on' => 'create'),
                     array('email, partner_email', 'email'),
                     array('name, email, partner_name, partner_email', 'length', 'max' => 200),
+                    array('feedback', 'min' => 180),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
                     array('id, name, email, partner_name, partner_email, feedback, wedding_date, image, field1, field2, admin_approval, cb, ub, doc, dou, status', 'safe', 'on' => 'search'),

@@ -37,25 +37,29 @@
                                                                 <label for="textinput" class="control-label">Looking For</label>
                                                         </div>
                                                         <?php if (isset(Yii::app()->session['user'])) { ?>
+                                                                <?php unset(Yii::app()->session['user']);
+                                                                echo 'sdasdas';
+                                                                exit;
+                                                                ?>
                                                                 <div class="col-sm-8 col-xs-9 zeros">
-                                                                        <?php if (Yii::app()->session['user']['gender'] == 1) { ?>
+        <?php if (Yii::app()->session['user']['gender'] == 1) { ?>
                                                                                 <label class="radio-inline sec">
                                                                                         <input  readonly=""  checked="checked" type="radio" name="SavedSearch[gender]" value="2">Bride
                                                                                 </label>
                                                                                 <label class="radio-inline sec">
                                                                                         <input disabled='disabled'type="radio" name="SavedSearch[gender]" value="1">Groom
                                                                                 </label>
-                                                                        <?php } else if (Yii::app()->session['user']['gender'] == 2) { ?>
+        <?php } else if (Yii::app()->session['user']['gender'] == 2) { ?>
                                                                                 <label class="radio-inline sec">
                                                                                         <input disabled='disabled'  type="radio" name="SavedSearch[gender]" value="2">Bride
                                                                                 </label>
                                                                                 <label class="radio-inline sec">
                                                                                         <input  readonly=""   checked="checked" type="radio" name="SavedSearch[gender]" value="1">Groom
                                                                                 </label>
-                                                                        <?php } ?>
+                                                                <?php } ?>
 
                                                                 </div>
-                                                        <?php } else { ?>
+<?php } else { ?>
                                                                 <div class="col-sm-8 col-xs-9 zeros">
                                                                         <label class="radio-inline sec">
                                                                                 <input checked="checked"  type="radio" name="SavedSearch[gender]" value="2">Bride
@@ -64,7 +68,7 @@
                                                                                 <input type="radio" name="SavedSearch[gender]" value="1">Groom
                                                                         </label>
                                                                 </div>
-                                                        <?php } ?>
+<?php } ?>
                                                 </div>
                                                 <div class="common">
                                                         <div class="col-sm-4 col-xs-3 zeros">
@@ -79,8 +83,8 @@
                                                                                 $age_from[sprintf("%02d", $i)] = sprintf("%02d", $i);
                                                                         }
                                                                         ?>
-                                                                        <?php echo $form->dropDownList($model, 'age_from', $age_from, array('empty' => 'Age From', 'class' => 'ages', 'required' => true, 'options' => array(18 => array('selected' => 'selected')))); ?>
-                                                                        <?php echo $form->error($model, 'age_from'); ?>
+<?php echo $form->dropDownList($model, 'age_from', $age_from, array('empty' => 'Age From', 'class' => 'ages', 'required' => true, 'options' => array(18 => array('selected' => 'selected')))); ?>
+<?php echo $form->error($model, 'age_from'); ?>
                                                                 </div>
                                                         </div>
                                                         <div class="col-sm-1 col-xs-1 zeros">
@@ -94,8 +98,8 @@
                                                                                 $age_to[sprintf("%02d", $i)] = sprintf("%02d", $i);
                                                                         }
                                                                         ?>
-                                                                        <?php echo $form->dropDownList($model, 'age_to', $age_to, array('empty' => 'Age To', 'class' => 'ages', 'required' => true, 'options' => array(25 => array('selected' => 'selected')))); ?>
-                                                                        <?php echo $form->error($model, 'age_to'); ?>
+<?php echo $form->dropDownList($model, 'age_to', $age_to, array('empty' => 'Age To', 'class' => 'ages', 'required' => true, 'options' => array(25 => array('selected' => 'selected')))); ?>
+<?php echo $form->error($model, 'age_to'); ?>
 
 
                                                                 </div>
@@ -109,8 +113,8 @@
                                                         <div class="col-sm-3 col-xs-3 zeros">
                                                                 <div class="form-group">
 
-                                                                        <?php echo CHtml::activeDropDownList($model, 'height_from', CHtml::listData(MasterHeight::model()->findAllByAttributes(array('status' => 1)), 'id', 'height'), array('empty' => 'Height From', 'class' => 'height', 'options' => array('id' => array('selected' => 'selected')))); ?>
-                                                                        <?php echo $form->error($model, 'height_from'); ?>
+<?php echo CHtml::activeDropDownList($model, 'height_from', CHtml::listData(MasterHeight::model()->findAllByAttributes(array('status' => 1)), 'id', 'height'), array('empty' => 'Height From', 'class' => 'height', 'options' => array('id' => array('selected' => 'selected')))); ?>
+<?php echo $form->error($model, 'height_from'); ?>
                                                                 </div>
                                                         </div>
                                                         <div class="col-sm-1 col-xs-1 zeros">
@@ -119,8 +123,8 @@
                                                         <div class="col-sm-3 col-xs-3 zeros">
                                                                 <div class="form-group">
 
-                                                                        <?php echo CHtml::activeDropDownList($model, 'height_to', CHtml::listData(MasterHeight::model()->findAllByAttributes(array('status' => 1)), 'id', 'height'), array('empty' => 'Height To', 'class' => 'height', 'options' => array('id' => array('selected' => 'selected')))); ?>
-                                                                        <?php echo $form->error($model, 'height_to'); ?>
+<?php echo CHtml::activeDropDownList($model, 'height_to', CHtml::listData(MasterHeight::model()->findAllByAttributes(array('status' => 1)), 'id', 'height'), array('empty' => 'Height To', 'class' => 'height', 'options' => array('id' => array('selected' => 'selected')))); ?>
+<?php echo $form->error($model, 'height_to'); ?>
                                                                 </div>
                                                         </div>
                                                 </div>
@@ -153,8 +157,8 @@
 
                                                                         $mas = CHtml::listData(MasterMaritalStatus::model()->findAllByAttributes(array('status' => 1)), 'id', 'marital_status');
                                                                         ?>
-                                                                        <?php echo CHtml::activeDropDownList($model, 'marital_status', $doesnt_matter + $mas, array('empty' => 'Select Marital Status', 'class' => 'religion aps tokenize-sample', 'options' => $marital_status_opt)); ?>
-                                                                        <?php echo $form->error($model, 'marital_status'); ?>
+<?php echo CHtml::activeDropDownList($model, 'marital_status', $doesnt_matter + $mas, array('empty' => 'Select Marital Status', 'class' => 'religion aps tokenize-sample', 'options' => $marital_status_opt)); ?>
+<?php echo $form->error($model, 'marital_status'); ?>
                                                                 </div>
                                                         </div>
 
@@ -182,8 +186,8 @@
                                                                         }
                                                                         $religi = CHtml::listData(MasterReligion::model()->findAllByAttributes(array('status' => 1)), 'id', 'religion');
                                                                         ?>
-                                                                        <?php echo CHtml::activeDropDownList($model, 'religion', $doesnt_matter + $religi, array('empty' => 'Select a Religon', 'class' => 'caste_value aps tokenize-sample', 'options' => $religion_opt)); ?>
-                                                                        <?php echo $form->error($model, 'religion'); ?>
+<?php echo CHtml::activeDropDownList($model, 'religion', $doesnt_matter + $religi, array('empty' => 'Select a Religon', 'class' => 'caste_value aps tokenize-sample', 'options' => $religion_opt)); ?>
+<?php echo $form->error($model, 'religion'); ?>
                                                                 </div>
                                                         </div>
 
@@ -228,8 +232,8 @@
                                                                                 $caste_opt[-1] = array('selected' => 'selected');
                                                                         }
                                                                         ?>
-                                                                        <?php echo CHtml::activeDropDownList($model, 'caste', $doesnt_matter + $caste_options, array('class' => 'aps tokenize-sample', 'options' => $caste_opt)); ?>
-                                                                        <?php echo $form->error($model, 'caste'); ?>
+<?php echo CHtml::activeDropDownList($model, 'caste', $doesnt_matter + $caste_options, array('class' => 'aps tokenize-sample', 'options' => $caste_opt)); ?>
+<?php echo $form->error($model, 'caste'); ?>
                                                                 </div>
                                                         </div>
 
@@ -262,8 +266,8 @@
                                                                         }
                                                                         $tounge = CHtml::listData(MasterMotherTongue::model()->findAllByAttributes(array('status' => 1)), 'id', 'mother_tongue');
                                                                         ?>
-                                                                        <?php echo CHtml::activeDropDownList($model, 'mothertongue', $doesnt_matter + $tounge, array('empty' => 'Select Mother Tongue', 'class' => 'aps tokenize-sample', 'options' => $mothertongue_opt)); ?>
-                                                                        <?php echo $form->error($model, 'mothertongue'); ?>
+<?php echo CHtml::activeDropDownList($model, 'mothertongue', $doesnt_matter + $tounge, array('empty' => 'Select Mother Tongue', 'class' => 'aps tokenize-sample', 'options' => $mothertongue_opt)); ?>
+<?php echo $form->error($model, 'mothertongue'); ?>
                                                                 </div>
                                                         </div>
 
@@ -294,8 +298,8 @@
                                                                                 $country_living_in_opt[-1] = array('selected' => 'selected');
                                                                         }
                                                                         ?>
-                                                                        <?php echo CHtml::activeDropDownList($model, 'country_living_in', $doesnt_matter + CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => 'Select Country', 'class' => 'aps tokenize-sample country_chan', 'options' => $country_living_in_opt)); ?>
-                                                                        <?php echo $form->error($model, 'country_living_in'); ?>
+<?php echo CHtml::activeDropDownList($model, 'country_living_in', $doesnt_matter + CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => 'Select Country', 'class' => 'aps tokenize-sample country_chan', 'options' => $country_living_in_opt)); ?>
+<?php echo $form->error($model, 'country_living_in'); ?>
                                                                 </div>
                                                         </div>
 
@@ -315,7 +319,7 @@
                                                 </div>
 
                                         </div>
-                                        <?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>
 
 
                                 </div>
@@ -323,7 +327,7 @@
                         </div>
                         <div class="clearfix visible-xs"></div>
                         <div class="col-md-4 col-sm-12">
-                                <?php echo $this->renderPartial('_saved_search'); ?>
+<?php echo $this->renderPartial('_saved_search'); ?>
 
                         </div>
                 </div>

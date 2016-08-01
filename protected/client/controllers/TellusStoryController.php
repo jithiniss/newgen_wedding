@@ -60,7 +60,7 @@ class TellusStoryController extends Controller {
                                         chmod(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/' . $name . '.' . $uploadedFile->extensionName, 0777);
 
                                         $resize = new EasyImage(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/' . $name . '.' . $uploadedFile->extensionName);
-                                        $resize->resize(246, 172);
+                                        $resize->resize(265, 313);
                                         $resize->save(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/' . $name . '.' . $uploadedFile->extensionName);
 
                                         return true;

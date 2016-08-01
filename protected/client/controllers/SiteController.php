@@ -191,9 +191,6 @@ class SiteController extends Controller {
 
         public function actionLogout() {
                 unset(Yii::app()->session['user']);
-
-
-                $_SESSION['user'] = '';
                 $this->redirect(array('site/index'));
         }
 

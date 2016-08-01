@@ -438,7 +438,9 @@
                                                 ?>
 
                                                 <div class="items success_story1" data-order="<?php echo $i; ?>">
-                                                        <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        <div class="story1">
+                                                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        </div>
                                                         <p><?php echo substr($success->feedback, 0, 170); ?></p>
                                                         <h2><?php echo $success->name; ?> & <?php echo $success->partner_name; ?></h2>
                                                 </div>
@@ -449,7 +451,9 @@
                                                 ?>
 
                                                 <div class="items success_story2" data-order="<?php echo $i; ?>">
-                                                        <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        <div class="story2">
+                                                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        </div>
                                                         <p><?php echo substr($success->feedback, 0, 170); ?></p>
                                                         <h2><?php echo $success->name; ?> & <?php echo $success->partner_name; ?></h2>
                                                 </div>
@@ -463,7 +467,9 @@
                                                 ?>
 
                                                 <div class="items success_story1" data-order="<?php echo $i; ?>">
-                                                        <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        <div class="story1">
+                                                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        </div>
                                                         <p><?php echo substr($success->feedback, 0, 170); ?></p>
                                                         <h2><?php echo $success->name; ?> & <?php echo $success->partner_name; ?></h2>
                                                 </div>
@@ -475,7 +481,9 @@
                                                 ?>
 
                                                 <div class="items success_story2" data-order="<?php echo $i; ?>">
-                                                        <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        <div class="story2">
+                                                                <img class="img-responsive" src="<?= Yii::app()->baseUrl ?>/uploads/wedding/<?php echo $success->id ?>/wedding.<?php echo $success->image; ?>">
+                                                        </div>
                                                         <p><?php echo substr($success->feedback, 0, 170); ?></p>
                                                         <h2><?php echo $success->name; ?> & <?php echo $success->partner_name; ?></h2>
                                                 </div>
