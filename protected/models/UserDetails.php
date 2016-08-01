@@ -121,7 +121,7 @@ class UserDetails extends CActiveRecord {
                         'tooLong' => Yii::t("translation", "password is too long."), 'on' => 'userFirstStep'),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id,phone_setings,profile_privacy,display_name, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, plan_id, cb, ub, doc, dou,email_verification', 'safe', 'on' => 'search'),
+                    array('id,phone_setings,profile_privacy,display_name, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, plan_id, cb, ub, doc, dou,email_verification,oauth_provider,oauth_uid', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -129,6 +129,50 @@ class UserDetails extends CActiveRecord {
                 $model = UserDetails::model()->findByPk($id);
                 $model->user_id = 'NW' . $model->id;
                 return $model;
+        }
+
+        function checkUser($oauth_provider, $oauth_uid, $fname, $lname, $email, $gender) {
+                if($gender == 'female') {
+                        $gender = 2;
+                } else {
+                        $gender = 1;
+                }
+                if($email == '') {
+                        $email = $fname . $lname . '@facebook.com';
+                }
+                $facebook_user = UserDetails::model()->findByAttributes(array('oauth_provider' => "$oauth_provider", 'oauth_uid' => "$oauth_uid"));
+
+                if(!empty($facebook_user)) {
+                        $facebook_user->oauth_provider = $oauth_provider;
+                        $facebook_user->oauth_uid = $oauth_uid;
+                        $facebook_user->first_name = $fname;
+                        $facebook_user->last_name = $lname;
+                        $facebook_user->email = $email;
+                        $facebook_user->email_verification = 1;
+                        $facebook_user->gender = $gender;
+                        $facebook_user->dou = date("Y-m-d H:i:s");
+                        $facebook_user->save();
+
+                        $user = UserDetails::model()->findByPk($facebook_user->id);
+                        Yii::app()->session['user'] = $user;
+                } else {
+                        $facebook_user = new UserDetails;
+                        $facebook_user->oauth_provider = $oauth_provider;
+                        $facebook_user->oauth_uid = $oauth_uid;
+                        $facebook_user->first_name = $fname;
+                        $facebook_user->last_name = $lname;
+                        $facebook_user->email = $email;
+                        $facebook_user->gender = $gender;
+                        $facebook_user->email_verification = 1;
+                        $facebook_user->doc = date("Y-m-d H:i:s");
+                        $facebook_user->dou = date("Y-m-d H:i:s");
+                        if($facebook_user->save()) {
+                                $user = UserDetails::model()->findByPk($facebook_user->id);
+                                Yii::app()->session['user'] = $user;
+                        }
+                }
+
+                return $facebook_user;
         }
 
         /**
@@ -144,7 +188,8 @@ class UserDetails extends CActiveRecord {
                     'workingAs' => array(self::BELONGS_TO, 'MasterWorkingAs', 'working_as'),
                     'profileFor' => array(self::BELONGS_TO, 'MasterProfileFor', 'profile_for'),
                     'religion0' => array(self::BELONGS_TO, 'MasterReligion', 'religion'),
-                    'caste0' => array(self::BELONGS_TO, 'MasterCaste', 'caste'),
+                    'caste0' => array
+                        (self::BELONGS_TO, 'MasterCaste', 'caste'),
                     'mothertongue0' => array(self::BELONGS_TO, 'MasterMotherTongue', 'mothertongue'),
                     'growUpIn' => array(self::BELONGS_TO, 'MasterCountry', 'grow_up_in'),
                 );
@@ -227,6 +272,8 @@ class UserDetails extends CActiveRecord {
                     'display_name' => 'Display name',
                     'phone_setings' => 'Phone setings',
                     'profile_privacy' => 'Profile_privacy',
+                    'oauth_provider' => 'Oauth Provider',
+                    'oauth_uid' => 'Oauth Uid',
                 );
         }
 
@@ -316,8 +363,12 @@ class UserDetails extends CActiveRecord {
                 $criteria->compare('doc', $this->doc, true);
                 $criteria->compare('dou', $this->dou, true);
                 $criteria->compare('email_verification', $this->email_verification);
+                $criteria->compare('oauth_provider', $this->oauth_provider, true);
+                $criteria->compare('oauth_uid', $this->oauth_uid, true);
 
-                return new CActiveDataProvider($this, array(
+
+                return new CActiveDataProvider($this, array
+                    (
                     'criteria' => $criteria,
                 ));
         }
@@ -328,7 +379,9 @@ class UserDetails extends CActiveRecord {
          * @param string $className active record class name.
          * @return UserDetails the static model class
          */
-        public static function model($className = __CLASS__) {
+        public static function
+
+        model($className = __CLASS__) {
                 return parent::model($className);
         }
 

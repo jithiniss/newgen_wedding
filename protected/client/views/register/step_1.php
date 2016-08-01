@@ -3,6 +3,41 @@
         background-color: transparent;
     }
 </style>
+
+<?php
+if($_REQUEST['code'] != '') {
+        include_once("facebook_config.php");
+
+        if($fbuser == '') {
+                $this->redirect(array('site/index'));
+        }
+
+        $user_profile = $facebook->api('/me?fields=id,first_name,last_name,email,gender,age_range');
+
+        $user = new UserDetails();
+        $user_data = $user->checkUser('facebook', $user_profile['id'], $user_profile['first_name'], $user_profile['last_name'], $user_profile['email'], $user_profile['gender']);
+
+
+        if(!empty($user_data)) {
+                $this->ReturnUrl($user_data);
+
+                $first_name = $user_data['first_name'];
+                $last_name = $user_data['last_name'];
+                $email = $user_data['email'];
+                $gender = $user_data['gender'];
+        } else {
+                $first_name = '';
+                $last_name = '';
+                $email = '';
+                $gender = '';
+        }
+} else {
+        $first_name = '';
+        $last_name = '';
+        $email = '';
+        $gender = '';
+}
+?>
 <section class="login">
     <div class="container wishes">
         <div class="row">
@@ -16,16 +51,16 @@
                 </ul>
 
 
-                <?php
-                $form = $this->beginWidget('CActiveForm', array(
-                    'id' => 'register-one-form',
-                    // Please note: When you enable ajax validation, make sure the corresponding
-                    // controller action is handling ajax validation correctly.
-                    // There is a call to performAjaxValidation() commented in generated controller code.
-                    // See class documentation of CActiveForm for details on this.
-                    'enableAjaxValidation' => true,
-                ));
-                ?>
+<?php
+$form = $this->beginWidget('CActiveForm', array(
+    'id' => 'register-one-form',
+    // Please note: When you enable ajax validation, make sure the corresponding
+    // controller action is handling ajax validation correctly.
+    // There is a call to performAjaxValidation() commented in generated controller code.
+    // See class documentation of CActiveForm for details on this.
+    'enableAjaxValidation' => true,
+        ));
+?>
 
                 <div class="col-md-8 col-sm-12 col-xs-12 prime">
 
@@ -33,11 +68,11 @@
                     <h1>Register</h1>
 
                     <div class="zeros">
-                        <?php if(Yii::app()->user->hasFlash('register_error1')): ?>
+<?php if(Yii::app()->user->hasFlash('register_error1')): ?>
                                 <div class="alert alert-danger">
-                                    <?php echo Yii::app()->user->getFlash('register_error1'); ?>
+                                <?php echo Yii::app()->user->getFlash('register_error1'); ?>
                                 </div>
-                        <?php endif; ?>
+                            <?php endif; ?>
                         <div class="common">
                             <div class="col-sm-3 col-xs-3 zeros">
                                 <label for="textinput" class="control-label">Email <span class="required">*</span></label>
@@ -47,8 +82,8 @@
                             </div>
                             <div class="col-sm-8 col-xs-8 zeros">
                                 <div class="form-group">
-                                    <?php echo $form->textField($firstStep, 'email', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps', 'placeholder' => 'Email Address')); ?>
-                                    <?php echo $form->error($firstStep, 'email'); ?>
+<?php echo $form->textField($firstStep, 'email', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps', 'placeholder' => 'Email Address', 'value' => $email)); ?>
+<?php echo $form->error($firstStep, 'email'); ?>
                                 </div>
                             </div>
 
@@ -65,8 +100,8 @@
                             </div>
                             <div class="col-sm-8 col-xs-8 zeros">
                                 <div class="form-group">
-                                    <?php echo $form->passwordField($firstStep, 'password', array('size' => 50, 'maxlength' => 50, 'class' => 'ui_apps', 'placeholder' => 'Enter Strong Password')); ?>
-                                    <?php echo $form->error($firstStep, 'password'); ?>
+<?php echo $form->passwordField($firstStep, 'password', array('size' => 50, 'maxlength' => 50, 'class' => 'ui_apps', 'placeholder' => 'Enter Strong Password')); ?>
+<?php echo $form->error($firstStep, 'password'); ?>
                                 </div>
                             </div>
 
@@ -81,7 +116,7 @@
                             </div>
                             <div class="col-sm-8 col-xs-8 zeros">
                                 <div class="form-group">
-                                    <?php echo CHtml::activeDropDownList($firstStep, 'profile_for', CHtml::listData(MasterProfileFor::model()->findAllByAttributes(array('status' => 1)), 'id', 'profile_for'), array('empty' => '--Please select--', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+<?php echo CHtml::activeDropDownList($firstStep, 'profile_for', CHtml::listData(MasterProfileFor::model()->findAllByAttributes(array('status' => 1)), 'id', 'profile_for'), array('empty' => '--Please select--', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
 
                                     <?php echo $form->error($firstStep, 'profile_for'); ?>
                                 </div>
@@ -97,16 +132,16 @@
                             </div>
                             <div class="col-sm-4 col-xs-4 zeros">
                                 <div class="form-group">
-                                    <?php echo $form->textField($firstStep, 'first_name', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps', 'placeholder' => 'First Name')); ?>
-                                    <?php echo $form->error($firstStep, 'first_name'); ?>
+<?php echo $form->textField($firstStep, 'first_name', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps', 'placeholder' => 'First Name', 'value' => $first_name)); ?>
+<?php echo $form->error($firstStep, 'first_name'); ?>
                                 </div>
                             </div>
 
                             <div class="col-sm-4 col-xs-4 zeros">
                                 <div class="form-group">
 
-                                    <?php echo $form->textField($firstStep, 'last_name', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps', 'placeholder' => 'Last Name')); ?>
-                                    <?php echo $form->error($firstStep, 'last_name'); ?>
+<?php echo $form->textField($firstStep, 'last_name', array('size' => 60, 'maxlength' => 100, 'class' => 'ui_apps', 'placeholder' => 'Last Name', 'value' => $last_name)); ?>
+<?php echo $form->error($firstStep, 'last_name'); ?>
                                 </div>
                             </div>
                         </div>
@@ -120,12 +155,20 @@
                             </div>
                             <div class="col-sm-8 col-xs-8 zeros">
                                 <label class="radio-inline sec">
-                                    <input type="radio" name="UserDetails[gender]" id="UserDetails_gender" value="1">Male
+                                    <input type="radio" name="UserDetails[gender]" id="UserDetails_gender" value="1" <?php
+if($gender == 1) {
+        echo 'checked';
+}
+?>>Male
                                 </label>
                                 <label class="radio-inline sec">
-                                    <input type="radio" name="UserDetails[gender]" id="UserDetails_gender" value="2">Female
+                                    <input type="radio" name="UserDetails[gender]" id="UserDetails_gender" value="2" <?php
+                                    if($gender == 2) {
+                                            echo 'checked';
+                                    }
+?>>Female
                                 </label>
-                                <?php echo $form->error($firstStep, 'gender'); ?>
+                                    <?php echo $form->error($firstStep, 'gender'); ?>
                             </div>
                         </div>
 
@@ -139,12 +182,12 @@
                             </div>
                             <div class="col-sm-2 col-xs-2 zeros">
                                 <div class="form-group">
-                                    <?php
-                                    $day = array();
-                                    for($i = 1; $i <= 31; $i++) {
-                                            $day[sprintf("%02d", $i)] = sprintf("%02d", $i);
-                                    }
-                                    ?>
+<?php
+$day = array();
+for($i = 1; $i <= 31; $i++) {
+        $day[sprintf("%02d", $i)] = sprintf("%02d", $i);
+}
+?>
                                     <?php echo $form->dropDownList($firstStep, 'dob_day', $day, array('empty' => 'Day', 'class' => 'aps')); ?>
                                     <?php echo $form->error($firstStep, 'dob_day'); ?>
                                 </div>
@@ -153,8 +196,8 @@
 
                             <div class="col-sm-3 col-xs-3 zeros">
                                 <div class="form-group">
-                                    <?php $months = array(01 => 'Jan', 02 => 'Feb', 03 => 'Mar', 04 => 'Apr', 05 => 'May', 06 => 'Jun', 07 => 'Jul', 08 => 'Aug', 09 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'); ?>
-                                    <?php echo $form->dropDownList($firstStep, 'dob_month', $months, array('empty' => 'Month', 'class' => 'aps')); ?>
+<?php $months = array(01 => 'Jan', 02 => 'Feb', 03 => 'Mar', 04 => 'Apr', 05 => 'May', 06 => 'Jun', 07 => 'Jul', 08 => 'Aug', 09 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'); ?>
+<?php echo $form->dropDownList($firstStep, 'dob_month', $months, array('empty' => 'Month', 'class' => 'aps')); ?>
                                     <?php echo $form->error($firstStep, 'dob_month'); ?>
 
                                 </div>
@@ -162,12 +205,12 @@
 
                             <div class="col-sm-3 col-xs-3 zeros">
                                 <div class="form-group">
-                                    <?php
-                                    $year = array();
-                                    for($i = date("Y", strtotime("-18 year")); $i >= date("Y", strtotime("-69 year")); $i--) {
-                                            $year[$i] = $i;
-                                    }
-                                    ?>
+<?php
+$year = array();
+for($i = date("Y", strtotime("-18 year")); $i >= date("Y", strtotime("-69 year")); $i--) {
+        $year[$i] = $i;
+}
+?>
                                     <?php echo $form->dropDownList($firstStep, 'dob_year', $year, array('empty' => 'Year', 'class' => 'aps')); ?>
                                     <?php echo $form->error($firstStep, 'dob_year'); ?>
 
@@ -185,8 +228,8 @@
                             </div>
                             <div class="col-sm-8 col-xs-8 zeros">
                                 <div class="form-group">
-                                    <?php echo CHtml::activeDropDownList($firstStep, 'religion', CHtml::listData(MasterReligion::model()->findAllByAttributes(array('status' => 1)), 'id', 'religion'), array('empty' => 'Select a Religon', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
-                                    <?php echo $form->error($firstStep, 'religion'); ?>
+<?php echo CHtml::activeDropDownList($firstStep, 'religion', CHtml::listData(MasterReligion::model()->findAllByAttributes(array('status' => 1)), 'id', 'religion'), array('empty' => 'Select a Religon', 'class' => 'form-control', 'options' => array('id' => array('selected' => 'selected')))); ?>
+<?php echo $form->error($firstStep, 'religion'); ?>
 
                                 </div>
                             </div>
@@ -204,8 +247,8 @@
                             </div>
                             <div class="col-sm-8 col-xs-8 zeros">
                                 <div class="form-group">
-                                    <?php echo CHtml::activeDropDownList($firstStep, 'mothertongue', CHtml::listData(MasterMotherTongue::model()->findAllByAttributes(array('status' => 1)), 'id', 'mother_tongue'), array('empty' => '--Please select--', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
-                                    <?php echo $form->error($firstStep, 'mothertongue'); ?>
+<?php echo CHtml::activeDropDownList($firstStep, 'mothertongue', CHtml::listData(MasterMotherTongue::model()->findAllByAttributes(array('status' => 1)), 'id', 'mother_tongue'), array('empty' => '--Please select--', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+<?php echo $form->error($firstStep, 'mothertongue'); ?>
 
                                 </div>
                             </div>
@@ -222,8 +265,8 @@
                             </div>
                             <div class="col-sm-8 col-xs-8 zeros">
                                 <div class="form-group">
-                                    <?php echo CHtml::activeDropDownList($firstStep, 'country', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => '--Please select--', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
-                                    <?php echo $form->error($firstStep, 'country'); ?>
+<?php echo CHtml::activeDropDownList($firstStep, 'country', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => '--Please select--', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+<?php echo $form->error($firstStep, 'country'); ?>
 
                                 </div>
                             </div>
@@ -247,7 +290,7 @@
 
                 </div>
 
-                <?php $this->endWidget(); ?>
+<?php $this->endWidget(); ?>
                 <div class="col-md-4 col-sm-12 col-xs-12">
                     <div class="infos">
                         <div class="item">
