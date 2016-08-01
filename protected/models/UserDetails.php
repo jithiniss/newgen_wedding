@@ -132,17 +132,17 @@ class UserDetails extends CActiveRecord {
         }
 
         function checkUser($oauth_provider, $oauth_uid, $fname, $lname, $email, $gender) {
-                if($gender == 'female') {
+                if ($gender == 'female') {
                         $gender = 2;
                 } else {
                         $gender = 1;
                 }
-                if($email == '') {
+                if ($email == '') {
                         $email = $fname . $lname . '@facebook.com';
                 }
                 $facebook_user = UserDetails::model()->findByAttributes(array('oauth_provider' => "$oauth_provider", 'oauth_uid' => "$oauth_uid"));
 
-                if(!empty($facebook_user)) {
+                if (!empty($facebook_user)) {
                         $facebook_user->oauth_provider = $oauth_provider;
                         $facebook_user->oauth_uid = $oauth_uid;
                         $facebook_user->first_name = $fname;
@@ -151,6 +151,7 @@ class UserDetails extends CActiveRecord {
                         $facebook_user->email_verification = 1;
                         $facebook_user->gender = $gender;
                         $facebook_user->dou = date("Y-m-d H:i:s");
+                        $facebook_user->user_id = $this->userId($facebook_user->id);
                         $facebook_user->save();
 
                         $user = UserDetails::model()->findByPk($facebook_user->id);
@@ -166,7 +167,8 @@ class UserDetails extends CActiveRecord {
                         $facebook_user->email_verification = 1;
                         $facebook_user->doc = date("Y-m-d H:i:s");
                         $facebook_user->dou = date("Y-m-d H:i:s");
-                        if($facebook_user->save()) {
+                        $facebook_user->user_id = $this->userId($facebook_user->id);
+                        if ($facebook_user->save()) {
                                 $user = UserDetails::model()->findByPk($facebook_user->id);
                                 Yii::app()->session['user'] = $user;
                         }
