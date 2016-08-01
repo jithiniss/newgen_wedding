@@ -255,7 +255,7 @@ class MyaccountController extends Controller {
                         $model->doc = date('Y-m-d');
                         if ($model->validate()) {
                                 if ($model->save()) {
-//                                        $this->ShareMail($model);
+                                        $this->ShareMail($model);
                                         Yii::app()->user->setFlash('success', "Successfully shared.");
                                         $this->redirect(Yii::app()->request->urlReferrer);
                                 } else {
@@ -279,9 +279,15 @@ class MyaccountController extends Controller {
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
                 // More headers
-                $headers .= 'From:Newgen Wedding Matrimony <no-reply@intersmarthosting.in>' . "\r\n";
+                $headers .= 'From:Newgen Wedding Matrimony <no-reply@newgenwedding.com>' . "\r\n";
 
                 mail($user, $user_subject, $user_message, $headers);
+        }
+
+        public function siteURL() {
+                $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+                $domainName = $_SERVER['HTTP_HOST'];
+                return $protocol . $domainName . '/beta/';
         }
 
 }

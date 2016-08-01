@@ -123,7 +123,8 @@ class RegisterController extends Controller {
 //$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
                 mail($user, $user_subject, $user_message, $headers);
                 if ($s == 1) {
-                        $admin = 'sibys09@gmail.com';
+                        $admin_mail = AdminUsers::model()->findByPk(1);
+                        $admin = $admin_mail->email;
                         $admin_subject = $model->first_name . ' registered with NEWGEN.com';
                         $admin_message = $this->renderPartial('mail/_register_admin_mail', array('model' => $model), true);
 
@@ -399,7 +400,7 @@ class RegisterController extends Controller {
         public function siteURL() {
                 $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
                 $domainName = $_SERVER['HTTP_HOST'];
-                return $protocol . $domainName . '/beta';
+                return $protocol . $domainName . '/beta/';
         }
 
         public function encrypt_decrypt($action, $string) {

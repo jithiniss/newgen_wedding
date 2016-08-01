@@ -101,7 +101,7 @@
 
                                                                                                 <li><?php echo CHtml::link('Membership Plans', array('site/index', '#' => 'upgrade')); ?></li>
                                                                                                 <li><?php echo CHtml::link('Search', array('Search/index')); ?></li>
-                                                                                                <li><a href="#">Contact Us</a></li>
+                                                                                                <li><?php echo CHtml::link('Contact Us', array('site/contact')); ?></li>
                                                                                                 <li class="colors"><a href="#">Couples</a></li>
                                                                                         <?php } ?>
                                                                                         <?php
@@ -438,13 +438,13 @@
                         </script>
                 <?php } ?>
 <!--        <script type="text/javascript">
-        $(document).ready(function () {
-            setTimeout(function () {
-                $("#myModal").modal('show');
-            }, 4000);
+$(document).ready(function () {
+    setTimeout(function () {
+        $("#myModal").modal('show');
+    }, 4000);
 
 
-        });
+});
 </script>-->
         </body>
 

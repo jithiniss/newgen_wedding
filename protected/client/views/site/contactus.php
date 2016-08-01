@@ -21,24 +21,24 @@
                                                 <div class="common">
                                                         <div class="col-sm-6 col-xs-6 mob-file zeros">
                                                                 <div class="form-group">
-                                                                        <input type="text" class="ui_source" id="email" required placeholder="Name" name="name">
+                                                                        <input type="text" class="ui_source"  required placeholder="Name" name="name">
                                                                 </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6 mob-file zeros">
                                                                 <div class="form-group">
-                                                                        <input type="text" class="ui_source" id="email" required placeholder="Email address" name="email">
+                                                                        <input type="text" class="ui_source"  required placeholder="Email address" name="email">
                                                                 </div>
                                                         </div>
                                                 </div>
                                                 <div class="common">
                                                         <div class="col-sm-6 col-xs-6 mob-file zeros">
                                                                 <div class="form-group">
-                                                                        <input type="text" class="ui_source" id="email" required placeholder="Contact Number" name="phones">
+                                                                        <input type="text" class="ui_source"  required placeholder="Contact Number" name="phones">
                                                                 </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6 mob-file zeros">
                                                                 <div class="form-group">
-                                                                        <input type="text" class="ui_source" id="email" required placeholder="Subject" name="subject">
+                                                                        <input type="text" class="ui_source"  required placeholder="Subject" name="subject">
                                                                 </div>
                                                         </div>
                                                 </div>
@@ -50,7 +50,7 @@
                                                         </div>
                                                 </div>
                                                 <div class="common tops">
-                                                        <div class="col-sm-3 col-xs-3 zeros pull-right">
+                                                        <div class="col-sm-3 col-xs-12 zeros ">
                                                                 <input type="Submit" class="btn sub-ment btn-default" name="Enquiry" value="Submit">
                                                         </div>
                                                 </div>
