@@ -1,7 +1,7 @@
 <?php
 
 return array(
-    '' => 'site/index',
+//    '' => 'site/index',
     'primary-info' => 'register/FirstStep',
     'location-background' => 'register/SecondStep',
     'lifestyle-appearence' => 'register/ThirdStep',
@@ -41,6 +41,7 @@ return array(
     'wedding-planner' => 'weddingPlanner/index',
     'wedding-plan-category' => 'weddingPlanner/category',
     'wedding-plan-category-detail' => 'weddingPlanner/detail',
+    'featured-profiles' => 'Featuredstory/profile',
     '<controller:\w+>/<id:\d+>' => '<controller>/view',
 //    '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
