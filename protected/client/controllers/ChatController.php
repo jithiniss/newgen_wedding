@@ -6,7 +6,7 @@ class ChatController extends Controller {
                 $this->render('index');
         }
 
-        function time_elapsed_string($datetime, $full = false) {
+        public function time_elapsed_string($datetime, $full = false) {
                 date_default_timezone_set('Asia/Kolkata');
                 $now = new DateTime;
                 $ago = new DateTime($datetime);

@@ -2,6 +2,10 @@
 
 class RegisterController extends Controller {
 
+        public function init() {
+                date_default_timezone_set("Asia/Kolkata");
+        }
+
         public function actionFirstStep() {
                 if (!isset(Yii::app()->session['user']) && Yii::app()->session['user'] == NULL && Yii::app()->session['user'] == '') {
                         $firstStep = new UserDetails('userFirstStep');
@@ -53,6 +57,7 @@ class RegisterController extends Controller {
                 $model->register_step = 1;
                 $model->created_by = 2;
                 $model->doc = date('Y-m-d');
+                $model->last_login = date('Y-m-d H:i:s');
                 $model->status = 1;
                 return $model;
         }
@@ -168,6 +173,7 @@ class RegisterController extends Controller {
         public function setSecondStep($model, $post) {
                 $model->attributes = $post;
                 $model->register_step = 2;
+                $model->last_login = date('Y-m-d H:i:s');
                 return $model;
         }
 
@@ -197,6 +203,7 @@ class RegisterController extends Controller {
         public function setThirdStep($model, $post) {
                 $model->attributes = $post;
                 $model->register_step = 3;
+                $model->last_login = date('Y-m-d H:i:s');
                 return $model;
         }
 
@@ -223,7 +230,7 @@ class RegisterController extends Controller {
         public function setFourthStep($model, $post) {
                 $model->attributes = $post;
                 $model->register_step = 4;
-                $model->last_login = date('Y-m-d');
+                $model->last_login = date('Y-m-d H:i:s');
                 return $model;
         }
 
@@ -271,6 +278,7 @@ class RegisterController extends Controller {
                         $model->save();
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $user->register_step = 5;
+                        $user->last_login = date('Y-m-d H:i:s');
                         $user->save();
                         $this->PlanSuccessMail($user, $model);
                         Yii::app()->session['user'] = $user;

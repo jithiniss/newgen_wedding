@@ -42,7 +42,7 @@ class SiteController extends Controller {
         public function actionLogin() {
 
 
-
+                date_default_timezone_set("Asia/Kolkata");
                 if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != '') {
 
                         $this->redirect(array('//Myaccount/Index'));
@@ -79,6 +79,8 @@ class SiteController extends Controller {
                                                                 $plan->save();
                                                         }
                                                 }
+                                                $user_login->last_login = date('Y-m-d H:i:s');
+                                                $user_login->save();
                                                 Yii::app()->session['user'] = $user_login;
 
                                                 Yii::app()->session['plan'] = $plan;
