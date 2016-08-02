@@ -151,7 +151,7 @@ class UserDetails extends CActiveRecord {
                         $facebook_user->email_verification = 1;
                         $facebook_user->gender = $gender;
                         $facebook_user->dou = date("Y-m-d H:i:s");
-                        $facebook_user->user_id = $this->userId($facebook_user->id);
+                        $facebook_user->user_id = 'NW' . $facebook_user->id;
                         $facebook_user->save();
 
                         $user = UserDetails::model()->findByPk($facebook_user->id);
@@ -167,7 +167,7 @@ class UserDetails extends CActiveRecord {
                         $facebook_user->email_verification = 1;
                         $facebook_user->doc = date("Y-m-d H:i:s");
                         $facebook_user->dou = date("Y-m-d H:i:s");
-                        $facebook_user->user_id = $this->userId($facebook_user->id);
+                        $facebook_user->user_id = 'NW' . $facebook_user->id;
                         if ($facebook_user->save()) {
                                 $user = UserDetails::model()->findByPk($facebook_user->id);
                                 Yii::app()->session['user'] = $user;
