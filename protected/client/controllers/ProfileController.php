@@ -543,4 +543,55 @@ class ProfileController extends Controller {
                 return implode($pass); //turn the array into a string
         }
 
+        public function actionHoroscope() {
+                $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                if (isset($_FILES['UserDetails'])) {
+
+                        $image = CUploadedFile::getInstance($model, 'horoscope');
+                        if (isset($image)) {
+                                $model->horoscope = $image->extensionName;
+                        }
+                        if ($model->save()) {
+                                if ($model->horoscope != "") {
+                                        $this->ImageUpload($image, 'horoscope', $model->id, 'horoscope');
+                                }
+                        }
+                }
+                $this->render('horoscope', array('myProfile' => $model));
+        }
+
+        public function ImageUpload($uploadedFile, $folder, $id, $name) {
+                if (isset($uploadedFile)) {
+
+                        if (Yii::app()->basePath . '/../uploads') {
+                                chmod(Yii::app()->basePath . '/../uploads', 0777);
+
+                                if (!is_dir(Yii::app()->basePath . '/../uploads/' . $folder . '/'))
+                                        mkdir(Yii::app()->basePath . '/../uploads/' . $folder . '/');
+                                chmod(Yii::app()->basePath . '/../uploads/' . $folder . '/', 0777);
+
+                                if (!is_dir(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/'))
+                                        mkdir(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/');
+                                chmod(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/', 0777);
+
+                                if ($uploadedFile->saveAs(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/' . $name . '.' . $uploadedFile->extensionName)) {
+                                        chmod(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/' . $name . '.' . $uploadedFile->extensionName, 0777);
+                                        $resize = new EasyImage(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/' . $name . '.' . $uploadedFile->extensionName);
+                                        $resize->resize(250, 365);
+                                        $resize->save(Yii::app()->basePath . '/../uploads/' . $folder . '/' . $id . '/' . $name . '.' . $uploadedFile->extensionName);
+                                        return true;
+                                } else {
+                                        return false;
+                                }
+                        } else {
+                                return false;
+                        }
+                } else {
+                        return false;
+                }
+        }
+
+//        public function actionHoroscopeUpload() {
+//
+//        }
 }

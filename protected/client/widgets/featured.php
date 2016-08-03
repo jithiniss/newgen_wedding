@@ -14,11 +14,13 @@
 class featured extends CWidget {
 
         public $id = '';
+        public $width = '';
+        public $height = '';
 
         public function run() {
 
                 $featured = UserPlans::model()->findAllByAttributes(array('featured' => 1));
-                $this->render('featured_profile', array('featured' => $featured));
+                $this->render('featured_profile', array('featured' => $featured, 'width' => $this->width, 'height' => $this->height));
         }
 
 }

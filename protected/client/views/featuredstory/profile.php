@@ -27,7 +27,7 @@
                         <div class="col-xs-3 col-md-2 col-sm-2">
                             <div class="form-group">
 
-<!--                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/Result/id/<?php // echo $this->encrypt_decrypt('encrypt', $id);           ?>" id="search_form" method="POST">
+<!--                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/Result/id/<?php // echo $this->encrypt_decrypt('encrypt', $id);                    ?>" id="search_form" method="POST">
                                 <?php
 //                                    echo CHtml::dropDownList('sort', '', array(
 //                                        'id DESC' => "Default Order",
@@ -45,10 +45,10 @@
                         </div>
 
                         <!--                        <div class="col-xs-1 col-md-1 col-sm-1 nop">
-                                                    <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/ResultList/id/<?php // echo $this->encrypt_decrypt('encrypt', $id);          ?>"><img class="center-block grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g2.jpg"></a>
+                                                    <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/ResultList/id/<?php // echo $this->encrypt_decrypt('encrypt', $id);                   ?>"><img class="center-block grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g2.jpg"></a>
                                                 </div>
                                                 <div class="col-xs-1 col-md-1 col-sm-1 nop">
-                                                    <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/Result/id/<?php // echo $this->encrypt_decrypt('encrypt', $id);          ?>"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
+                                                    <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Search/Result/id/<?php // echo $this->encrypt_decrypt('encrypt', $id);                   ?>"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
                                                 </div>
                                                 <div class="col-xs-3 col-md-3 col-sm-4">
                                                     <span>2000 profiles found</span>
@@ -58,7 +58,10 @@
 
 
                     <?php
-                    $this->widget("application.client.widgets.featured");
+                    $this->widget("application.client.widgets.featured", array(
+                        'width' => 180,
+                        'height' => 238,
+                    ));
                     ?>
 
 
