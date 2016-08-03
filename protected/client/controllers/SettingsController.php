@@ -311,11 +311,15 @@ class SettingsController extends Controller {
         }
 
         public function actionDeleteAccount() {
-                if ($_POST['status']) {
-                        echo 'hii';
-                        exit;
+                if ($_POST['UserDetails']['status'] == 1) {
+                        $model = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                        $trash = new UserTrash;
+                        $trash->attributes = $model->attributes;
+                        if ($trash->save()) {
+                                $model->delete();
+                                $this->redirect(array('site/index'));
+                        }
                 }
-                $account = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                 $this->render('delete_or_hide', array('model' => $model));
         }
 

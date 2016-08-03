@@ -69,7 +69,7 @@
                                                                 </div>
                                                                 <?php echo CHtml::submitButton('Hide', array('class' => 'btn btn-secondary btn-single pull-right', 'style' => 'border-radius:0px;padding: 10px 50px;')); ?>
                                                         </div>
-
+                                                        <?php $this->endWidget(); ?>
                                                 </div>
 
                                         </div>
@@ -80,22 +80,20 @@
                                                         </div>
                                                 </div>
                                                 <div class="strip-padding">
+                                                        <form action="<?php echo Yii::app()->baseUrl ?>/index.php/Settings/DeleteAccount" method="post">
 
-                                                        <div class="common">
-                                                                <div class="col-sm-4 col-xs-6 zeros">
-                                                                        <label for="textinput" class="control-label">Do you want to delete your account?</label>
+                                                                <div class="common">
+                                                                        <div class="col-sm-4 col-xs-6 zeros">
+                                                                                <label for="textinput" class="control-label">Do you want to delete your account?</label>
+                                                                        </div>
+                                                                        <div class="col-sm-4 col-xs-4 zeros"><?php echo $form->radioButtonList($model, 'status', array('1' => 'Yes', '2' => 'No'), array('class' => 'row'), array('name' => 'account_status')); ?>
+                                                                        </div>
+                                                                        <button type="submit" class="btn btn-secondary btn-single pull-right" style="border-radius:0px;padding: 10px 50px;" name="account_submit">Delete</button>
                                                                 </div>
-                                                                <div class="col-sm-4 col-xs-4 zeros"><?php echo $form->radioButtonList($model, 'status', array('1' => 'Yes', '2' => 'No'), array('class' => 'row')); ?>
-                                                                </div>
-
-
-
-                                                                <?php echo CHtml::submitButton('Delete', array('class' => 'btn btn-secondary btn-single pull-right', 'style' => 'border-radius:0px;padding: 10px 50px;')); ?>
-                                                        </div>
+                                                        </form>
                                                 </div>
 
                                         </div>
-                                        <?php $this->endWidget(); ?>
 
                                         <!--****-->
 

@@ -112,7 +112,7 @@ class RegisterController extends Controller {
 
         /* mail to user and admin */
 
-        public function RegisterMail($model, $s = '') {
+        public function RegisterMail1($model, $s = '') {
                 $to = $model->email;
                 $from = 'noreply@newgenwedding.com';
                 $subject = 'Welcome to NEWGEN.com!';
@@ -130,7 +130,7 @@ class RegisterController extends Controller {
 //                }
         }
 
-        public function RegisterMail1($model, $s = '') {
+        public function RegisterMail($model, $s = '') {
                 $user = $model->email;
 //                $user = 'sibys09@gmail.com';
                 $user_subject = 'Welcome to NEWGEN.com!';

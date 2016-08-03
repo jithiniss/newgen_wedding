@@ -1,9 +1,9 @@
 <?php
 
 /**
- * This is the model class for table "user_details".
+ * This is the model class for table "user_trash".
  *
- * The followings are the available columns in table 'user_details':
+ * The followings are the available columns in table 'user_trash':
  * @property integer $id
  * @property string $user_id
  * @property string $email
@@ -63,31 +63,35 @@
  * @property string $id_proof
  * @property integer $register_step
  * @property integer $status
+ * @property string $hide_for
+ * @property string $hide_from
+ * @property string $hide_reason
  * @property string $last_login
  * @property integer $created_by
  * @property integer $profile_approval
  * @property integer $image_approval
  * @property integer $plan_id
+ * @property integer $photo_visibility
+ * @property string $photo_password
  * @property integer $cb
  * @property integer $ub
  * @property string $doc
  * @property string $dou
+ * @property string $address
  * @property integer $email_verification
- *
- * The followings are the available model relations:
- * @property PartnerDetails[] $partnerDetails
+ * @property string $display_name
+ * @property integer $phone_setings
+ * @property integer $profile_privacy
+ * @property string $oauth_uid
+ * @property integer $oauth_provider
  */
-class UserDetails extends CActiveRecord {
-
-        public $old_password;
-        public $new_password;
-        public $repeat_password;
+class UserTrash extends CActiveRecord {
 
         /**
          * @return string the associated database table name
          */
         public function tableName() {
-                return 'user_details';
+                return 'user_trash';
         }
 
         /**
@@ -97,87 +101,18 @@ class UserDetails extends CActiveRecord {
                 // NOTE: you should only define rules for those attributes that
                 // will receive user inputs.
                 return array(
-                    array('email, password, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, mothertongue, country', 'required', 'on' => 'userFirstStep'),
-                    array('caste, marital_status, state, city', 'required', 'on' => 'userSecondStep'),
-                    array('height,smoke, drink', 'required', 'on' => 'userThirdStep'),
-                    array('height,smoke, drink,caste, marital_status, state, city,profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, mothertongue, country', 'required', 'on' => 'myProfile'),
-                    array('contact_number', 'required', 'on' => 'contactupdate'),
-                    array('old_password,new_password,repeat_password', 'required', 'on' => 'changePwd'),
-                    array('repeat_password', 'compare', 'compareAttribute' => 'new_password', 'on' => 'changePwd'),
-                    array('country, state, city', 'required', 'on' => 'addressupdate'),
-//array('user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, cb, ub, doc, dou', 'required'),
-                    array('email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, marital_status, mothertongue, country, state, city, zip_code, education_level, education_field, working_with, working_as, annual_income, mobile_number, grow_up_in, plan_id', 'required', 'on' => 'admin_create'),
-                    array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, plan_id, cb, ub', 'numerical', 'integerOnly' => true),
-                    array('email', 'email'),
-                    array('email', 'unique'),
-                    array('profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, cb, ub', 'numerical', 'integerOnly' => true),
+//			array('id, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, hide_for, hide_from, hide_reason, last_login, created_by, profile_approval, image_approval, plan_id, photo_visibility, photo_password, cb, ub, doc, dou, address, email_verification, display_name, phone_setings, profile_privacy, oauth_uid, oauth_provider', 'required'),
+                    array('id, profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, plan_id, photo_visibility, cb, ub, email_verification, phone_setings, profile_privacy, oauth_provider', 'numerical', 'integerOnly' => true),
                     array('user_id, password', 'length', 'max' => 50),
-                    array('email, first_name, last_name', 'length', 'max' => 100),
+                    array('email, first_name, last_name, photo_password', 'length', 'max' => 100),
                     array('contact_number, mobile_number', 'length', 'max' => 20),
                     array('home_town, house_name', 'length', 'max' => 200),
-                    array('photo, id_proof', 'length', 'max' => 99),
-                    array('password', 'length', 'min' => 4, 'max' => 20,
-                        'tooShort' => Yii::t("translation", "password is too short."),
-                        'tooLong' => Yii::t("translation", "password is too long."), 'on' => 'userFirstStep'),
+//                    array('photo, id_proof', 'length', 'max' => 99),
+//                    array('hide_for, display_name', 'length', 'max' => 250),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id,phone_setings,profile_privacy,display_name, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, plan_id, cb, ub, doc, dou,email_verification,oauth_provider,oauth_uid', 'safe', 'on' => 'search'),
+                    array('id, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, hide_for, hide_from, hide_reason, last_login, created_by, profile_approval, image_approval, plan_id, photo_visibility, photo_password, cb, ub, doc, dou, address, email_verification, display_name, phone_setings, profile_privacy, oauth_uid, oauth_provider', 'safe', 'on' => 'search'),
                 );
-        }
-
-        public function userId($id) {
-                $model = UserDetails::model()->findByPk($id);
-                $model->user_id = 'NW' . $model->id;
-                return $model;
-        }
-
-        function checkUser($oauth_provider, $oauth_uid, $fname, $lname, $email, $gender) {
-                if ($gender == 'female') {
-                        $gender = 2;
-                } else {
-                        $gender = 1;
-                }
-                if ($email == '') {
-                        $email = $fname . $lname . '@facebook.com';
-                }
-                $facebook_user = UserDetails::model()->findByAttributes(array('oauth_provider' => "$oauth_provider", 'oauth_uid' => "$oauth_uid"));
-
-                if (!empty($facebook_user)) {
-                        $facebook_user->oauth_provider = $oauth_provider;
-                        $facebook_user->oauth_uid = $oauth_uid;
-                        $facebook_user->first_name = $fname;
-                        $facebook_user->last_name = $lname;
-                        $facebook_user->email = $email;
-                        $facebook_user->email_verification = 1;
-                        $facebook_user->gender = $gender;
-                        $facebook_user->dou = date("Y-m-d H:i:s");
-                        $facebook_user->user_id = 'NW' . $facebook_user->id;
-                        $facebook_user->save();
-
-                        $user = UserDetails::model()->findByPk($facebook_user->id);
-                        Yii::app()->session['user'] = $user;
-                } else {
-                        $facebook_user = new UserDetails;
-                        $facebook_user->oauth_provider = $oauth_provider;
-                        $facebook_user->oauth_uid = $oauth_uid;
-                        $facebook_user->first_name = $fname;
-                        $facebook_user->last_name = $lname;
-                        $facebook_user->email = $email;
-                        $facebook_user->gender = $gender;
-                        $facebook_user->email_verification = 1;
-                        $facebook_user->doc = date("Y-m-d H:i:s");
-                        $facebook_user->dou = date("Y-m-d H:i:s");
-
-                        if ($facebook_user->save()) {
-
-                                $user = UserDetails::model()->findByPk($facebook_user->id);
-                                $user->user_id = 'NW' . $user->id;
-                                $user->save();
-                                Yii::app()->session['user'] = $user;
-                        }
-                }
-
-                return $facebook_user;
         }
 
         /**
@@ -187,16 +122,6 @@ class UserDetails extends CActiveRecord {
                 // NOTE: you may need to adjust the relation name and the related
                 // class name for the relations automatically generated below.
                 return array(
-                    'partnerDetails' => array(self::HAS_MANY, 'PartnerDetails', 'user_id'),
-                    'country0' => array(self::BELONGS_TO, 'MasterCountry', 'country'),
-                    'state0' => array(self::BELONGS_TO, 'MasterState', 'state'),
-                    'workingAs' => array(self::BELONGS_TO, 'MasterWorkingAs', 'working_as'),
-                    'profileFor' => array(self::BELONGS_TO, 'MasterProfileFor', 'profile_for'),
-                    'religion0' => array(self::BELONGS_TO, 'MasterReligion', 'religion'),
-                    'caste0' => array
-                        (self::BELONGS_TO, 'MasterCaste', 'caste'),
-                    'mothertongue0' => array(self::BELONGS_TO, 'MasterMotherTongue', 'mothertongue'),
-                    'growUpIn' => array(self::BELONGS_TO, 'MasterCountry', 'grow_up_in'),
                 );
         }
 
@@ -214,10 +139,10 @@ class UserDetails extends CActiveRecord {
                     'first_name' => 'First Name',
                     'last_name' => 'Last Name',
                     'gender' => 'Gender',
-                    'dob_day' => 'Day',
-                    'dob_month' => 'Month',
-                    'dob_year' => 'Year',
-                    'dob' => 'Date of birth',
+                    'dob_day' => 'Dob Day',
+                    'dob_month' => 'Dob Month',
+                    'dob_year' => 'Dob Year',
+                    'dob' => 'Dob',
                     'religion' => 'Religion',
                     'caste' => 'Caste',
                     'sub_caste' => 'Sub Caste',
@@ -264,21 +189,27 @@ class UserDetails extends CActiveRecord {
                     'id_proof' => 'Id Proof',
                     'register_step' => 'Register Step',
                     'status' => 'Status',
+                    'hide_for' => 'Hide For',
+                    'hide_from' => 'Hide From',
+                    'hide_reason' => 'Hide Reason',
                     'last_login' => 'Last Login',
                     'created_by' => 'Created By',
                     'profile_approval' => 'Profile Approval',
                     'image_approval' => 'Image Approval',
-                    'plan_id' => 'plan_id',
+                    'plan_id' => 'Plan',
+                    'photo_visibility' => 'Photo Visibility',
+                    'photo_password' => 'Photo Password',
                     'cb' => 'Cb',
                     'ub' => 'Ub',
                     'doc' => 'Doc',
                     'dou' => 'Dou',
-                    'email_verification' => 'Email Verifcation',
-                    'display_name' => 'Display name',
-                    'phone_setings' => 'Phone setings',
-                    'profile_privacy' => 'Profile_privacy',
-                    'oauth_provider' => 'Oauth Provider',
+                    'address' => 'Address',
+                    'email_verification' => 'Email Verification',
+                    'display_name' => 'Display Name',
+                    'phone_setings' => 'Phone Setings',
+                    'profile_privacy' => 'Profile Privacy',
                     'oauth_uid' => 'Oauth Uid',
+                    'oauth_provider' => 'Oauth Provider',
                 );
         }
 
@@ -311,7 +242,7 @@ class UserDetails extends CActiveRecord {
                 $criteria->compare('dob_day', $this->dob_day);
                 $criteria->compare('dob_month', $this->dob_month);
                 $criteria->compare('dob_year', $this->dob_year);
-                $criteria->compare('dob', $this->dob);
+                $criteria->compare('dob', $this->dob, true);
                 $criteria->compare('religion', $this->religion);
                 $criteria->compare('caste', $this->caste);
                 $criteria->compare('sub_caste', $this->sub_caste);
@@ -358,22 +289,29 @@ class UserDetails extends CActiveRecord {
                 $criteria->compare('id_proof', $this->id_proof, true);
                 $criteria->compare('register_step', $this->register_step);
                 $criteria->compare('status', $this->status);
+                $criteria->compare('hide_for', $this->hide_for, true);
+                $criteria->compare('hide_from', $this->hide_from, true);
+                $criteria->compare('hide_reason', $this->hide_reason, true);
                 $criteria->compare('last_login', $this->last_login, true);
                 $criteria->compare('created_by', $this->created_by);
                 $criteria->compare('profile_approval', $this->profile_approval);
                 $criteria->compare('image_approval', $this->image_approval);
                 $criteria->compare('plan_id', $this->plan_id);
+                $criteria->compare('photo_visibility', $this->photo_visibility);
+                $criteria->compare('photo_password', $this->photo_password, true);
                 $criteria->compare('cb', $this->cb);
                 $criteria->compare('ub', $this->ub);
                 $criteria->compare('doc', $this->doc, true);
                 $criteria->compare('dou', $this->dou, true);
+                $criteria->compare('address', $this->address, true);
                 $criteria->compare('email_verification', $this->email_verification);
-                $criteria->compare('oauth_provider', $this->oauth_provider, true);
+                $criteria->compare('display_name', $this->display_name, true);
+                $criteria->compare('phone_setings', $this->phone_setings);
+                $criteria->compare('profile_privacy', $this->profile_privacy);
                 $criteria->compare('oauth_uid', $this->oauth_uid, true);
+                $criteria->compare('oauth_provider', $this->oauth_provider);
 
-
-                return new CActiveDataProvider($this, array
-                    (
+                return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
                 ));
         }
@@ -382,11 +320,9 @@ class UserDetails extends CActiveRecord {
          * Returns the static model of the specified AR class.
          * Please note that you should have this exact method in all your CActiveRecord descendants!
          * @param string $className active record class name.
-         * @return UserDetails the static model class
+         * @return UserTrash the static model class
          */
-        public static function
-
-        model($className = __CLASS__) {
+        public static function model($className = __CLASS__) {
                 return parent::model($className);
         }
 
