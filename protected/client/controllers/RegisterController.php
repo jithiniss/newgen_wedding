@@ -113,6 +113,24 @@ class RegisterController extends Controller {
         /* mail to user and admin */
 
         public function RegisterMail($model, $s = '') {
+                $to = $model->email;
+                $from = 'noreply@newgenwedding.com';
+                $subject = 'Welcome to NEWGEN.com!';
+                $message = $this->renderPartial('mail/_register_user_mail', array('model' => $model), true);
+                $mail = Yii::app()->Smtpmail;
+                $mail->SetFrom($from, 'Newgen');
+                $mail->Subject = $subject;
+                $mail->MsgHTML($message);
+                $mail->AddAddress($to, "");
+                $mail->Send();
+//                if (!$mail->Send()) {
+//                        echo "Mailer Error: " . $mail->ErrorInfo;
+//                } else {
+//                        echo "Message sent!";
+//                }
+        }
+
+        public function RegisterMail1($model, $s = '') {
                 $user = $model->email;
 //                $user = 'sibys09@gmail.com';
                 $user_subject = 'Welcome to NEWGEN.com!';

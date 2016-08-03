@@ -261,6 +261,30 @@ img.img_lock {
         font-weight: 500;
         border: none;
 }
+.accesdenied h2{
+        font-size: 29px;
+        margin: 0px;
+        padding: 0px;
+        color: #ff4e87;
+}
+.empty_image{
+        border-right: solid 1px #c0c0c0;
+        padding-right: 6% !important;
+        /*padding-top: 92px;*/
+
+}
+.empty_message h3 {
+        margin: 0px;
+        padding: 0px;
+        font-size: 13px;
+        font-family: "Open Sans", sans-serif;
+        font-weight: bold;
+        margin-bottom: 10px;
+        line-height: 22px;
+}
+.login_error{
+        margin-top: -126px;
+}
 @media screen and (min-width: 480px) {
         .tokenize-sample { width: 300px }
 }

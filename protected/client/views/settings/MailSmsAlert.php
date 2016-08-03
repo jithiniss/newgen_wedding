@@ -25,7 +25,7 @@
                         </div>
                         <div class="col-md-9 alert_sms">
                                 <h2>My Alerts Manager</h2>
-                                <p>Manage your subscriptions to Newgrn wedding Alerts on email listed below. You can also subscribe to Newgrn wedding and Newgrn wedding times Newsletters</p>
+                                <p>Manage your subscriptions to Newgen wedding Alerts on email listed below. You can also subscribe to Newgen wedding and Newgen wedding times Newsletters</p>
                                 <?php
                                 $form = $this->beginWidget('CActiveForm', array(
                                     'id' => 'mail-sms-alert-MailSmsAlert-form',

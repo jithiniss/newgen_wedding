@@ -293,4 +293,30 @@ class SettingsController extends Controller {
                 $this->render('MailSmsAlert', array('model' => $model, 'user' => $user));
         }
 
+        public function actionDeleteOrHide() {
+//                $account = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                if (Yii::app()->session['user']['id'] != '') {
+                        $model = $this->loadModel(Yii::app()->session['user']['id']);
+                        $model->setScenario('hide');
+                        if (isset($_POST['UserDetails'])) {
+                                $model->attributes = $_POST['UserDetails'];
+                                $model->status = 0;
+                                $model->hide_from = date('Y-m-d');
+                                if ($model->save()) {
+                                        $this->redirect(array('index'));
+                                }
+                        }
+                }
+                $this->render('delete_or_hide', array('model' => $model));
+        }
+
+        public function actionDeleteAccount() {
+                if ($_POST['status']) {
+                        echo 'hii';
+                        exit;
+                }
+                $account = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                $this->render('delete_or_hide', array('model' => $model));
+        }
+
 }

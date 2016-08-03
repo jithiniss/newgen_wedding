@@ -42,6 +42,7 @@ return array(
     'wedding-plan-category' => 'weddingPlanner/category',
     'wedding-plan-category-detail' => 'weddingPlanner/detail',
     'featured-profiles' => 'Featuredstory/profile',
+    'hide-or-delete-account' => 'settings/DeleteOrHide',
     '<controller:\w+>/<id:\d+>' => '<controller>/view',
 //    '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

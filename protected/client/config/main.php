@@ -37,6 +37,15 @@ return array(
         ),
     ),
     'components' => array(
+        'Smtpmail' => array(
+            'class' => 'application.components.smtpmail.PHPMailer',
+            'Host' => "smtp.gmail.com",
+            'Username' => 'ashiq@intersmart.in',
+            'Password' => 'lehkabudhan',
+            'Mailer' => 'smtp',
+            'Port' => 587,
+            'SMTPAuth' => true,
+        ),
         'Upload' => array('class' => 'UploadFile'),
         'PhotoVisibility' => array('class' => 'PhotoVisibility'),
         'Matches' => array('class' => 'Matches'),
