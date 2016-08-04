@@ -81,7 +81,7 @@
                                                                                 <?php
                                                                                 $day = array();
                                                                                 for ($i = 1; $i <= 31; $i++) {
-                                                                                        $day[sprintf("%02d", $i)] = sprintf("%02d", $i);
+                                                                                        $day[sprintf("%d", $i)] = sprintf("%02d", $i);
                                                                                 }
                                                                                 ?>
                                                                                 <?php echo $form->dropDownList($editProfile, 'dob_day', $day, array('empty' => 'Day', 'class' => 'aps')); ?>
@@ -494,7 +494,6 @@
                                                                 </div>
                                                                 <div class="col-sm-8 col-xs-8 zeros">
                                                                         <div class="form-group">
-
                                                                                 <?php echo CHtml::activeDropDownList($editProfile, 'father_status', CHtml::listData(MasterParentStatus::model()->findAllByAttributes(array('status' => 1), array('condition' => 'category = 3 or category = 1')), 'id', 'parent_status'), array('empty' => 'Select Fathers Status', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
                                                                                 <?php echo $form->error($editProfile, 'father_status'); ?>
                                                                         </div>

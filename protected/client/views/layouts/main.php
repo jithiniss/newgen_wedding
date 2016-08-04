@@ -96,7 +96,7 @@
                                                                         <div class="nop">
                                                                                 <ul class="nav navbar-nav">
                                                                                         <?php if (!isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] == '') { ?>
-                                                                                                <li class="active"><?php echo CHtml::link('Home', array('site')); ?></li>
+                                                                                                <li class="active"><?php echo CHtml::link('Home', array('site/index')); ?></li>
                                                                                                 <li><?php echo CHtml::link('Wedding Planner', array('weddingPlanner/index')); ?></li>
 
                                                                                                 <li><?php echo CHtml::link('Membership Plans', array('site/index', '#' => 'upgrade')); ?></li>

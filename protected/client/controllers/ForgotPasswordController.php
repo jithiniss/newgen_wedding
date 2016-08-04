@@ -87,7 +87,7 @@ class ForgotPasswordController extends Controller {
                         Yii::app()->user->setFlash('error', "Session Expired. Try again later..");
                         $this->redirect(array('ForgotPassword'));
                 }
-                $this->render('changepassword');
+//                $this->render('changepassword');
         }
 
         public function siteURL() {
