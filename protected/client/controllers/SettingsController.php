@@ -70,6 +70,7 @@ class SettingsController extends Controller {
                                 $model->attributes = $_POST['UserDetails'];
                                 if ($model->validate()) {
                                         $model->ub = $user_id;
+                                        $model->address = $_POST['UserDetails']['address'];
                                         if ($model->save()) {
                                                 $this->redirect(array('index'));
                                         }
@@ -84,6 +85,8 @@ class SettingsController extends Controller {
 
         public function loadModel($id) {
                 $model = UserDetails::model()->findByPk($id);
+//                echo $id . $model->address;
+//                exit;
                 if ($model === null)
                         throw new CHttpException(404, 'The requested page does not exist.');
                 return $model;

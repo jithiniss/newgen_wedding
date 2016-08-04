@@ -11,7 +11,7 @@ class FacebookController extends Controller {
                         $model->attributes = $_POST['Facebook'];
                         $model->user_id = Yii::app()->session['user']['id'];
                         $model->cb = Yii::app()->session['user']['id'];
-                        $model->doc = date('Y-m-d');
+//                        $model->doc = date('Y-m-d');
                         if ($model->validate()) {
                                 if ($model->save()) {
                                         $this->redirect(array('index'));

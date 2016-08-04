@@ -208,7 +208,8 @@
                                 <li><?php echo CHtml::link('Hobbies & Interests', array('profile/HobbiesInterest')); ?></li>
                                 <li><a href="#">Set Contact Filters</a></li>
                                 <li><a href="#">Hide / Delete Profile</a></li>
-                                <li><?php echo CHtml::link('Facebook Link', array('/facebook')); ?></li>
+                                <li><?php echo CHtml::link('Facebook Link', array('/user')); ?></li>
+                                <li><?php echo CHtml::link('Documents', array('/user/document')); ?></li>
 
 
                             </ul>
