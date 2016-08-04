@@ -285,6 +285,14 @@ img.img_lock {
 .login_error{
         margin-top: -126px;
 }
+.delete_account{
+        padding-top: 38px;
+}
+.delete_account a{
+        color: #dc42a3;
+        font-size: 17px;
+        font-weight: normal;
+}
 @media screen and (min-width: 480px) {
         .tokenize-sample { width: 300px }
 }

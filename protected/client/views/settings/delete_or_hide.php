@@ -67,13 +67,16 @@
                                                                                 <?php echo $form->error($model, 'hide_reason'); ?>
                                                                         </div>
                                                                 </div>
+                                                                <div class="col-sm-12 col-xs-12 zeros delete_account">
+                                                                        <a href="#" id="delete_click">Do you want to delete this account?</a>
+                                                                </div>
                                                                 <?php echo CHtml::submitButton('Hide', array('class' => 'btn btn-secondary btn-single pull-right', 'style' => 'border-radius:0px;padding: 10px 50px;')); ?>
                                                         </div>
                                                         <?php $this->endWidget(); ?>
                                                 </div>
 
                                         </div>
-                                        <div class="strip">
+                                        <div class="strip" id="delete_account_id">
                                                 <div class="rel">
                                                         <div class="rel-1">
                                                                 <h2>Delete Your Account</h2>
@@ -83,24 +86,36 @@
                                                         <form action="<?php echo Yii::app()->baseUrl ?>/index.php/Settings/DeleteAccount" method="post">
 
                                                                 <div class="common">
-                                                                        <div class="col-sm-4 col-xs-6 zeros">
+                                                                        <div class="col-sm-12 col-xs-12 zeros">
                                                                                 <label for="textinput" class="control-label">Do you want to delete your account?</label>
                                                                         </div>
-                                                                        <div class="col-sm-4 col-xs-4 zeros"><?php echo $form->radioButtonList($model, 'status', array('1' => 'Yes', '2' => 'No'), array('class' => 'row'), array('name' => 'account_status')); ?>
+                                                                        <div class="col-sm-4 col-xs-4 zeros">
+                                                                                <input type="checkbox" name="UserDetails[status]" value="1" id = "account_status"/>
                                                                         </div>
-                                                                        <button type="submit" class="btn btn-secondary btn-single pull-right" style="border-radius:0px;padding: 10px 50px;" name="account_submit">Delete</button>
                                                                 </div>
-                                                        </form>
+                                                                <button type="submit" class="btn btn-secondary btn-single pull-right" onclick="delete_account(<?php echo $model->id; ?>)" style="border-radius:0px;padding: 10px 50px;" name="account_submit">Submit</button>
                                                 </div>
-
+                                                </form>
                                         </div>
 
-                                        <!--****-->
-
                                 </div>
-                                <!--</form>-->
-                        </div>
-                </div>
 
+                                <!--****-->
+
+                        </div>
+                        <!--</form>-->
+                </div>
         </div>
+
+</div>
 </section>
+
+<script>
+        $(document).ready(function () {
+                $("#delete_account_id").hide();
+                $("#delete_click").on('click', function () {
+                        $("#delete_account_id").show();
+                });
+        });
+
+</script>

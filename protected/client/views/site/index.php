@@ -2,6 +2,7 @@
 <link href="<?= Yii::app()->baseUrl ?>/css/styles.css" rel="stylesheet" media="screen">
 <link rel="stylesheet" href="<?= Yii::app()->baseUrl ?>/css/animate.css" type="text/css">
 <link href="<?= Yii::app()->baseUrl ?>/css/set2.css" rel="stylesheet">
+
 <!-- MAIN SLIDER -->
 <section id="main-slider" class="flexslider fullscreen">
 
@@ -248,7 +249,7 @@
 
 
                                         <li class="link-2"><a href="<?php echo $loginUrl; ?>"><i class="fa email fa-facebook"></i>Signup with Facebook</a></li>
-<?php //} ?>
+                                        <?php //} ?>
                                 </ul>
 
                                 <p>Already a Member<?php echo CHtml::link('Login', array('site/login'), array('class' => 'log')); ?></p>
@@ -290,8 +291,8 @@
                                                         for ($i = 18; $i <= 50; $i++) {
                                                                 ?>
                                                                 <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-<?php }
-?>
+                                                        <?php }
+                                                        ?>
                                                 </select>
                                         </div>
 
@@ -303,8 +304,8 @@
                                                         for ($i = 18; $i <= 50; $i++) {
                                                                 ?>
                                                                 <option value="<?php echo $i; ?>"><?php echo $i; ?></option>
-<?php }
-?>
+                                                        <?php }
+                                                        ?>
                                                 </select>
                                         </div>
                                         <div class="form-group">
@@ -317,7 +318,7 @@
                                                                 ?>
                                                                 <option value="<?php echo $religion->id; ?>"><?php echo $religion->religion; ?></option>
 
-<?php } ?>
+                                                        <?php } ?>
                                                 </select>
                                         </div>
 
@@ -331,7 +332,7 @@
                                                                 ?>
                                                                 <option value="<?php echo $language->id; ?>"><?php echo $language->mother_tongue; ?></option>
 
-<?php } ?>
+                                                        <?php } ?>
                                                 </select>
                                         </div>
 
@@ -383,7 +384,7 @@
                                         </figcaption>
                                 </figure>
                         </div>
-<?php } ?>
+                <?php } ?>
         </div>
 
 
@@ -588,7 +589,7 @@
                                                 }
                                                 ?>
                                         </ul>
-                                <?php echo CHtml::link('Choose<i class="fa fat fa-angle-right"></i>', array('Register/UpgradePlan', 'plan' => $this->encrypt_decrypt('encrypt', $plan->id)), array("class" => "btc")); ?>
+                                        <?php echo CHtml::link('Choose<i class="fa fat fa-angle-right"></i>', array('Register/UpgradePlan', 'plan' => $this->encrypt_decrypt('encrypt', $plan->id)), array("class" => "btc")); ?>
 
                                 </div>
                                 <?php
@@ -674,7 +675,7 @@
                                                                         }
                                                                         ?>
                                                                 </ul>
-                <?php echo CHtml::link('Choose<i class="fa fat fa-angle-right"></i>', array('Register/UpgradePlan', 'plan' => $this->encrypt_decrypt('encrypt', $plan->id)), array("class" => "btc")); ?>
+                                                                <?php echo CHtml::link('Choose<i class="fa fat fa-angle-right"></i>', array('Register/UpgradePlan', 'plan' => $this->encrypt_decrypt('encrypt', $plan->id)), array("class" => "btc")); ?>
 
                                                         </div>
                                                 </div>
