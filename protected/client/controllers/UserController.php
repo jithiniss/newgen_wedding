@@ -22,7 +22,7 @@ class UserController extends Controller {
         }
 
         public function actionDocument() {
-                $model = new Documents;
+                $model = new Documents('create');
                 $details = Documents::model()->findAllByAttributes(array('user_id' => Yii::app()->session['user']['id'], 'status' => 1));
                 if (isset($_POST['Documents'])) {
                         $model->attributes = $_POST['Documents'];

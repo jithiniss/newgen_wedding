@@ -30,7 +30,7 @@ class Documents extends CActiveRecord {
                 // will receive user inputs.
                 return array(
                     array('name', 'required'),
-                    array('file', 'file', 'types' => 'jpg, gif, png, pdf, doc, docx, txt', 'allowEmpty' => false),
+                    array('file', 'file', 'types' => 'jpg, gif, png, pdf, doc, docx, txt', 'allowEmpty' => false, 'on' => 'create'),
                     array('name', 'length', 'max' => 200),
                     array('file', 'length', 'max' => 100),
 //                    array('dou', 'safe'),
