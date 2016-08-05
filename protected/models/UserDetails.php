@@ -103,6 +103,7 @@ class UserDetails extends CActiveRecord {
                     array('height,smoke, drink,caste, marital_status, state, city,profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, mothertongue, country', 'required', 'on' => 'myProfile'),
                     array('contact_number', 'required', 'on' => 'contactupdate'),
                     array('old_password,new_password,repeat_password', 'required', 'on' => 'changePwd'),
+                    array('old_password', 'DCurrentPassword', 'on' => 'changePwd'),
                     array('repeat_password', 'compare', 'compareAttribute' => 'new_password', 'on' => 'changePwd'),
                     array('country, state, city', 'required', 'on' => 'addressupdate'),
 //array('user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, cb, ub, doc, dou', 'required'),
@@ -123,6 +124,13 @@ class UserDetails extends CActiveRecord {
                     // @todo Please remove those attributes that should not be searched.
                     array('id,phone_setings,profile_privacy,display_name, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, plan_id, cb, ub, doc, dou,email_verification,oauth_provider,oauth_uid', 'safe', 'on' => 'search'),
                 );
+        }
+
+        public function DCurrentPassword($old_pass, $param) {
+                $old = $_POST['UserDetails']['old_password'];
+                $password = UserDetails::model()->findByAttributes(array('id' => Yii::app()->session['user']['id'], 'password' => $old));
+                if (empty($password))
+                        $this->addError('old_password', 'Incorrect Password.');
         }
 
         public function userId($id) {
@@ -179,6 +187,10 @@ class UserDetails extends CActiveRecord {
 
                 return $facebook_user;
         }
+
+//        public function validatePassword($password) {
+//                return $this->hashPassword($password) === $this->password;
+//        }
 
         /**
          * @return array relational rules.
