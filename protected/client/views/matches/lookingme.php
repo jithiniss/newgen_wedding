@@ -2,8 +2,6 @@
         <div class="container">
                 <div class="row">
                         <?php echo $this->renderPartial('//myaccount/_leftmenu'); ?>
-
-
                         <div class="col-lg-9 col-md-9 col-sm-8 search">
                                 <div class="row">
                                         <h4>Looking For Me</h4>
@@ -30,9 +28,9 @@
                                                         <div class="col-xs-1 col-md-1 col-sm-1 nop">
                                                                 <a href="#"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
                                                         </div>
-                                                        <div class="col-xs-3 col-md-3 col-sm-4">
-                                                                <span>2000 profiles found</span>
-                                                        </div>
+                                                        <!--                                                        <div class="col-xs-3 col-md-3 col-sm-4">
+                                                                                                                        <span>2000 profiles found</span>
+                                                                                                                </div>-->
                                                 </div>
 
                                         </form>

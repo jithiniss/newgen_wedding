@@ -14,7 +14,7 @@ if (!empty($data)) {
 
                         <div class="load">
 
-                                                                                                <!--<img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">-->
+                                                                                                                <!--<img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">-->
                                 <?php
                                 $this->widget("application.client.widgets.PhotoVisibility", array(
                                     'id' => $visitor->id,
@@ -35,9 +35,12 @@ if (!empty($data)) {
                                 <h3>Grew up in <?= $visitor->country0->country; ?></h3>
 
                                 <div class="connect">
-                                        <h5>Connect with her?</h5>
-                                        <div class="f2"><a href="#" class="connect-1">Yes</a></div>
-                                        <div class="f3"><a href="#" class="connect-2">No</a></div>
+                                        <?php
+                                        $this->widget("application.client.components.UserInterest", array(
+                                            'interest_id' => $visitor->user_id,
+                                        ));
+                                        ?>
+
                                 </div>
 
                         </div>

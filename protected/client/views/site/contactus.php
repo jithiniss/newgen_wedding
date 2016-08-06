@@ -62,14 +62,24 @@
                                         <div class="add-left">
                                                 <img class="makes" src="<?php echo Yii::app()->request->baseUrl; ?>/images/map.png">
                                         </div>
+                                        <!--                                        <div class="add-right">
+                                        <?php // echo $banner->small_content; ?>
+                                                                                </div>-->
                                         <div class="add-right">
-                                                <?php echo $banner->small_content; ?>
+                                                <p>Lorem ipsum dolor sit amet, consectetur </p>
+                                                <p>adipisicing elit, sed do </p>
+                                                <p>eiusmod tempor incidid</p>
                                         </div>
                                         <div class="add-left">
                                                 <img class="makes" src="<?php echo Yii::app()->request->baseUrl; ?>/images/ph.png">
                                         </div>
+                                        <!--                                        <div class="add-right">
+                                        <?php // echo $banner->big_content; ?>
+                                                                                </div>-->
                                         <div class="add-right">
-                                                <?php echo $banner->big_content; ?>
+                                                <p>12323545840 </p>
+                                                <p>info@newgen.com </p>
+
                                         </div>
                                 </div>
                         </div>

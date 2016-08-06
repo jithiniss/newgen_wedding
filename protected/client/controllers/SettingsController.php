@@ -321,8 +321,12 @@ class SettingsController extends Controller {
                         $trash = new UserTrash;
                         $trash->attributes = $model->attributes;
                         $trash->u_id = $model->id;
-                        $trash->partner_detail_id = $partner->id;
-                        if ($trash->save()) {
+                        if (empty($partner)) {
+                                $trash->partner_detail_id = 0;
+                        } else {
+                                $trash->partner_detail_id = $partner->id;
+                        }
+                        if ($trash->save(false)) {
                                 $this->loadModel($id)->delete();
                                 $this->redirect(array('site/logout'));
                         }

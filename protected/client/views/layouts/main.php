@@ -253,10 +253,10 @@
                                                 <ul>
                                                         <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/static/page/about-us">About Us</a></li>
                                                         <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/awards">Awards</a></li>
-                                                        <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/faq">FAQ</a></li>
+                                                        <li><?php echo CHtml::link('FAQ', array('site/faq')); ?></li>
                                                         <li><a href="#">Event Management</a></li>
                                                         <li><a href="#">Plans</a></li>
-                                                        <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/contact">Contact Us</a></li>
+                                                        <li><?php echo CHtml::link('Contact Us', array('site/contact')); ?></li>
                                                 </ul>
 
 

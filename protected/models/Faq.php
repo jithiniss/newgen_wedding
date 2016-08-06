@@ -8,7 +8,7 @@
  * @property string $question
  * @property string $answer
  * @property integer $cb
- * @property string $dou
+ * @property string $doc
  */
 class Faq extends CActiveRecord {
 
@@ -28,10 +28,10 @@ class Faq extends CActiveRecord {
                 return array(
                     array('question, answer', 'required'),
                     array('cb', 'numerical', 'integerOnly' => true),
-                    array('question', 'length', 'max' => 200),
+                    array('question', 'length', 'max' => 250),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id, question, answer, cb, dou', 'safe', 'on' => 'search'),
+                    array('id, question, answer, cb, doc', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -54,7 +54,7 @@ class Faq extends CActiveRecord {
                     'question' => 'Question',
                     'answer' => 'Answer',
                     'cb' => 'Cb',
-                    'dou' => 'Dou',
+                    'doc' => 'Doc',
                 );
         }
 
@@ -79,7 +79,7 @@ class Faq extends CActiveRecord {
                 $criteria->compare('question', $this->question, true);
                 $criteria->compare('answer', $this->answer, true);
                 $criteria->compare('cb', $this->cb);
-                $criteria->compare('dou', $this->dou, true);
+                $criteria->compare('doc', $this->doc, true);
 
                 return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,

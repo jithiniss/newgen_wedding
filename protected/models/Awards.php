@@ -5,11 +5,11 @@
  *
  * The followings are the available columns in table 'awards':
  * @property integer $id
- * @property integer $year
+ * @property string $year
  * @property string $content
  * @property string $image
  * @property integer $sort_order
- * @property integer $field1
+ * @property string $field1
  * @property integer $cb
  * @property integer $ub
  * @property string $doc
@@ -32,10 +32,9 @@ class Awards extends CActiveRecord {
                 // NOTE: you should only define rules for those attributes that
                 // will receive user inputs.
                 return array(
-                    array('year, content, sort_order', 'required'),
-                    array('year, sort_order', 'numerical', 'integerOnly' => true),
-                    array('image', 'file', 'allowEmpty' => FALSE, 'types' => 'jpg,jpeg,gif,png', 'on' => 'create'),
-                    array('image', 'length', 'max' => 100),
+                    array('year, content', 'required'),
+                    array('sort_order, cb, ub, status', 'numerical', 'integerOnly' => true),
+                    array('year, image, field1', 'length', 'max' => 250),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
                     array('id, year, content, image, sort_order, field1, cb, ub, doc, dou, status', 'safe', 'on' => 'search'),
@@ -89,11 +88,11 @@ class Awards extends CActiveRecord {
                 $criteria = new CDbCriteria;
 
                 $criteria->compare('id', $this->id);
-                $criteria->compare('year', $this->year);
+                $criteria->compare('year', $this->year, true);
                 $criteria->compare('content', $this->content, true);
                 $criteria->compare('image', $this->image, true);
                 $criteria->compare('sort_order', $this->sort_order);
-                $criteria->compare('field1', $this->field1);
+                $criteria->compare('field1', $this->field1, true);
                 $criteria->compare('cb', $this->cb);
                 $criteria->compare('ub', $this->ub);
                 $criteria->compare('doc', $this->doc, true);
@@ -116,3 +115,5 @@ class Awards extends CActiveRecord {
         }
 
 }
+
+?>

@@ -65,7 +65,7 @@
                                 <button type="button" class="btn btn-default btn-interest">Interest Send</button>
                         </div>
                 <?php } else if ($request_details->status == 2) { ?>
-                        <h5>Accept Your Interest</h5>
+                        <h5>Accepted Your Interest</h5>
                 <?php } else if ($request_details->status == 3) { ?>
                         <h5>Your Interest is Pending</h5>
                 <?php } else if ($request_details->status == 4) { ?>

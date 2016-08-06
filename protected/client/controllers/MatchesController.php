@@ -20,7 +20,6 @@ class MatchesController extends Controller {
         }
 
         public function actionLookingMe() {
-
                 //  $lookingme = Yii::app()->Matches->LookingMe();
 //                var_dump($lookingme);
 //                exit;

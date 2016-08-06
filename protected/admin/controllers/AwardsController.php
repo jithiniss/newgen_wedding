@@ -66,6 +66,7 @@ class AwardsController extends Controller {
                 if (isset($_POST['Awards'])) {
                         $model->attributes = $_POST['Awards'];
                         $model->cb = Yii::app()->session['admin']['id'];
+                        $model->status = 1;
                         $model->doc = date('Y-m-d');
                         if ($model->validate()) {
                                 $image = CUploadedFile::getInstance($model, 'image');

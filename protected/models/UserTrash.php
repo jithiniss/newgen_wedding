@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'user_trash':
  * @property integer $id
+ * @property integer $u_id
  * @property string $user_id
  * @property string $email
  * @property string $password
@@ -84,6 +85,7 @@
  * @property integer $profile_privacy
  * @property string $oauth_uid
  * @property integer $oauth_provider
+ * @property integer $partner_detail_id
  */
 class UserTrash extends CActiveRecord {
 
@@ -101,17 +103,17 @@ class UserTrash extends CActiveRecord {
                 // NOTE: you should only define rules for those attributes that
                 // will receive user inputs.
                 return array(
-//			array('id, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, hide_for, hide_from, hide_reason, last_login, created_by, profile_approval, image_approval, plan_id, photo_visibility, photo_password, cb, ub, doc, dou, address, email_verification, display_name, phone_setings, profile_privacy, oauth_uid, oauth_provider', 'required'),
-                    array('id, profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, plan_id, photo_visibility, cb, ub, email_verification, phone_setings, profile_privacy, oauth_provider', 'numerical', 'integerOnly' => true),
+//            array(' user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, hide_for, hide_from, hide_reason, last_login, created_by, profile_approval, image_approval, plan_id, photo_visibility, photo_password, cb, ub, doc, dou, address, email_verification, display_name, phone_setings, profile_privacy, oauth_uid, oauth_provider', 'required'),
+//                    array('u_id, profile_for, gender, dob_day, dob_month, dob_year, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, mob_num_verification, register_step, status, created_by, profile_approval, image_approval, plan_id, photo_visibility, cb, ub, email_verification, phone_setings, profile_privacy, oauth_provider, partner_detail_id', 'numerical', 'integerOnly' => true),
                     array('user_id, password', 'length', 'max' => 50),
                     array('email, first_name, last_name, photo_password', 'length', 'max' => 100),
                     array('contact_number, mobile_number', 'length', 'max' => 20),
                     array('home_town, house_name', 'length', 'max' => 200),
-//                    array('photo, id_proof', 'length', 'max' => 99),
-//                    array('hide_for, display_name', 'length', 'max' => 250),
+                    array('photo, id_proof', 'length', 'max' => 99),
+                    array('hide_for, display_name', 'length', 'max' => 250),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, hide_for, hide_from, hide_reason, last_login, created_by, profile_approval, image_approval, plan_id, photo_visibility, photo_password, cb, ub, doc, dou, address, email_verification, display_name, phone_setings, profile_privacy, oauth_uid, oauth_provider', 'safe', 'on' => 'search'),
+                    array('id, u_id, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, hide_for, hide_from, hide_reason, last_login, created_by, profile_approval, image_approval, plan_id, photo_visibility, photo_password, cb, ub, doc, dou, address, email_verification, display_name, phone_setings, profile_privacy, oauth_uid, oauth_provider, partner_detail_id', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -131,6 +133,7 @@ class UserTrash extends CActiveRecord {
         public function attributeLabels() {
                 return array(
                     'id' => 'ID',
+                    'u_id' => 'U',
                     'user_id' => 'User',
                     'email' => 'Email',
                     'password' => 'Password',
@@ -210,6 +213,7 @@ class UserTrash extends CActiveRecord {
                     'profile_privacy' => 'Profile Privacy',
                     'oauth_uid' => 'Oauth Uid',
                     'oauth_provider' => 'Oauth Provider',
+                    'partner_detail_id' => 'Partner Detail',
                 );
         }
 
@@ -231,6 +235,7 @@ class UserTrash extends CActiveRecord {
                 $criteria = new CDbCriteria;
 
                 $criteria->compare('id', $this->id);
+                $criteria->compare('u_id', $this->u_id);
                 $criteria->compare('user_id', $this->user_id, true);
                 $criteria->compare('email', $this->email, true);
                 $criteria->compare('password', $this->password, true);
@@ -310,6 +315,7 @@ class UserTrash extends CActiveRecord {
                 $criteria->compare('profile_privacy', $this->profile_privacy);
                 $criteria->compare('oauth_uid', $this->oauth_uid, true);
                 $criteria->compare('oauth_provider', $this->oauth_provider);
+                $criteria->compare('partner_detail_id', $this->partner_detail_id);
 
                 return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,

@@ -65,6 +65,8 @@ class FaqController extends Controller {
 
                 if (isset($_POST['Faq'])) {
                         $model->attributes = $_POST['Faq'];
+                        $model->cb = Yii::app()->session['admin']['id'];
+                        $model->doc = date('Y-m-d');
                         if ($model->save())
                                 $this->redirect(array('admin'));
                 }
