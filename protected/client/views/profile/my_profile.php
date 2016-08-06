@@ -1201,6 +1201,8 @@
                                                                                                 <?php
                                                                                                 if ($myProfile->zip_code != '' || $myProfile->zip_code != 0) {
                                                                                                         echo $myProfile->zip_code;
+                                                                                                } elseif ($myProfile->zip_code == 0) {
+                                                                                                        echo '--';
                                                                                                 } else {
                                                                                                         echo '--';
                                                                                                 }

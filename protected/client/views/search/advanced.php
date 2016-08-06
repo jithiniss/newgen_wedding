@@ -131,7 +131,7 @@
 
                                                                         <?php
                                                                         $doesnt_matter = array(
-                                                                            '-1' => Yii::t('fim', 'Doesnt Matter'),
+                                                                            '-1' => Yii::t('fim', 'Does not Matter'),
                                                                         );
                                                                         if (!empty($model->marital_status)) {
 
@@ -631,7 +631,7 @@
                                                                                         </div>
                                                                                         <div class="col-sm-8 col-xs-8 zeros">
                                                                                                 <?php
-                                                                                                $drink = array('1' => 'No', '2' => 'Yes', '3' => 'Occasionally', '-1' => 'Doesnt Matter');
+                                                                                                $drink = array('1' => 'No', '2' => 'Yes', '3' => 'Occasionally', '-1' => 'Does not Matter');
 
                                                                                                 foreach ($drink as $drinkkey => $drinkvalue) {
 
@@ -668,7 +668,7 @@
                                                                                         <div class="col-sm-8 col-xs-8 zeros">
                                                                                                 <?php
                                                                                                 $sm = 1;
-                                                                                                $smoke = array('1' => 'No', '2' => 'Yes', '3' => 'Occasionally', '-1' => 'Doesnt Matter');
+                                                                                                $smoke = array('1' => 'No', '2' => 'Yes', '3' => 'Occasionally', '-1' => 'Does not Matter');
                                                                                                 foreach ($smoke as $smokekey => $smokevalue) {
 
                                                                                                         if ($model->smoke == $smokekey) {
@@ -779,7 +779,7 @@
                                                                                         <div class="col-sm-8 col-xs-8 zeros">
                                                                                                 <?php
                                                                                                 $d = 1;
-                                                                                                $disability = array('-1' => 'Doesnt Matter', '1' => 'Dont include profiles with disability');
+                                                                                                $disability = array('-1' => 'Does not Matter', '1' => 'Dont include profiles with disability');
                                                                                                 foreach ($disability as $key => $value) {
 
                                                                                                         if ($model->disability == $key) {

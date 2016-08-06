@@ -14,10 +14,12 @@ if (!empty($data)) {
 
                         <div class="load">
 
-                                                <!--<img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">-->
+                                                                                                <!--<img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">-->
                                 <?php
                                 $this->widget("application.client.widgets.PhotoVisibility", array(
                                     'id' => $visitor->id,
+                                    'width' => 262,
+                                    'height' => 257,
                                 ));
                                 ?>
                                 <h1><?= $visitor->first_name; ?></h1>
@@ -34,12 +36,8 @@ if (!empty($data)) {
 
                                 <div class="connect">
                                         <h5>Connect with her?</h5>
-
-
                                         <div class="f2"><a href="#" class="connect-1">Yes</a></div>
                                         <div class="f3"><a href="#" class="connect-2">No</a></div>
-
-
                                 </div>
 
                         </div>

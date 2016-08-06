@@ -1,4 +1,4 @@
-<div class="profile ">
+<div class="profile visibility">
         <?php
         if ($partner->photo != '') {
                 $userPic = explode('.', $partner->photo);

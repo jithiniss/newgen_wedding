@@ -311,7 +311,7 @@ a.btc:hover{
         text-decoration:  none;
 }
 .load {
-        height: 620px;
+        height: 673px;
         padding-bottom: 30px;
 }
 
@@ -535,7 +535,21 @@ i.fa.fa-paper-plane {
         border: none;
         height: 32px !important;
 }
-
+.modal .login_with a{
+        background: none;
+        padding-right: 0px;
+        padding-top: 0px;
+        padding-bottom: 0px;
+        color: #000;
+        font-size: 13px;
+        padding-left: 9px;
+        text-decoration: underline;
+}
+.visibility p{
+        margin-left: 36px;
+        margin-top: -21px;
+        color: #fff;
+}
 .enquire_plan {
         background-color: #0e6382;
         padding-left: 12px;

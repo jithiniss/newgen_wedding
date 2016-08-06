@@ -234,7 +234,7 @@
                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
 
                         </div>
-                        <div class="modal-body">
+                        <div class="modal-body login_with">
                                 <h1>The New Way to find your</h1>
                                 <h2>Partner & Plan your Wedding</h2>
                                 <ul class="list-inline list-unstyled">
@@ -252,7 +252,7 @@
                                         <?php //} ?>
                                 </ul>
 
-                                <p>Already a Member<?php echo CHtml::link('Login', array('site/login'), array('class' => 'log')); ?></p>
+                                <p>Already a Member<?php echo CHtml::link('Login', array('site/login'), array('class' => 'log already_login')); ?></p>
                         </div>
 
                 </div>

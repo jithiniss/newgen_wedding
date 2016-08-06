@@ -34,8 +34,8 @@ class ForgotPasswordController extends Controller {
                 $user = $details->email;
                 //$user = 'shahana@intersmart.in';
                 $user_subject = 'Please Reset Your Password';
-                echo $user_message = $this->renderPartial('mail/_forgot_password_mail_user', array('token' => $token), true);
-                exit;
+                $user_message = $this->renderPartial('mail/_forgot_password_mail_user', array('token' => $token, 'details' => $details), true);
+
 
                 // Always set content-type when sending HTML email
                 $headers = "MIME-Version: 1.0" . "\r\n";

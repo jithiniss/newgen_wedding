@@ -118,7 +118,7 @@
                                                                         <div class="form-group">
                                                                                 <?php
                                                                                 $doesnt_matter = array(
-                                                                                    '-1' => Yii::t('fim', 'Doesnt Matter'),
+                                                                                    '-1' => Yii::t('fim', 'Does not Matter'),
                                                                                 );
                                                                                 if (!empty($partnerDetails->marital_status)) {
 

@@ -12,8 +12,8 @@
                                 </tr>
                                 <tr>
                                         <td style="padding:40px 20px; font-family:'Open Sans',arial, sans-serif; font-size:13px"><p style="font-size:14px; font-weight:bold;">Reset Your Password</p>
-                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">Dear <b><?php echo $vendor->first_name; ?></b>,</p>
-                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">You recently requested to reset your password for your NEWGEN Vendor Account.Click the button below to reset it.</p>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">Dear <b><?php echo $details->first_name; ?></b>,</p>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">You recently requested to reset your password for your NEWGEN  Account.Click the button below to reset it.</p>
                                                 <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;"><button style="display: table;margin: 0 auto;background: #0e6382;padding: 10px;padding-left:20px;padding-right:20px;margin-bottom:20px;border: 0px solid #1C1B1C;border-radius: 3px 3px 3px 3px;">
 
                                                                 <a href="<?php echo $this->siteURL(); ?>/index.php/ForgotPassword/Changepassword/token/<?php echo $token; ?>" style="text-decoration:none;color:#fff;font-weight: bold;font-size: 15px;">Reset Password</a>

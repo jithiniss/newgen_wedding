@@ -156,6 +156,7 @@
                         <a class="hey" href="#">Read More<i class="fa would fa-caret-right"></i></a>
                 </div>
         </div>
+        <div class="clearfix"></div>
 </div>
 
 <div class="clearfix visible-xs"></div>

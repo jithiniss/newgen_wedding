@@ -250,9 +250,9 @@ class VendorController extends Controller {
                 $user = $vendor->email;
                 //$user = 'shahana@intersmart.in';
                 $user_subject = 'Please Reset Your Password';
-                echo $user_message = $this->renderPartial('mail/_forgot_password_mail_user', array('token' => $token, 'vendor' => $vendor), true);
+                $user_message = $this->renderPartial('mail/_forgot_password_mail_user', array('token' => $token, 'vendor' => $vendor), true);
 
-                exit;
+
                 // Always set content-type when sending HTML email
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";

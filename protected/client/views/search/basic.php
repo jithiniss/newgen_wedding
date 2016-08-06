@@ -37,8 +37,6 @@
                                                                 <label for="textinput" class="control-label">Looking For</label>
                                                         </div>
                                                         <?php if (isset(Yii::app()->session['user'])) { ?>
-                                                                <?php unset(Yii::app()->session['user']);
-                                                                ?>
                                                                 <div class="col-sm-8 col-xs-9 zeros">
                                                                         <?php if (Yii::app()->session['user']['gender'] == 1) { ?>
                                                                                 <label class="radio-inline sec">
@@ -136,7 +134,7 @@
 
                                                                         <?php
                                                                         $doesnt_matter = array(
-                                                                            '-1' => Yii::t('fim', 'Doesnt Matter'),
+                                                                            '-1' => Yii::t('fim', 'Does not Matter'),
                                                                         );
                                                                         if (!empty($model->marital_status)) {
 
