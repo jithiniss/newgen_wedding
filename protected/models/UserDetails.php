@@ -202,6 +202,7 @@ class UserDetails extends CActiveRecord {
                     'partnerDetails' => array(self::HAS_MANY, 'PartnerDetails', 'user_id'),
                     'country0' => array(self::BELONGS_TO, 'MasterCountry', 'country'),
                     'state0' => array(self::BELONGS_TO, 'MasterState', 'state'),
+                    'city0' => array(self::BELONGS_TO, 'MasterCity', 'city'),
                     'workingAs' => array(self::BELONGS_TO, 'MasterWorkingAs', 'working_as'),
                     'profileFor' => array(self::BELONGS_TO, 'MasterProfileFor', 'profile_for'),
                     'religion0' => array(self::BELONGS_TO, 'MasterReligion', 'religion'),
