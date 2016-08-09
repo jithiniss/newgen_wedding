@@ -1,6 +1,8 @@
+
 <section class="searches">
         <div class="container">
                 <div class="row">
+
                         <div class="col-md-3 newgens short">
                                 <h3>Inbox</h3>
                                 <ul class="list-unstyled">
@@ -33,42 +35,43 @@
 
                         <div class="col-lg-9 col-md-9 col-sm-8 search">
                                 <div class="row">
-                                        <h4>Blocked members</h4>
-                                        <form action="action_page.php">
-                                                <div class=row>
-                                                        <div class="col-xs-3 col-sm-4 col-md-3 col-md-offset-2 ">
-                                                                <!--                                                                <a href="#" class="offset">Save this Search</a>-->
-                                                        </div>
-                                                        <div class="col-xs-3 col-md-2 col-sm-2">
-                                                                <div class="form-group">
+                                        <h4>Profile Visited</h4>
 
-                                                                        <select class="ord" name="carlist" form="carform">
-                                                                                <option value="volvo">Default Order</option>
-                                                                                <option value="1">Sorting By Age</option>
-                                                                                <option value="2">Recently Posted</option>
-                                                                                <option value="3">Name (A-Z)</option>
-                                                                                <option value="4">Name (Z-A)</option>
-                                                                        </select>
-                                                                </div>
-                                                        </div>
-                                                        <div class="col-xs-1 col-md-1 col-sm-1 nop">
-                                                                <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/BlockedMembersList"><img class="center-block grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g2.jpg"></a>
-                                                        </div>
-                                                        <div class="col-xs-1 col-md-1 col-sm-1 nop">
-                                                                <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/ListBlockedMembers"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
-                                                        </div>
-                                                        <!--                                                        <div class="col-xs-3 col-md-3 col-sm-4">
-                                                                                                                        <span>2000 profiles found</span>
-                                                                                                                </div>-->
+                                        <div class=row>
+                                                <div class="col-xs-3 col-sm-4 col-md-3 col-md-offset-2 ">
+                                                        <!--                                                                <a href="#" class="offset">Save this Search</a>-->
                                                 </div>
+                                                <div class="col-xs-3 col-md-2 col-sm-2">
+                                                        <div class="form-group">
+                                                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/ListProfileVisitors" id="search_form_shortlist" method="post">
+                                                                        <select class="ord" name="sort_list"  onchange="changesearch();">
+                                                                                <option value="id DESC">Default Order</option>
+                                                                                <option value="first_name ASC">Name(A->Z)</option>
+                                                                                <option value="first_name DESC">Name(Z->A)</option>
+                                                                                <option value="dob_year ASC">Age(Low->High)</option>
+                                                                                <option value="dob_year DESC">Age(High->Low)</option>
+                                                                        </select>
+                                                                </form>
+                                                        </div>
+                                                </div>
+                                                <div class="col-xs-1 col-md-1 col-sm-1 nop">
+                                                        <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/BlockedMembersList"><img class="center-block grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g2.jpg"></a>
+                                                </div>
+                                                <div class="col-xs-1 col-md-1 col-sm-1 nop">
+                                                        <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/ListBlockedMembers"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
+                                                </div>
+                                                <!--                                                        <div class="col-xs-3 col-md-3 col-sm-4">
+                                                                                                                <span>2000 profiles found</span>
+                                                                                                        </div>-->
+                                        </div>
 
-                                        </form>
+
 
                                         <?php
                                         if (!empty($dataprovider) || $dataProvider != '') {
                                                 $this->widget('zii.widgets.CListView', array(
                                                     'dataProvider' => $dataProvider,
-                                                    'itemView' => '_blocked_members',
+                                                    'itemView' => '_list_blocked_members',
                                                     'itemsCssClass' => 'data',
                                                 ));
                                         } else {
@@ -97,4 +100,7 @@
                         });
                 });
         });
+        function changesearch() {
+                $('#search_form_shortlist').submit();
+        }
 </script>
