@@ -290,4 +290,108 @@ class MyaccountController extends Controller {
                 return $protocol . $domainName . '/beta/';
         }
 
+        public function actionShortlist_Sort() {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                if (isset(Yii::app()->session['user'])) {
+                        $dataProvider = new CActiveDataProvider('Requests', array(
+                            'criteria' => array(
+                                'condition' => 'user_id="' . Yii::app()->session['user']['id'] . '" AND status = 1',
+                                'condition' => 'status = 2',
+//                                'group' => 'user_id',
+                                'order' => $sort,
+                                'distinct' => TRUE,
+                            ),
+                            'pagination' => array(
+                                'pageSize' => 8,
+                            ),
+                                )
+                        );
+                        $this->render('short_list_sort', array('dataProvider' => $dataProvider));
+                } else {
+                        $this->redirect(array('site/login'));
+                }
+        }
+
+        public function actionListOfShortlist() {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                if (isset(Yii::app()->session['user'])) {
+                        $dataProvider = new CActiveDataProvider('Requests', array(
+                            'criteria' => array(
+                                'condition' => 'user_id="' . Yii::app()->session['user']['id'] . '" AND status = 1',
+                                'condition' => 'status = 2',
+                                'order' => 'date desc',
+                                'group' => 'user_id',
+                                'distinct' => TRUE,
+                            ),
+                            'pagination' => array(
+                                'pageSize' => 5,
+                            ),
+                                )
+                        );
+                        $this->render('list_of_shortlist', array('dataProvider' => $dataProvider));
+                } else {
+                        $this->redirect(array('site/login'));
+                }
+        }
+
+        public function actionListProfileVisitors() {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                if (isset(Yii::app()->session['user'])) {
+                        $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                        $dataProvider = new CActiveDataProvider('ProfileVisitors', array(
+                            'criteria' => array(
+                                'condition' => 'visited_id="' . $user->user_id . '" AND status = 1',
+                                'order' => $sort,
+                                'group' => 'user_id',
+                                'distinct' => TRUE
+                            ),
+                            'pagination' => array(
+                                'pageSize' => 5,
+                            ),
+                                )
+                        );
+                        $this->render('list_profile_visitors', array('dataProvider' => $dataProvider));
+                } else {
+                        $this->redirect(array('site/login'));
+                }
+        }
+
+        public function actionListProfileVisited() {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                if (isset(Yii::app()->session['user'])) {
+                        $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                        $dataProvider = new CActiveDataProvider('ProfileVisitors', array(
+                            'criteria' => array(
+                                'condition' => 'user_id="' . $user->user_id . '" AND status = 1',
+                                'order' => 'date desc',
+                                'group' => 'visited_id',
+                                'distinct' => TRUE,
+                            ),
+                            'pagination' => array(
+                                'pageSize' => 8,
+                            ),
+                                )
+                        );
+                        $this->render('list_profile_visited', array('dataProvider' => $dataProvider));
+                } else {
+                        $this->redirect(array('site/login'));
+                }
+        }
+
 }

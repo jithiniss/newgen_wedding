@@ -4,4 +4,4 @@
 <li><?php echo CHtml::link('2-way Matches', array('Matches/TwoWayMatches')); ?></li>
 <li><?php echo CHtml::link('Profile Visitors', array('Myaccount/ProfileVisitors')); ?></li>
 <li><?php echo CHtml::link('Profile Visited', array('Myaccount/ProfileVisited')); ?></li>
-<li><a href="#">Saved Searches</a></li>
+<li><?php echo CHtml::link('Saved Searches', array('Search/index')); ?></li>

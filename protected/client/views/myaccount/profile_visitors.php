@@ -1,208 +1,33 @@
 <section class="searches">
         <div class="container">
                 <div class="row">
-                        <div class="col-lg-3 col-md-3 col-sm-4 mains">
-                                <h3>Refine Search</h3>
-                                <div class="panel-group" id="accordion">
-                                        <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel1">
-                                                                <h4 class="panel-title">
-                                                                        <i class="glyphicon glyphicon-minus"></i>Photo Settings
-                                                                </h4>
-                                                        </a>
+                        <div class="col-md-3 newgens short">
+                                <h3>Inbox</h3>
+                                <ul class="list-unstyled">
+                                        <?php
+                                        $this->renderPartial('_leftSideInbox');
+                                        ?>
 
-                                                </div>
-                                                <div id="panel1" class="panel-collapse collapse in">
-                                                        <div class="panel-body">
+                                </ul>
+                                <h3>Accepted</h3>
+                                <h3>Sent</h3>
+                                <ul class="list-unstyled">
+                                        <li><?php echo CHtml::link('Message', array('Myaccount/Message')); ?></li>
+                                        <li><?php echo CHtml::link('Invitations', array('Myaccount/SentInvitations')); ?></li>
+                                </ul>
+                                <h3>Quick Links</h3>
+                                <ul class="list-unstyled">
+                                        <?php
+                                        $this->renderPartial('_leftSideQuickLinks');
+                                        ?>
+                                </ul>
+                                <h3>Explore</h3>
+                                <ul class="list-unstyled">
+                                        <li><?php echo CHtml::link('Blocked Members', array('Myaccount/ListBlockedMembers'), array('target' => 'blank')); ?></li>
+                                        <li><?php echo CHtml::link('Favorite List', array('Partner/Favoritelist')); ?></li>
+                                        <li><?php echo CHtml::link('Membership Details', array('Myaccount/Membershipdetails')); ?></li>
+                                </ul>
 
-                                                                <ul class="list-unstyled">
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
-                                                                </ul>
-                                                        </div>
-                                                </div>
-                                        </div>
-                                        <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel2">
-                                                                <h4 class="panel-title">
-                                                                        <i class="glyphicon glyphicon-minus"></i>Recently Joined
-                                                                </h4>
-                                                        </a>
-
-                                                </div>
-                                                <div id="panel2" class="panel-collapse collapse in">
-                                                        <div class="panel-body">
-                                                                <ul class="list-unstyled">
-                                                                        <li><input type="radio" class="rad" name="rec" value="all" checked> Within a day (39)</li>
-                                                                        <li><input type="radio" class="rad" name="rec" value="all" checked> Within a week (168)</li>
-                                                                        <li><input type="radio" class="rad" name="rec" value="all" checked> Within a month (341)</li>
-                                                                </ul>
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-
-
-
-
-
-
-                                        <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel3">
-                                                                <h4 class="panel-title">
-                                                                        <i class="glyphicon glyphicon-minus"></i>Active Members
-                                                                </h4>
-                                                        </a>
-                                                </div>
-                                                <div id="panel3" class="panel-collapse collapse in">
-                                                        <div class="panel-body">
-                                                                <ul class="list-unstyled">
-                                                                        <li><input type="radio" class="rad" name="rec" value="all" checked> Within a day (39)</li>
-                                                                        <li><input type="radio" class="rad" name="rec" value="all" checked> Within a week (168)</li>
-                                                                        <li><input type="radio" class="rad" name="rec" value="all" checked> Within a month (341)</li>
-                                                                </ul>
-
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-
-
-                                        <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel4">
-                                                                <h4 class="panel-title">
-                                                                        <i class="glyphicon glyphicon-minus"></i>Marital Status
-                                                                </h4>
-                                                        </a>
-                                                </div>
-                                                <div id="panel4" class="panel-collapse collapse in">
-                                                        <div class="panel-body">
-                                                                <ul class="list-unstyled">
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
-                                                                </ul>
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-
-
-
-                                        <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel5">
-                                                                <h4 class="panel-title">
-                                                                        <i class="glyphicon glyphicon-minus"></i>Working With
-                                                                </h4>
-                                                        </a>
-                                                </div>
-                                                <div id="panel5" class="panel-collapse collapse in">
-                                                        <div class="panel-body">
-                                                                <ul class="list-unstyled">
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
-                                                                </ul>
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-                                        <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel6">
-                                                                <h4 class="panel-title">
-                                                                        <i class="glyphicon glyphicon-minus"></i>Profile Created by
-                                                                </h4>
-                                                        </a>
-                                                </div>
-                                                <div id="panel6" class="panel-collapse collapse in">
-                                                        <div class="panel-body">
-                                                                <ul class="list-unstyled">
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
-                                                                </ul>
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-                                        <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel7">
-                                                                <h4 class="panel-title">
-                                                                        <i class="glyphicon glyphicon-minus"></i>Smoking
-                                                                </h4>
-                                                        </a>
-                                                </div>
-                                                <div id="panel7" class="panel-collapse collapse in">
-                                                        <div class="panel-body">
-                                                                <ul class="list-unstyled">
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
-                                                                </ul>
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-                                        <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion" href="#panel8">
-                                                                <h4 class="panel-title">
-                                                                        <i class="glyphicon glyphicon-minus"></i>Drinking
-                                                                </h4>
-                                                        </a>
-                                                </div>
-                                                <div id="panel8" class="panel-collapse collapse in">
-                                                        <div class="panel-body">
-                                                                <ul class="list-unstyled">
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
-                                                                </ul>
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-
-
-                                        <div class="panel panel-default">
-                                                <div class="panel-heading">
-                                                        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordions" href="#panel9">
-                                                                <h4 class="panel-title">
-                                                                        <i class="glyphicon glyphicon-minus"></i>Eating habits
-                                                                </h4>
-                                                        </a>
-                                                </div>
-                                                <div id="panel9" class="panel-collapse collapse in">
-                                                        <div class="panel-body">
-                                                                <ul class="list-unstyled">
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">All</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike">Visible to all (1000+)</li>
-                                                                        <li><input type="checkbox" class="chk" name="vehicle" value="Bike"> Protected Phot... (392)</li>
-                                                                </ul>
-                                                        </div>
-                                                </div>
-                                        </div>
-
-
-
-
-
-                                </div>
                         </div>
 
 
@@ -227,10 +52,10 @@
                                                                 </div>
                                                         </div>
                                                         <div class="col-xs-1 col-md-1 col-sm-1 nop">
-                                                                <a href="#"><img class="center-block grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g2.jpg"></a>
+                                                                <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/ListProfileVisitors"><img class="center-block grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g2.jpg"></a>
                                                         </div>
                                                         <div class="col-xs-1 col-md-1 col-sm-1 nop">
-                                                                <a href="#"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
+                                                                <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/ProfileVisitors"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
                                                         </div>
                                                         <!--                                                        <div class="col-xs-3 col-md-3 col-sm-4">
                                                                                                                         <span>2000 profiles found</span>

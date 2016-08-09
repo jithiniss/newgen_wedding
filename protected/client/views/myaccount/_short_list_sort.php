@@ -9,7 +9,7 @@ if (!empty($data)) {
 
                         <div class="load">
 
-                                                                                                                                                                                                                                                                                                                                <!--<img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">-->
+                                                                                                                                                                                                                                                                                                                                                <!--<img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $visitor->id; ?>/profile/<?= $visitor->photo ?>">-->
                                 <?php
                                 $this->widget("application.client.widgets.PhotoVisibility", array(
                                     'id' => $visitor->id,

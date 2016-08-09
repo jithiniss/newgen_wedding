@@ -437,7 +437,7 @@ class ProfileController extends Controller {
                         $dimension[6] = array('width' => '149', 'height' => '178', 'name' => '149_178');
                         $dimension[7] = array('width' => '337', 'height' => '270', 'name' => '337_270');
                         $dimension[8] = array('width' => '262', 'height' => '257', 'name' => '262_257');
-
+//                        $dimension[8] = array('width' => '149', 'height' => '197', 'name' => '149_197');
 //                        $dimension[1] = array('width' => '322', 'height' => '500', 'name' => 'medium');
 //                        $dimension[2] = array('width' => '580', 'height' => '775', 'name' => 'big');
 //                        $dimension[3] = array('width' => '3016', 'height' => '4030', 'name' => 'zoom');

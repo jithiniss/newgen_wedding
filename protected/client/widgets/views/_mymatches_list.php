@@ -140,9 +140,9 @@
                 <div class="col-md-2 col-sm-3 col-xs-6 nop liz">
                         <a class="album" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $data->user_id; ?>"><img class="profiles" src="<?php echo Yii::app()->request->baseUrl; ?>/images/users.png">View Full Profile</a>
                 </div>
-                <div class="col-md-4 col-sm-3 col-xs-12 nop liz">
-                        <h5>Connect with her?</h5>
-                </div>
+                <!--                <div class="col-md-4 col-sm-3 col-xs-12 nop liz">
+                                        <h5>Connect with her?</h5>
+                                </div>-->
                 <div class="col-md-4 col-sm-4 col-xs-12 nop liz">
                         <?php
                         $this->widget("application.client.components.UserInterest", array(

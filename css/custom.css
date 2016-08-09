@@ -149,7 +149,12 @@ button.btn.new-btn.btn-default{
         margin-top: 0px;
         line-height: 33px;
 }
-
+.last-1 p{
+        margin-left: 36px;
+        margin-top: -21px;
+        color: #fff;
+        font-size: 12px;
+}
 a.doc3 {
         text-align: center;
         /* display: block; */
@@ -311,10 +316,12 @@ a.btc:hover{
         text-decoration:  none;
 }
 .load {
-        height: 686px;
-        padding-bottom: 30px;
+        height: auto!important;
+        padding-bottom: 204px;
 }
-
+.details_length{
+        height: 148px;
+}
 .btn-interest {
         margin-top: 35px;
         text-align: center;

@@ -62,7 +62,7 @@
         <?php } else { ?>
                 <?php if ($request_details->status == 1) { ?>
                         <div class="request_result">
-                                <button type="button" class="btn btn-default btn-interest">Interest Send</button>
+                                <button type="button" class="btn btn-default btn-interest">Interest Sent</button>
                         </div>
                 <?php } else if ($request_details->status == 2) { ?>
                         <h5>Accepted Your Interest</h5>

@@ -92,6 +92,12 @@
                         });
                 });
         });
+//        $(document).ready(function () {
+//                $('#sortDrop').on('change', function () {
+//                        $('#search_form').submit();
+//
+//                });
+//        });
         function changesearch() {
                 $('#search_form').submit();
         }
