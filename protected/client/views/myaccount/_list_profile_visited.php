@@ -31,13 +31,13 @@
                 <div class="last">
                         <div class="last-1">
                                 <!--<div class="profile">-->
-                                <?php
-                                $this->widget("application.client.widgets.PhotoVisibility", array(
-                                    'id' => $data->id,
-                                    'width' => 149,
-                                    'height' => 178,
-                                ));
-                                ?>
+        <?php
+        $this->widget("application.client.widgets.PhotoVisibility", array(
+            'id' => $data->id,
+            'width' => 149,
+            'height' => 178,
+        ));
+        ?>
                                         <!--<img class="center-block file img-responsive" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p1.jpg">-->
         <!--                                <img class="lock" src="images/lock.png">
                                         <h6>Visible on Accept</h6>-->
@@ -153,11 +153,11 @@
                                                 <h5>Connect with her?</h5>
                                         </div>-->
                         <div class="col-md-4 col-sm-4 col-xs-12 nop liz">
-                                <?php
-                                $this->widget("application.client.components.UserInterestConnect", array(
-                                    'interest_id' => $data->user_id,
-                                ));
-                                ?>
+        <?php
+        $this->widget("application.client.components.UserInterestConnect", array(
+            'interest_id' => $data->user_id,
+        ));
+        ?>
                         </div>
 
                         <div class="col-md-12 col-sm-12 nop">
