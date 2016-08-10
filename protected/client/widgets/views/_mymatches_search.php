@@ -17,7 +17,7 @@
                 </div>
                 <div class="connect">
                         <?php
-                        $this->widget("application.client.components.UserInterestConnect", array(
+                        $this->widget("application.client.components.UserInterest", array(
                             'interest_id' => $data->user_id,
                         ));
                         ?>

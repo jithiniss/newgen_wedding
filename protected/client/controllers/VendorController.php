@@ -86,6 +86,7 @@ class VendorController extends Controller {
                                 $service->vendor_id = $model->id;
                                 $service->status = 0;
                                 $service->doc = date('Y-m-d');
+                                $service->map = $_POST['VendorServices']['map'];
                                 $image = CUploadedFile::getInstance($service, 'image');
                                 if ($service->save()) {
                                         $this->uploadFiles($service->id, $service->vendor_id, $image);
@@ -113,6 +114,7 @@ class VendorController extends Controller {
                                         $service->vendor_id = $model->id;
                                         $service->status = 0;
                                         $service->doc = date('Y-m-d');
+                                        $service->map = $_POST['VendorServices']['map'];
                                         $image = CUploadedFile::getInstance($service, 'image');
                                         if (!isset($image)) {
                                                 $service->image = $photo;

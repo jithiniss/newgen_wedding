@@ -14,6 +14,8 @@
 class Matches extends CWidget {
 
         public $id = '';
+        public $sort = '';
+        public $view = '';
 
         public function run() {
                 $block_details = BlockedMembers::model()->findByAttributes(array('user_id' => $this->id));
@@ -116,79 +118,94 @@ class Matches extends CWidget {
                 $condition11 = 'gender = ' . $gender
                         . ' AND status = 1';
 
-
+                if ($this->sort != '') {
+                        $sort .= $this->sort;
+                } else {
+                        $sort .= 'id DESC';
+                }
                 $dataProvider1 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition1
+                        'condition' => $condition1,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 $dataProvider2 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition2
+                        'condition' => $condition2,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 $dataProvider3 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition3
+                        'condition' => $condition3,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 $dataProvider4 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition4
+                        'condition' => $condition4,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 $dataProvider5 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition5
+                        'condition' => $condition5,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 $dataProvider6 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition6
+                        'condition' => $condition6,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 $dataProvider7 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition7
+                        'condition' => $condition7,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 $dataProvider8 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition8
+                        'condition' => $condition8,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 $dataProvider9 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition9
+                        'condition' => $condition9,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 $dataProvider10 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition10
+                        'condition' => $condition10,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
                 $dataProvider11 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition11
+                        'condition' => $condition11,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,

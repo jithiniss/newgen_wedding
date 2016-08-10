@@ -1,7 +1,7 @@
 <?php
 $this->widget('zii.widgets.CListView', array(
     'dataProvider' => $dataProvider,
-    'itemView' => '_mymatches',
+    'itemView' => '_mymatches_search',
     'id' => 'search_item',
     'itemsCssClass' => 'table-class',
     'emptyText' => '<div class="col-md-12" style="    padding: 100px;

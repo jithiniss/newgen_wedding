@@ -815,7 +815,7 @@ div#ui-progress {
 }
 img.lockz {
         position: absolute;
-        top: 49px;
+        top: 42px;
         right: 0;
         left: 0;
         margin: auto;
@@ -953,7 +953,7 @@ a.viewallz:hover {
         right: 0;
         margin: auto;
         text-align: center;
-        max-width: 84px;
+        max-width: 117px;
 }
 .mynewgenz h5 {
         padding-top: 11px;

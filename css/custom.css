@@ -244,6 +244,16 @@ img.img_lock {
         line-height: 24px;
         display: block;
 }
+.load_custom{
+        height: auto!important;
+        padding-bottom: 56px;
+        border: 1px solid #ccc;
+        padding-top: 4px;
+        margin-bottom: 15px;
+}
+.search_details{
+        height: 128px;
+}
 .button_modal input {
         background-color: #63536e;
         padding-left: 36px;
@@ -320,7 +330,7 @@ a.btc:hover{
         padding-bottom: 204px;
 }
 .details_length{
-        height: 148px;
+        height: 120px;
 }
 .btn-interest {
         margin-top: 35px;
@@ -553,7 +563,7 @@ i.fa.fa-paper-plane {
         text-decoration: underline;
 }
 .visibility p{
-        margin-left: 36px;
+        margin-left: 44px;
         margin-top: -21px;
         color: #fff;
 }

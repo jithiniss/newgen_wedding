@@ -49,9 +49,8 @@ class VendorServices extends CActiveRecord {
                 return array(
                     array('vendor_id, category_id, name, address, description, phn_no, email, status', 'required'),
                     array('vendor_id, category_id, featured, status, cb, ub', 'numerical', 'integerOnly' => true),
-                    array('name, address, video, image', 'length', 'max' => 200),
+                    array('name, address,  image', 'length', 'max' => 200),
                     array('phn_no, email', 'length', 'max' => 100),
-                    array('website, map, facebook, google_plus, twitter, linkdin', 'length', 'max' => 500),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
                     array('id, vendor_id, category_id, name, address, description, phn_no, email, website, map, video, image, facebook, google_plus, twitter, linkdin, featured, status, cb, ub, doc, dou', 'safe', 'on' => 'search'),

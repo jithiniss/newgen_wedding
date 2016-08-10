@@ -19,6 +19,10 @@ class MatchesController extends Controller {
                 $this->render('mymatches');
         }
 
+        public function actionMyMatchesList() {
+                $this->render('mymatches_list');
+        }
+
         public function actionLookingMe() {
                 //  $lookingme = Yii::app()->Matches->LookingMe();
 //                var_dump($lookingme);

@@ -43,14 +43,19 @@
                                                 </div>
                                                 <div class="col-xs-3 col-md-2 col-sm-2">
                                                         <div class="form-group">
-                                                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/ListProfileVisitors" id="search_form_shortlist" method="post">
-                                                                        <select class="ord" name="sort_list"  onchange="changesearch();">
-                                                                                <option value="id DESC">Default Order</option>
-                                                                                <option value="first_name ASC">Name(A->Z)</option>
-                                                                                <option value="first_name DESC">Name(Z->A)</option>
-                                                                                <option value="dob_year ASC">Age(Low->High)</option>
-                                                                                <option value="dob_year DESC">Age(High->Low)</option>
-                                                                        </select>
+                                                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/BlockedMembersList" id="search_form_shortlist" method="post">
+                                                                        <?php
+                                                                        echo CHtml::dropDownList('sort', '', array(
+                                                                            'id DESC' => "Default Order",
+                                                                            'first_name ASC' => 'Name(A->Z)',
+                                                                            'first_name DESC' => 'Name(Z->A)',
+                                                                            'dob_year ASC' => 'Age(Low->High)',
+                                                                            'dob_year DESC' => 'Age(High->Low)'
+                                                                                ), array('id' => 'sortDrop', 'class' => 'ord',
+                                                                            'onchange' => 'changesearch()',
+                                                                            'options' => array($sort => array('selected' => 'selected'))
+                                                                        ));
+                                                                        ?>
                                                                 </form>
                                                         </div>
                                                 </div>

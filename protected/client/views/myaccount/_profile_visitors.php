@@ -6,7 +6,7 @@ if (!empty($data)) {
         foreach ($visitors as $visitor) {
                 ?>
                 <div class="col-md-4 col-sm-6 col-xs-6 sized">
-                        <div class="load">
+                        <div class="load_custom">
                                 <div class="profile ">
                                         <?php
                                         $this->widget("application.client.widgets.PhotoVisibility", array(
@@ -30,7 +30,7 @@ if (!empty($data)) {
 
                                 <div class="connect">
                                         <?php
-                                        $this->widget("application.client.components.UserInterest", array(
+                                        $this->widget("application.client.components.UserInterestConnect", array(
                                             'interest_id' => $visitor->user_id,
                                         ));
                                         ?>

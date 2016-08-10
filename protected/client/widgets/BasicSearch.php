@@ -118,7 +118,7 @@ class BasicSearch extends CWidget {
                             'dataProvider' => $dataProvider,
                         ));
                 } else {
-                        $this->render('mymatches', array(
+                        $this->render('mymatches_search', array(
                             'dataProvider' => $dataProvider,
                         ));
                 }
