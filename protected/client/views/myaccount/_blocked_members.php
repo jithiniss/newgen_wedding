@@ -31,8 +31,6 @@ if (!empty($data)) {
                                     'interest_id' => $data->user_id,
                                 ));
                                 ?>
-
-
                         </div>
                 </div>
         </div>

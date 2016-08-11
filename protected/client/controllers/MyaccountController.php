@@ -212,7 +212,6 @@ class MyaccountController extends Controller {
                 } else {
                         $sort = 'id DESC';
                 }
-
                 if (isset(Yii::app()->session['user'])) {
                         $dataProvider = new CActiveDataProvider('UserDetails', array(
                             'criteria' => array(

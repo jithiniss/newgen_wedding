@@ -65,9 +65,6 @@
                                                 <div class="col-xs-1 col-md-1 col-sm-1 nop">
                                                         <a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/ProfileVisited"><img class="center-block ans grids" src="<?php echo Yii::app()->request->baseUrl; ?>/images/g3.jpg"></a>
                                                 </div>
-                                                <!--                                                        <div class="col-xs-3 col-md-3 col-sm-4">
-                                                                                                                <span>2000 profiles found</span>
-                                                                                                        </div>-->
                                         </div>
 
 

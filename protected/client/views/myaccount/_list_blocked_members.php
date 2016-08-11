@@ -15,7 +15,6 @@
                 $visitors = UserDetails::model()->findAllByAttributes(array('id' => $data->block_id));
                 foreach ($visitors as $visitor) {
                         ?>
-
                         <?php
                         $last_login = date('i') - strtotime('Y-m-d H:i:s', $visitor->last_login);
                         if ($last_login > 43200) {

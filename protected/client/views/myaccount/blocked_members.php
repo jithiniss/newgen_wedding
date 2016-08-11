@@ -7,7 +7,6 @@
                                         <?php
                                         $this->renderPartial('_leftSideInbox');
                                         ?>
-
                                 </ul>
                                 <h3>Accepted</h3>
                                 <h3>Sent</h3>
