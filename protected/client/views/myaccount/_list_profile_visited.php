@@ -164,7 +164,7 @@
                 </div>
                 <div class="clearfix"></div>
         </div>
-        <?php
-}
-?>
+<?php } else { ?>
+        <?php echo 'No Result'; ?>
+<?php } ?>
 <div class="clearfix visible-xs"></div>

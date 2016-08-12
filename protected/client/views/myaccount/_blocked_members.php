@@ -34,6 +34,6 @@ if (!empty($data)) {
                         </div>
                 </div>
         </div>
-        <?php
-}
-?>
+<?php } else { ?>
+        <?php echo 'No Result'; ?>
+<?php } ?>

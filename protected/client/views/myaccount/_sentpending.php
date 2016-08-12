@@ -25,4 +25,6 @@ if (!empty($data)) {
                         </div>
                 </div>
         </div>
+<?php } else { ?>
+        <?php echo 'No Result'; ?>
 <?php } ?>

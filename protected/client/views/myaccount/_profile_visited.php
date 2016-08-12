@@ -45,6 +45,6 @@ if (!empty($data)) {
 
 
 
-        <?php
-}
-?>
+<?php } else { ?>
+        <?php echo 'No Result'; ?>
+<?php } ?>

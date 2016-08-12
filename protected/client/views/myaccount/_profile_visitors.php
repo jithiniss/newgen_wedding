@@ -37,7 +37,8 @@ if (!empty($data)) {
                                 </div>
                         </div>
                 </div>
-                <?php
-        }
-}
-?>
+                <?php }
+        ?>
+<?php } else { ?>
+        <?php echo 'No Result'; ?>
+<?php } ?>

@@ -7,7 +7,7 @@ if (!empty($data)) {
 
                 <div class="load_custom">
 
-                                                                                                                                                                                                                                                                                                                                                                                                                <!--<img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $data->id; ?>/profile/<?= $data->photo ?>">-->
+                                                                                                                                                                                                                                                                                                                                                                                                                        <!--<img class="center-block img-responsive side" src="<?php echo Yii::app()->request->baseUrl; ?>/uploads/user/1000/<?= $data->id; ?>/profile/<?= $data->photo ?>">-->
                         <?php
                         $this->widget("application.client.widgets.PhotoVisibility", array(
                             'id' => $data->id,
@@ -45,6 +45,6 @@ if (!empty($data)) {
 
 
 
-        <?php
-}
-?>
+<?php } else { ?>
+        <?php echo 'No Result'; ?>
+<?php } ?>
