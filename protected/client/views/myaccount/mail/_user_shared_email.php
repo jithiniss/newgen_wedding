@@ -10,9 +10,10 @@
                                 <tr>
                                         <td><a href="#"><img src="<?= $this->siteURL(); ?>images/emailer_01.jpg" width="776" height="102" alt=""></a></td>
                                 </tr>
+                                <?php $user = UserDetails::model()->findByPk($model->user_id); ?>
 <!--                                <tr>
                                         <td style="padding:40px 20px; font-family:'Open Sans',arial, sans-serif; font-size:13px">
-                                                <p style="font-size:14px; font-weight:bold;">Dear <?php echo $model->first_name . ' ' . $model->last_name; ?> ,</p>
+                                                <p style="font-size:14px; font-weight:bold;">Dear <?php echo $user->first_name . ' ' . $user->last_name; ?> ,</p>
 
 
                                                 <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">Welcome to newgen.com It's great to have you on board. I would like to share with you a few things that we have learnt while helping millions of people find their match.</p>
@@ -32,7 +33,7 @@
                                                 </ul>
                                                 </p>
                                                 <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;font-weight:bold;">Verify your account for accessing above features to find your perfect partner.</p>
-                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;"><a href="<?php echo $this->siteURL() . 'index.php/register/verify?m=' . $this->encrypt_decrypt('encrypt', $model->id); ?>" style="    width: 116px;
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;"><a href="<?php //echo $this->siteURL() . 'index.php/register/verify?m=' . $this->encrypt_decrypt('encrypt', $model->id);  ?>" style="    width: 116px;
                                                                                                                           background-color: #603779;
                                                                                                                           line-height: 40px;
                                                                                                                           padding-left: 30px;
@@ -41,7 +42,7 @@
                                                                                                                           text-decoration: none;
                                                                                                                           display: block;
                                                                                                                           margin: 0 auto;">VERIFY ACCOUNT</a></p>
-                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;font-weight:bold;">Please<a href="<?php echo $this->siteURL() . 'index.php/register/verify?m=' . $this->encrypt_decrypt('encrypt', $model->id); ?>"> click </a>this link to activate your account if you are unable to use verify button</p>
+                                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;font-weight:bold;">Please<a href="<?php //echo $this->siteURL() . 'index.php/register/verify?m=' . $this->encrypt_decrypt('encrypt', $model->id);   ?>"> click </a>this link to activate your account if you are unable to use verify button</p>
                                                 <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;font-weight:bold;">If you are already verified your account, Please ignore this mail.</p>
                                                 <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">All the best for your Partner Search! </p>
                                                 <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;">

@@ -6,7 +6,7 @@
                 <li><?php echo CHtml::link('Photo Requests', array('Myaccount/PhotoRequests')); ?></li>
 
         </ul>
-        <h3>Accepted</h3>
+
         <h3>Sent</h3>
         <ul class="list-unstyled">
                 <li><?php echo CHtml::link('Message', array('Myaccount/Message')); ?></li>

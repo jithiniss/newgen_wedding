@@ -145,7 +145,7 @@
                                 </div>-->
                 <div class="col-md-4 col-sm-4 col-xs-12 nop liz">
                         <?php
-                        $this->widget("application.client.components.UserInterest", array(
+                        $this->widget("application.client.components.UserInterestConnect", array(
                             'interest_id' => $data->user_id,
                         ));
                         ?>
@@ -153,7 +153,7 @@
 
                 <div class="col-md-12 col-sm-12 nop">
                         <p><?php echo $data->about_me; ?></p>
-                        <a class="hey" href="#">Read More<i class="fa would fa-caret-right"></i></a>
+                        <!--<a class="hey" href="#">Read More<i class="fa would fa-caret-right"></i></a>-->
                 </div>
         </div>
         <div class="clearfix"></div>

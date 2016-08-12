@@ -362,7 +362,7 @@
                                 <figcaption>
 
                                         <p><span class="names">Featured Profile</span></p>
-                                        <h4><?php echo CHtml::link('View All', 'Featuredstory/profile', array('class' => 'featured_link')) ?></h4>
+                                        <h4><?php echo CHtml::link('View All', array('Featuredstory/profile'), array('class' => 'featured_link')) ?></h4>
                                         <!--<h4>View All</h4>-->
 
                                 </figcaption>

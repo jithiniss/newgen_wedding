@@ -14,6 +14,8 @@
 class LookingMe extends CWidget {
 
         public $id = '';
+        public $sort = '';
+        public $view = '';
 
         public function run() {
 
@@ -32,20 +34,34 @@ class LookingMe extends CWidget {
                 $condition1 = 'gender = ' . $gender
                         . ' AND  id  IN(' . $ids . ')'
                         . ' AND status = 1';
+                if ($this->sort != '') {
+                        $sort .= $this->sort;
+                } else {
+                        $sort .= 'id DESC';
+                }
                 $dataProvider1 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $condition1
+                        'condition' => $condition1,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
-
-                if ($dataProvider1->getTotalItemCount() >= 1) {
-
+                if ($this->view == 2 && $dataProvider1->getTotalItemCount() >= 1) {
+                        $this->render('mymatches_list', array(
+                            'dataProvider' => $dataProvider1,
+                        ));
+                } else {
                         $this->render('mymatches', array(
                             'dataProvider' => $dataProvider1,
                         ));
                 }
+//                if ($dataProvider1->getTotalItemCount() >= 1) {
+//
+//                        $this->render('mymatches', array(
+//                            'dataProvider' => $dataProvider1,
+//                        ));
+//                }
         }
 
 }

@@ -35,4 +35,30 @@ class MessageController extends Controller {
                 }
         }
 
+        public function actionViewMessage($id) {
+                $user = UserDetails::model()->findByAttributes(array('user_id' => $id));
+                $message = Message::model()->findAllByAttributes(array(), array('condition' => '(sender_id = "' . $user->id . '" AND receiver_id = "' . Yii::app()->session['user']['id'] . '" OR sender_id = "' . Yii::app()->session['user']['id'] . '" AND receiver_id = "' . $user->id . '" )'));
+                $message_user = Message::model()->findByAttributes(array(), array('condition' => '(sender_id = "' . $user->id . '" AND receiver_id = "' . Yii::app()->session['user']['id'] . '")'));
+                $message_user->viewed = 2;
+                $message_user->save();
+                $this->render('view_message', array('message' => $message, 'user' => $user));
+        }
+
+        public function actionReplyMessage($id) {
+                $message = new Message;
+                $message->receiver_id = $id;
+                $message->sender_id = Yii::app()->session['user']['id'];
+                $message->message = $_POST['reply_message'];
+                $message->viewed = 2;
+                $message->status = 1;
+                $message->DOC = date('Y-m-d H:i:s');
+                if ($message->save()) {
+                        Yii::app()->user->setFlash('success', "Successfully Sent.");
+                        $this->redirect(Yii::app()->request->urlReferrer);
+                } else {
+                        Yii::app()->user->setFlash('error', "Error Occured");
+                        $this->redirect(Yii::app()->request->urlReferrer);
+                }
+        }
+
 }

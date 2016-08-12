@@ -14,6 +14,8 @@
 class TwoWayMatches extends CWidget {
 
         public $id = '';
+        public $sort = '';
+        public $view = '';
 
         public function run() {
 
@@ -81,16 +83,27 @@ class TwoWayMatches extends CWidget {
                                 . ' AND  id  IN(0)'
                                 . ' AND status = 1';
                 }
+                if ($this->sort != '') {
+                        $sort .= $this->sort;
+                } else {
+                        $sort .= 'id DESC';
+                }
                 $dataProvider1 = new CActiveDataProvider('UserDetails', array('criteria' => array(
-                        'condition' => $selectcondition
+                        'condition' => $selectcondition,
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 25,
                     ),
                 ));
+                if ($this->view == 2) {
+                        $viewfile = 'mymatches_list';
+                } else {
+                        $viewfile = 'mymatches';
+                }
                 if ($dataProvider1->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider1,
                         ));
                 }

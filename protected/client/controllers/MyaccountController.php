@@ -16,11 +16,19 @@ class MyaccountController extends Controller {
         }
 
         public function actionInvitations() {
-                $requests = Requests::model()->findAllByAttributes(array(), array('condition' => '(partner_id = "' . Yii::app()->session['user']['user_id'] . '" AND status = 1)'));
-                if (!empty($requests))
-                        $this->redirect(array('Pending'));
-                else {
-                        $this->redirect(array('Accepted'));
+                if (isset(Yii::app()->session['user'])) {
+                        $dataProvider = new CActiveDataProvider('UserDetails', array(
+                            'criteria' => array(
+                                'condition' => 'user_id in (select partner_id from requests where user_id="' . Yii::app()->session['user']['id'] . '" AND status = 1)',
+                            ),
+                            'pagination' => array(
+                                'pageSize' => 6,
+                            ),
+                                )
+                        );
+                        $this->render('pending', array('dataProvider' => $dataProvider));
+                } else {
+                        $this->redirect(array('site/login'));
                 }
         }
 
@@ -44,25 +52,20 @@ class MyaccountController extends Controller {
                     ),
                         )
                 );
-                // $accepted = Requests::model()->findAllByAttributes(array(), array('condition' => '(partner_id = "' . Yii::app()->session['user']['user_id'] . '" AND status = 2)'));
                 $this->render('sentpending', array('dataProvider' => $dataProvider));
         }
 
         public function actionPending() {
                 if (Yii::app()->session['user'] != "") {
-//                        echo 'hii';
-//                        exit;
-                        $dataProvider = new CActiveDataProvider('Requests', array(
+                        $dataProvider = new CActiveDataProvider('UserDetails', array(
                             'criteria' => array(
-                                'condition' => 'partner_id="' . Yii::app()->session['user']['user_id'] . '" AND status = 1',
-                                'order' => 'date desc',
+                                'condition' => 'user_id in (select partner_id from requests where user_id=' . Yii::app()->session['user']['id'] . ' AND status = 3)',
                             ),
                             'pagination' => array(
-                                'pageSize' => 4,
+                                'pageSize' => 6,
                             ),
                                 )
                         );
-                        // $accepted = Requests::model()->findAllByAttributes(array(), array('condition' => '(partner_id = "' . Yii::app()->session['user']['user_id'] . '" AND status = 2)'));
                         $this->render('pending', array('dataProvider' => $dataProvider));
                 } else {
                         $this->redirect(array('site/login'));
@@ -70,35 +73,41 @@ class MyaccountController extends Controller {
         }
 
         public function actionAccept($id) {
-                $request = Requests::model()->findByPk($id);
-                if (!empty($request) && $request->status == 1) {
-                        $request->status = 2;
-                        $request->save();
-                        $this->redirect(Yii::app()->request->urlReferrer);
+                if (isset(Yii::app()->session['user'])) {
+                        $request = Requests::model()->findByAttributes(array('partner_id' => $id));
+                        if (!empty($request) && $request->status == 1) {
+                                $request->status = 2;
+                                $request->save();
+                                $this->redirect(Yii::app()->request->urlReferrer);
+                        }
+                } else {
+                        $this->redirect(array('site/login'));
                 }
         }
 
         public function actionReject($id) {
-                $reject = Requests::model()->findByPk($id);
-                if (!empty($reject) && $reject->status == 1) {
-                        $reject->status = 4;
-                        $reject->save();
-                        $this->redirect(Yii::app()->request->urlReferrer);
+                if (isset(Yii::app()->session['user'])) {
+                        $reject = Requests::model()->findByAttributes(array('partner_id' => $id));
+                        if (!empty($reject) && $reject->status == 1) {
+                                $reject->status = 4;
+                                $reject->save();
+                                $this->redirect(Yii::app()->request->urlReferrer);
+                        }
+                } else {
+                        $this->redirect(array('site/login'));
                 }
         }
 
         public function actionAccepted() {
-                $dataProvider = new CActiveDataProvider('Requests', array(
+                $dataProvider = new CActiveDataProvider('UserDetails', array(
                     'criteria' => array(
-                        'condition' => 'partner_id="' . Yii::app()->session['user']['user_id'] . '" AND status = 2',
-                        'order' => 'date desc',
+                        'condition' => 'user_id in (select partner_id from requests where user_id=' . Yii::app()->session['user']['id'] . ' AND status = 2)',
                     ),
                     'pagination' => array(
-                        'pageSize' => 4,
+                        'pageSize' => 6,
                     ),
                         )
                 );
-                // $accepted = Requests::model()->findAllByAttributes(array(), array('condition' => '(partner_id = "' . Yii::app()->session['user']['user_id'] . '" AND status = 2)'));
                 $this->render('accepted', array('dataProvider' => $dataProvider));
         }
 
@@ -118,6 +127,19 @@ class MyaccountController extends Controller {
         }
 
         public function actionRejected() {
+                $dataProvider = new CActiveDataProvider('UserDetails', array(
+                    'criteria' => array(
+                        'condition' => 'user_id in (select partner_id from requests where user_id=' . Yii::app()->session['user']['id'] . ' AND status = 4)',
+                    ),
+                    'pagination' => array(
+                        'pageSize' => 6,
+                    ),
+                        )
+                );
+                $this->render('rejected', array('dataProvider' => $dataProvider));
+        }
+
+        public function actionSentRejected() {
                 $dataProvider = new CActiveDataProvider('Requests', array(
                     'criteria' => array(
                         'condition' => 'partner_id="' . Yii::app()->session['user']['user_id'] . '" AND status = 4',
@@ -128,22 +150,6 @@ class MyaccountController extends Controller {
                     ),
                         )
                 );
-                // $accepted = Requests::model()->findAllByAttributes(array(), array('condition' => '(partner_id = "' . Yii::app()->session['user']['user_id'] . '" AND status = 2)'));
-                $this->render('rejected', array('dataProvider' => $dataProvider));
-        }
-
-        public function actionSentRejected() {
-                $dataProvider = new CActiveDataProvider('Requests', array(
-                    'criteria' => array(
-                        'condition' => 'user_id="' . Yii::app()->session['user']['id'] . '" AND status = 4',
-                        'order' => 'date desc',
-                    ),
-                    'pagination' => array(
-                        'pageSize' => 4,
-                    ),
-                        )
-                );
-                // $accepted = Requests::model()->findAllByAttributes(array(), array('condition' => '(partner_id = "' . Yii::app()->session['user']['user_id'] . '" AND status = 2)'));
                 $this->render('sentrejected', array('dataProvider' => $dataProvider));
         }
 

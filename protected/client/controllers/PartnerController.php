@@ -74,19 +74,39 @@ class PartnerController extends Controller {
         }
 
         public function actionFavoritelist() {
-//                $favrt = Favorites::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id']));
-                $dataProvider = new CActiveDataProvider('Favorites', array(
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $dataProvider = new CActiveDataProvider('UserDetails', array(
                     'criteria' => array(
-                        'condition' => 'user_id="' . Yii::app()->session['user']['id'] . '" AND status = 1',
-//                        'order' => 'doc desc',
-//                        'group' => 'user_id',
-//                        'distinct' => TRUE
+                        'condition' => 'id in (select partner_id from favorites where user_id="' . Yii::app()->session['user']['id'] . '" AND status = 1)',
+                        'order' => $sort,
                     ),
                     'pagination' => array(
                         'pageSize' => 4,
                     ),
                 ));
                 $this->render('favorite', array('dataProvider' => $dataProvider));
+        }
+
+        public function actionFavoritelistProfile() {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $dataProvider = new CActiveDataProvider('UserDetails', array(
+                    'criteria' => array(
+                        'condition' => 'id in (select partner_id from favorites where user_id="' . Yii::app()->session['user']['id'] . '" AND status = 1)',
+                        'order' => $sort,
+                    ),
+                    'pagination' => array(
+                        'pageSize' => 4,
+                    ),
+                ));
+                $this->render('favorite_list', array('dataProvider' => $dataProvider));
         }
 
         public function Similar($userid) {

@@ -213,61 +213,65 @@ class Matches extends CWidget {
                 ));
 
 
-
+                if ($this->view == 2) {
+                        $viewfile = 'mymatches_list';
+                } else {
+                        $viewfile = 'mymatches';
+                }
 
                 if ($dataProvider1->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider1,
                         ));
                 } else if ($dataProvider2->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider2,
                         ));
                 } else if ($dataProvider3->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider3,
                         ));
                 } else if ($dataProvider4->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider4,
                         ));
                 } else if ($dataProvider5->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider5,
                         ));
                 } else if ($dataProvider6->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider6,
                         ));
                 } else if ($dataProvider7->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider7,
                         ));
                 } else if ($dataProvider8->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider8,
                         ));
                 } else if ($dataProvider9->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider9,
                         ));
                 } else if ($dataProvider10->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider10,
                         ));
                 } else if ($dataProvider11->getTotalItemCount() >= 1) {
 
-                        $this->render('mymatches', array(
+                        $this->render($viewfile, array(
                             'dataProvider' => $dataProvider11,
                         ));
                 }

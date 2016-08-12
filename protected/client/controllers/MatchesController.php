@@ -14,28 +14,57 @@ class MatchesController extends Controller {
 //        }
 
         public function actionMyMatches() {
-
-//                $matches = Yii::app()->Matches->MyMatches();
-                $this->render('mymatches');
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $this->render('mymatches', array('sort' => $sort));
         }
 
         public function actionMyMatchesList() {
-                $this->render('mymatches_list');
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $this->render('mymatches_list', array('sort' => $sort));
         }
 
         public function actionLookingMe() {
-                //  $lookingme = Yii::app()->Matches->LookingMe();
-//                var_dump($lookingme);
-//                exit;
-                $this->render('lookingme');
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $this->render('lookingme', array('sort' => $sort));
+        }
+
+        public function actionLookingMeList() {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $this->render('lookingmeList', array('sort' => $sort));
         }
 
         public function actionTwoWayMatches() {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $this->render('twowaymatches', array('sort' => $sort));
+        }
 
-                //  $lookingme = Yii::app()->Matches->LookingMe();
-//                var_dump($lookingme);
-//                exit;
-                $this->render('twowaymatches');
+        public function actionTwoWayMatchesList() {
+                if (isset($_POST['sort'])) {
+                        $sort = $_POST['sort'];
+                } else {
+                        $sort = 'id DESC';
+                }
+                $this->render('twowaymatches_list', array('sort' => $sort));
         }
 
 // Uncomment the following methods and override them if needed

@@ -15,7 +15,7 @@
                                                 <div class="col-xs-3 col-md-2 col-sm-2">
                                                         <div class="form-group">
 
-                                                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Myaccount/ListProfileVisited" id="search_form_shortlist" method="post">
+                                                                <form action="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Matches/MyMatchesList" id="search_form_shortlist" method="post">
                                                                         <?php
                                                                         echo CHtml::dropDownList('sort', '', array(
                                                                             'id DESC' => "Default Order",
@@ -68,4 +68,7 @@
                         });
                 });
         });
+        function changesearch() {
+                $('#search_form_shortlist').submit();
+        }
 </script>
