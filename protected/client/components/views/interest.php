@@ -57,7 +57,7 @@
 
                                 <a href="<?= Yii::app()->baseUrl; ?>/index.php/Partner/SendInterest/userid/<?= $id ?>" class="connect-3">Yes</a>
                         </div>
-                        <div class="f5"><a href="#" class="connect-4">No</a></div>
+                        <div class="f5"><?php echo CHtml::link('No', array('site/index'), array('class' => 'connect-4')); ?></div>
                 </div>
         <?php } else { ?>
                 <?php if ($request_details->status == 1) { ?>

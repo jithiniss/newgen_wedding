@@ -115,13 +115,13 @@
                                                                                                 </div>
                                                                                         <?php } ?>
                                                                                         <!--                                        <div class="item">
-                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                ?>/images/3.jpg" alt="Second slide">
+                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                            ?>/images/3.jpg" alt="Second slide">
                                                                                                                                 </div>
                                                                                                                                 <div class="item">
-                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                ?>/images/2.jpg" alt="Third slide">
+                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                            ?>/images/2.jpg" alt="Third slide">
                                                                                                                                 </div>
                                                                                                                                 <div class="item">
-                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                ?>/images/1.jpg" alt="Third slide">
+                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                            ?>/images/1.jpg" alt="Third slide">
                                                                                                                                 </div>-->
                                                                                 </div><!-- /.carousel-inner -->
                                                                                 <a class="left carousel-control" href="#lightbox" role="button" data-slide="prev">
@@ -212,37 +212,54 @@
                                                                                                 ?>
                                                                                                 <?php if ($similar_profile->gender == 1) { ?>
                                                                                                         <?php if ($similar_profile->photo_visibility == 1) { ?>
-                                                                                                                <img class = "img-responsive sim" src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $similar_profile->id . '/profile/' . $similar_profile->photo; ?>"><br>
+                                                                                                                <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $similar_profile->user_id; ?>">
+                                                                                                                        <img class = "img-responsive sim" src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $similar_profile->id . '/profile/' . $similar_profile->photo; ?>"><br>
+                                                                                                                </a>
                                                                                                         <?php }if ($similar_profile->photo_visibility == 2) { ?>
                                                                                                                 <div class="profile mynewgenz ">
-                                                                                                                        <img class="sim side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
+                                                                                                                        <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $similar_profile->user_id; ?>">
+                                                                                                                                <img class="sim side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
+                                                                                                                        </a>
                                                                                                                 </div>
                                                                                                         <?php }if ($similar_profile->photo_visibility == 3) { ?>
                                                                                                                 <div class="profile mynewgenz ">
-                                                                                                                        <img class="sim side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
+                                                                                                                        <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $similar_profile->user_id; ?>">
+                                                                                                                                <img class="sim side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/gen.jpg">
+                                                                                                                        </a>
                                                                                                                 </div>
                                                                                                                 <?php
                                                                                                         }
                                                                                                 } else {
                                                                                                         ?>
                                                                                                         <?php if ($similar_profile->photo_visibility == 1) { ?>
-                                                                                                                <img class = "sim" src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $similar_profile->id . '/profile/' . $similar_profile->photo; ?>"><br>
+                                                                                                                <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $similar_profile->user_id; ?>">
+                                                                                                                        <img class = "sim" src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $similar_profile->id . '/profile/' . $similar_profile->photo; ?>"><br>
+                                                                                                                </a>
                                                                                                         <?php }if ($similar_profile->photo_visibility == 2) { ?>
                                                                                                                 <div class="profile mynewgenz ">
-                                                                                                                        <img class="sim side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                        <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $similar_profile->user_id; ?>">
+                                                                                                                                <img class="sim side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                        </a>
                                                                                                                 </div>
                                                                                                         <?php }if ($similar_profile->photo_visibility == 3) { ?>
                                                                                                                 <div class="profile mynewgenz ">
-                                                                                                                        <img class="sim side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                        <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $similar_profile->user_id; ?>">
+                                                                                                                                <img class="sim side" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p2.jpg">
+                                                                                                                        </a>
                                                                                                                 </div>
 
                                                                                                                 <?php
                                                                                                         }
                                                                                                 }
-                                                                                                ?>                                                                                <?php } else if ($similar_profile->gender == 1) { ?>
-                                                                                                <img class = "sim" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/pp.jpg" />
+                                                                                                ?>
+                                                                                        <?php } else if ($similar_profile->gender == 1) { ?>
+                                                                                                <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $similar_profile->user_id; ?>">
+                                                                                                        <img class = "sim" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/pp.jpg" />
+                                                                                                </a>
                                                                                         <?php } else { ?>
-                                                                                                <img class = "sim" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
+                                                                                                <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $similar_profile->user_id; ?>">
+                                                                                                        <img class = "sim" src = "<?php echo Yii::app()->request->baseUrl; ?>/images/w1.jpg" />
+                                                                                                </a>
                                                                                         <?php } ?>
                         <!--<img class="sim" src="<?php echo Yii::app()->request->baseUrl; ?>/images/w2.jpg">-->
                                                                                         <h4><?= $similar_profile->first_name; ?> <?= $similar_profile->last_name; ?></h4>
@@ -646,7 +663,7 @@
 
 
 
-                                                                                                                <!--                                                                                <img class="her" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p1.jpg">--><br>
+                                                                                                                                                                                                                <!--                                                                                <img class="her" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p1.jpg">--><br>
                                                                 <span class="lift-1"> Her Preferences</span>
                                                                 </th>
                                                                 <th>

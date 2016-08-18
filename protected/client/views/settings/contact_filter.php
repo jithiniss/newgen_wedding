@@ -184,7 +184,7 @@
                                                                         <label for="textinput" class="control-label">Community</label>
                                                                 </div>
 
-                                                                <div class="col-sm-8 col-xs-9 zeros">
+                                                                714444444441                                                                <div class="col-sm-8 col-xs-9 zeros">
                                                                         <div class="form-group">
 
                                                                                 <?php
@@ -230,7 +230,6 @@
                                                                 <div class="col-sm-4 col-xs-3 zeros">
                                                                         <label for="textinput" class="control-label">Mother Tongue</label>
                                                                 </div>
-
                                                                 <div class="col-sm-8 col-xs-9 zeros">
                                                                         <div class="form-group">
                                                                                 <?php
@@ -254,7 +253,6 @@
                                                                                 <?php echo $form->error($partnerDetails, 'mothertongue'); ?>
                                                                         </div>
                                                                 </div>
-
                                                         </div>
                                                         <div class="common">
                                                                 <div class="col-sm-4 col-xs-3 zeros">
@@ -264,29 +262,24 @@
                                                                 <div class="col-sm-8 col-xs-9 zeros">
                                                                         <div class="form-group">
                                                                                 <ul class="list-unstyled list-inline">
-                                                                                        <ul class="list-unstyled list-inline">
-                                                                                                <?php
-                                                                                                if (!is_array($partnerDetails->profile_created_by)) {
+                                                                                        <?php
+                                                                                        if (!is_array($partnerDetails->profile_created_by)) {
 
-                                                                                                        $options = explode(',', $partnerDetails->profile_created_by);
-                                                                                                } else {
-                                                                                                        $options = $partnerDetails->profile_created_by;
-                                                                                                }
-                                                                                                ?>
-                                                                                                <?php
-                                                                                                $partnerDetails->profile_created_by = $options;
-                                                                                                echo CHtml::activeCheckboxList($partnerDetails, 'profile_created_by', $doesnt_matter + CHtml::listData(MasterProfileFor::model()->findAll(array('condition' => 'status=1')), 'id', 'profile_for'), array('template' => '<li style="padding-bottom:0px;padding-left:0px">{input}{label}</li>', 'separator' => '',
-                                                                                                    'labelOptions' => array(
-                                                                                                        'style' => 'padding-left:13px;width: 60px;float: left;'),
-                                                                                                    'style' => 'float:left;'
-                                                                                                ));
-                                                                                                ?>
+                                                                                                $options = explode(',', $partnerDetails->profile_created_by);
+                                                                                        } else {
+                                                                                                $options = $partnerDetails->profile_created_by;
+                                                                                        }
+                                                                                        ?>
+                                                                                        <?php
+                                                                                        $partnerDetails->profile_created_by = $options;
+                                                                                        echo CHtml::activeCheckboxList($partnerDetails, 'profile_created_by', $doesnt_matter + CHtml::listData(MasterProfileFor::model()->findAll(array('condition' => 'status=1')), 'id', 'profile_for'), array('template' => '<li style="padding-bottom:0px;padding-left:5px">{input}{label}</li>', 'separator' => '',
+                                                                                            'labelOptions' => array(
+                                                                                            ),
+                                                                                        ));
+                                                                                        ?>
 
-                                                                                                <?php echo $form->error($partnerDetails, 'profile_created_by'); ?>
-
-
-
-                                                                                        </ul>
+                                                                                        <?php echo $form->error($partnerDetails, 'profile_created_by'); ?>
+                                                                                </ul>
                                                                         </div>
                                                                 </div>
 

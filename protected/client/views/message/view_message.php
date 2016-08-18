@@ -1,9 +1,10 @@
 <section class="ui-teams">
         <div class="container">
                 <div class="row">
-                        <div class="col-md-3">
-
-                                <?php $this->renderPartial('_leftSide'); ?>
+                        <div class="col-md-3 newgens short">
+                                <ul class="list-unstyled">
+                                        <?php $this->renderPartial('_leftSide'); ?>
+                                </ul>
                         </div>
 
                         <div class="col-md-9">
