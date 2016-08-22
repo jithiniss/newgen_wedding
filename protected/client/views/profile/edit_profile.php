@@ -1118,6 +1118,21 @@
                                                                 </div>
 
                                                         </div>
+                                                        <div class="common">
+                                                                <div class="col-sm-3 col-xs-3 zeros">
+                                                                        <label for="textinput" class="control-label">Land Phone Number</label>
+                                                                </div>
+                                                                <div class="col-sm-1 col-xs-1 zeros">
+                                                                        <label for="textinput" class="control-label">:</label>
+                                                                </div>
+                                                                <div class="col-sm-8 col-xs-8 zeros">
+                                                                        <div class="form-group">
+                                                                                <?php echo $form->textField($editProfile, 'land_phone', array('class' => 'ui_apps', 'placeholder' => 'Zip-code')); ?>
+                                                                                <?php echo $form->error($editProfile, 'land_phone'); ?>
+
+                                                                        </div>
+                                                                </div>
+                                                        </div>
 
 
 

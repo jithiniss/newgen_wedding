@@ -13,6 +13,7 @@ class SearchController extends Controller {
                                 } else {
                                         $model->gender = 2;
                                 }
+
                                 if ($model->validate()) {
                                         if ($model->save()) {
 
@@ -30,6 +31,50 @@ class SearchController extends Controller {
                 if (isset($_POST['SavedSearch'])) {
                         $model->attributes = $_POST['SavedSearch'];
                         $model->user_id = Yii::app()->session['user']['id'];
+                        if (isset($_POST['SavedSearch']['diet'])) {
+                                $dit = $_POST['SavedSearch']['diet'];
+                                if (count($dit) > 1) {
+                                        if (in_array("-1", $dit)) {
+                                                $diets = -1;
+                                        } else {
+                                                $diets = implode(',', $dit);
+                                        }
+                                } else {
+                                        $diets = "";
+                                }
+                        }
+//                        var_dump($_POST['SavedSearch']['drink']);
+//                        exit;
+                        if (isset($_POST['SavedSearch']['skin_tone'])) {
+                                $skn = $_POST['SavedSearch']['skin_tone'];
+                                if (count($skn) > 1) {
+                                        if (in_array("-1", $skn)) {
+                                                $skin_tone = -1;
+                                        } else {
+                                                $skin_tone = implode(',', $skn);
+                                        }
+                                } else {
+                                        $skin_tone = "";
+                                }
+                        }
+                        if (isset($_POST['SavedSearch']['body_type'])) {
+                                $bdytyp = $_POST['SavedSearch']['body_type'];
+                                if (count($bdytyp) > 1) {
+                                        if (in_array("-1", $bdytyp)) {
+                                                $body_type = -1;
+                                        } else {
+                                                $body_type = implode(',', $bdytyp);
+                                        }
+                                } else {
+                                        $body_type = "";
+                                }
+                        }
+
+
+
+                        $model->diet = $diets;
+                        $model->skin_tone = $skin_tone;
+                        $model->body_type = $body_type;
                         if ($_POST['SavedSearch']['gender'] == 2) {
                                 $model->gender = 1;
                         } else {
@@ -37,7 +82,6 @@ class SearchController extends Controller {
                         }
                         if ($model->validate()) {
                                 if ($model->save()) {
-
                                         $this->redirect(Yii::app()->request->baseUrl . '/index.php/Search/AdvanceResult/id/' . $this->encrypt_decrypt('encrypt', $model->id));
                                 }
                         }
@@ -210,6 +254,8 @@ class SearchController extends Controller {
         }
 
         public function actionAdvanceResult($id) {
+                $result_id = $this->encrypt_decrypt('decrypt', $id);
+                $model = SavedSearch::model()->findByPk($result_id);
                 if (isset($_POST['photo'])) {
                         $ph = $_POST['photo'];
                         if (count($ph) > 1) {
@@ -237,6 +283,8 @@ class SearchController extends Controller {
                                 }
                         }
                         $marital_stat = implode(',', $ms);
+                } else {
+                        $marital_stat = $model->marital_status;
                 }
                 if (isset($_POST['profile_created_by'])) {
                         $pcb = $_POST['profile_created_by'];
@@ -246,6 +294,8 @@ class SearchController extends Controller {
                                 }
                         }
                         $profile_crea = implode(',', $pcb);
+                } else {
+                        $profile_crea = $model->profession_area;
                 }
                 if (isset($_POST['smoke'])) {
                         $smk = $_POST['smoke'];
@@ -255,6 +305,8 @@ class SearchController extends Controller {
                                 }
                         }
                         $smoking = implode(',', $smk);
+                } else {
+                        $smoking = $model->smoke;
                 }
                 if (isset($_POST['drink'])) {
                         $drk = $_POST['drink'];
@@ -264,6 +316,8 @@ class SearchController extends Controller {
                                 }
                         }
                         $drinking = implode(',', $drk);
+                } else {
+                        $drinking = $model->drink;
                 }
                 if (isset($_POST['diet'])) {
                         $dit = $_POST['diet'];
@@ -273,13 +327,16 @@ class SearchController extends Controller {
                                 }
                         }
                         $diets = implode(',', $dit);
+                } else {
+                        $diets = $model->diet;
                 }
                 if (isset($_POST['sort'])) {
                         $sort = $_POST['sort'];
                 } else {
                         $sort = 'id DESC';
                 }
-                $result_id = $this->encrypt_decrypt('decrypt', $id);
+
+
                 $this->render('advance_search_result', array('id' => $result_id, 'sort' => $sort, 'photo' => $photo, 'joined' => $joined, 'active_mem' => $active_mem, 'marital_stat' => $marital_stat, 'profile_crea' => $profile_crea, 'smoking' => $smoking, 'drinking' => $drinking, 'diets' => $diets));
         }
 

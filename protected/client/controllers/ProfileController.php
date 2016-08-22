@@ -48,6 +48,7 @@ class ProfileController extends Controller {
                                 $editProfile->about_me = $_POST['UserDetails']['about_me'];
                                 $editProfile->ub = $editProfile->id;
                                 $editProfile->dob = $editProfile->dob_year . '-' . $editProfile->dob_month . '-' . $editProfile->dob_day;
+                                $editProfile->land_phone = $_POST['UserDetails']['land_phone'];
                                 if ($editProfile->validate()) {
                                         $editProfile->save(FALSE);
                                         Yii::app()->session['user'] = $editProfile;

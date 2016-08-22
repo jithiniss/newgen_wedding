@@ -23,8 +23,8 @@ class RegisterController extends Controller {
                         if ($firstStep->validate()) {
 
 
-                                //  $transaction = Yii::app()->db->beginTransaction();
-                                //  try {
+//  $transaction = Yii::app()->db->beginTransaction();
+//  try {
                                 $firstStep->save();
                                 UserDetails::model()->userId($firstStep->id)->save();
                                 $this->partnerDetails($firstStep->id)->save(false);
@@ -39,7 +39,7 @@ class RegisterController extends Controller {
                                 Yii::app()->session['user'] = $user;
                                 Yii::app()->session['plan'] = $plan;
                                 $this->RegisterMail($user, 1);
-                                //$transaction->commit();
+//$transaction->commit();
 
                                 $this->redirect(array('SecondStep'));
 //                                } catch(Exception $e) {
@@ -112,46 +112,31 @@ class RegisterController extends Controller {
 
         /* mail to user and admin */
 
-        public function RegisterMail1($model, $s = '') {
-                $to = $model->email;
-                $from = 'noreply@newgenwedding.com';
-                $subject = 'Welcome to NEWGEN.com!';
-                $message = $this->renderPartial('mail/_register_user_mail', array('model' => $model), true);
-                $mail = Yii::app()->Smtpmail;
-                $mail->SetFrom($from, 'Newgen');
-                $mail->Subject = $subject;
-                $mail->MsgHTML($message);
-                $mail->AddAddress($to, "");
-                $mail->Send();
-//                if (!$mail->Send()) {
-//                        echo "Mailer Error: " . $mail->ErrorInfo;
-//                } else {
-//                        echo "Message sent!";
-//                }
-        }
-
         public function RegisterMail($model, $s = '') {
-                $user = $model->email;
-//                $user = 'sibys09@gmail.com';
-                $user_subject = 'Welcome to NEWGEN.com!';
-                $user_message = $this->renderPartial('mail/_register_user_mail', array('model' => $model), true);
+//                $to = $model->email;
+                $message = new YiiMailMessage;
+                $message->view = "_register_user_mail";  // view file name
+                $params = array('model' => $model); // parameters
+                $message->subject = 'Welcome to NEWGEN.com!';
+                $message->setBody($params, 'text/html');
+                $message->addTo($model->email);
+                $message->from = 'newgenwedding@intersmart.in';
 
-
-
-// Always set content-type when sending HTML email
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-// More headers
-                $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
-//$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
-                mail($user, $user_subject, $user_message, $headers);
-                if ($s == 1) {
-                        $admin_mail = AdminUsers::model()->findByPk(1);
-                        $admin = $admin_mail->email;
-                        $admin_subject = $model->first_name . ' registered with NEWGEN.com';
-                        $admin_message = $this->renderPartial('mail/_register_admin_mail', array('model' => $model), true);
-
-                        mail($admin, $admin_subject, $admin_message, $headers);
+                if (Yii::app()->mail->send($message)) {
+                        if ($s == 1) {
+                                $admin_mail = AdminUsers::model()->findByPk(1);
+                                $message1 = new YiiMailMessage;
+                                $message1->view = "_register_admin_mail";  // view file name
+                                $params1 = array('model' => $model); // parameters
+                                $message1->subject = $model->first_name . ' registered with NEWGEN.com';
+                                $message1->setBody($params1, 'text/html');
+                                $message1->addTo($admin_mail->email);
+                                $message1->from = 'newgenwedding@intersmart.in';
+                                Yii::app()->mail->send($message1);
+                        }
+                } else {
+                        echo 'message not send';
+                        exit;
                 }
         }
 
@@ -269,7 +254,7 @@ class RegisterController extends Controller {
                         if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
 
                                 $this->redirect(array('PlanPaymentSuccess', 'plan_id' => $plan_id));
-                                //  $this->redirect(array('PlanPaymentError', 'plan_id' => $plan_id));
+//  $this->redirect(array('PlanPaymentError', 'plan_id' => $plan_id));
                         } else {
                                 Yii::app()->session['unloggedUserPlan'] = $plan_id;
                                 $this->redirect(array('site/login'));
@@ -335,7 +320,7 @@ class RegisterController extends Controller {
 //$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
                 mail($user_email, $user_subject, $user_message, $headers);
 
-                $admin = 'sibys09@gmail.com';
+                $admin = 'shahana@intersmart.in';
                 $admin_subject = 'Payment for account upgrade got received';
                 $admin_message = $this->renderPartial('mail/_plan_admin_mail', array('user' => $user, 'plan' => $plan, 'status' => 1), true);
 
@@ -358,7 +343,7 @@ class RegisterController extends Controller {
 //$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
                 mail($user_email, $user_subject, $user_message, $headers);
 
-                $admin = 'sibys09@gmail.com';
+                $admin = 'shahana@intersmart.in';
                 $admin_subject = 'Payment for account upgrade got failed';
                 $admin_message = $this->renderPartial('mail/_plan_admin_mail', array('user' => $user, 'plan' => $plan, 'status' => 2), true);
 

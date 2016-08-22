@@ -165,30 +165,35 @@ class SiteController extends Controller {
 
         public function contactmail_admin($model) {
                 $admin_mail = AdminUsers::model()->findByPk(1);
-                $admin = $admin_mail->email;
-                $admin_subject = 'Newgen Wedding Matrimony:New Enquiry Recieved';
-                $admin_message = $this->renderPartial('mail/_admin_contact_email', array('model' => $model), true);
-                // Always set content-type when sending HTML email
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                // More headers
-                $headers .= 'From:Newgen Wedding Matrimony <no-reply@intersmarthosting.in>' . "\r\n";
+                $message = new YiiMailMessage;
+                $message->view = "_admin_contact_email";  // view file name
+                $params = array('model' => $model); // parameters
+                $message->subject = 'Newgen Wedding Matrimony:New Enquiry Recieved';
+                $message->setBody($params, 'text/html');
+                $message->addTo($admin_mail->email);
+                $message->from = 'newgenwedding@intersmart.in';
+                if (Yii::app()->mail->send($message)) {
 
-                mail($admin, $admin_subject, $admin_message, $headers);
+                } else {
+                        echo 'message not send';
+                        exit;
+                }
         }
 
         public function contactmail_user($model) {
-//                $user = 'shahana@intersmart.in';
-                $user = $model->email;
-                $user_subject = 'Newgen Wedding Matrimony:New Enquiry Recieved';
-                $user_message = $this->renderPartial('mail/_user_contact_email', array('model' => $model), true);
-                // Always set content-type when sending HTML email
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                // More headers
-                $headers .= 'From:Newgen Wedding Matrimony <no-reply@intersmarthosting.in>' . "\r\n";
+                $message = new YiiMailMessage;
+                $message->view = "_user_contact_email";  // view file name
+                $params = array('model' => $model); // parameters
+                $message->subject = 'Newgen Wedding Matrimony:New Enquiry Recieved';
+                $message->setBody($params, 'text/html');
+                $message->addTo($model->email);
+                $message->from = 'newgenwedding@intersmart.in';
+                if (Yii::app()->mail->send($message)) {
 
-                mail($user, $user_subject, $user_message, $headers);
+                } else {
+                        echo 'message not send';
+                        exit;
+                }
         }
 
         public function actionLogout() {

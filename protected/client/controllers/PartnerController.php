@@ -280,20 +280,19 @@ class PartnerController extends Controller {
                 $partner_details = UserDetails::model()->findByAttributes(array('user_id' => $partner_id));
                 $model = UserDetails::model()->findByAttributes(array('id' => Yii::app()->session['user']['id']));
                 if (!empty($partner_details)) {
-                        $to = $partner_details->email;
+                        $message = new YiiMailMessage;
+                        $message->view = "_user_mail";  // view file name
+                        $params = array('model' => $model); // parameters
+                        $message->subject = 'info_NewGen';
+                        $message->setBody($params, 'text/html');
+                        $message->addTo($partner_details->email);
+                        $message->from = 'newgenwedding@intersmart.in';
+                        if (Yii::app()->mail->send($message)) {
 
-                        $subject = 'info_NewGen';
-                        $message = $this->renderPartial(_user_mail, array('model' => $model));
-// Always set content-type when sending HTML email
-                        $headers = "MIME-Version: 1.0" . "\r\n";
-                        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-// More headers
-                        $headers .= 'From: <no-reply@newgen.com>' . "\r\n";
-                        //$headers .= 'Cc: reply@foldingbooks.com' . "\r\n";
-                        //                        echo $message;
-                        //                        exit();
-                        //mail($to, $subject, $message, $headers);
+                        } else {
+                                echo 'message not send';
+                                exit;
+                        }
                 }
         }
 
@@ -353,7 +352,7 @@ class PartnerController extends Controller {
                 $model->doc = date('Y-m-d');
 
                 if ($model->save(false)) {
-//                        $this->SuccessMail($model);
+                        $this->SuccessMail($model);
                         $this->redirect(Yii::app()->request->urlReferrer);
                 }
         }
@@ -361,14 +360,19 @@ class PartnerController extends Controller {
         public function SuccessMail($model) {
                 $user_details = UserDetails::model()->findByAttributes(array('id' => $model->user_id));
                 $report_details = UserDetails::model()->findByAttributes(array('id' => $model->report_id));
-                $admin = 'shahana@intersmart.in';
-                $admin_subject = $user_details->first_name . ' reported a misuse with NEWGEN.com';
-                $admin_message = $this->renderPartial('_report_admin_mail', array('model' => $model, 'user_details' => $user_details, 'report_details' => $report_details), true);
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-// More headers
-                $headers .= 'From: <no-reply@intersmarthosting.in>' . "\r\n";
-                mail($admin, $admin_subject, $admin_message, $headers);
+                $message = new YiiMailMessage;
+                $message->view = "_report_admin_mail";  // view file name
+                $params = array('model' => $model, 'user_details' => $user_details, 'report_details' => $report_details); // parameters
+                $message->subject = $user_details->first_name . ' reported a misuse with NEWGEN.com';
+                $message->setBody($params, 'text/html');
+                $message->addTo('shahana@intersmart.in');
+                $message->from = 'newgenwedding@intersmart.in';
+                if (Yii::app()->mail->send($message)) {
+
+                } else {
+                        echo 'message not send';
+                        exit;
+                }
         }
 
         public function siteURL() {

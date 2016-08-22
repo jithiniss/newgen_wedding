@@ -101,7 +101,7 @@ class UserDetails extends CActiveRecord {
                     array('caste, marital_status, state, city', 'required', 'on' => 'userSecondStep'),
                     array('height,smoke, drink', 'required', 'on' => 'userThirdStep'),
                     array('height,smoke, drink,caste, marital_status, state, city,profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, mothertongue, country', 'required', 'on' => 'myProfile'),
-                    array('contact_number', 'required', 'on' => 'contactupdate'),
+//                    array('contact_number', 'required', 'on' => 'contactupdate'),
                     array('contact_number', 'numerical', 'on' => 'contactupdate'),
                     array('old_password,new_password,repeat_password', 'required', 'on' => 'changePwd'),
                     array('old_password', 'DCurrentPassword', 'on' => 'changePwd'),

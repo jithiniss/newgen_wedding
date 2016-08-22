@@ -254,7 +254,7 @@
                                                         <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/static/page/about-us">About Us</a></li>
                                                         <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/awards">Awards</a></li>
                                                         <li><?php echo CHtml::link('FAQ', array('site/faq')); ?></li>
-                                                        <li><a href="#">Event Management</a></li>
+                                                        <li><?php echo CHtml::link('Event Management', array('weddingPlanner/index')); ?></li>
                                                         <li><?php echo CHtml::link('Plans', array('site/index', '#' => 'upgrade')); ?></li>
                                                         <li><?php echo CHtml::link('Contact Us', array('site/contact')); ?></li>
                                                 </ul>

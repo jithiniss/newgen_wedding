@@ -248,19 +248,19 @@ class VendorController extends Controller {
         }
 
         public function SuccessMail($token, $vendor) {
+                $message = new YiiMailMessage;
+                $message->view = "_forgot_password_mail_vendor";  // view file name
+                $params = array('token' => $token, 'vendor' => $vendor); // parameters
+                $message->subject = 'Please Reset Your Password';
+                $message->setBody($params, 'text/html');
+                $message->addTo($vendor->email);
+                $message->from = 'newgenwedding@intersmart.in';
+                if (Yii::app()->mail->send($message)) {
 
-                $user = $vendor->email;
-                //$user = 'shahana@intersmart.in';
-                $user_subject = 'Please Reset Your Password';
-                $user_message = $this->renderPartial('mail/_forgot_password_mail_user', array('token' => $token, 'vendor' => $vendor), true);
-
-
-                // Always set content-type when sending HTML email
-                $headers = "MIME-Version: 1.0" . "\r\n";
-                $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                // More headers
-                $headers .= 'From: <no-reply@newgen.com/>' . "\r\n";
-                mail($user, $user_subject, $user_message, $headers);
+                } else {
+                        echo 'message not send';
+                        exit;
+                }
         }
 
         public function actionChangeOldPassword($token) {

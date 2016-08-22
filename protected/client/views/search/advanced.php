@@ -523,7 +523,7 @@
 
                                                                                 <div class="common">
                                                                                         <div class="col-sm-3 col-xs-3 zeros">
-                                                                                                <label for="textinput" class="control-label">Annual Income</label>
+                                                                                                <label for="textinput" class="control-label">Annual Income From</label>
                                                                                         </div>
                                                                                         <div class="col-sm-1 col-xs-1 zeros">
                                                                                                 <label for="textinput" class="control-label">:</label>
@@ -544,8 +544,41 @@
                                                                                                                 $annual_income_from_opt[-1] = array('selected' => 'selected');
                                                                                                         }
                                                                                                         ?>
-                                                                                                        <?php echo CHtml::activeDropDownList($model, 'annual_income_from', $doesnt_matter + CHtml::listData(MasterAnnualIncome::model()->findAllByAttributes(array('status' => 1)), 'id', 'income_from'), array('empty' => 'Select Annual Income', 'class' => 'aps tokenize-sample', 'options' => $annual_income_from_opt)); ?>
+                                                                                                        <?php echo CHtml::activeDropDownList($model, 'annual_income_from', $doesnt_matter + CHtml::listData(MasterAnnualIncome::model()->findAllByAttributes(array('status' => 1)), 'income_from', 'income_from'), array('empty' => 'Select Annual Income', 'class' => 'aps tokenize-sample', 'options' => $annual_income_from_opt)); ?>
                                                                                                         <?php echo $form->error($model, 'annual_income_from'); ?>
+
+                                                                                                </div>
+
+
+                                                                                        </div>
+                                                                                </div>
+
+
+                                                                                <div class="common">
+                                                                                        <div class="col-sm-3 col-xs-3 zeros">
+                                                                                                <label for="textinput" class="control-label">Annual Income To</label>
+                                                                                        </div>
+                                                                                        <div class="col-sm-1 col-xs-1 zeros">
+                                                                                                <label for="textinput" class="control-label">:</label>
+                                                                                        </div>
+                                                                                        <div class="col-sm-8 col-xs-8 zeros">
+                                                                                                <div class="form-group">
+                                                                                                        <?php
+                                                                                                        if (!empty($model->annual_income_to)) {
+
+                                                                                                                $annual_income_from = explode(',', $model->annual_income_to);
+                                                                                                        }
+                                                                                                        $annual_income_from_opt = array();
+                                                                                                        if (!empty($annual_income_from)) {
+                                                                                                                foreach ($annual_income_from as $value) {
+                                                                                                                        $annual_income_from_opt[$value] = array('selected' => 'selected');
+                                                                                                                }
+                                                                                                        } else {
+                                                                                                                $annual_income_from_opt[-1] = array('selected' => 'selected');
+                                                                                                        }
+                                                                                                        ?>
+                                                                                                        <?php echo CHtml::activeDropDownList($model, 'annual_income_to', $doesnt_matter + CHtml::listData(MasterAnnualIncome::model()->findAllByAttributes(array('status' => 1)), 'income_to', 'income_to'), array('empty' => 'Select Annual Income', 'class' => 'aps tokenize-sample', 'options' => $annual_income_from_opt)); ?>
+                                                                                                        <?php echo $form->error($model, 'annual_income_to'); ?>
 
                                                                                                 </div>
 
@@ -583,42 +616,42 @@
                                                                 </div>
                                                                 <div id="panel3" class="panel-collapse collapse in">
                                                                         <div class="panel-body">
-                                                                                <div class="common">
-                                                                                        <div class="col-sm-3 col-xs-3 zeros">
-                                                                                                <label for="textinput" class="control-label">Diet</label>
-                                                                                        </div>
-                                                                                        <div class="col-sm-1 col-xs-1 zeros">
-                                                                                                <label for="textinput" class="control-label">:</label>
-                                                                                        </div>
-                                                                                        <div class="col-sm-8 col-xs-8 zeros">
-                                                                                                <div class="form-group">
-                                                                                                        <ul class="list-unstyled list-inline">
-                                                                                                                <?php
-                                                                                                                if (!is_array($model->diet)) {
+                                                                                <!--                                                                                <div class="common">
+                                                                                                                                                                        <div class="col-sm-3 col-xs-3 zeros">
+                                                                                                                                                                                <label for="textinput" class="control-label">Diet</label>
+                                                                                                                                                                        </div>
+                                                                                                                                                                        <div class="col-sm-1 col-xs-1 zeros">
+                                                                                                                                                                                <label for="textinput" class="control-label">:</label>
+                                                                                                                                                                        </div>
+                                                                                                                                                                        <div class="col-sm-8 col-xs-8 zeros">
+                                                                                                                                                                                <div class="form-group">
+                                                                                                                                                                                        <ul class="list-unstyled list-inline">
+                                                                                <?php
+//                                                                                if (!is_array($model->diet)) {
+//
+//                                                                                        $options1 = explode(',', $model->diet);
+//                                                                                } else {
+//                                                                                        $options1 = $model->diet;
+//                                                                                }
+                                                                                ?>
+                                                                                <?php
+//                                                                                $model->diet = $options1;
+//                                                                                echo CHtml::activeCheckboxList($model, 'diet', $doesnt_matter + CHtml::listData(MasterDiet::model()->findAll(array('condition' => 'status=1')), 'id', 'diet'), array('template' => '<li style="padding-bottom:0px;padding-left:0px">{input}{label}</li>', 'separator' => '',
+//                                                                                    'labelOptions' => array(
+//                                                                                        'style' => 'padding-left:13px;width: 70px;float: left;'),
+//                                                                                    'style' => 'float:left;'
+//                                                                                ));
+                                                                                ?>
 
-                                                                                                                        $options1 = explode(',', $model->diet);
-                                                                                                                } else {
-                                                                                                                        $options1 = $model->diet;
-                                                                                                                }
-                                                                                                                ?>
-                                                                                                                <?php
-                                                                                                                $model->diet = $options1;
-                                                                                                                echo CHtml::activeCheckboxList($model, 'diet', $doesnt_matter + CHtml::listData(MasterDiet::model()->findAll(array('condition' => 'status=1')), 'id', 'diet'), array('template' => '<li style="padding-bottom:0px;padding-left:0px">{input}{label}</li>', 'separator' => '',
-                                                                                                                    'labelOptions' => array(
-                                                                                                                        'style' => 'padding-left:13px;width: 70px;float: left;'),
-                                                                                                                    'style' => 'float:left;'
-                                                                                                                ));
-                                                                                                                ?>
-
-                                                                                                                <?php echo $form->error($model, 'diet'); ?>
+                                                                                <?php //echo $form->error($model, 'diet'); ?>
 
 
 
-                                                                                                        </ul>
-                                                                                                </div>
-                                                                                        </div>
+                                                                                                                                                                                        </ul>
+                                                                                                                                                                                </div>
+                                                                                                                                                                        </div>
 
-                                                                                </div>
+                                                                                                                                                                </div>-->
 
 
 
@@ -679,7 +712,7 @@
                                                                                                         ?>
 
                                                                                                         <label class="radio-inline seekz">
-                                                                                                                <input type="radio" name="PartnerDetails[smoke]" id="PartnerDetails_smoke<?= $sm ?>" value="<?= $smokekey; ?>" <?= $checked ?>><?= $smokevalue; ?>
+                                                                                                                <input type="radio" name="SavedSearch[smoke]" id="SavedSearch_smoke<?= $sm ?>" value="<?= $smokekey; ?>" <?= $checked ?>><?= $smokevalue; ?>
                                                                                                         </label>
                                                                                                         <?php
                                                                                                         $sm++;
@@ -790,7 +823,7 @@
                                                                                                         ?>
 
                                                                                                         <label class="radio-inline seekz">
-                                                                                                                <input type="radio" name="PartnerDetails[disability]" id="PartnerDetails_disablity<?= $d ?>" value="<?= $key; ?>" <?= $checked ?>><?= $value; ?>
+                                                                                                                <input type="radio" name="SavedSearch[disability]" id="SavedSearch_disability<?= $d ?>" value="<?= $key; ?>" <?= $checked ?>><?= $value; ?>
                                                                                                         </label>
                                                                                                         <?php
                                                                                                         $d++;

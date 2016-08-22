@@ -70,7 +70,7 @@ class AdvanceSearch extends CWidget {
                         $condition .= ' AND working_as	 = ' . $search_details->profession_area;
                 }
                 if ($search_details->annual_income_from != '' && $search_details->annual_income_from != 0 && $search_details->annual_income_from != -1) {
-                        $condition .= ' AND annual_income_from	 <= ' . $search_details->annual_income_from;
+                        $condition .= ' AND ' . $search_details->annual_income_from . ' <=  annual_income >= ' . $search_details->annual_income_to;
                 }
                 if ($search_details->diet != '' && $search_details->diet != 0 && $search_details->diet != -1) {
                         $condition .= ' AND diet = ' . $search_details->diet;
@@ -81,11 +81,11 @@ class AdvanceSearch extends CWidget {
                 if ($search_details->smoke != '' && $search_details->smoke != 0 && $search_details->smoke != -1) {
                         $condition .= ' AND smoke = ' . $search_details->smoke;
                 }
-                if ($search_details->body_type != '' && $search_details->body_type != 0 && $search_details->skin_tone != -1) {
-                        $condition .= ' AND body_type	 = ' . $search_details->skin_tone;
+                if ($search_details->body_type != '' && $search_details->body_type != 0 && $search_details->body_type != -1) {
+                        $condition .= ' AND body_type	 IN (' . $search_details->body_type . ')';
                 }
                 if ($search_details->skin_tone != '' && $search_details->skin_tone != 0 && $search_details->skin_tone != -1) {
-                        $condition .= ' AND skin_tone	 = ' . $search_details->skin_tone;
+                        $condition .= ' AND skin_tone	 IN (' . $search_details->skin_tone . ')';
                 }
                 if ($search_details->disability != '' && $search_details->disability != 0 && $search_details->disability != -1) {
                         $condition .= ' AND disability	 = ' . $search_details->disability;
@@ -98,6 +98,7 @@ class AdvanceSearch extends CWidget {
                 if (!empty($this->photo)) {
                         $condition .= ' AND photo_visibility IN (' . $this->photo . ')';
                 }
+
                 if ($this->joined != '') {
                         if ($this->joined == 1) {
                                 $joined_date = date("Y-m-d", strtotime(date('Y-m-d') . " -1 days"));
@@ -122,23 +123,26 @@ class AdvanceSearch extends CWidget {
                                 $condition .= ' AND last_login >= "' . $active_members . '"';
                         }
                 }
+                if ($this->marital_stat != '' && $this->marital_stat != 0 && $this->marital_stat != -1) {
 
-                if (!empty($this->marital_stat)) {
                         $condition .= ' AND marital_status IN (' . $this->marital_stat . ')';
                 }
-                if (!empty($this->profile_crea)) {
+
+                if ($this->profile_crea != '' && $this->profile_crea != 0 && $this->profile_crea != -1) {
+
                         $condition .= ' AND profile_for IN (' . $this->profile_crea . ')';
                 }
-                if (!empty($this->smoking)) {
+                if ($this->smoking != '' && $this->smoking != 0 && $this->smoking != -1) {
                         $condition .= ' AND smoke IN (' . $this->smoking . ')';
                 }
-                if (!empty($this->drinking)) {
+                if ($this->drinking != '' && $this->drinking != 0 && $this->drinking != -1) {
                         $condition .= ' AND drink IN (' . $this->drinking . ')';
                 }
-                if (!empty($this->diets)) {
+                if ($this->diets != '' && $this->diets != 0 && $this->diets != -1) {
                         $condition .= ' AND diet IN (' . $this->diets . ')';
                 }
-
+//                var_dump($this->diets);
+//                exit;
                 $dataProvider = new CActiveDataProvider('UserDetails', array('criteria' => array(
                         'condition' => $condition
                     ),

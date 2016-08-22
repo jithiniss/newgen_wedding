@@ -25,6 +25,7 @@ return array(
         'application.components.*',
         'admin.extensions.easyimage.EasyImage',
         'application.client.extensions.yiiinfiniteScroll.YiinfiniteScroller',
+        'application.client.extensions.yii-mail.*',
     ),
     'modulePath' => $admin . '/modules/',
     'modules' => array(
@@ -45,6 +46,21 @@ return array(
             'Mailer' => 'smtp',
             'Port' => 587,
             'SMTPAuth' => true,
+        ),
+        'mail' => array(
+            'class' => 'application.client.extensions.yii-mail.YiiMail',
+            'transportType' => 'smtp',
+            'transportOptions' => array(
+//                'host' => 'mail.ecareagora.com',
+                'host' => 'mail.intersmarthosting.in',
+                // 'encryption'=>'ssl', // use ssl
+                'username' => "develop@intersmarthosting.in",
+                'password' => "develop@123",
+                'port' => '25', // ssl port for gmail
+            ),
+            'viewPath' => 'application.client.template',
+            'logging' => true,
+            'dryRun' => false
         ),
         'Upload' => array('class' => 'UploadFile'),
         'PhotoVisibility' => array('class' => 'PhotoVisibility'),
