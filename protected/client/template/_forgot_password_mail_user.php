@@ -25,7 +25,8 @@
 
                                         </td>
                                 </tr>
-
+                                <p style=" font-family:'Open Sans',arial, sans-serif; font-size:13px;font-weight:bold;">Please copy this link to activate your account if you are unable to use verify button <br>
+                                        " <?php echo $this->siteURL(); ?>/index.php/ForgotPassword/Changepassword/token/<?php echo $token; ?>"</p>
                                 <tr>
                                         <td style="padding:20px;  border:solid 1px #d7d7d7;"><table width="100%" border="0" cellspacing="0" cellpadding="0">
                                                         <tbody>

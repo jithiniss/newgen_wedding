@@ -295,8 +295,7 @@
 
                                         <div class="usefull-links col col-xs-6 col-md-3">
                                                 <h2>Help & Support</h2>
-                                                <p>Lorem ipsum dolor sit a met con
-                                                        seret adipiscing elit sed diam nonunem.</p>
+                                                <p>Newgen is equipped with a team of professional who offer end-to-end customer support for wide ranging enquiries of all registered users on the website. Our customer support team works around the clock to ensure that clients receive timely guidance on using the website. </p>
 
                                         </div> <!-- end of usefull-links  -->
                                 </div> <!-- end of row -->

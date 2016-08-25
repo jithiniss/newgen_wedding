@@ -6543,6 +6543,7 @@ footer li, footer a, footer p {
         line-height: 22px;
         list-style: none;
         font-family: 'Roboto', sans-serif;
+        text-align: justify;
 }
 img.luv {
         padding-bottom: 11px;
