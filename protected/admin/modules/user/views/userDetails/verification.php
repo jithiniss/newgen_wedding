@@ -15,8 +15,8 @@
 <div class="page-title">
 
     <div class="title-env">
-        <h1 style="float: left;" class="title">Facebook Link Verification</h1>
-        <p style="float: left;margin-top: 8px;margin-left: 11px;" class="description">Facebook Link Verification</p>
+        <h1 style="float: left;" class="title">Phone Verification</h1>
+        <p style="float: left;margin-top: 8px;margin-left: 11px;" class="description">Phone Verification</p>
     </div>
 
     <div class="breadcrumb-env">
@@ -28,7 +28,7 @@
 
             <li class="active">
 
-                <strong>Facebook Link Verification</strong>
+                <strong>Phone Verification</strong>
             </li>
         </ol>
 
@@ -100,15 +100,15 @@
 //                                    'title' => 'Not Verified'
 //                                ),
 //                            ),
-////                            'user' => array
-////                                (
-////                                'url' => 'Yii::app()->createUrl("/user/UserDetails/admin/user_approval/".$data->user_id)',
-////                                'label' => '<i class="fa fa-user" style="font-size:20px;padding:2px;" aria-hidden="true"></i>',
-////                                'options' => array(
-////                                    'data-toggle' => 'tooltip',
-////                                    'title' => 'User Detail'
-////                                ),
-////                            ),
+//                            'user' => array
+//                                (
+//                                'url' => 'Yii::app()->createUrl("/user/UserDetails/admin/user_approval/".$data->user_id)',
+//                                'label' => '<i class="fa fa-user" style="font-size:20px;padding:2px;" aria-hidden="true"></i>',
+//                                'options' => array(
+//                                    'data-toggle' => 'tooltip',
+//                                    'title' => 'User Detail'
+//                                ),
+//                            ),
 //                        ),
 //                    ),
                 ),
