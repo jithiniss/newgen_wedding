@@ -1,6 +1,6 @@
 <?php
-/* @var $this MasterServicesController */
-/* @var $model MasterServices */
+/* @var $this UserDetailsController */
+/* @var $model UserDetails */
 ?>
 <style>
     .table th, td{
@@ -51,6 +51,7 @@
                 'columns' => array(
 //                    'id',
                     'first_name',
+                    'mobile_number',
 //                    array('name' => 'user_id',
 //                        'value' => function($data) {
 //                                $user = UserDetails::model()->findByPk($data->user_id);
@@ -60,13 +61,50 @@
 //                    ),
 //                    'facebook_link',
 //                    'verify_status',
-//                    array(
-//                        'name' => 'verify_status',
-//                        'filter' => array(1 => 'Verified', 0 => 'Not Verified'),
-//                        'value' => function($data) {
-//                        return $data->verify_status == 1 ? 'Verified' : 'Not Verified';
-//                }
-//                    ),
+                    array(
+                        'name' => 'mobile_verify',
+                        'value' => function($data) {
+                                return $data->mobile_verify == 1 ? 'Verified' : 'Not Verified';
+                        },
+                        'filter' => array(1 => 'Verified', 0 => 'Not Verified'),
+                    ),
+                    array(
+                        'htmlOptions' => array('nowrap' => 'nowrap'),
+                        'class' => 'booster.widgets.TbButtonColumn',
+                        'template' => '{verified}{Not verified}',
+                        'buttons' => array
+                            (
+                            'verified' => array
+                                (
+                                'url' => 'Yii::app()->createUrl("/user/userDetails/notVerify", array("id"=>$data->id))',
+                                'label' => '<i class="fa fa-thumbs-o-up" style="font-size:20px;padding:2px;" aria-hidden="true"></i>',
+                                'visible' => '$data->mobile_verify == 1',
+                                'options' => array(
+                                    'data-toggle' => 'tooltip',
+                                    'title' => 'Verified'
+                                ),
+                            ),
+                            'Not verified' => array
+                                (
+                                'url' => 'Yii::app()->createUrl("/user/userDetails/verify", array("id"=>$data->id))',
+                                'label' => '<i class="fa fa-thumbs-o-down" style="font-size:20px;padding:2px;" aria-hidden="true"></i>',
+                                'visible' => '$data->mobile_verify == 0',
+                                'options' => array(
+                                    'data-toggle' => 'tooltip',
+                                    'title' => 'Not Verified'
+                                ),
+                            ),
+//                            'user' => array
+//                                (
+//                                'url' => 'Yii::app()->createUrl("/user/UserDetails/admin/user_approval/".$data->user_id)',
+//                                'label' => '<i class="fa fa-user" style="font-size:20px;padding:2px;" aria-hidden="true"></i>',
+//                                'options' => array(
+//                                    'data-toggle' => 'tooltip',
+//                                    'title' => 'User Detail'
+//                                ),
+//                            ),
+                        ),
+                    ),
 //                    'cb',
 //                    'ub',
                 /*

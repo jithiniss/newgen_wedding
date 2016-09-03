@@ -5,6 +5,7 @@
  *
  * The followings are the available columns in table 'tell_us_story':
  * @property integer $id
+ * @property integer $user_id
  * @property string $name
  * @property string $email
  * @property string $partner_name
@@ -14,7 +15,7 @@
  * @property string $image
  * @property integer $field1
  * @property integer $field2
- * @property integer $admin_approve
+ * @property integer $admin_approval
  * @property integer $cb
  * @property integer $ub
  * @property string $doc
@@ -40,11 +41,11 @@ class TellUsStory extends CActiveRecord {
                     array('name, email, partner_name, partner_email, feedback, wedding_date', 'required'),
                     array('image', 'file', 'allowEmpty' => FALSE, 'types' => 'jpg,jpeg,gif,png', 'on' => 'create'),
                     array('email, partner_email', 'email'),
+                    array('feedback', 'length', 'min' => 180),
                     array('name, email, partner_name, partner_email', 'length', 'max' => 200),
-                    array('feedback', 'min' => 180),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id, name, email, partner_name, partner_email, feedback, wedding_date, image, field1, field2, admin_approval, cb, ub, doc, dou, status', 'safe', 'on' => 'search'),
+                    array('id, user_id, name, email, partner_name, partner_email, feedback, wedding_date, image, field1, field2, admin_approval, cb, ub, doc, dou, status', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -64,6 +65,7 @@ class TellUsStory extends CActiveRecord {
         public function attributeLabels() {
                 return array(
                     'id' => 'ID',
+                    'user_id' => 'User',
                     'name' => 'Name',
                     'email' => 'Email',
                     'partner_name' => 'Partner Name',
@@ -100,6 +102,7 @@ class TellUsStory extends CActiveRecord {
                 $criteria = new CDbCriteria;
 
                 $criteria->compare('id', $this->id);
+                $criteria->compare('user_id', $this->user_id);
                 $criteria->compare('name', $this->name, true);
                 $criteria->compare('email', $this->email, true);
                 $criteria->compare('partner_name', $this->partner_name, true);

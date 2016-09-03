@@ -135,6 +135,9 @@ class TellUsStoryController extends Controller {
          */
         public function actionAdmin() {
                 $model = new TellUsStory('search');
+//                echo 'oops' . '<pre>';
+//                print_r($model);
+//                exit;
                 $model->unsetAttributes();  // clear any default values
                 if (isset($_GET['TellUsStory']))
                         $model->attributes = $_GET['TellUsStory'];
