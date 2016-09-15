@@ -99,3 +99,20 @@ $(document).ready(function () {
 
 
 });
+
+function test(){
+     var formdata = $("#register-one-form").serializeArray();
+     formdata.push({'token':'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE0NzM0MTk1ODYsImp0aSI6InZiQVM5ZXdCOVwvRjZRSVZJc2FONitGcndpT3d3Q1dGK05QN3pTV2E3VkdNPSIsImlzcyI6ImxvY2FsaG9zdCIsIm5iZiI6MTQ3MzQxOTU5NiwiZXhwIjoxNDczNDIzMTk2LCJkYXRhIjp7InVzZXJJZCI6Ijc5IiwidXNlck5hbWUiOiJzdWphbm5hdGhAZ21haWwuY29tIn19.rcysBhzFI49YOBs51tEtw6WunHYAnw4kSrVK3NdPPrEQ2ObBpdcyZmqPUNrFR77YBD1_5ryfJE7ygEArNoBctw'});
+     $.ajax({
+         url: baseurl + 'Api/RegisterFirstStep',
+         type: "POST",
+         data:formdata,
+         success:function(data){
+             alert("HAI");
+             
+         }
+         
+         
+     });
+     
+}

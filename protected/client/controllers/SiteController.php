@@ -32,6 +32,8 @@ class SiteController extends Controller {
                         $this->redirect(array('//vendor/home'));
                 } else {
                         $this->layout = '//layouts/main_home';
+
+
                         $plans = Plans::model()->findAllByAttributes(array('status' => 1), array('condition' => 'amount!=0', 'order' => 'amount desc'));
                         $featured = UserPlans::model()->findAllByAttributes(array('featured' => 1), array('limit' => 7));
                         $story = TellUsStory::model()->findAllByAttributes(array('status' => 1, 'admin_approval' => 1), array('limit' => 8));
