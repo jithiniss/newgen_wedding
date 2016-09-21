@@ -505,19 +505,6 @@ ud.id = up.user_id LIMIT 7");
                 }
         }
 
-        public function actionProfileVisited() {
-                $this->layout = null;
-                header('Content-Type: application/json');
-                if (isset($_POST['id']) && $_POST['id'] > 0) {
-                        $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $_POST['id']), array('order' => 'date DESC', 'group' => 'user_id', 'distinct' => TRUE));
-                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $profile_visitors));
-                        yii::app()->end();
-                } else {
-                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
-                        yii::app()->end();
-                }
-        }
-
         public function actionMyTwoWayMatches() {
                 $this->layout = null;
                 header('Content-Type: application/json');
@@ -526,6 +513,213 @@ ud.id = up.user_id LIMIT 7");
                                 if (isset($_REQUEST['userid']) && $_REQUEST['userid'] > 0) {
                                         $twowaymatches = $this->MyTwoWayMatches($_REQUEST['userid']);
                                         echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $twowaymatches));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionLookingForMe() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] > 0) {
+                                        $lookingmeprofiles = Requests::model()->findAllByAttributes(array('partner_id' => $user->user_id, 'status' => 2));
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $lookingmeprofiles));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionProfileVisitors() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] != "") {
+                                        $profilevisitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $_REQUEST['userid'], 'status' => 1));
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $profilevisitors));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionProfileVisited() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] != "") {
+                                        $profilevisited = ProfileVisitors::model()->findAllByAttributes(array('user_id' => $_REQUEST['userid'], 'status' => 1));
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $profilevisited));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionShortList() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] != "") {
+                                        $shortList = Requests::model()->findAllByAttributes(array('user_id' => $_REQUEST['userid']));
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $shortList));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionAccepted() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] != "") {
+                                        $accepted = Requests::model()->findAllByAttributes(array('user_id' => $_REQUEST['userid'], 'status' => 2));
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $accepted));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionRejected() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] != "") {
+                                        $rejected = Requests::model()->findAllByAttributes(array('user_id' => $_REQUEST['userid'], 'status' => 4));
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $rejected));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionPending() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] != "") {
+                                        $pending = Requests::model()->findAllByAttributes(array('user_id' => $_REQUEST['userid'], 'status' => 3));
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $pending));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionListBlockedMembers() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['id']) && $_REQUEST['id'] > 0) {
+                                        $blockedIds = BlockedMembers::model()->findAllByAttributes(array('user_id' => $_REQUEST['id']));
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $blockedIds));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionSearchById() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] != "") {
+                                        $user_details = UserDetails::model()->findByAttributes(array('user_id' => $_REQUEST['user_id']));
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $user_details));
                                         yii::app()->end();
                                 } else {
                                         echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
@@ -689,9 +883,9 @@ ud.id = up.user_id LIMIT 7");
         public function actionValToken() {
                 $ch = curl_init();
                 $data = array('token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJjbGllbnRpZCI6IjI2QUZCMDEwLUY5RjctOTQ0Qi1BQUFDLTJEOURDMDc4MjU2QiJ9.E3HlNiBVFs52dUL-6JIETd6RSUT_KlvjIKxNMPoGYov_71TM4xoZBIsZKRg3gaFhO_yle0Obi4YTC70ocXorPg',
-                    'userid' => 79
+                    'userid' => 'NG68'
                 );
-                curl_setopt($ch, CURLOPT_URL, "http://localhost/newgen_wedding/index.php/Api/MyTwoWayMatches");
+                curl_setopt($ch, CURLOPT_URL, "http://localhost/newgen_wedding/index.php/Api/ProfileVisitors");
                 curl_setopt($ch, CURLOPT_POST, 1);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
