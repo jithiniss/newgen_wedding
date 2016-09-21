@@ -30,7 +30,7 @@ class MessageController extends Controller {
                         $message = Message::model()->findAllByAttributes(array(), array('condition' => '(sender_id = "' . $sender . '" OR receiver_id = "' . $receiver->id . '" OR sender_id = "' . $receiver->id . '" OR receiver_id = "' . $sender . '" )'));
                         $this->render('message', array('model' => $model, 'messages' => $message, 'receiver' => $receiver->id));
                 } else {
-                        Yii::app()->user->setFlash('error', "  You hacve no provision to send message please upgrade your plan");
+                        Yii::app()->user->setFlash('error', "  You have no provision to send message please upgrade your plan");
                         $this->redirect(Yii::app()->request->urlReferrer);
                 }
         }

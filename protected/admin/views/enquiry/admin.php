@@ -1,58 +1,89 @@
-<?php
-/* @var $this EnquiryController */
-/* @var $model Enquiry */
 
-$this->breadcrumbs=array(
-	'Enquiries'=>array('index'),
-	'Manage',
-);
 
-$this->menu=array(
-	array('label'=>'List Enquiry', 'url'=>array('index')),
-	array('label'=>'Create Enquiry', 'url'=>array('create')),
-);
+<style>
+        .table th, td{
+                text-align: center;
+        }
+        .table td{
+                text-align: center;
+        }
+        .panel-default {
+                overflow-x: scroll;
+        }
+        #user-details-grid table{
+                width: 4200px;
+        }
+</style>
 
-Yii::app()->clientScript->registerScript('search', "
-$('.search-button').click(function(){
-	$('.search-form').toggle();
-	return false;
-});
-$('.search-form form').submit(function(){
-	$('#enquiry-grid').yiiGridView('update', {
-		data: $(this).serialize()
-	});
-	return false;
-});
-");
-?>
 
-<h1>Manage Enquiries</h1>
+<div class="page-title">
 
-<p>
-You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
-or <b>=</b>) at the beginning of each of your search values to specify how the comparison should be done.
-</p>
+        <div class="title-env">
+                <h1 style="float: left;" class="title">User Details</h1>
+                <p style="float: left;margin-top: 8px;margin-left: 11px;" class="description">Manage User Details</p>
+        </div>
 
-<?php echo CHtml::link('Advanced Search','#',array('class'=>'search-button')); ?>
-<div class="search-form" style="display:none">
-<?php $this->renderPartial('_search',array(
-	'model'=>$model,
-)); ?>
-</div><!-- search-form -->
+        <div class="breadcrumb-env">
 
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'enquiry-grid',
-	'dataProvider'=>$model->search(),
-	'filter'=>$model,
-	'columns'=>array(
-		'id',
-		'name',
-		'subject',
-		'mobile',
-		'email',
-		'message',
-		array(
-			'class'=>'CButtonColumn',
-		),
-	),
-)); ?>
+                <ol class="breadcrumb bc-1" >
+                        <li>
+                                <a href="<?php echo Yii::app()->request->baseurl . '/site/home'; ?>"><i class="fa-home"></i>Home</a>
+                        </li>
+
+                        <li class="active">
+
+                                <strong>Manage User Details</strong>
+                        </li>
+                </ol>
+
+        </div>
+
+</div>
+<div class="row">
+
+
+        <div class="col-sm-12">
+
+                <a class="btn btn-secondary btn-icon btn-icon-standalone" href="<?php echo Yii::app()->request->baseurl . '/admin.php/enquiry/create'; ?>" id="add-note">
+                        <i class="fa-pencil"></i>
+                        <span>Add Contacts</span>
+                </a>
+                <div class="panel panel-default">
+                        <?php
+                        Yii::app()->clientScript->registerScript('search', "
+            $('.search-button').click(function(){
+            $('.search-form').toggle();
+            return false;
+            });
+            $('.search-form form').submit(function(){
+            $('#user-details-grid').yiiGridView('update', {
+            data: $(this).serialize()
+            });
+            return false;
+            });
+            ");
+                        ?>
+
+                        <?php
+                        $this->widget('booster.widgets.TbGridView', array(
+                            'id' => 'enquiry-grid',
+                            'dataProvider' => $model->search(),
+                            'filter' => $model,
+                            'columns' => array(
+//                                'id',
+                                'name',
+                                'subject',
+                                'mobile',
+                                'email',
+                                'message',
+                                array(
+                                    'htmlOptions' => array('nowrap' => 'nowrap'),
+                                    'class' => 'booster.widgets.TbButtonColumn',
+                                    'template' => '{update}{delete}{view}',
+                                ),
+                            ),
+                        ));
+                        ?>
+                </div>
+        </div>
+</div>

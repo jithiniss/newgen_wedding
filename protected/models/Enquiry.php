@@ -32,7 +32,7 @@ class Enquiry extends CActiveRecord {
 //                    array('name', 'length', 'max' => 100),
 //                    array('mobile', 'length', 'max' => 20),
 //                    array('email', 'length', 'max' => 200),
-                    array('mobile', 'number'),
+                    array('mobile', 'numerical'),
                     array('email', 'email'),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.

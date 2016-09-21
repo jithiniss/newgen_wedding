@@ -145,7 +145,7 @@
 
                                                 <div class="common">
                                                         <div class="col-sm-4 col-xs-4 zeros">
-                                                                <label for="textinput" class="control-label">Community <span class="required">*</span></label>
+                                                                <label for="textinput" class="control-label">Caste <span class="required">*</span></label>
                                                         </div>
                                                         <div class="col-sm-1 col-xs-1 zeros">
                                                                 <label for="textinput" class="control-label">:</label>
@@ -157,16 +157,16 @@
                                                                         if ($secondStep->religion != '') {
                                                                                 $castes = MasterCaste::model()->findAllByAttributes(array('religion_id' => $secondStep->religion));
                                                                                 if (!empty($castes)) {
-                                                                                        $caste_options[""] = "Select Community";
+                                                                                        $caste_options[""] = "Select Caste";
                                                                                         foreach ($castes as $caste) {
                                                                                                 $caste_options[$caste->id] = $caste->caste;
                                                                                         }
                                                                                 } else {
-                                                                                        $caste_options[""] = "Select Community";
+                                                                                        $caste_options[""] = "Select Caste";
                                                                                         $caste_options[0] = "Other";
                                                                                 }
                                                                         } else {
-                                                                                $caste_options[""] = 'Select Community';
+                                                                                $caste_options[""] = 'Select Caste';
                                                                         }
                                                                         ?>
                                                                         <?php echo CHtml::activeDropDownList($secondStep, 'caste', $caste_options, array('class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
@@ -179,7 +179,7 @@
 
                                                 <div class="common" id="sub_community">
                                                         <div class="col-sm-4 col-xs-4 zeros">
-                                                                <label for="textinput" class="control-label">Sub-Community (Optional)</label>
+                                                                <label for="textinput" class="control-label">Sub-Caste (Optional)</label>
                                                         </div>
                                                         <div class="col-sm-1 col-xs-1 zeros">
                                                                 <label for="textinput" class="control-label">:</label>
@@ -191,16 +191,16 @@
                                                                         if ($secondStep->caste != 0) {
                                                                                 $subcastes = MasterSubCaste::model()->findAllByAttributes(array('caste_id' => $secondStep->caste));
                                                                                 if (!empty($subcastes)) {
-                                                                                        $subcaste_options[""] = "Select Sub-Community";
+                                                                                        $subcaste_options[""] = "Select Sub-Caste";
                                                                                         foreach ($subcastes as $subcaste) {
                                                                                                 $subcaste_options[$subcaste->id] = $subcaste->sub_caste;
                                                                                         }
                                                                                 } else {
-                                                                                        $subcaste_options[""] = "Select Sub-Community";
+                                                                                        $subcaste_options[""] = "Select Sub-Caste";
                                                                                         $subcaste_options[0] = "Other";
                                                                                 }
                                                                         } else {
-                                                                                $subcaste_options[""] = "Select Sub-Community";
+                                                                                $subcaste_options[""] = "Select Sub-Caste";
                                                                         }
                                                                         ?>
                                                                         <?php echo CHtml::activeDropDownList($secondStep, 'sub_caste', $subcaste_options, array('class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
