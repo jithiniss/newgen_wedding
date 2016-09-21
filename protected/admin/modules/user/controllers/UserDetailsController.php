@@ -34,7 +34,7 @@ class UserDetailsController extends Controller {
 
                 return array(
                     array('allow', // allow all users to perform 'index' and 'view' actions
-                        'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete', 'verification'),
+                        'actions' => array('index', 'view', 'create', 'update', 'admin', 'delete', 'verification', 'verify', 'notverify'),
                         'users' => array('*'),
                     ),
                     array('allow', // allow authenticated user to perform 'create' and 'update' actions
@@ -294,6 +294,22 @@ class UserDetailsController extends Controller {
                 $this->render('verification', array(
                     'model' => $model,
                 ));
+        }
+
+        public function actionVerify($id) {
+                $model = $this->loadModel($id);
+
+                $model->mobile_verify = 1;
+                if ($model->save())
+                        $this->redirect(array('verification'));
+        }
+
+        public function actionNotVerify($id) {
+                $model = $this->loadModel($id);
+
+                $model->mobile_verify = 0;
+                if ($model->save())
+                        $this->redirect(array('verification'));
         }
 
         /**

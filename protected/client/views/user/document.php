@@ -7,6 +7,9 @@
         padding-left: 205px;
         color: #006666;
     }
+    i.fa.circles.fa-check-circle-o {
+        position: inherit;
+    }
 </style>   <label  id="basicinfo"></label>
 <section class="profiles">
     <div class="container">
@@ -72,7 +75,16 @@
                             </div>
                             <?php foreach ($details as $detail) { ?>
                                     <?php echo CHtml::link($detail->name, array('/../uploads/user/files/' . $detail->id . '/' . $detail->name . '.' . $detail->file), array('class' => 'document', 'target' => '_blank')); ?>
-                                    <a href="<?php echo yii::app()->baseUrl . '/index.php/user/delete/id/' . $detail->id; ?>"><img style="width: 25px;" alt="delete" class="delete_photo" src="/newgen_wedding/images/delete-trash.jpg"></a><br>
+                                    <a href="<?php echo yii::app()->baseUrl . '/index.php/user/delete/id/' . $detail->id; ?>"><img style="width: 25px;" alt="delete" class="delete_photo" src="/newgen_wedding/images/delete-trash.jpg"></a>
+                                    <?php
+                                    $document = Documents::model()->findByPk($detail->id);
+                                    if ($document->verify_status == '1') {
+                                            ?>
+                                            <i class = "fa circles fa-check-circle-o"></i>
+                                    <?php }
+                                    ?>
+                                    <br>
+
                             <?php } ?>
                             <div class="row buttons">
                                 <button type="submit" class="btn row-btn btn-default">Submit</button>
