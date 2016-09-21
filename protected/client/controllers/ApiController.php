@@ -17,38 +17,157 @@ class ApiController extends Controller {
                 JWT::$leeway = 20;
         }
 
+        public function actionValidateToken() {  // token validate, return type bool
+                $this->layout = null;
+                header('Content-type:application/json');
+                if ($_REQUEST['token'] != "") {
+                        $model = ApiClients::model()->findByAttributes(array('access_token' => $_REQUEST['token']));
+                        if (count($model) > 0) {
+                                try {
+                                        $config = Factory::fromFile('authConfig/config.php', true);
+                                        $secretKey = base64_decode($config->get('jwt')->get('key'));
+                                        $token = JWT::decode($_REQUEST['token'], $secretKey, array($config->get('jwt')->get('algorithm')));
+                                        if ($model->client_id == $token->clientid) {
+                                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => "valid"));
+                                                yii::app()->end();
+                                        } else {
+                                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Conflict'));
+                                                yii::app()->end();
+                                        }
+                                } catch (Exception $ex) {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Unauthorized'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Unauthorized'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionAuthentication() {
+                $this->layout = null;
+                $plans = array();
+                header('Content:type:application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['username']) && isset($_REQUEST['pwd'])) {
+                                        $user_login = UserDetails::model()->find(['condition' => '(email = "' . $_REQUEST['username'] . '" or user_id = "' . $_REQUEST['username'] . '") and  password = "' . $_REQUEST['pwd'] . '" and status > 0']);
+                                        if (count($user_login) > 0) {
+                                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => array('id' => $user_login->id, 'username' => $user_login->email)));
+                                                yii::app()->end();
+                                        } else {
+                                                echo CJSON::encode(array('response' => 'error', 'code' => '404', 'result' => 'Not Found'));
+                                                yii::app()->end();
+                                        }
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '405', 'result' => 'Method Not Allowed'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Conflict'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionProfileDetails() {
+                $this->layout = null;
+                $plans = array();
+                header('Content:type:application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid'])) {
+                                        $user = UserDetails::model()->findByPk($_REQUEST['userid']);
+                                        if (count($user) > 0) {
+                                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $user));
+                                                yii::app()->end();
+                                        } else {
+                                                echo CJSON::encode(array('response' => 'error', 'code' => '404', 'result' => 'Not Found'));
+                                                yii::app()->end();
+                                        }
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '405', 'result' => 'Method Not Allowed'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Conflict'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
         public function actionPlans() {
                 $this->layout = null;
                 $plans = array();
                 header('Content:type:application/json');
-                $plansetails = Plans::model()->findAllByAttributes(array('status' => 1), array('condition' => 'amount!=0', 'order' => 'amount desc'));
-                if (count($plansetails) > 0)
-                        $plans = $plansetails;
-                echo CJSON::encode(array('response' => 'success', 'plans' => $plans));
-                yii::app()->end();
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                $plansetails = Plans::model()->findAllByAttributes(array('status' => 1), array('condition' => 'amount!=0', 'order' => 'amount desc'));
+                                if (count($plansetails) > 0)
+                                        $plans = $plansetails;
+                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $plans));
+                                yii::app()->end();
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Conflict'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
         }
 
         public function actionTellUsStory() {
                 $this->layout = null;
                 $story = array();
                 header('Content:type:application/json');
-                $storyDetails = TellUsStory::model()->findAllByAttributes(array('status' => 1, 'admin_approval' => 1), array('limit' => 8));
-                if (count($storyDetails) > 0)
-                        $story = $storyDetails;
-                echo CJSON::encode(array('response' => 'success', 'story' => $story));
-                yii::app()->end();
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                $storyDetails = TellUsStory::model()->findAllByAttributes(array('status' => 1, 'admin_approval' => 1), array('limit' => 8));
+                                if (count($storyDetails) > 0)
+                                        $story = $storyDetails;
+                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $story));
+                                yii::app()->end();
+                        }else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Conflict'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
         }
 
         public function actionFeatured() {
                 $this->layout = null;
                 $featured = array();
                 header('Content:type:application/json');
-                $featureddetails = UserDetails::model()->findAllBySql("select up.id,ud.* from user_plans as up,user_details as ud where up.featured=1 AND
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                $featureddetails = UserDetails::model()->findAllBySql("select up.id,ud.* from user_plans as up,user_details as ud where up.featured=1 AND
 ud.id = up.user_id LIMIT 7");
-                if (count($featureddetails) > 0)
-                        $featured = $featureddetails;
-                echo CJSON::encode(array('response' => 'success', 'featured' => $featured));
-                yii::app()->end();
+                                if (count($featureddetails) > 0)
+                                        $featured = $featureddetails;
+                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $featured));
+                                yii::app()->end();
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Conflict'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
         }
 
         public function actionWedingPlanner() {
@@ -56,16 +175,26 @@ ud.id = up.user_id LIMIT 7");
                 header('Content-type:appalication/json');
                 $featured_list = array();
                 $category = array();
-                $categoryDetails = MasterServices::model()->findAll(array('condition' => 'id in (select category_id from vendor_services where status=1 and vendor_id  in (select id from vendor_details where status=1 and approval_status=1))'));
-                $featured_listDetails = VendorServices::model()->findAll(array('condition' => 'status=1  and featured=1 and (vendor_id  in (select id from vendor_details where status=1 and approval_status=1))'));
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                $categoryDetails = MasterServices::model()->findAll(array('condition' => 'id in (select category_id from vendor_services where status=1 and vendor_id  in (select id from vendor_details where status=1 and approval_status=1))'));
+                                $featured_listDetails = VendorServices::model()->findAll(array('condition' => 'status=1  and featured=1 and (vendor_id  in (select id from vendor_details where status=1 and approval_status=1))'));
 
-                if (count($featured_listDetails) > 0)
-                        $featured_list = $featured_listDetails;
-                if (count($categoryDetails) > 0)
-                        $category = $categoryDetails;
+                                if (count($featured_listDetails) > 0)
+                                        $featured_list = $featured_listDetails;
+                                if (count($categoryDetails) > 0)
+                                        $category = $categoryDetails;
 
-                echo CJSON::encode(array('response' => 'success', 'category' => $category, 'featured_list' => $featured_list));
-                yii::app()->end();
+                                echo CJSON::encode(array('response' => 'success', 'category' => $category, 'featured_list' => $featured_list));
+                                yii::app()->end();
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Conflict'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
         }
 
         public function actionRegisterFirstStep() {
@@ -184,9 +313,25 @@ ud.id = up.user_id LIMIT 7");
         public function actionPartnerdetails() {
                 $this->layout = null;
                 header('Content-Type: application/json');
-                if (isset($_POST['id']) && $_POST['id'] > 0) {
-                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $partner_details));
-                        yii::app()->end();
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if (isset($_REQUEST['userid']) && $_REQUEST['userid'] > 0) {
+                                if ($this->validateToken($_REQUEST['token'])) {
+                                        $partner_details = PartnerDetails::model()->findByAttributes(array('user_id' => $_REQUEST['userid']));
+                                        if (count($partner_details) > 0) {
+                                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $partner_details));
+                                                yii::app()->end();
+                                        } else {
+                                                echo CJSON::encode(array('response' => 'error', 'code' => '404', 'result' => 'Not Found'));
+                                                yii::app()->end();
+                                        }
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Conflict'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '405', 'result' => 'Method Not Allowed'));
+                                yii::app()->end();
+                        }
                 } else {
                         echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
                         yii::app()->end();
@@ -196,10 +341,141 @@ ud.id = up.user_id LIMIT 7");
         public function actionUserInterest() {
                 $this->layout = null;
                 header('Content-Type: application/json');
-                if (isset($_POST['id']) && $_POST['id'] > 0) {
-                        $interest = UserInterests::model()->findByAttributes(array('user_id' => $_POST['id']));
-                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $interest));
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if (isset($_POST['id']) && $_POST['id'] > 0) {
+                                $interest = UserInterests::model()->findByAttributes(array('user_id' => $_POST['id']));
+                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $interest));
+                                yii::app()->end();
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
                         yii::app()->end();
+                }
+        }
+
+        public function actionFavoritelist() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] != "") {
+                                        $criteria = new CDbCriteria();
+                                        $criteria->condition = 'id in (select partner_id from favorites where user_id="' . $_REQUEST['userid'] . '" AND status = 1)';
+                                        $faveratelist = UserDetails::model()->find($criteria);
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $faveratelist));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '405', 'result' => 'Method Not Allowed'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function actionSimilarProfile() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                $similarprofile = array();
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] != "") {
+                                        $userid = $_REQUEST['userid'];
+                                        $user = UserDetails::model()->findByAttributes(array('user_id' => $userid));
+                                        $similar_profile1 = UserDetails::model()->findAllByAttributes(array(
+                                            'gender' => $user->gender,
+                                            'religion' => $user->religion,
+                                            'caste' => $user->caste,
+                                            'dob_year' => $user->dob_year,
+                                            'country' => $user->country,
+                                            'state' => $user->state,
+                                            'city' => $user->city,
+                                            'education_level' => $user->education_level,
+                                            'working_as' => $user->working_as), array('condition' => 'user_id != "' . $userid . '"'));
+
+                                        $similar_profile2 = UserDetails::model()->findAllByAttributes(array(
+                                            'gender' => $user->gender,
+                                            'religion' => $user->religion,
+                                            'caste' => $user->caste,
+                                            'dob_year' => $user->dob_year,
+                                            'country' => $user->country,
+                                            'state' => $user->state,
+                                            'city' => $user->city,
+                                            'education_level' => $user->education_level), array('condition' => 'user_id != "' . $userid . '"'));
+                                        $similar_profile3 = UserDetails::model()->findAllByAttributes(array(
+                                            'gender' => $user->gender,
+                                            'religion' => $user->religion,
+                                            'caste' => $user->caste,
+                                            'dob_year' => $user->dob_year,
+                                            'country' => $user->country,
+                                            'state' => $user->state,
+                                            'city' => $user->city,
+                                                ), array('condition' => 'user_id != "' . $userid . '"'));
+                                        $similar_profile4 = UserDetails::model()->findAllByAttributes(array(
+                                            'gender' => $user->gender,
+                                            'religion' => $user->religion,
+                                            'caste' => $user->caste,
+                                            'dob_year' => $user->dob_year,
+                                            'country' => $user->country,
+                                            'state' => $user->state,
+                                                ), array('condition' => 'user_id != "' . $userid . '"'));
+                                        $similar_profile5 = UserDetails::model()->findAllByAttributes(array(
+                                            'gender' => $user->gender,
+                                            'religion' => $user->religion,
+                                            'caste' => $user->caste,
+                                            'dob_year' => $user->dob_year,
+                                            'country' => $user->country,
+                                                ), array('condition' => 'user_id != "' . $userid . '"'));
+                                        $similar_profile6 = UserDetails::model()->findAllByAttributes(array(
+                                            'gender' => $user->gender,
+                                            'religion' => $user->religion,
+                                            'caste' => $user->caste,
+                                            'dob_year' => $user->dob_year,
+                                                ), array('condition' => 'user_id != "' . $userid . '"'));
+                                        $similar_profile7 = UserDetails::model()->findAllByAttributes(array(
+                                            'gender' => $user->gender,
+                                            'religion' => $user->religion,
+                                            'caste' => $user->caste,
+                                                ), array('condition' => 'user_id != "' . $userid . '"'));
+                                        $similar_profile8 = UserDetails::model()->findAllByAttributes(array(
+                                            'gender' => $user->gender,
+                                            'religion' => $user->religion), array('condition' => 'user_id != "' . $userid . '"'));
+
+
+                                        if (!empty($similar_profile1)) {
+                                                $similarprofile = $similar_profile1;
+                                        } else if (!empty($similar_profile2)) {
+                                                $similarprofile = $similar_profile2;
+                                        } else if (!empty($similar_profile3)) {
+                                                $similarprofile = $similar_profile3;
+                                        } else if (!empty($similar_profile4)) {
+                                                $similarprofile = $similar_profile4;
+                                        } else if (!empty($similar_profile5)) {
+                                                $similarprofile = $similar_profile5;
+                                        } else if (!empty($similar_profile6)) {
+                                                $similarprofile = $similar_profile6;
+                                        } else if (!empty($similar_profile7)) {
+                                                $similarprofile = $similar_profile7;
+                                        } else if (!empty($similar_profile8)) {
+                                                $similarprofile = $similar_profile8;
+                                        } else {
+                                                $similarprofile = array();
+                                        }
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $similarprofile));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
                 } else {
                         echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
                         yii::app()->end();
@@ -209,10 +485,20 @@ ud.id = up.user_id LIMIT 7");
         public function actionMyMatches() {
                 $this->layout = null;
                 header('Content-Type: application/json');
-                if (isset($_POST['id']) && $_POST['id'] > 0) {
-                        $matches = $this->MyMatches($_POST['id']);
-                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $matches));
-                        yii::app()->end();
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] > 0) {
+                                        $matches = $this->MyMatches($_REQUEST['userid']);
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $matches));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
                 } else {
                         echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
                         yii::app()->end();
@@ -235,10 +521,20 @@ ud.id = up.user_id LIMIT 7");
         public function actionMyTwoWayMatches() {
                 $this->layout = null;
                 header('Content-Type: application/json');
-                if (isset($_POST['id']) && $_POST['id'] > 0) {
-                        $twowaymatches = $this->MyTwoWayMatches($_POST['id']);
-                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $twowaymatches));
-                        yii::app()->end();
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['userid']) && $_REQUEST['userid'] > 0) {
+                                        $twowaymatches = $this->MyTwoWayMatches($_REQUEST['userid']);
+                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $twowaymatches));
+                                        yii::app()->end();
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
                 } else {
                         echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
                         yii::app()->end();
@@ -390,21 +686,18 @@ ud.id = up.user_id LIMIT 7");
                 echo $server_output;
         }
 
-//-----
-        public function validateToken($token) {  // token validate, return type array
-                error_reporting(E_ALL);
-                if ($token) {
-                        try {
-                                $config = Factory::fromFile('authConfig/config.php', true);
-                                $secretKey = base64_decode($config->get('jwt')->get('key'));
-                                $token = JWT::decode($token, $secretKey, array($config->get('jwt')->get('algorithm')));
-                                return $token->data;
-                        } catch (Exception $ex) {
-                                return false;
-                        }
-                } else {
-                        return false;
-                }
+        public function actionValToken() {
+                $ch = curl_init();
+                $data = array('token' => 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJjbGllbnRpZCI6IjI2QUZCMDEwLUY5RjctOTQ0Qi1BQUFDLTJEOURDMDc4MjU2QiJ9.E3HlNiBVFs52dUL-6JIETd6RSUT_KlvjIKxNMPoGYov_71TM4xoZBIsZKRg3gaFhO_yle0Obi4YTC70ocXorPg',
+                    'userid' => 79
+                );
+                curl_setopt($ch, CURLOPT_URL, "http://localhost/newgen_wedding/index.php/Api/MyTwoWayMatches");
+                curl_setopt($ch, CURLOPT_POST, 1);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $server_output = curl_exec($ch);
+                curl_close($ch);
+                echo $server_output;
         }
 
         public function userPlan($id) {
@@ -473,7 +766,7 @@ ud.id = up.user_id LIMIT 7");
         }
 
         public function MyMatches($id = 0) {
-
+                $opt = '';
                 $user = UserDetails::model()->findByPk(array('id' => $id));
                 $blocked_members = BlockedMembers::model()->findAllByAttributes(array('user_id' => $id, 'status' => 1));
                 foreach ($blocked_members as $blocked) {
@@ -486,8 +779,7 @@ ud.id = up.user_id LIMIT 7");
                 } else {
                         $blocked_ids = 0;
                 }
-//                var_dump($blocked_ids);
-//                exit;
+
                 $partner = PartnerDetails::model()->findByAttributes(array('user_id' => $id));
                 if ($user->gender == 1) {
                         $gender = 2;
@@ -598,7 +890,7 @@ ud.id = up.user_id LIMIT 7");
                 $condition11 = 'gender = ' . $gender
                         . ' AND id NOT IN (' . $blocked_ids . ') '
                         . ' AND status = 1';
-//                $block_user = 'id NOT IN ("' . $blocked_ids . '")  AND ';
+
                 $matchprofile1 = UserDetails::model()->findAll(array('condition' => $condition1));
                 $matchprofile2 = UserDetails::model()->findAll(array('condition' => $condition2));
                 $matchprofile3 = UserDetails::model()->findAll(array('condition' => $condition3));
@@ -611,8 +903,7 @@ ud.id = up.user_id LIMIT 7");
                 $matchprofile10 = UserDetails::model()->findAll(array('condition' => $condition10));
                 $matchprofile11 = UserDetails::model()->findAll(array('condition' => $condition11));
 
-//                var_dump($condition10);
-//                exit;
+
                 if (!empty($matchprofile1)) {
                         return $matchprofile1;
                 } else if (!empty($matchprofile2)) {
@@ -696,5 +987,25 @@ ud.id = up.user_id LIMIT 7");
                 }
         }
 
-//-----
+        public function validateToken($token) {  // token validate, return type bool
+                error_reporting(E_ALL);
+                $model = ApiClients::model()->findByAttributes(array('access_token' => $token));
+                if (count($model) > 0) {
+                        try {
+                                $config = Factory::fromFile('authConfig/config.php', true);
+                                $secretKey = base64_decode($config->get('jwt')->get('key'));
+                                $token = JWT::decode($token, $secretKey, array($config->get('jwt')->get('algorithm')));
+                                if ($model->client_id == $token->clientid)
+                                        return true;
+                                else {
+                                        return false;
+                                }
+                        } catch (Exception $ex) {
+                                return false;
+                        }
+                } else {
+                        return false;
+                }
+        }
+
 }
