@@ -267,7 +267,7 @@ if ($_REQUEST['code'] != '') {
                                                         </div>
                                                         <div class="col-sm-8 col-xs-8 zeros">
                                                                 <div class="form-group">
-                                                                        <?php echo CHtml::activeDropDownList($firstStep, 'country', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => '--Select Country--', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
+                                                                        <?php echo CHtml::activeDropDownList($firstStep, 'country', CHtml::listData(MasterCountry::model()->findAllByAttributes(array('status' => 1)), 'id', 'country'), array('empty' => '--Please Select Country--', 'class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
                                                                         <?php echo $form->error($firstStep, 'country'); ?>
 
                                                                 </div>
