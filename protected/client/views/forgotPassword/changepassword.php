@@ -64,10 +64,10 @@
 
                                                 <button type="submit"  name="btn_submit" class="btn new-btn btn-default">Reset my password</button>
                                                 <!--<input type="submit" name="btn_submit" value="Reset my password" class="new-btn btn-default">-->
-
+                                        </form>
 
                                 </div>
-                                </form>
+
 
                         </div>
 

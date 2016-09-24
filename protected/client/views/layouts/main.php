@@ -102,7 +102,13 @@
                                                                                                 <li><?php echo CHtml::link('Membership Plans', array('site/index', '#' => 'upgrade')); ?></li>
                                                                                                 <li><?php echo CHtml::link('Search', array('Search/index')); ?></li>
                                                                                                 <li><?php echo CHtml::link('Contact Us', array('site/contact')); ?></li>
-                                                                                                <li class="colors"><a href="#">Couples</a></li>
+                                                                                        <?php } ?>
+                                                                                        <?php if (isset(Yii::app()->session['couple']) && Yii::app()->session['couple'] != '') { ?>
+                                                                                                <li class="colors">
+                                                                                                        <?php echo CHtml::link('<i class="fa locks fa-user"></i>Hi, ' . Yii::app()->session['couple']['couple_name'], array('couple/home')); ?>
+                                                                                                </li>
+                                                                                        <?php } else { ?>
+
                                                                                         <?php } ?>
                                                                                         <?php
                                                                                         if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != '') {

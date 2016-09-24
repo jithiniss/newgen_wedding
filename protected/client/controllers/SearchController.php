@@ -4,24 +4,24 @@ class SearchController extends Controller {
 
         public function actionIndex() {
                 $model = new SavedSearch();
-                if (isset(Yii::app()->session['user'])) {
-                        if (isset($_POST['SavedSearch'])) {
-                                $model->attributes = $_POST['SavedSearch'];
-                                $model->user_id = Yii::app()->session['user']['id'];
-                                if ($_POST['SavedSearch']['gender'] == 2) {
-                                        $model->gender = 1;
-                                } else {
-                                        $model->gender = 2;
-                                }
+//                if (isset(Yii::app()->session['user'])) {
+                if (isset($_POST['SavedSearch'])) {
+                        $model->attributes = $_POST['SavedSearch'];
+                        $model->user_id = Yii::app()->session['user']['id'];
+                        if ($_POST['SavedSearch']['gender'] == 2) {
+                                $model->gender = 1;
+                        } else {
+                                $model->gender = 2;
+                        }
 
-                                if ($model->validate()) {
-                                        if ($model->save()) {
+                        if ($model->validate()) {
+                                if ($model->save()) {
 
-                                                $this->redirect(Yii::app()->request->baseUrl . '/index.php/Search/Result/id/' . $this->encrypt_decrypt('encrypt', $model->id));
-                                        }
+                                        $this->redirect(Yii::app()->request->baseUrl . '/index.php/Search/Result/id/' . $this->encrypt_decrypt('encrypt', $model->id));
                                 }
                         }
                 }
+//                }
 
                 $this->render('basic', array('model' => $model));
         }
