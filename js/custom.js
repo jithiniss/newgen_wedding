@@ -100,19 +100,20 @@ $(document).ready(function () {
 
 });
 
-function test(){
-     var formdata = $("#register-one-form").serializeArray();
-     formdata.push({'token':'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE0NzM0MTk1ODYsImp0aSI6InZiQVM5ZXdCOVwvRjZRSVZJc2FONitGcndpT3d3Q1dGK05QN3pTV2E3VkdNPSIsImlzcyI6ImxvY2FsaG9zdCIsIm5iZiI6MTQ3MzQxOTU5NiwiZXhwIjoxNDczNDIzMTk2LCJkYXRhIjp7InVzZXJJZCI6Ijc5IiwidXNlck5hbWUiOiJzdWphbm5hdGhAZ21haWwuY29tIn19.rcysBhzFI49YOBs51tEtw6WunHYAnw4kSrVK3NdPPrEQ2ObBpdcyZmqPUNrFR77YBD1_5ryfJE7ygEArNoBctw'});
+
+function test(name,action){   
+     var formdata = $("#"+name).serializeArray();
+     token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJjbGllbnRpZCI6IjI2QUZCMDEwLUY5RjctOTQ0Qi1BQUFDLTJEOURDMDc4MjU2QiJ9.E3HlNiBVFs52dUL-6JIETd6RSUT_KlvjIKxNMPoGYov_71TM4xoZBIsZKRg3gaFhO_yle0Obi4YTC70ocXorPg';
      $.ajax({
-         url: baseurl + 'Api/RegisterFirstStep',
+         url: baseurl + 'Api/'+action+'?token='+token,
          type: "POST",
          data:formdata,
          success:function(data){
              alert("HAI");
-             
+             return false;
          }
          
          
      });
-     
+     return false;
 }
