@@ -249,11 +249,21 @@ class RegisterController extends Controller {
 
         public function actionUpgradePlan($plan) {
                 $plan_id = $this->encrypt_decrypt('decrypt', $plan);
+                $uid = Yii::app()->session['user']['id'];
                 $plans = Plans::model()->findByPk($plan_id);
+                $amt = $plans->amount;
                 if (!empty($plans)) {
+                        $micro = time();
                         if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != NULL) {
-
-                                $this->redirect(array('PlanPaymentSuccess', 'plan_id' => $plan_id));
+                                //accesscode=AVPD66DI80AD30DPDA;
+                                //workingkey=	4469F0857AF8C7CA6A07E3455E7E2A24;
+                                $pay_details = array();
+                                $pay_details['tid'] = '';
+                                $pay_details['merchant_id'] = 108401;
+                                $pay_details['order_id'] = $plan_id;
+                                $pay_details['amount'] = $amt;
+                                $this->renderPartial('payment', array('pay_details' => $pay_details));
+                                //  $this->redirect(array('PlanPaymentSuccess', 'plan_id' => $plan_id));
 //  $this->redirect(array('PlanPaymentError', 'plan_id' => $plan_id));
                         } else {
                                 Yii::app()->session['unloggedUserPlan'] = $plan_id;
