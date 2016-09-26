@@ -5,12 +5,12 @@
 
                                 <div class="new_form">
                                         <?php if (Yii::app()->user->hasFlash('success')): ?>
-                                                <div class="alert alert-success login_error">
+                                                <div class="alert alert-success ">
                                                         <?php echo Yii::app()->user->getFlash('success'); ?>
                                                 </div>
                                         <?php endif; ?>
                                         <?php if (Yii::app()->user->hasFlash('vendor_login_error')): ?>
-                                                <div class="alert alert-danger login_error">
+                                                <div class="alert alert-danger ">
                                                         <?php echo Yii::app()->user->getFlash('vendor_login_error'); ?>
                                                 </div>
                                         <?php endif; ?>

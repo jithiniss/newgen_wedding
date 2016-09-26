@@ -267,4 +267,54 @@ class CoupleController extends Controller {
                 }
         }
 
+        public function actionLike() {
+                $model = new CoupleUploadReport;
+                $like = CoupleUploadReport::model()->findByAttributes(array('like_id' => Yii::app()->session['couple']['id'], 'couple_upload_id' => $_POST['couple_upload_id']));
+                if (empty($like)) {
+                        $model->couple_id = $_POST['couple_id'];
+                        $model->couple_upload_id = $_POST['couple_upload_id'];
+                        $model->like_id = $_POST['like_id'];
+                        $model->like = 1;
+                        $model->doc = date('Y-m-d H-i-s');
+                        if ($model->save()) {
+                                $this->redirect('home');
+                        }
+                } else {
+                        $like->like = 1;
+                        if ($like->save()) {
+                                $this->redirect('home');
+                        }
+                }
+        }
+
+        public function actionDislike() {
+                $model = new CoupleUploadReport;
+                $dislike = CoupleUploadReport::model()->findByAttributes(array('dislike_id' => Yii::app()->session['couple']['id'], 'couple_upload_id' => $_POST['couple_upload_id']));
+                if (empty($dislike)) {
+                        $model->couple_id = $_POST['couple_id'];
+                        $model->couple_upload_id = $_POST['couple_upload_id'];
+                        $model->dislike_id = $_POST['dislike_id'];
+                        $model->dislike = 1;
+                        $model->doc = date('Y-m-d H-i-s');
+                        if ($model->save()) {
+                                $this->redirect('home');
+                        }
+                } else {
+                        $dislike->dislike = 1;
+                        if ($dislike->save()) {
+                                $this->redirect('home');
+                        }
+                }
+        }
+
+        public function actionComment() {
+                $model = new CoupleUploadReport;
+                $model->comment_id = Yii::app()->session['couple']['id'];
+                $model->comment = $_POST['comment_box'];
+                $model->doc = date('Y-m-d H-i-s');
+                if ($model->save()) {
+                        $this->redirect('home');
+                }
+        }
+
 }

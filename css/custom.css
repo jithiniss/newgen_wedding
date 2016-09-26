@@ -793,5 +793,27 @@ i.fa.fa-paper-plane {
         margin-bottom: 33px;
         color: #d8379d;
         float: right;
-        margin-right: 299px;
+        /*margin-right: 299px;*/
+}
+.couple_textarea{
+        padding-left: 30px;
+        width: 685px;
+}
+.comment_text{
+        float: left;
+        font-size: 12px;
+        font-weight: normal;
+        color: #d46060;
+}
+.share_friends{
+        width: 8%;
+        border: 0;
+        border-radius: 0;
+        color: #fff;
+        padding-top: 10px;
+        padding-bottom: 10px;
+        margin-bottom: 33px;
+        color: #000;
+        float: right;
+        margin-right: 705px;
 }

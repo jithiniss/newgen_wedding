@@ -52,6 +52,7 @@ return array(
     'couple-home' => 'couple/home',
     'couple-profile' => 'Couple/myprofile',
     'couple-add-new-post' => 'couple/AddNewPost',
+    'couple-account-settings' => 'Couple/accountsettings',
     '<controller:\w+>/<id:\d+>' => '<controller>/view',
 //    '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
     '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

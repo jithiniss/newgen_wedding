@@ -14,7 +14,22 @@
 
 
                 <div class="form-group couple_class"  >
+                        <select class="share_friends">
+                                <option value="">share</option>
+                                <option id="share_friends_value" value="1">a friend</option>
+                                <option value="2">public</option>
+                        </select>
                         <button type="submit" name="CoupleUploads" class="couple_post_class">POST</button>
                 </div>
         </form>
 </div>
+
+
+<script>
+        $(document).ready(function () {
+                $("#share_friends_value").on('click', function () {
+                        alert();
+                });
+        });
+
+</script>

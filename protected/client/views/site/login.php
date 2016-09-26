@@ -6,7 +6,7 @@
                                 <div class="new_form">
                                         <h1>Login</h1>
                                         <?php if (Yii::app()->user->hasFlash('login_error')): ?>
-                                                <div class="alert alert-danger login_error">
+                                                <div class="alert alert-danger ">
                                                         <?php echo Yii::app()->user->getFlash('login_error'); ?>
                                                 </div>
                                         <?php endif; ?>
