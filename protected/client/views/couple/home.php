@@ -14,18 +14,19 @@
 
 
                         <div class="col-md-9">
-                                <?php if (Yii::app()->user->hasFlash('success')): ?>
-                                        <div class="alert alert-success">
-                                                <strong>Success!</strong> <?php echo Yii::app()->user->getFlash('success'); ?>
+                                <div class="add_new_post">
+                                        <?php if (Yii::app()->user->hasFlash('success')): ?>
+                                                <div class="alert alert-success">
+                                                        <strong>Success!</strong> <?php echo Yii::app()->user->getFlash('success'); ?>
 
-                                        </div>
-                                <?php endif; ?>
-                                <a href="#" style="text-decoration:none;" class="connect-86" id="post_id">Add Post</a>
-                                <?php // echo CHtml::link('Add Post', array('couple/addNewPost'), array('class' => 'connect-86')); ?>
-                                <?php
-                                $this->renderPartial('_addpost', array('addedpost' => $addedpost));
-                                ?>
-
+                                                </div>
+                                        <?php endif; ?>
+                                        <a href="#" style="text-decoration:none;" class="connect-86" id="post_id">Add Post</a>
+                                        <?php // echo CHtml::link('Add Post', array('couple/addNewPost'), array('class' => 'connect-86')); ?>
+                                        <?php
+                                        $this->renderPartial('_addpost', array('addedpost' => $addedpost));
+                                        ?>
+                                </div>
                         </div>
 
                         <div class="col-md-9">
@@ -44,7 +45,7 @@
                                                                                         $folder = Yii::app()->Upload->folderName(0, 1000, $profile_pic->id);
                                                                                         ?>
                                                                                         <img  class="center-block couple" src = "<?php echo Yii::app()->baseUrl . '/uploads/couple/' . $folder . '/' . $profile_pic->id . '/profile/' . $userPic[0] . '_31_49' . '.' . $userPic[1]; ?>">
-                                                                                        <!--<img class="center-block line" src="<?php // echo Yii::app()->request->baseUrl;                                                                                                                                                                                                                                                                          ?>/uploads/couple/1000/<?= $model->id; ?>/profile/' . $userPic[0] . '_' . $width . '_' . $height . '.' . $userPic[1];">-->
+                                                                                        <!--<img class="center-block line" src="<?php // echo Yii::app()->request->baseUrl;                                                                                                                                                                                                                                                                                                                                                                           ?>/uploads/couple/1000/<?= $model->id; ?>/profile/' . $userPic[0] . '_' . $width . '_' . $height . '.' . $userPic[1];">-->
                                                                                 <?php } else {
                                                                                         ?>
                                                                                         <img class="center-block line" src="<?php echo Yii::app()->request->baseUrl; ?>/images/demo-female.jpg">
@@ -66,9 +67,7 @@
                                                                                 <div class="cont"><?php echo $post->title; ?></div>
                                                                                 <?php
                                                                                 if ($post->file != "") {
-                                                                                        if ($post->file_type == 2) {
-                                                                                                echo '<img class="img-responsive" src="' . Yii::app()->baseUrl . '/uploads/couple' . '/' . $post->cb . '/files/' . $post->id . '_.' . $post->file . '" />';
-                                                                                        }
+                                                                                        echo '<img class="img-responsive" src="' . Yii::app()->baseUrl . '/uploads/couple' . '/' . $post->cb . '/files/' . $post->id . '_.' . $post->file . '" />';
                                                                                 }
                                                                                 ?>
 
@@ -87,7 +86,7 @@
                                                                                         <a href="#" data-toggle="tooltip"  data-placement="top" title="Like"><i class="fa fa-thumbs-o-up" style="font-size: 15px;padding: 8px;color: blue;"> <?php echo $total; ?> </i></a>
 
                                                                                 <?php } else { ?>
-                                                                                        <a href="#" data-toggle="tooltip" onclick="likeuploads(<?php echo $post->cb ?>,<?php echo $post->id ?>,<?php echo Yii::app()->session['couple']['id']; ?>)" data-placement="top" title="Like"><i class="fa fa-thumbs-o-up" style="font-size: 15px;padding: 8px;"> <?php echo '23'; ?> </i></a>
+                                                                                        <a href="#" data-toggle="tooltip" onclick="likeuploads(<?php echo $post->cb ?>,<?php echo $post->id ?>,<?php echo Yii::app()->session['couple']['id']; ?>)" data-placement="top" title="Like"><i class="fa fa-thumbs-o-up" style="font-size: 15px;padding: 8px;"> <?php echo $total; ?> </i></a>
 
                                                                                 <?php } ?>
                                                                                 <?php
@@ -101,7 +100,7 @@
                                                                                         <a href="#" data-toggle="tooltip" data-placement="top" title="Dislike"><i class="fa fa-thumbs-o-down" style="font-size: 15px;padding: 8px;color: blue; "> <?php echo $total1; ?> </i></a>
 
                                                                                 <?php } else { ?>
-                                                                                        <a href="#" data-toggle="tooltip" onclick="dislikeuploads(<?php echo $post->cb ?>,<?php echo $post->id ?>,<?php echo Yii::app()->session['couple']['id']; ?>)" data-placement="top" title="Dislike"><i class="fa fa-thumbs-o-down" style="font-size: 15px;padding: 8px;"> <?php echo '23'; ?> </i></a>
+                                                                                        <a href="#" data-toggle="tooltip" onclick="dislikeuploads(<?php echo $post->cb ?>,<?php echo $post->id ?>,<?php echo Yii::app()->session['couple']['id']; ?>)" data-placement="top" title="Dislike"><i class="fa fa-thumbs-o-down" style="font-size: 15px;padding: 8px;"> <?php echo $total1; ?> </i></a>
 
                                                                                 <?php } ?>
                                                                                 <?php
@@ -111,64 +110,63 @@
                                                                                 $total2 = CoupleUploadReport::model()->count($criteria2);
                                                                                 ?>
 
-                                                                                <a href="#" data-toggle="tooltip" id="couple_comment"  data-placement="top" title="Comment"><i class="fa fa-comments-o" style="font-size: 15px;padding: 8px;"> <?php echo $total2; ?>  </i></a>
-                                                                                <div class="cont couple_comment">
-                                                                                        dhggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggdh
-                                                                                        <div class="couple_text">
-
+                                                                                <a href="#" data-toggle="tooltip"   data-placement="top" title="Comments"><i class="fa fa-comments-o" id="couple_comment" style="font-size: 15px;padding: 8px;"> <?php echo $total2; ?>  </i></a>
+                                                                                <?php
+                                                                                $this->renderPartial('_addpost', array('addedpost' => $addedpost));
+                                                                                ?>
+                                                                                <style>
+                                                                                        .post_user_image img {
+                                                                                                width: 25px;
+                                                                                        }
+                                                                                        .user_comment{
+                                                                                                margin: 20px 0px;
+                                                                                        }
+                                                                                        .post_user_image {
+                                                                                                width: 7%;
+                                                                                                float: left;
+                                                                                        }
+                                                                                        .post_user_content {
+                                                                                                width: 93%;
+                                                                                                float: left;
+                                                                                        }
+                                                                                        .post_user_content h5 {
+                                                                                                font-weight: bold;
+                                                                                                font-size: 9px;
+                                                                                                margin: 0px;
+                                                                                        }
+                                                                                        .post_user_content p {
+                                                                                                margin: 0px;
+                                                                                        }
+                                                                                        .post_user {
+                                                                                                margin-bottom: 15px;
+                                                                                        }
+                                                                                </style>
+                                                                                <div class="user_comment">
+                                                                                        <div id="post_content<?php echo $post->id ?>">
                                                                                                 <?php
-//                                                                                                $comment = CoupleUploadReport::model()->findAll();
-//                                                                                                foreach ($comment as $comments) {
-//                                                                                                        $couple = CoupleDetails::model()->findByPk($comments->comment_id);
+                                                                                                $comments = CoupleUploadReport::model()->findAllByAttributes(array('couple_upload_id' => $post->id), array('limit' => 3, 'order' => 'id desc'));
+                                                                                                $this->renderPartial('_coment_content', array('comments' => $comments));
                                                                                                 ?>
-                                                                                                <div class="comment_text"><?php echo 'veena-mahesh' ?></div>
-                                                                                                <div class="couple_text_date">
-                                                                                                        <?php // echo date(" dS F Y, H:i", strtotime($comments->doc)); ?>
-                                                                                                </div>
-                                                                                                <?php // }  ?>
+
                                                                                         </div>
 
+                                                                                        <div class="clearfix"></div>
                                                                                 </div>
 
                                                                                 <div class="common">
                                                                                         <div class="col-sm-8 col-xs-8 zeros">
                                                                                                 <div class="form-group">
-                                                                                                        <textarea id="couple_textarea" name="comment_box" class="couple_textarea" placeholder="Share your comments here....."></textarea>
+                                                                                                        <textarea id="couple_textarea" post_id="<?php echo $post->id ?>" name="comment_box" class="couple_textarea" placeholder="Share your comments here....."></textarea>
                                                                                                 </div>
                                                                                         </div>
-
+                                                                                        <input type="hidden" id="comment_id" value="<?php echo $post->cb ?>"/>
+                                                                                        <input type="hidden" id="comment_upload_id" value="<?php echo $post->id ?>"/>
+                                                                                        <input type="hidden" id="session_upload_id" value="<?php echo Yii::app()->session['couple']['id']; ?>"/>
                                                                                 </div>
 
                                                                         </div>
                                                                 </div>
 
-
-
-
-
-
-                                                                <!--                                                                <div class="ui-send ">
-                                                                                                                                        <div class="send-left">
-                                                                <?php
-//                                                                                if ($post->file != "") {
-//                                                                                        echo '<img class="img-responsive" src="' . Yii::app()->baseUrl . '/uploads/couple' . '/' . $post->cb . '/files/' . $post->id . '_.' . $post->file . '" />';
-                                                                ?>
-
-                                                                <?php // }         ?>
-                                                                                                                                        </div>
-
-                                                                                                                                        <div class="send-left couple_text">
-                                                                <?php // echo $post->texts;         ?>
-                                                                                                                                        </div>
-                                                                                                                                        <div class="send-right">
-                                                                                                                                                <div class="lev-2">
-                                                                                                                                                        <h3><?php // echo date(" dS F Y", strtotime($post->doc));                                                                                                                                                                                                                                                                               ?></h3>
-                                                                                                                                                </div>
-                                                                                                                                                                                                                <div class="lev-2">
-                                                                                                                                                                                                                <a href="">Like</a>
-                                                                                                                                                                                                                </div>
-                                                                                                                                        </div>
-                                                                                                                                </div>-->
                                                         </div>
                                                         <?php
                                                 }
@@ -226,15 +224,23 @@
 
                 $("textarea#couple_textarea").keypress(function (event) {
                         if (event.which == 13) {
+
                                 event.preventDefault();
-                                var comment = $("#couple_textarea").val();
+                                var post_id = $(this).attr("post_id");
+                                var comment = $(this).val();
+
+                                var couple_id = $("#comment_id").val();
+                                //      alert(comment);
+                                var couple_upload_id = post_id;
+                                var comment_id = $("#session_upload_id").val();
                                 $.ajax({
                                         url: baseurl + 'Couple/Comment',
                                         type: "POST",
                                         cache: 'false',
-                                        data: {comment: comment}
+                                        data: {couple_id: couple_id, couple_upload_id: couple_upload_id, comment_id: comment_id, comment: comment}
                                 }).done(function (data) {
-                                        window.location.replace("<?= Yii::app()->baseUrl; ?>/index.php/couple/home/");
+                                        $("#post_content" + post_id).html(data);
+                                        //  window.location.replace("<?= Yii::app()->baseUrl; ?>/index.php/couple/home/");
                                 });
                         }
                 });
@@ -264,7 +270,9 @@
                 });
         }
         $(document).ready(function () {
-                $("#comment_box").hide();
+                $("#couple_comment").on('click', function () {
+                        $("#comment_box").show();
+                });
         });
 </script>
 

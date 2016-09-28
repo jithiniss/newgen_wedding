@@ -39,8 +39,10 @@ class CoupleController extends Controller {
                         $model->status = 1;
                         $model->doc = date('Y-m-d');
                         $bride = UserDetails::model()->find(['condition' => '( user_id = "' . $model->bride_id . '") and password = "' . $model->bride_password . '" ']);
-                        $groom = UserDetails::model()->find(['condition' => '( user_id = "' . $model->groom_id . '") and password = "' . $model->bride_password . '" ']);
+                        $groom = UserDetails::model()->find(['condition' => '( user_id = "' . $model->groom_id . '") and password = "' . $model->groom_password . '" ']);
                         if ($bride == '' || $bride == NULL || $groom == '' || $groom == NULL) {
+                                echo 'hloo';
+                                exit;
                                 Yii::app()->user->setFlash('register_error1', "Invalid Bride Details or Groom Details. Try again later..");
                                 $this->redirect(array('register'));
                         } else {
@@ -100,6 +102,7 @@ class CoupleController extends Controller {
                 if (isset(Yii::app()->session['couple']) && Yii::app()->session['couple'] != '') {
                         $model = CoupleDetails::model()->findByPk(Yii::app()->session['couple']['id']);
                         $adduploads = CoupleUploads::model()->findAllByAttributes(array(), array('order' => 'id DESC'));
+
                         $this->render('home', array('model' => $model, 'adduploads' => $adduploads));
                 } else {
                         $this->redirect(array('logout'));
@@ -108,9 +111,9 @@ class CoupleController extends Controller {
 
         public function actionMyProfile() {
                 if (isset(Yii::app()->session['couple']) && Yii::app()->session['couple'] != '') {
-                        $post = new CoupleUploads;
                         $model = CoupleDetails::model()->findByPk(Yii::app()->session['couple']['id']);
-                        $this->render('myaccount', array('model' => $model, 'post' => $post));
+                        $adduploads = CoupleUploads::model()->findAllByAttributes(array('status' => 1), array('condition' => 'cb = ' . Yii::app()->session['couple']['id'] . ' or to_friend = ' . Yii::app()->session['couple']['id'] . '', 'order' => 'id DESC'));
+                        $this->render('myaccount', array('model' => $model, 'adduploads' => $adduploads));
                 } else {
                         $this->redirect(array('logout'));
                 }
@@ -119,8 +122,7 @@ class CoupleController extends Controller {
         public function actionAddNewPost() {
                 if (isset(Yii::app()->session['couple']) && Yii::app()->session['couple'] != '') {
                         $addedpost = new CoupleUploads;
-                        if (isset($_POST['CoupleUploads'])) {
-                                $addedpost->attributes = $_POST['CoupleUploads'];
+                        if (isset($_POST['title'])) {
                                 $file = CUploadedFile::getInstanceByName('file');
                                 if (isset($file)) {
                                         $addedpost->file = $file->extensionName;
@@ -132,6 +134,11 @@ class CoupleController extends Controller {
                                 $addedpost->status = 1;
                                 $addedpost->doc = date('Y-m-d H-i-s');
                                 $addedpost->title = $_POST['title'];
+                                if (isset($_POST['to_friend']) != '') {
+                                        $addedpost->to_friend = $_POST['to_friend'];
+                                        $addedpost->to_public = 0;
+                                }
+                                $addedpost->to_public = 1;
                                 if ($addedpost->save(FALSE)) {
                                         if (!empty($addedpost->file)) {
 
@@ -149,6 +156,7 @@ class CoupleController extends Controller {
                                         $this->redirect(array('Home'));
                                 }
                         }
+
                         $this->render('home', array('model' => $model, 'addedpost' => $addedpost));
                 } else {
 
@@ -309,12 +317,17 @@ class CoupleController extends Controller {
 
         public function actionComment() {
                 $model = new CoupleUploadReport;
+                $model->couple_id = $_POST['couple_id'];
+                $model->couple_upload_id = $_POST['couple_upload_id'];
                 $model->comment_id = Yii::app()->session['couple']['id'];
-                $model->comment = $_POST['comment_box'];
+                $model->comment = 1;
+                $model->comments = $_POST['comment'];
                 $model->doc = date('Y-m-d H-i-s');
+                $comments = CoupleUploadReport::model()->findAllByAttributes(array('couple_upload_id' => $_POST['couple_upload_id']), array('limit' => 3, 'order' => 'id desc'));
                 if ($model->save()) {
-                        $this->redirect('home');
+
                 }
+                $this->renderPartial('_coment_content', array('comments' => $comments));
         }
 
 }

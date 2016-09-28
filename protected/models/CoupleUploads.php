@@ -38,7 +38,7 @@ class CoupleUploads extends CActiveRecord {
 //                    array('dou', 'safe'),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id, title, file_type, file, texts, comment, status, cb, doc, ub, dou', 'safe', 'on' => 'search'),
+                    array('id, title, file_type, file, texts, comment, status,to_public,to_friend, cb, doc, ub, dou', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -64,6 +64,8 @@ class CoupleUploads extends CActiveRecord {
                     'texts' => 'Texts',
                     'comment' => 'Comment',
                     'status' => 'Status',
+                    'to_public' => 'To Public',
+                    'to_friend' => 'To Friend',
                     'cb' => 'Cb',
                     'doc' => 'Doc',
                     'ub' => 'Ub',
@@ -95,6 +97,8 @@ class CoupleUploads extends CActiveRecord {
                 $criteria->compare('texts', $this->texts, true);
                 $criteria->compare('comment', $this->comment, true);
                 $criteria->compare('status', $this->status);
+                $criteria->compare('to_public', $this->to_public);
+                $criteria->compare('to_friend', $this->to_friend, true);
                 $criteria->compare('cb', $this->cb);
                 $criteria->compare('doc', $this->doc, true);
                 $criteria->compare('ub', $this->ub);
