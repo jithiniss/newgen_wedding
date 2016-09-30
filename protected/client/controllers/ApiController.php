@@ -197,117 +197,174 @@ ud.id = up.user_id LIMIT 7");
                 }
         }
 
-        public function actionRegisterFirstStep() {
+        public function actionSetPrimaryInfo() {
                 $this->layout = null;
                 header('Content-Type: application/json');
-                if (isset($_POST['id']) && $_POST['id'] > 0) {
-                        if ($userDetails = $this->validateToken($_POST['id'])) {
-                                $firstStep = UserDetails::model()->findByPk($userDetails->userId);
-                        } else {
-                                $firstStep = new UserDetails('userFirstStep');
-                        }
-                } else {
-                        $firstStep = new UserDetails('userFirstStep');
-                }
-
-                if (isset($_POST['UserDetails'])) {
-                        if ($firstStep->save()) {
-                                UserDetails::model()->userId($firstStep->id)->save();
-                                $this->partnerDetails($firstStep->id)->save(false);
-                                $this->userPlan($firstStep->id)->save(false);
-                                $this->userInterest($firstStep->id)->save(false);
-                                $user = UserDetails::model()->findByPk($firstStep->id);
-                                $user->cb = $firstStep->id;
-                                $user->ub = $firstStep->id;
-                                $user->photo_visibility = 1;
-                                $user->save(FALSE);
-                                $plan = UserPlans::model()->findByAttributes(array('user_id' => $user->id));
-                                $this->RegisterMail($user, 1);
-                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => 'go to second step'));
-                                yii::app()->end();
-                        }
-                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => $firstStep->getErrors()));
-                        yii::app()->end();
-                }
-                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
-                yii::app()->end();
-        }
-
-        public function actionSecondStep() {
-                $this->layout = null;
-                header('Content-Type: application/json');
-                if (isset($_POST['id']) && $_POST['id'] > 0) {
-                        $secondStep = UserDetails::model()->findByPk($_POST['id']);
-                        $secondStep->scenario = 'userSecondStep';
-                        if (isset($_POST['UserDetails'])) {
-                                if ($secondStep->save()) {
-                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'msg' => $secondStep->getErrors()));
-                                        yii::app()->end();
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_POST['id']) && $_POST['id'] > 0) {
+                                        $firstStep = UserDetails::model()->findByPk($userDetails->userId);
+                                        if (count($firstStep) == 0)
+                                                $firstStep = new UserDetails('userFirstStep');
                                 } else {
-                                        echo CJSON::encode(array('response' => 'error', 'code' => '504', 'msg' => $secondStep->getErrors()));
+                                        $firstStep = new UserDetails('userFirstStep');
+                                }
+
+                                if (isset($_POST['UserDetails'])) {
+                                        $firstStep = $this->setFirstStep($firstStep, $_POST['UserDetails']);
+                                        if ($firstStep->save()) {
+                                                UserDetails::model()->userId($firstStep->id)->save();
+                                                $this->partnerDetails($firstStep->id)->save(false);
+                                                // $this->userPlan($firstStep->id)->save(false);
+                                                $this->userInterest($firstStep->id)->save(false);
+                                                $user = UserDetails::model()->findByPk($firstStep->id);
+                                                $user->cb = $firstStep->id;
+                                                $user->ub = $firstStep->id;
+                                                $user->photo_visibility = 1;
+                                                $user->save(FALSE);
+                                                //$plan = UserPlans::model()->findByAttributes(array('user_id' => $user->id));
+                                                //$this->RegisterMail($user, 1);
+                                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $firstStep->id));
+                                                yii::app()->end();
+                                        }
+
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => $firstStep->getErrors()));
                                         yii::app()->end();
                                 }
                         } else {
-                                echo CJSON::encode(array('response' => 'error', 'code' => '500', 'msg' => 'post variable missing'));
+                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Inavlid Token'));
                                 yii::app()->end();
                         }
                 } else {
-                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'msg' => 'Not Acceptable'));
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Missing Token'));
                         yii::app()->end();
                 }
         }
 
-        public function actionThirdStep() {
+        public function actionSetLocation() {
                 $this->layout = null;
                 header('Content-Type: application/json');
-                if (isset($_POST['token']) && $_POST['token'] != "") {
-                        if ($userDetails = $this->validateToken($_POST['token'])) {
-                                $thirdStep = UserDetails::model()->findByPk($userDetails->userId);
-                                $thirdStep->scenario = 'userThirdStep';
-                                if (isset($_POST['UserDetails'])) {
-                                        if ($thirdStep->save()) {
-                                                echo CJSON::encode(array('response' => 'success', 'code' => '200', 'msg' => $secondStep->getErrors()));
-                                                yii::app()->end();
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_POST['id']) && $_POST['id'] > 0) {
+                                        $secondStep = UserDetails::model()->findByPk($_POST['id']);
+                                        $secondStep->scenario = 'userSecondStep';
+                                        if (isset($_POST['UserDetails'])) {
+                                                $secondStep = $this->setSecondStep($secondStep, $_POST['UserDetails']);
+                                                if ($secondStep->save()) {
+                                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $_POST['id']));
+                                                        yii::app()->end();
+                                                } else {
+                                                        echo CJSON::encode(array('response' => 'error', 'code' => '504', 'result' => $secondStep->getErrors()));
+                                                        yii::app()->end();
+                                                }
                                         } else {
-                                                echo CJSON::encode(array('response' => 'error', 'code' => '504', 'msg' => $thirdStep->getErrors()));
+                                                echo CJSON::encode(array('response' => 'error', 'code' => '500', 'result' => 'Post Variable Missing'));
                                                 yii::app()->end();
                                         }
                                 } else {
-                                        echo CJSON::encode(array('response' => 'error', 'code' => '500', 'msg' => 'post variable missing'));
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
                                         yii::app()->end();
                                 }
                         } else {
-                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'msg' => 'Tocken Expired'));
+                                echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Invalid Token'));
                                 yii::app()->end();
                         }
                 } else {
-                        echo CJSON::encode(array('response' => 'error', 'code' => '400', 'msg' => 'Tocken Missing'));
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Missing Token'));
                         yii::app()->end();
                 }
         }
 
-        public function actionFourthStep() {
+        public function setSecondStep($model, $post) {
+                $model->attributes = $post;
+                $model->register_step = 2;
+                $model->last_login = date('Y-m-d H:i:s');
+                return $model;
+        }
+
+        public function actionSetLifestyle() {
                 $this->layout = null;
                 header('Content-Type: application/json');
-                if (isset($_POST['id']) && $_POST['id'] != "") {
-                        $fourthStep = UserDetails::model()->findByPk($_POST['id']);
-                        if (isset($_POST['UserDetails'])) {
-                                $fourthStep = $this->setFourthStep($fourthStep, $_POST['UserDetails']);
-                                if ($fourthStep->save()) {
-                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'msg' => $secondStep->getErrors()));
-                                        yii::app()->end();
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_POST['id']) && $_POST['id'] > 0) {
+                                        $thirdStep = UserDetails::model()->findByPk($userDetails->userId);
+                                        $thirdStep->scenario = 'userThirdStep';
+                                        if (isset($_POST['UserDetails'])) {
+                                                $thirdStep = $this->setThirdStep($thirdStep, $_POST['UserDetails']);
+                                                if ($thirdStep->save()) {
+                                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'result' => $secondStep->getErrors()));
+                                                        yii::app()->end();
+                                                } else {
+                                                        echo CJSON::encode(array('response' => 'error', 'code' => '504', 'result' => $thirdStep->getErrors()));
+                                                        yii::app()->end();
+                                                }
+                                        } else {
+                                                echo CJSON::encode(array('response' => 'error', 'code' => '500', 'result' => 'post variable missing'));
+                                                yii::app()->end();
+                                        }
                                 } else {
-                                        echo CJSON::encode(array('response' => 'error', 'code' => '504', 'msg' => $fourthStep->getErrors()));
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '401', 'result' => 'Tocken Expired'));
                                         yii::app()->end();
                                 }
                         } else {
-                                echo CJSON::encode(array('response' => 'error', 'code' => '500', 'msg' => 'post variable missing'));
+                                echo CJSON::encode(array('response' => 'error', 'code' => '400', 'result' => 'Tocken Missing'));
                                 yii::app()->end();
                         }
                 } else {
-                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'msg' => 'Not Acceptable'));
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
                         yii::app()->end();
                 }
+        }
+
+        public function setThirdStep($model, $post) {
+                $model->attributes = $post;
+                $model->register_step = 3;
+                $model->last_login = date('Y-m-d H:i:s');
+                return $model;
+        }
+
+        public function actionSetEducation() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_POST['id']) && $_POST['id'] > 0) {
+                                        $fourthStep = UserDetails::model()->findByPk($_POST['id']);
+                                        if (isset($_POST['UserDetails'])) {
+                                                $fourthStep = $this->setFourthStep($fourthStep, $_POST['UserDetails']);
+                                                $fourthStep = $this->setFourthStep($fourthStep, $_POST['UserDetails']);
+                                                if ($fourthStep->save()) {
+                                                        echo CJSON::encode(array('response' => 'success', 'code' => '200', 'msg' => $secondStep->getErrors()));
+                                                        yii::app()->end();
+                                                } else {
+                                                        echo CJSON::encode(array('response' => 'error', 'code' => '504', 'msg' => $fourthStep->getErrors()));
+                                                        yii::app()->end();
+                                                }
+                                        } else {
+                                                echo CJSON::encode(array('response' => 'error', 'code' => '500', 'msg' => 'post variable missing'));
+                                                yii::app()->end();
+                                        }
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'msg' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '400', 'result' => 'Tocken Missing'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
+        public function setFourthStep($model, $post) {
+                $model->attributes = $post;
+                $model->register_step = 4;
+                $model->last_login = date('Y-m-d H:i:s');
+                return $model;
         }
 
         public function actionPartnerdetails() {
@@ -712,6 +769,29 @@ ud.id = up.user_id LIMIT 7");
                 }
         }
 
+        public function actionMembershipdetails() {
+                $this->layout = null;
+                header('Content-Type: application/json');
+                if (isset($_REQUEST['token']) && $_REQUEST['token'] != "") {
+                        if ($this->validateToken($_REQUEST['token'])) {
+                                if (isset($_REQUEST['id']) && $_REQUEST['id'] > 0) {
+                                        $detail = UserPlans::model()->findByAttributes(array('user_id' => $_REQUEST['id']));
+
+                                        $this->render('membership', array('detail' => $detail));
+                                } else {
+                                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                        yii::app()->end();
+                                }
+                        } else {
+                                echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                                yii::app()->end();
+                        }
+                } else {
+                        echo CJSON::encode(array('response' => 'error', 'code' => '406', 'result' => 'Not Acceptable'));
+                        yii::app()->end();
+                }
+        }
+
         public function actionSearchById() {
                 $this->layout = null;
                 header('Content-Type: application/json');
@@ -749,7 +829,6 @@ ud.id = up.user_id LIMIT 7");
                                         } else {
                                                 $model->gender = 2;
                                         }
-
                                         if ($model->save()) {
 
                                         } else {
@@ -897,7 +976,7 @@ ud.id = up.user_id LIMIT 7");
         public function userPlan($id) {
                 $user_details = UserDetails::model()->findByPk($id);
                 $plan_details = Plans::model()->findByPk($user_details->plan_id);
-                $model = new UserPlans;
+                $model = new UserPlans();
                 $model->attributes = $plan_details->attributes;
                 $model->view_contact_left = $plan_details->view_contact;
                 $model->send_message_left = $plan_details->send_message;
@@ -1199,6 +1278,40 @@ ud.id = up.user_id LIMIT 7");
                         }
                 } else {
                         return false;
+                }
+        }
+
+        public function setFirstStep($model, $post) {
+                $model->attributes = $post;
+                $model->dob = $model->dob_year . '-' . $model->dob_month . '-' . $model->dob_day;
+                $model->register_step = 1;
+                $model->created_by = 2;
+                $model->doc = date('Y-m-d');
+                $model->last_login = date('Y-m-d H:i:s');
+                $model->status = 1;
+                return $model;
+        }
+
+        public function partnerDetails($id) {
+                $user_details = UserDetails::model()->findByPk($id);
+                if (!empty($user_details)) {
+                        $age = date('Y') - date('Y', strtotime($user_details->dob_year));
+                        $model = new PartnerDetails;
+                        $model->user_id = $user_details->id;
+                        if ($user_details->gender == 1) {
+                                $model->age_from = 18;
+                                $model->age_to = $age;
+                        } else if ($user_details->gender == 2) {
+                                $model->age_from = $age;
+                                $model->age_to = $age;
+                        }
+                        $model->religion = $user_details->religion;
+                        $model->status = 1;
+                        $model->doc = date('Y-m-d');
+                        $model->cb = $id;
+                        return $model;
+                } else {
+                        return FALSE;
                 }
         }
 
