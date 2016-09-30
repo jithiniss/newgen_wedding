@@ -41,8 +41,6 @@ class CoupleController extends Controller {
                         $bride = UserDetails::model()->find(['condition' => '( user_id = "' . $model->bride_id . '") and password = "' . $model->bride_password . '" ']);
                         $groom = UserDetails::model()->find(['condition' => '( user_id = "' . $model->groom_id . '") and password = "' . $model->groom_password . '" ']);
                         if ($bride == '' || $bride == NULL || $groom == '' || $groom == NULL) {
-                                echo 'hloo';
-                                exit;
                                 Yii::app()->user->setFlash('register_error1', "Invalid Bride Details or Groom Details. Try again later..");
                                 $this->redirect(array('register'));
                         } else {

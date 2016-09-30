@@ -7,6 +7,7 @@ $this->widget('zii.widgets.CListView', array(
     'emptyText' => '<div class="col-md-12" style="    padding: 100px;
     text-align: center;
     color: #64536f;
+    margin-left: 20px;
     border: 1px solid #ccc;">
                                    <label> No Matches Found.....</label>
                                 </div>',

@@ -31,13 +31,17 @@ class LookingMe extends CWidget {
                         $ids .= $lookingmeprofile->user_id . ',';
                 }
                 $ids = rtrim($ids, ',');
-                $condition1 = 'gender = ' . $gender
-                        . ' AND  id  IN(' . $ids . ')'
-                        . ' AND status = 1';
-                if ($this->sort != '') {
-                        $sort .= $this->sort;
+                if ($ids != '') {
+                        $condition1 = 'gender = ' . $gender
+                                . ' AND  id  IN(' . $ids . ')'
+                                . ' AND status = 1';
+                        if ($this->sort != '') {
+                                $sort .= $this->sort;
+                        } else {
+                                $sort .= 'id DESC';
+                        }
                 } else {
-                        $sort .= 'id DESC';
+                        $condition1 = 'status = 100';
                 }
                 $dataProvider1 = new CActiveDataProvider('UserDetails', array('criteria' => array(
                         'condition' => $condition1,
