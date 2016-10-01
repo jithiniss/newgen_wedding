@@ -45,7 +45,7 @@
                                                                                         $folder = Yii::app()->Upload->folderName(0, 1000, $profile_pic->id);
                                                                                         ?>
                                                                                         <img  class="center-block couple" src = "<?php echo Yii::app()->baseUrl . '/uploads/couple/' . $folder . '/' . $profile_pic->id . '/profile/' . $userPic[0] . '_31_49' . '.' . $userPic[1]; ?>">
-                                                                                        <!--<img class="center-block line" src="<?php // echo Yii::app()->request->baseUrl;                                                                                                                                                                                                                                                                                                                                                                                                                                                             ?>/uploads/couple/1000/<?= $model->id; ?>/profile/' . $userPic[0] . '_' . $width . '_' . $height . '.' . $userPic[1];">-->
+                                                                                        <!--<img class="center-block line" src="<?php // echo Yii::app()->request->baseUrl;                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ?>/uploads/couple/1000/<?= $model->id; ?>/profile/' . $userPic[0] . '_' . $width . '_' . $height . '.' . $userPic[1];">-->
                                                                                 <?php } else {
                                                                                         ?>
                                                                                         <img class="center-block line" src="<?php echo Yii::app()->request->baseUrl; ?>/images/demo-female.jpg">
@@ -56,7 +56,7 @@
                                                                         </div>
 
                                                                         <div class="couple_text">
-                                                                                <b><?php echo $profile_pic->couple_name; ?></b> added new post<?php echo $post->id; ?>
+                                                                                <b><?php echo $profile_pic->couple_name; ?></b> added new post
                                                                                 <div class="couple_text_date">
                                                                                         <?php echo date(" dS F Y, H:i", strtotime($post->doc)); ?>
                                                                                 </div>
@@ -237,12 +237,12 @@
 
 
                 $("textarea#couple_textarea").keypress(function (event) {
+
                         if (event.which == 13) {
 
                                 event.preventDefault();
                                 var post_id = $(this).attr("post_id");
                                 var comment = $(this).val();
-
                                 var couple_id = $("#comment_id").val();
                                 //      alert(comment);
                                 var couple_upload_id = post_id;
@@ -252,11 +252,9 @@
                                         type: "POST",
                                         cache: 'false',
                                         data: {couple_id: couple_id, couple_upload_id: couple_upload_id, comment_id: comment_id, comment: comment}
+                                }).done(function (data) {
+                                        $("#post_content" + post_id).html(data);
                                 });
-//                                        .done(function (data) {
-//                                        $("#post_content" + post_id).html(data);
-//                                        //  window.location.replace("<?= Yii::app()->baseUrl; ?>/index.php/couple/home/");
-//                                });
                         }
                 });
         });

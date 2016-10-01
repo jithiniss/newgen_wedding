@@ -18,7 +18,7 @@
 
                                                         <tr>
 
-                                                                <td>NEWGEN ID</td><td>:</td><td><?php echo $model->couple_name; ?></td>
+                                                                <td>Couple Name</td><td>:</td><td><?php echo $model->couple_name; ?></td>
                                                         </tr>
                                                         <?php if (!empty($bride)) { ?>
                                                                 <tr>

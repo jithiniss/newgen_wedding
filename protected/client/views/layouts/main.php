@@ -26,7 +26,7 @@
 
                 <style>
                         #mask {
-                                background-color: #e4007d;
+                                background-color: #fff;
                                 bottom: 0;
                                 height: 100%;
                                 left: 0;

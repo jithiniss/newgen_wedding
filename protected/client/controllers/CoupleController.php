@@ -60,14 +60,13 @@ class CoupleController extends Controller {
         }
 
         public function SuccessMailRegister($model) {
-                Yii::import('client.extensions.yii-mail.YiiMail');
                 $message = new YiiMailMessage;
                 $message->view = "_couple_register_user_mail";
                 $params = array('model' => $model);
                 $message->subject = 'Welcome To Newgen Wedding';
                 $message->setBody($params, 'text/html');
                 $message->addTo($model->email);
-                $message->from = 'newgenwedding.com';
+                $message->from = 'newgenwedding@intersmart.in';
                 if (Yii::app()->mail->send($message)) {
 
                 } else {
@@ -78,14 +77,13 @@ class CoupleController extends Controller {
 
         public function SuccessMailAdmin($model, $id) {
                 $email = AdminUsers::model()->findByAttributes(array('status' => 1), array('limit' => 1));
-                Yii::import('client.extensions.yii-mail.YiiMail');
                 $message = new YiiMailMessage;
                 $message->view = "_couple_register_admin_mail";
                 $params = array('model' => $model, 'id' => $id);
                 $message->subject = 'Newgen wedding';
                 $message->setBody($params, 'text/html');
                 $message->addTo($email->email);
-                $message->from = 'newgenwedding.com';
+                $message->from = 'newgenwedding@intersmart.in';
                 if (Yii::app()->mail->send($message)) {
 
                 } else {
@@ -353,8 +351,8 @@ class CoupleController extends Controller {
                                 $forgot->doc = date('Y-m-d');
                                 if ($forgot->save(FALSE)) {
                                         $this->SuccessMail($token, $user);
-                                        Yii::app()->user->setFlash('success1', ' Weâ€™ve sent you a link to change your password');
-                                        Yii::app()->user->setFlash('success2', ' Weâ€™ve sent you an email that will allow you to reset your password quickly and easily.');
+                                        Yii::app()->user->setFlash('success1', ' We have sent you a link to change your password');
+                                        Yii::app()->user->setFlash('success2', ' We have sent you an email that will allow you to reset your password quickly and easily.');
                                 } else {
                                         Yii::app()->user->setFlash('error', "Invalid Email Id. Try again later..");
                                 }
@@ -388,7 +386,6 @@ class CoupleController extends Controller {
                 $id = $arr[0];
                 $token2 = $arr[1];
                 $token_test = ForgotPassword::model()->findByAttributes(array('code' => $token2, 'user_id' => $id));
-
                 if ($token_test != '') {
                         Yii::app()->session['frgt_venderid'] = $id;
                         $token_test->delete();
@@ -406,6 +403,7 @@ class CoupleController extends Controller {
                                 $pass1 = CoupleDetails::model()->findByPk($id);
                                 $newpass = $_POST['password1'];
                                 $pass1->couple_password = $newpass;
+                                $pass1->confirm_password = $newpass;
                                 $pass1->update(array('couple_password'));
                                 if ($pass1->save()) {
                                         Yii::app()->user->setFlash('success', "Your password changed successfully. Please login");
