@@ -34,16 +34,18 @@ class CoupleDetails extends CActiveRecord {
                 // NOTE: you should only define rules for those attributes that
                 // will receive user inputs.
                 return array(
-                    array('bride_id, couple_name,bride_password, groom_id, groom_password, couple_password, confirm_password', 'required'),
+                    array('bride_id, couple_name,email,bride_password, groom_id, groom_password, couple_password, confirm_password', 'required'),
                     array('status, cb, ub', 'numerical', 'integerOnly' => true),
                     array('bride_id, bride_password, groom_id, groom_password, couple_password, confirm_password, photo', 'length', 'max' => 250),
                     array('dou', 'safe'),
                     array('bride_id', 'unique'),
                     array('groom_id', 'unique'),
+                    array('email', 'unique'),
+                    array('email', 'email'),
                     array('confirm_password', 'compare', 'compareAttribute' => 'couple_password'),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id, bride_id, bride_password, groom_id, groom_password, couple_password, confirm_password, photo, status, couple_name,cb, doc, ub, dou', 'safe', 'on' => 'search'),
+                    array('id, bride_id, bride_password, groom_id,email, groom_password, couple_password, confirm_password, photo, status, couple_name,cb, doc, ub, dou', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -64,6 +66,7 @@ class CoupleDetails extends CActiveRecord {
                 return array(
                     'id' => 'ID',
                     'couple_name' => 'Couple Name',
+                    'email' => 'Email',
                     'bride_id' => 'Bride',
                     'bride_password' => 'Bride Password',
                     'groom_id' => 'Groom',
@@ -98,6 +101,7 @@ class CoupleDetails extends CActiveRecord {
 
                 $criteria->compare('id', $this->id);
                 $criteria->compare('couple_name', $this->couple_name, true);
+                $criteria->compare('email', $this->email, true);
                 $criteria->compare('bride_id', $this->bride_id, true);
                 $criteria->compare('bride_password', $this->bride_password, true);
                 $criteria->compare('groom_id', $this->groom_id, true);

@@ -46,8 +46,8 @@ class CoupleController extends Controller {
                         } else {
                                 if ($model->validate()) {
                                         if ($model->save()) {
-//                                                $this->SuccessMail($model, $bride, $groom);
-//                                                $this->SuccessMailAdmin($model, $bride, $groom, 1);
+                                                $this->SuccessMailRegister($model);
+                                                $this->SuccessMailAdmin($model, 1);
                                                 Yii::app()->user->setFlash('success', " You are registered successfully!!! ");
                                                 $this->redirect(array('CoupleLogin'));
                                         }
@@ -59,42 +59,40 @@ class CoupleController extends Controller {
                 $this->render('register', array('model' => $model));
         }
 
-//        public function SuccessMail($model, $bride, $groom) {
-//                Yii::import('user.extensions.yii-mail.YiiMail');
-//                $message = new YiiMailMessage;
-//                $message->view = "_couple_register_user_mail";
-//                $params = array('model' => $model, 'bride' => $bride, 'groom' => $groom);
-//                $message->subject = 'Welcome To Newgen Wedding';
-//                $message->setBody($params, 'text/html');
-//                $message->addTo($bride->email, $groom->email);
-//                $message->from = 'newgenwedding.com';
-//                if (Yii::app()->mail->send($message)) {
-//
-//                } else {
-//                        echo 'message not send';
-//                        exit;
-//                }
-//        }
-//        public function SuccessMailAdmin($model, $bride, $groom, $id) {
-//                $email = AdminUsers::model()->findByAttributes(array('status' => 1), array('limit' => 1));
-//                Yii::import('user.extensions.yii-mail.YiiMail');
-//                $message = new YiiMailMessage;
-//                $message->view = "_couple_register_admin_mail";
-//                $params = array('model' => $model, 'bride' => $bride, 'groom' => $groom, 'id' => $id);
-//                $message->subject = 'Newgen wedding';
-//                $message->setBody($params, 'text/html');
-//                $message->addTo($email->email);
-//                $message->from = 'newgenwedding.com';
-//                if (Yii::app()->mail->send($message)) {
-////            echo 'message send';
-////            exit;
-//                } else {
-//                        echo 'message not send';
-//                        exit;
-//                }
-//        }
+        public function SuccessMailRegister($model) {
+                Yii::import('client.extensions.yii-mail.YiiMail');
+                $message = new YiiMailMessage;
+                $message->view = "_couple_register_user_mail";
+                $params = array('model' => $model);
+                $message->subject = 'Welcome To Newgen Wedding';
+                $message->setBody($params, 'text/html');
+                $message->addTo($model->email);
+                $message->from = 'newgenwedding.com';
+                if (Yii::app()->mail->send($message)) {
 
+                } else {
+                        echo 'message not send';
+                        exit;
+                }
+        }
 
+        public function SuccessMailAdmin($model, $id) {
+                $email = AdminUsers::model()->findByAttributes(array('status' => 1), array('limit' => 1));
+                Yii::import('client.extensions.yii-mail.YiiMail');
+                $message = new YiiMailMessage;
+                $message->view = "_couple_register_admin_mail";
+                $params = array('model' => $model, 'id' => $id);
+                $message->subject = 'Newgen wedding';
+                $message->setBody($params, 'text/html');
+                $message->addTo($email->email);
+                $message->from = 'newgenwedding.com';
+                if (Yii::app()->mail->send($message)) {
+
+                } else {
+                        echo 'message not send';
+                        exit;
+                }
+        }
 
         public function actionHome() {
                 if (isset(Yii::app()->session['couple']) && Yii::app()->session['couple'] != '') {
@@ -276,40 +274,53 @@ class CoupleController extends Controller {
         public function actionLike() {
                 $model = new CoupleUploadReport;
                 $like = CoupleUploadReport::model()->findByAttributes(array('like_id' => Yii::app()->session['couple']['id'], 'couple_upload_id' => $_POST['couple_upload_id']));
+                $dislike = CoupleUploadReport::model()->findByAttributes(array('dislike_id' => Yii::app()->session['couple']['id'], 'couple_upload_id' => $_POST['couple_upload_id']));
                 if (empty($like)) {
                         $model->couple_id = $_POST['couple_id'];
                         $model->couple_upload_id = $_POST['couple_upload_id'];
                         $model->like_id = $_POST['like_id'];
                         $model->like = 1;
                         $model->doc = date('Y-m-d H-i-s');
-                        if ($model->save()) {
-                                $this->redirect('home');
-                        }
+                        $model->save();
+                        $dislike->delete();
+                        $like_count = CoupleUploadReport::model()->findAllByAttributes(array('like' => 1, 'couple_upload_id' => $_POST['couple_upload_id']));
+                        $dislike_count = CoupleUploadReport::model()->findAllByAttributes(array('dislike' => 1, 'couple_upload_id' => $_POST['couple_upload_id']));
+                        $array = array('like_count' => count($like_count), 'dislike_count' => count($dislike_count), 'post_id' => $_POST['couple_upload_id'], 'status' => 1, 'like_tooltip' => 'You liked this', 'dislike_tooltip' => 'Disliked');
+                        $json = CJSON::encode($array);
+                        echo $json;
                 } else {
-                        $like->like = 1;
-                        if ($like->save()) {
-                                $this->redirect('home');
-                        }
+                        $like_count = CoupleUploadReport::model()->findAllByAttributes(array('like' => 1, 'couple_upload_id' => $_POST['couple_upload_id']));
+                        $dislike_count = CoupleUploadReport::model()->findAllByAttributes(array('dislike' => 1, 'couple_upload_id' => $_POST['couple_upload_id']));
+                        $array = array('like_count' => count($like_count), 'dislike_count' => count($dislike_count), 'status' => 2, 'post_id' => $_POST['couple_upload_id'], 'like_tooltip' => 'You liked this', 'dislike_tooltip' => 'Disliked');
+                        $json = CJSON::encode($array);
+                        echo $json;
+                        //  echo 2;
                 }
         }
 
         public function actionDislike() {
                 $model = new CoupleUploadReport;
                 $dislike = CoupleUploadReport::model()->findByAttributes(array('dislike_id' => Yii::app()->session['couple']['id'], 'couple_upload_id' => $_POST['couple_upload_id']));
+                $like = CoupleUploadReport::model()->findByAttributes(array('like_id' => Yii::app()->session['couple']['id'], 'couple_upload_id' => $_POST['couple_upload_id']));
                 if (empty($dislike)) {
                         $model->couple_id = $_POST['couple_id'];
                         $model->couple_upload_id = $_POST['couple_upload_id'];
                         $model->dislike_id = $_POST['dislike_id'];
                         $model->dislike = 1;
                         $model->doc = date('Y-m-d H-i-s');
-                        if ($model->save()) {
-                                $this->redirect('home');
-                        }
+                        $model->save();
+                        $like->delete();
+                        $like_count = CoupleUploadReport::model()->findAllByAttributes(array('like' => 1, 'couple_upload_id' => $_POST['couple_upload_id']));
+                        $dislike_count = CoupleUploadReport::model()->findAllByAttributes(array('dislike' => 1, 'couple_upload_id' => $_POST['couple_upload_id']));
+                        $array = array('like_count' => count($like_count), 'dislike_count' => count($dislike_count), 'status' => 1, 'post_id' => $_POST['couple_upload_id'], 'like_tooltip' => 'Like', 'dislike_tooltip' => 'You Disliked this');
+                        $json = CJSON::encode($array);
+                        echo $json;
                 } else {
-                        $dislike->dislike = 1;
-                        if ($dislike->save()) {
-                                $this->redirect('home');
-                        }
+                        $like_count = CoupleUploadReport::model()->findAllByAttributes(array('like' => 1, 'couple_upload_id' => $_POST['couple_upload_id']));
+                        $dislike_count = CoupleUploadReport::model()->findAllByAttributes(array('dislike' => 1, 'couple_upload_id' => $_POST['couple_upload_id']));
+                        $array = array('like_count' => count($like_count), 'dislike_count' => count($dislike_count), 'status' => 2, 'post_id' => $_POST['couple_upload_id'], 'like_tooltip' => 'Like', 'dislike_tooltip' => 'You Disliked this');
+                        $json = CJSON::encode($array);
+                        echo $json;
                 }
         }
 
@@ -326,6 +337,97 @@ class CoupleController extends Controller {
 
                 }
                 $this->renderPartial('_coment_content', array('comments' => $comments));
+        }
+
+        public function actionForgotPassword() {
+                if (isset($_POST['btn_submit'])) {
+                        $email = $_POST['email'];
+                        $user = CoupleDetails::model()->findByAttributes(array('email' => $email));
+                        if ($user != '') {
+
+                                $forgot = new ForgotPassword;
+                                $forgot->user_id = $user->id;
+                                $forgot->code = rand(10000, 1000000);
+                                $token = base64_encode($forgot->user_id . ':' . $forgot->code);
+                                $forgot->status = 1;
+                                $forgot->doc = date('Y-m-d');
+                                if ($forgot->save(FALSE)) {
+                                        $this->SuccessMail($token, $user);
+                                        Yii::app()->user->setFlash('success1', ' Weâ€™ve sent you a link to change your password');
+                                        Yii::app()->user->setFlash('success2', ' Weâ€™ve sent you an email that will allow you to reset your password quickly and easily.');
+                                } else {
+                                        Yii::app()->user->setFlash('error', "Invalid Email Id. Try again later..");
+                                }
+                        } else {
+                                Yii::app()->user->setFlash('error', "Invalid Email Id. Try again later..");
+                        }
+                }
+                $this->render('forgot_password');
+        }
+
+        public function SuccessMail($token, $couple) {
+                $message = new YiiMailMessage;
+                $message->view = "_forgot_password_mail_couple";  // view file name
+                $params = array('token' => $token, 'couple' => $couple); // parameters
+                $message->subject = 'Please Reset Your Password';
+                $message->setBody($params, 'text/html');
+                $message->addTo($couple->email);
+                $message->from = 'newgenwedding@intersmart.in';
+                if (Yii::app()->mail->send($message)) {
+
+                } else {
+                        echo 'message not send';
+                        exit;
+                }
+        }
+
+        public function actionChangeOldPassword($token) {
+                $var = base64_decode($token);
+                $arr = explode(':', $var);
+
+                $id = $arr[0];
+                $token2 = $arr[1];
+                $token_test = ForgotPassword::model()->findByAttributes(array('code' => $token2, 'user_id' => $id));
+
+                if ($token_test != '') {
+                        Yii::app()->session['frgt_venderid'] = $id;
+                        $token_test->delete();
+                        $this->render('changepassword');
+                } else {
+                        Yii::app()->user->setFlash('error', "Session Expired. Try again later..");
+                        $this->redirect(array('ForgotPassword'));
+                }
+        }
+
+        public function actionNewpassword() {
+                if (isset(Yii::app()->session['frgt_venderid']) && Yii::app()->session['frgt_venderid'] != '') {
+                        if (isset($_POST['btn_submit'])) {
+                                $id = Yii::app()->session['frgt_venderid'];
+                                $pass1 = CoupleDetails::model()->findByPk($id);
+                                $newpass = $_POST['password1'];
+                                $pass1->couple_password = $newpass;
+                                $pass1->update(array('couple_password'));
+                                if ($pass1->save()) {
+                                        Yii::app()->user->setFlash('success', "Your password changed successfully. Please login");
+                                        $this->redirect(array('couple/couplelogin'));
+                                } else {
+
+                                        Yii::app()->user->setFlash('error', "Inavlid user,..");
+                                }
+                                Yii::app()->session['frgt_venderid'] = '';
+                                $_SESSION['frgt_venderid'] = '';
+                        }
+                        $this->render('changepassword');
+                } else {
+                        Yii::app()->user->setFlash('error', "Session Expired. Try again later..");
+                        $this->redirect(array('ForgotPassword'));
+                }
+        }
+
+        public function siteURL() {
+                $protocol = isset($_SERVER['HTTPS']) ? 'https://' : 'http://';
+                $domainName = $_SERVER['HTTP_HOST'];
+                return $protocol . $domainName . '/beta';
         }
 
 }

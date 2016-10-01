@@ -59,6 +59,21 @@
                                                 </div>
                                                 <div class="common">
                                                         <div class="col-sm-3 col-xs-3 zeros">
+                                                                <label for="textinput" class="control-label"><?php echo $form->labelEx($model, 'email'); ?> </label>
+                                                        </div>
+                                                        <div class="col-sm-1 col-xs-1 zeros">
+                                                                <label for="textinput" class="control-label">:</label>
+                                                        </div>
+                                                        <div class="col-sm-8 col-xs-8 zeros">
+                                                                <div class="form-group">
+                                                                        <?php echo $form->textField($model, 'email', array('class' => 'ui_apps', 'placeholder' => 'Email')); ?>
+                                                                        <?php echo $form->error($model, 'email'); ?>
+                                                                </div>
+                                                        </div>
+
+                                                </div>
+                                                <div class="common">
+                                                        <div class="col-sm-3 col-xs-3 zeros">
                                                                 <label for="textinput" class="control-label"><?php echo $form->labelEx($model, 'bride_id'); ?> </label>
                                                         </div>
                                                         <div class="col-sm-1 col-xs-1 zeros">

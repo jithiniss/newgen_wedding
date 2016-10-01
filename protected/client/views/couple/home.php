@@ -45,7 +45,7 @@
                                                                                         $folder = Yii::app()->Upload->folderName(0, 1000, $profile_pic->id);
                                                                                         ?>
                                                                                         <img  class="center-block couple" src = "<?php echo Yii::app()->baseUrl . '/uploads/couple/' . $folder . '/' . $profile_pic->id . '/profile/' . $userPic[0] . '_31_49' . '.' . $userPic[1]; ?>">
-                                                                                        <!--<img class="center-block line" src="<?php // echo Yii::app()->request->baseUrl;                                                                                                                                                                                                                                                                                                                                                                           ?>/uploads/couple/1000/<?= $model->id; ?>/profile/' . $userPic[0] . '_' . $width . '_' . $height . '.' . $userPic[1];">-->
+                                                                                        <!--<img class="center-block line" src="<?php // echo Yii::app()->request->baseUrl;                                                                                                                                                                                                                                                                                                                                                                                                                                                             ?>/uploads/couple/1000/<?= $model->id; ?>/profile/' . $userPic[0] . '_' . $width . '_' . $height . '.' . $userPic[1];">-->
                                                                                 <?php } else {
                                                                                         ?>
                                                                                         <img class="center-block line" src="<?php echo Yii::app()->request->baseUrl; ?>/images/demo-female.jpg">
@@ -56,7 +56,7 @@
                                                                         </div>
 
                                                                         <div class="couple_text">
-                                                                                <b><?php echo $profile_pic->couple_name; ?></b> added new post
+                                                                                <b><?php echo $profile_pic->couple_name; ?></b> added new post<?php echo $post->id; ?>
                                                                                 <div class="couple_text_date">
                                                                                         <?php echo date(" dS F Y, H:i", strtotime($post->doc)); ?>
                                                                                 </div>
@@ -77,40 +77,45 @@
                                                                         <div class="couple_like">
                                                                                 <?php
                                                                                 $like = CoupleUploadReport::model()->findByAttributes(array('like_id' => Yii::app()->session['couple']['id'], 'couple_upload_id' => $post->id));
-                                                                                $criteria = new CDbCriteria;
-                                                                                $criteria->condition = 'like = 1';
-                                                                                $criteria->condition = 'couple_upload_id =' . $post->id . '';
-                                                                                $total = CoupleUploadReport::model()->count($criteria);
+//                                                                                $criteria = new CDbCriteria;
+//                                                                                $criteria->condition = 'like = 1 AND couple_upload_id=' . $post->id . '';
+                                                                                $pid = $post->id;
+                                                                                $like_count = CoupleUploadReport::model()->findAllByAttributes(array('like' => 1, 'couple_upload_id' => $pid));
+
+//                                                                                $criteria->condition = 'like = 1';
+//                                                                                $criteria->condition = 'couple_upload_id =' . $post->id . '';
+                                                                                $total = count($like_count);
                                                                                 if (!empty($like)) {
                                                                                         ?>
-                                                                                        <a href="#" data-toggle="tooltip"  data-placement="top" title="Like"><i class="fa fa-thumbs-o-up" style="font-size: 15px;padding: 8px;color: blue;"> <?php echo $total; ?> </i></a>
+                                                                                        <a href="javascript:void(0)"  data-toggle="tooltip" onclick="likeuploads(<?php echo $post->cb ?>,<?php echo $post->id ?>,<?php echo Yii::app()->session['couple']['id']; ?>)"  data-placement="top" title="Like"><i class="fa fa-thumbs-o-up likecount_<?php echo $post->id; ?>" style="font-size: 15px;padding: 8px;color: blue;"> <?php echo $total; ?> </i></a>
 
                                                                                 <?php } else { ?>
-                                                                                        <a href="#" data-toggle="tooltip" onclick="likeuploads(<?php echo $post->cb ?>,<?php echo $post->id ?>,<?php echo Yii::app()->session['couple']['id']; ?>)" data-placement="top" title="Like"><i class="fa fa-thumbs-o-up" style="font-size: 15px;padding: 8px;"> <?php echo $total; ?> </i></a>
+                                                                                        <a href="javascript:void(0);" data-toggle="tooltip" onclick="likeuploads(<?php echo $post->cb ?>,<?php echo $post->id ?>,<?php echo Yii::app()->session['couple']['id']; ?>)" data-placement="top" title="Like"><i class="fa fa-thumbs-o-up likecount_<?php echo $post->id; ?>" style="font-size: 15px;padding: 8px;"> <?php echo $total; ?> </i></a>
 
                                                                                 <?php } ?>
                                                                                 <?php
                                                                                 $criteria1 = new CDbCriteria;
-                                                                                $criteria1->condition = 'dislike = 1';
-                                                                                $criteria1->condition = 'couple_upload_id =' . $post->id . '';
+                                                                                $criteria1->condition = 'dislike = 1 AND couple_upload_id=' . $post->id . '';
+//                                                                                $criteria1->condition = 'couple_upload_id =' . $post->id . '';
                                                                                 $total1 = CoupleUploadReport::model()->count($criteria1);
                                                                                 $dislike = CoupleUploadReport::model()->findByAttributes(array('dislike_id' => Yii::app()->session['couple']['id'], 'couple_upload_id' => $post->id));
                                                                                 if (!empty($dislike)) {
                                                                                         ?>
-                                                                                        <a href="#" data-toggle="tooltip" data-placement="top" title="Dislike"><i class="fa fa-thumbs-o-down" style="font-size: 15px;padding: 8px;color: blue; "> <?php echo $total1; ?> </i></a>
+                                                                                        <a href="javascript:void(0);" data-toggle="tooltip" onclick="dislikeuploads(<?php echo $post->cb ?>,<?php echo $post->id ?>,<?php echo Yii::app()->session['couple']['id']; ?>)" data-placement="top" title="Dislike"><i class="fa fa-thumbs-o-down dislikecount_<?php echo $post->id; ?>" style="font-size: 15px;padding: 8px;color: blue; "> <?php echo $total1; ?> </i></a>
 
                                                                                 <?php } else { ?>
-                                                                                        <a href="#" data-toggle="tooltip" onclick="dislikeuploads(<?php echo $post->cb ?>,<?php echo $post->id ?>,<?php echo Yii::app()->session['couple']['id']; ?>)" data-placement="top" title="Dislike"><i class="fa fa-thumbs-o-down" style="font-size: 15px;padding: 8px;"> <?php echo $total1; ?> </i></a>
+                                                                                        <a href="javascript:void(0);" data-toggle="tooltip" onclick="dislikeuploads(<?php echo $post->cb ?>,<?php echo $post->id ?>,<?php echo Yii::app()->session['couple']['id']; ?>)" data-placement="top" title="Dislike"><i class="fa fa-thumbs-o-down dislikecount_<?php echo $post->id; ?>" style="font-size: 15px;padding: 8px;"> <?php echo $total1; ?> </i></a>
 
                                                                                 <?php } ?>
                                                                                 <?php
                                                                                 $criteria2 = new CDbCriteria;
-                                                                                $criteria2->condition = 'comment = 1';
-                                                                                $criteria2->condition = 'couple_upload_id =' . $post->id . '';
+                                                                                $criteria2->condition = 'comment = 1 AND comments !=" " AND couple_upload_id=' . $post->id . '';
+//                                                                                $criteria2->condition = 'couple_upload_id =' . $post->id . '';
                                                                                 $total2 = CoupleUploadReport::model()->count($criteria2);
                                                                                 ?>
 
-                                                                                <a href="#" data-toggle="tooltip"   data-placement="top" title="Comments"><i class="fa fa-comments-o" id="couple_comment" style="font-size: 15px;padding: 8px;"> <?php echo $total2; ?>  </i></a>
+                                                                                <a href="javascript:void(0);" data-toggle="tooltip"  data-placement="top" title="comments"><i class="fa fa-comments-o"  style="font-size: 15px;padding: 8px;"> <?php echo $total2; ?>  </i></a>
+                                                                                <!--<a href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/couple/Viewallcomments">View all comments</a>-->
                                                                                 <?php
                                                                                 $this->renderPartial('_addpost', array('addedpost' => $addedpost));
                                                                                 ?>
@@ -124,10 +129,12 @@
                                                                                         .post_user_image {
                                                                                                 width: 7%;
                                                                                                 float: left;
+                                                                                                padding-top: 10px;
                                                                                         }
                                                                                         .post_user_content {
                                                                                                 width: 93%;
                                                                                                 float: left;
+                                                                                                padding-top: 10px;
                                                                                         }
                                                                                         .post_user_content h5 {
                                                                                                 font-weight: bold;
@@ -140,12 +147,18 @@
                                                                                         .post_user {
                                                                                                 margin-bottom: 15px;
                                                                                         }
+                                                                                        .view_comment_list{
+                                                                                                color: #c76e6e;
+                                                                                                padding-left: 12px;
+
+                                                                                        }
                                                                                 </style>
                                                                                 <div class="user_comment">
                                                                                         <div id="post_content<?php echo $post->id ?>">
                                                                                                 <?php
+                                                                                                $comment_list = CoupleUploadReport::model()->findAllByAttributes(array('couple_upload_id' => $post->id), array('order' => 'id desc'));
                                                                                                 $comments = CoupleUploadReport::model()->findAllByAttributes(array('couple_upload_id' => $post->id), array('limit' => 3, 'order' => 'id desc'));
-                                                                                                $this->renderPartial('_coment_content', array('comments' => $comments));
+                                                                                                $this->renderPartial('_coment_content', array('comments' => $comments, 'comment_list' => $comment_list));
                                                                                                 ?>
 
                                                                                         </div>
@@ -193,6 +206,7 @@
         $(document).ready(function () {
                 $(".couple_post").hide();
                 $(".couple_comment").hide();
+                $(".view_all_comments").hide();
                 $("#couple_comment").on('click', function () {
                         $(".couple_comment").show();
                 });
@@ -238,10 +252,11 @@
                                         type: "POST",
                                         cache: 'false',
                                         data: {couple_id: couple_id, couple_upload_id: couple_upload_id, comment_id: comment_id, comment: comment}
-                                }).done(function (data) {
-                                        $("#post_content" + post_id).html(data);
-                                        //  window.location.replace("<?= Yii::app()->baseUrl; ?>/index.php/couple/home/");
                                 });
+//                                        .done(function (data) {
+//                                        $("#post_content" + post_id).html(data);
+//                                        //  window.location.replace("<?= Yii::app()->baseUrl; ?>/index.php/couple/home/");
+//                                });
                         }
                 });
         });
@@ -256,8 +271,13 @@
                         cache: 'false',
                         data: {couple_id: couple_id, couple_upload_id: couple_upload_id, like_id: like_id}
                 }).done(function (data) {
-                        window.location.replace("<?= Yii::app()->baseUrl; ?>/index.php/couple/home/");
+                        var obj = jQuery.parseJSON(data);
+                        $(".likecount_" + obj.post_id).html(obj.like_count);
+                        $(".dislikecount_" + obj.post_id).html(obj.dislike_count);
+//                        window.location.replace("<? //= Yii::app()->baseUrl; ?>/index.php/couple/home/");
                 });
+                // return false;
+
         }
         function dislikeuploads(couple_id, couple_upload_id, dislike_id) {
                 $.ajax({
@@ -266,12 +286,15 @@
                         cache: 'false',
                         data: {couple_id: couple_id, couple_upload_id: couple_upload_id, dislike_id: dislike_id}
                 }).done(function (data) {
-                        window.location.replace("<?= Yii::app()->baseUrl; ?>/index.php/couple/home/");
+                        var obj = jQuery.parseJSON(data);
+                        $(".likecount_" + obj.post_id).html(obj.like_count);
+                        $(".dislikecount_" + obj.post_id).html(obj.dislike_count);
                 });
         }
         $(document).ready(function () {
-                $("#couple_comment").on('click', function () {
-                        $("#comment_box").show();
+                $(".view_comment_list").on('click', function () {
+                        $(".view_all_comments").show();
+                        $(".view_comment_list").hide();
                 });
         });
 </script>
