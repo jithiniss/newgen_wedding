@@ -21,7 +21,7 @@
         <h3>Settings</h3>
         <ul class="list-unstyled">
                 <li>   <?php echo CHtml::link('Account Settings', array('Couple/accountsettings')); ?></li>
-                <li>   <?php echo CHtml::link('Change Password', array('Couple/changePassword')); ?></li>
+                <!--<li>   <?php // echo CHtml::link('Change Password', array('Couple/ChangePassword'));   ?></li>-->
                 <li>   <?php echo CHtml::link('Log Out', array('couple/logout')); ?></li>
         </ul>
 

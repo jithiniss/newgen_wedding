@@ -19,7 +19,7 @@
                                             'enableAjaxValidation' => false,
                                         ));
                                         ?>
-                                        <div class="strip" style="    padding-top: 22px;">
+                                        <div class="strip" style="padding-top: 22px;">
                                                 <div class="strip-padding">
                                                         <?php if (Yii::app()->user->hasFlash('success')): ?>
                                                                 <div class="alert alert-success">
@@ -27,7 +27,7 @@
                                                                 </div>
                                                         <?php endif; ?>
                                                         <?php if (Yii::app()->user->hasFlash('error')): ?>
-                                                                <div class="alert alert-success">
+                                                                <div class="alert alert-danger">
                                                                         <?php echo Yii::app()->user->getFlash('error'); ?>
                                                                 </div>
                                                         <?php endif; ?>

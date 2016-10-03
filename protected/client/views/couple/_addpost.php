@@ -37,7 +37,8 @@
                         <!-- Modal content-->
                         <div class="modal-content dialogs report">
                                 <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <button type="button" class="close" data-dismiss="modal" ><span >&times;</span></button>
+                                        <!--<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span></button>-->
                                 </div>
                                 <div class="modal-body">
                                         <!--<form action="<?= Yii::app()->baseUrl; ?>/index.php/couple/AddNewPostShere" method="post" id="misuse_report">-->
@@ -71,7 +72,6 @@
         $(document).ready(function () {
                 $(".connect-3").on('click', function () {
                         $("form#misuse_report").submit();
-//                        alert("Submit Successfully");
                 });
         });
         function share() {

@@ -19,7 +19,7 @@
                                             'enableAjaxValidation' => false,
                                         ));
                                         ?>
-                                        <div class="strip" style="    padding-top: 22px;">
+                                        <div class="strip" style="padding-top: 22px;">
                                                 <div class="strip-padding">
                                                         <?php if (Yii::app()->user->hasFlash('success')): ?>
                                                                 <div class="alert alert-success">
@@ -37,53 +37,53 @@
                                                                 </div>
                                                         <?php endif; ?>
                                                         <div class="common">
-                                                                <form  method="post"  action="<?= Yii::app()->baseUrl . '/index.php/couple/ChangePassword' ?>" id="form1" class="chng_pass_frm">
+                                                                <!--<form  method="post"  action="<?= Yii::app()->baseUrl . '/index.php/Couple/ChangePassword' ?>" id="form1" class="chng_pass_frm">-->
 
-                                                                        <div class="chnge_passwrd">
-                                                                                <div class="col-sm-3 col-xs-3 zeros">
-                                                                                        <label for="textinput" class="control-label">Current Password</label>
-                                                                                </div>
-                                                                                <div class="col-sm-1 col-xs-1 zeros">
-                                                                                        <label for="textinput" class="control-label">:</label>
-                                                                                </div>
-                                                                                <div class="col-sm-8 col-xs-8 zeros">
-                                                                                        <div class="form-group">
-                                                                                                <input  class="ui_apps" type="password" name="current_pass" required="true" id="current" placeholder="Current Password">
-                                                                                        </div>
+                                                                <div class="chnge_passwrd">
+                                                                        <div class="col-sm-3 col-xs-3 zeros">
+                                                                                <label for="textinput" class="control-label">Current Password</label>
+                                                                        </div>
+                                                                        <div class="col-sm-1 col-xs-1 zeros">
+                                                                                <label for="textinput" class="control-label">:</label>
+                                                                        </div>
+                                                                        <div class="col-sm-8 col-xs-8 zeros">
+                                                                                <div class="form-group">
+                                                                                        <input  class="ui_apps" type="password" name="current_pass" required="true" id="current" placeholder="Current Password">
                                                                                 </div>
                                                                         </div>
-                                                                        <div class="chnge_passwrd">
-                                                                                <div class="col-sm-3 col-xs-3 zeros">
-                                                                                        <label for="textinput" class="control-label">New Password</label>
-                                                                                </div>
-                                                                                <div class="col-sm-1 col-xs-1 zeros">
-                                                                                        <label for="textinput" class="control-label">:</label>
-                                                                                </div>
-                                                                                <div class="col-sm-8 col-xs-8 zeros">
-                                                                                        <div class="form-group">
-                                                                                                <input  class="ui_apps pass" type="password" name="new_password" id="password1" required="true" placeholder="New Password">
-                                                                                        </div>
+                                                                </div>
+                                                                <div class="chnge_passwrd">
+                                                                        <div class="col-sm-3 col-xs-3 zeros">
+                                                                                <label for="textinput" class="control-label">New Password</label>
+                                                                        </div>
+                                                                        <div class="col-sm-1 col-xs-1 zeros">
+                                                                                <label for="textinput" class="control-label">:</label>
+                                                                        </div>
+                                                                        <div class="col-sm-8 col-xs-8 zeros">
+                                                                                <div class="form-group">
+                                                                                        <input  class="ui_apps pass" type="password" name="new_password" id="password1" required="true" placeholder="New Password">
                                                                                 </div>
                                                                         </div>
-                                                                        <div  class="chnge_passwrd">
-                                                                                <div class="col-sm-3 col-xs-3 zeros">
-                                                                                        <label for="textinput" class="control-label">Confirm Password</label>
-                                                                                </div>
-                                                                                <div class="col-sm-1 col-xs-1 zeros">
-                                                                                        <label for="textinput" class="control-label">:</label>
-                                                                                </div>
-                                                                                <div class="col-sm-8 col-xs-8 zeros">
-                                                                                        <div class="form-group">
-                                                                                                <input  class="ui_apps pass" type="password" name="confirm_pass" id="password2" required="true" placeholder="Re-enter Password">
-                                                                                                <div id="password_error"></div>
-                                                                                        </div>
+                                                                </div>
+                                                                <div  class="chnge_passwrd">
+                                                                        <div class="col-sm-3 col-xs-3 zeros">
+                                                                                <label for="textinput" class="control-label">Confirm Password</label>
+                                                                        </div>
+                                                                        <div class="col-sm-1 col-xs-1 zeros">
+                                                                                <label for="textinput" class="control-label">:</label>
+                                                                        </div>
+                                                                        <div class="col-sm-8 col-xs-8 zeros">
+                                                                                <div class="form-group">
+                                                                                        <input  class="ui_apps pass" type="password" name="confirm_pass" id="password2" required="true" placeholder="Re-enter Password">
+                                                                                        <div id="password_error"></div>
                                                                                 </div>
                                                                         </div>
-                                                                        <div class="col-sm-4 col-xs-4 zeros">
-                                                                                <button type="submit" name="CoupleDetail" class="btn sub-btn btn-default">Submit</button>
-                                                                        </div>
+                                                                </div>
+                                                                <div class="col-sm-4 col-xs-4 zeros">
+                                                                        <button type="submit" name="CoupleDetail" class="btn sub-btn btn-default">Submit</button>
+                                                                </div>
 
-                                                                </form>
+                                                                <!--</form>-->
                                                         </div>
 
 

@@ -133,27 +133,31 @@ class CoupleController extends Controller {
                                         $addedpost->to_public = 0;
                                 }
                                 $addedpost->to_public = 1;
-                                if ($addedpost->save(FALSE)) {
-                                        if (!empty($addedpost->file)) {
+                                if (($_POST['title'] != "" || $_POST['title'] != NULL) || ($addedpost->file != "" || $addedpost->file != NULL)) {
+                                        if ($addedpost->save(FALSE)) {
+                                                if (!empty($addedpost->file)) {
 
-                                                if (!is_dir(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb)) {
-                                                        mkdir(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb);
+                                                        if (!is_dir(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb)) {
+                                                                mkdir(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb);
+                                                        }
+                                                        chmod(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb, 0777);
+                                                        if (!is_dir(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb . "/files")) {
+                                                                mkdir(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb . "/files");
+                                                        }
+                                                        chmod(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb . "/files", 0777);
+                                                        $file->saveAs(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb . "/files/" . $addedpost->id . "_" . "." . $file->extensionName);
                                                 }
-                                                chmod(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb, 0777);
-                                                if (!is_dir(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb . "/files")) {
-                                                        mkdir(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb . "/files");
-                                                }
-                                                chmod(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb . "/files", 0777);
-                                                $file->saveAs(Yii::app()->basePath . "/../uploads/couple/" . $addedpost->cb . "/files/" . $addedpost->id . "_" . "." . $file->extensionName);
+                                                Yii::app()->user->setFlash('success', " Your Posts are uploaded successfully!!! ");
+                                                $this->redirect(array('Home'));
                                         }
-                                        Yii::app()->user->setFlash('success', " Your Posts are uploaded successfully!!! ");
+                                } else {
                                         $this->redirect(array('Home'));
                                 }
                         }
 
-                        $this->render('home', array('model' => $model, 'addedpost' => $addedpost));
+                        $this->render('home', array('addedpost' => $addedpost));
                 } else {
-
+                        $this->redirect(array('logout'));
                 }
         }
 
@@ -187,32 +191,37 @@ class CoupleController extends Controller {
         }
 
         public function actionChangePassword() {
+                $id = Yii::app()->session['couple']['id'];
+                $model = $this->loadModelCouplePassword($id);
                 if (!isset(Yii::app()->session['couple']) && Yii::app()->session['couple'] == '') {
                         $this->redirect(Yii::app()->request->baseUrl . '/index.php/couple/CoupleLogin');
                 } else {
                         $model = CoupleDetails::model()->findByPk(Yii::app()->session['couple']['id']);
                         $model->setScenario('changePwd');
+//                        $this->render('change_password_settings', array('model' => $model));
                         if (isset($_POST['CoupleDetail'])) {
+                                echo 'hiii';
+                                exit;
                                 if ($model->couple_password == $_POST['current_pass']) {
                                         $model->couple_password = $_POST['new_password'];
                                         $model->confirm_password = $_POST['confirm_pass'];
                                         if ($model->save()) {
                                                 Yii::app()->user->setFlash('success', "Successfully Updated your password!!!");
-                                                $this->redirect('changePassword');
+                                                $this->redirect('ChangePassword');
                                         } else {
                                                 Yii::app()->user->setFlash('error', "Error Occured..");
-                                                $this->redirect('changePassword');
+                                                $this->redirect('ChangePassword');
                                         }
                                 } else {
-                                        Yii::app()->user->setFlash('pass_error', " Current Password Incorrect ");
-                                        $this->redirect('changePassword');
+                                        Yii::app()->user->setFlash('pass_error', " Current Password Is Invalid....");
+                                        $this->redirect('ChangePassword');
                                 }
                         } else {
                                 Yii::app()->user->setFlash('error', "Error Occured..");
-                                $this->redirect('changePassword');
+                                $this->redirect('ChangePassword');
                         }
                 }
-                $this->render('change_password', array('model' => $model));
+                $this->render('change_password_settings', array('model' => $model));
         }
 
         public function actionLogout() {
@@ -230,6 +239,13 @@ class CoupleController extends Controller {
         }
 
         public function loadModelPassword($id) {
+                $model = CoupleDetails::model()->findByPk($id);
+                if ($model === null)
+                        throw new CHttpException(404, 'The requested page does not exist.');
+                return $model;
+        }
+
+        public function loadModelCouplePassword($id) {
                 $model = CoupleDetails::model()->findByPk($id);
                 if ($model === null)
                         throw new CHttpException(404, 'The requested page does not exist.');
