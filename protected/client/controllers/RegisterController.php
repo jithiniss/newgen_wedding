@@ -21,11 +21,17 @@ class RegisterController extends Controller {
                 if (isset($_POST['UserDetails'])) {
                         $firstStep = $this->setFirstStep($firstStep, $_POST['UserDetails']);
                         if ($firstStep->validate()) {
-
-
-//  $transaction = Yii::app()->db->beginTransaction();
-//  try {
-                                $firstStep->save();
+                                var_dump($firstStep);
+                                exit;
+                                if ($firstStep->save()) {
+                                        echo 'hii';
+                                        exit;
+                                } else {
+                                        echo 'hloo';
+                                        exit;
+                                }
+                                echo 'error';
+                                exit;
                                 UserDetails::model()->userId($firstStep->id)->save();
                                 $this->partnerDetails($firstStep->id)->save(false);
                                 $this->userPlan($firstStep->id)->save(false);
@@ -284,19 +290,23 @@ class RegisterController extends Controller {
                         $model->featured = $plans->featured;
                         $model->dou = date('Y-m-d H:i:s');
                         $model->payment_status = 1;
-                        $model->view_contact_left = 0;
-                        $model->send_message_left = 0;
-                        $model->number_of_days_left = 0;
+                        $model->view_contact_left = $plans->view_contact;
+                        $model->send_message_left = $plans->send_message;
+                        $model->number_of_days_left = $plans->number_of_days;
                         $model->status = 1;
                         $model->save();
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $user->register_step = 5;
                         $user->last_login = date('Y-m-d H:i:s');
-                        $user->save();
-                        $this->PlanSuccessMail($user, $model);
+                        $user->plan_id = $plan_id;
+                        if ($user->save()) {
+                                $this->PlanSuccessMail($user, $model);
+                                Yii::app()->user->setFlash('plan_success', "Payment for  " . $plans->plan_name . "  successfully placed");
+                        } else {
+                                Yii::app()->user->setFlash('error', "Error Occured...");
+                        }
                         Yii::app()->session['user'] = $user;
                         Yii::app()->session['plan'] = $model;
-                        Yii::app()->user->setFlash('plan_success', "Payment for  " . $plans->plan_name . "  successfully placed");
                         Yii::app()->session['unloggedUserPlan'] = '';
                         unset(Yii::app()->session['unloggedUserPlan']);
                         $this->redirect(array('//Myaccount/Index'));
