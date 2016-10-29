@@ -92,7 +92,10 @@
 
                                                                 <div class="col-sm-3 col-xs-3 zeros">
                                                                         <div class="form-group">
-                                                                                <?php $months = array(01 => 'Jan', 02 => 'Feb', 03 => 'Mar', 04 => 'Apr', 05 => 'May', 06 => 'Jun', 07 => 'Jul', 08 => 'Aug', 09 => 'Sep', 10 => 'Oct', 11 => 'Nov', 12 => 'Dec'); ?>
+                                                                                <?php
+                                                                                $months = array('1' => 'Jan', '2' => 'Feb', '3' => 'Mar', '4' => 'Apr', '5' => 'May', '6' => 'Jun', '7' => 'Jul', '8' => 'Aug', '9' => 'Sep', '10' => 'Oct', '11' => 'Nov', '12' => 'Dec');
+//                                                                                var_dump($months);
+                                                                                ?>
                                                                                 <?php echo $form->dropDownList($editProfile, 'dob_month', $months, array('empty' => 'Month', 'class' => 'aps')); ?>
                                                                                 <?php echo $form->error($editProfile, 'dob_month'); ?>
 
@@ -116,7 +119,7 @@
 
                                                         <div class="common">
                                                                 <div class="col-sm-3 col-xs-3 zeros">
-                                                                        <label for="textinput" class="control-label">Martial Status <span class="required">*</span></label>
+                                                                        <label for="textinput" class="control-label">Marital Status <span class="required">*</span></label>
                                                                 </div>
                                                                 <div class="col-sm-1 col-xs-1 zeros">
                                                                         <label for="textinput" class="control-label">:</label>
@@ -528,24 +531,26 @@
                                                                                         <div class="col-sm-8 col-xs-8 zeros">
                                                                                             <div class="form-group">
                                                         <?php
-//                            $city_options = array();
-//                            if($editProfile->state != '') {
-//                                    $cities = MasterState::model()->findAllByAttributes(array('country_id' => $editProfile->state));
-//                                    if(!empty($cities)) {
-//                                            $city_options[""] = "Select";
-//                                            foreach($cities as $city) {
-//                                                    $city_options[$city->id] = $city->city;
-//                                            }
-//                                    } else {
-//                                            $city_options[""] = "Select";
-//                                            $city_options[0] = "Other";
-//                                    }
-//                            } else {
-//                                    $city_options[""] = 'Select';
-//                            }
+                                                        $city_options = array();
+                                                        if ($editProfile->state != '') {
+                                                                $cities = MasterState::model()->findAllByAttributes(array('country_id' => $editProfile->state));
+                                                                var_dump($cities);
+
+                                                                if (!empty($cities)) {
+                                                                        $city_options[""] = "Select";
+                                                                        foreach ($cities as $city) {
+                                                                                $city_options[$city->id] = $city->city;
+                                                                        }
+                                                                } else {
+                                                                        $city_options[""] = "Select";
+                                                                        $city_options[0] = "Other";
+                                                                }
+                                                        } else {
+                                                                $city_options[""] = 'Select';
+                                                        }
                                                         ?>
                                                         <?php //echo CHtml::activeDropDownList($editProfile, 'city', $city_options, array('class' => 'aps', 'options' => array('id' => array('selected' => 'selected')))); ?>
-                                                        <?php //echo $form->error($editProfile, 'city'); ?>
+                                                        <?php //echo $form->error($editProfile, 'city');  ?>
 
 
                                                                                                 <input type="checkbox" class="joint"  name="vehicle" value="Bike">Same as me
@@ -1017,7 +1022,7 @@
 
                                                         <div class="common">
                                                                 <div class="col-sm-3 col-xs-3 zeros">
-                                                                        <label for="textinput" class="control-label">City Living In <span class="required">*</span></label>
+                                                                        <label for="textinput" class="control-label">City Living In<span class="required">*</span></label>
                                                                 </div>
                                                                 <div class="col-sm-1 col-xs-1 zeros">
                                                                         <label for="textinput" class="control-label">:</label>
@@ -1028,7 +1033,7 @@
                                                                                 <?php
                                                                                 $city_options = array();
                                                                                 if ($editProfile->state != '') {
-                                                                                        $cities = MasterState::model()->findAllByAttributes(array('country_id' => $editProfile->state));
+                                                                                        $cities = MasterCity::model()->findAllByAttributes(array('state_id' => $editProfile->state));
                                                                                         if (!empty($cities)) {
                                                                                                 $city_options[""] = "Select";
                                                                                                 foreach ($cities as $city) {

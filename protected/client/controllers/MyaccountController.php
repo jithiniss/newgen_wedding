@@ -5,9 +5,14 @@ class MyaccountController extends Controller {
         public function actionIndex() {
 
                 if (isset(Yii::app()->session['user'])) {
+                        date_default_timezone_set("Asia/Kolkata");
+                        $userde = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                        $userde->dou = date('Y-m-d H:i:s');
+                        $userde->save(false);
                         $user = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
                         $matches = Yii::app()->Matches->MyMatches();
                         $twowaymatches = Yii::app()->Matches->MyTwoWayMatches($user->id);
+//                        $blocked_members = BlockedMembers::model()->findByAttributes(array('user_id' => Yii::app()->session['user']['id'], 'status' => 1));
                         $profile_visitors = ProfileVisitors::model()->findAllByAttributes(array('visited_id' => $user->user_id), array('order' => 'date DESC', 'group' => 'user_id', 'distinct' => TRUE));
                         $this->render('index', array('user' => $user, 'matches' => $matches, 'twowaymatches' => $twowaymatches, 'profile_visitors' => $profile_visitors));
                 } else {
@@ -19,7 +24,7 @@ class MyaccountController extends Controller {
                 if (isset(Yii::app()->session['user'])) {
                         $dataProvider = new CActiveDataProvider('UserDetails', array(
                             'criteria' => array(
-                                'condition' => 'user_id in (select partner_id from requests where user_id="' . Yii::app()->session['user']['id'] . '" AND status = 1)',
+                                'condition' => 'id in (select user_id from requests where partner_id="' . Yii::app()->session['user']['user_id'] . '" AND status = 1)',
                             ),
                             'pagination' => array(
                                 'pageSize' => 6,

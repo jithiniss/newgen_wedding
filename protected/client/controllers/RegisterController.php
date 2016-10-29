@@ -21,17 +21,6 @@ class RegisterController extends Controller {
                 if (isset($_POST['UserDetails'])) {
                         $firstStep = $this->setFirstStep($firstStep, $_POST['UserDetails']);
                         if ($firstStep->validate()) {
-                                var_dump($firstStep);
-                                exit;
-                                if ($firstStep->save()) {
-                                        echo 'hii';
-                                        exit;
-                                } else {
-                                        echo 'hloo';
-                                        exit;
-                                }
-                                echo 'error';
-                                exit;
                                 UserDetails::model()->userId($firstStep->id)->save();
                                 $this->partnerDetails($firstStep->id)->save(false);
                                 $this->userPlan($firstStep->id)->save(false);

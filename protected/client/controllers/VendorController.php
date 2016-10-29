@@ -119,15 +119,16 @@ class VendorController extends Controller {
                                         if (!isset($image)) {
                                                 $service->image = $photo;
                                         }
-                                        if ($service->save()) {
+                                        if ($service->save(FALSE)) {
                                                 $this->uploadFiles($service->id, $service->vendor_id, $image);
-
                                                 $this->redirect(array('home'));
                                         }
+                                } else {
+//                                        Yii::app()->user->setFlash('error_updation', "Error Occured!!!");
                                 }
                                 $this->render('services', array('model' => $model, 'service' => $service));
                         } else {
-                                $this->redirect(array('home'));
+                                //Yii::app()->user->setFlash('error_updation', "Error Occured!!!");
                         }
                 } else {
                         $this->redirect(array('logout'));

@@ -29,13 +29,8 @@ class Enquiry extends CActiveRecord {
                 // will receive user inputs.
                 return array(
                     array('name, subject, mobile, email, message, date', 'required'),
-//                    array('name', 'length', 'max' => 100),
-//                    array('mobile', 'length', 'max' => 20),
-//                    array('email', 'length', 'max' => 200),
                     array('mobile', 'numerical'),
                     array('email', 'email'),
-                    // The following rule is used by search().
-                    // @todo Please remove those attributes that should not be searched.
                     array('id, name, subject, mobile, email, message, date', 'safe', 'on' => 'search'),
                 );
         }

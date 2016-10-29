@@ -2121,12 +2121,6 @@
 
 
                                                                         <div class="col-md-6 lifestyle">
-
-
-
-
-
-
                                                                                 <div class="copyz">
                                                                                         <div class="col-sm-5 col-xs-3 zeros">
                                                                                                 <label for="textinput" class="control-labelz">Country Grew up in</label>
@@ -2198,7 +2192,6 @@
                                         $('#loading_prof').show();
                                 },
                                 success: function (data) {
-
                                         // on success do some validation or refresh the content div to display the uploaded images
                                         $("#ajax_pics").html(data);
                                 },

@@ -49,6 +49,8 @@ class ProfileController extends Controller {
                                 $editProfile->ub = $editProfile->id;
                                 $editProfile->dob = $editProfile->dob_year . '-' . $editProfile->dob_month . '-' . $editProfile->dob_day;
                                 $editProfile->land_phone = $_POST['UserDetails']['land_phone'];
+                                $editProfile->annual_income = $_POST['UserDetails']['annual_income'];
+
                                 if ($editProfile->validate()) {
                                         $editProfile->save(FALSE);
                                         Yii::app()->session['user'] = $editProfile;
@@ -415,6 +417,24 @@ class ProfileController extends Controller {
                         }
                 }
                 $this->render('user_interest', array('userInterest' => $userInterest, 'user' => $user));
+        }
+
+        public function actionUpload() {
+
+
+                $model = new UserDetails();
+                if (isset($_POST)) {
+
+                        $img = $_POST['image'];
+                        if ($img != '/img/noimage.png') {
+                                $img = str_replace('data:image/png;base64,', '', $img);
+                                $img = str_replace(' ', '+', $img);
+                                $data = base64_decode($img);
+                                $file = '/uploads/tempimages/' . $_POST['name'] . '.jpg';
+                                $model->photo = Yii::app()->request->hostInfo . '/' . Yii::app()->baseUrl . $file;
+                                file_put_contents(Yii::getPathOfAlias('webroot') . $file, $data);
+                        }
+                }
         }
 
         public function uploadFiles($id, $image) {

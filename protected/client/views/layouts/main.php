@@ -136,9 +136,11 @@
                                                                                                 <?php
                                                                                         } else {
                                                                                                 ?>
-                                                                                                <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Vendor', array('vendor/index')); ?></li>
-                                                                                                <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Login', array('site/login')); ?></li>
-                                                                                                <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-user-plus"></i>Register', array('register/FirstStep')); ?></li>
+                                                                                                <?php if (!isset(Yii::app()->session['couple']) && Yii::app()->session['couple'] == '') { ?>
+                                                                                                        <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Vendor', array('vendor/index')); ?></li>
+                                                                                                        <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-lock"></i>Login', array('site/login')); ?></li>
+                                                                                                        <li class="colors"> <?php echo CHtml::link('<i class="fa locks fa-user-plus"></i>Register', array('register/FirstStep')); ?></li>
+                                                                                                <?php } ?>
                                                                                         <?php } ?>
                                                                                 </ul>
                                                                         </div>
@@ -277,7 +279,9 @@
                                                         <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/static/page/terms">Terms and Conditions</a></li>
                                                         <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/static/page/company-profile">Company Profile</a></li>
                                                         <li><a href="<?= Yii::app()->baseUrl ?>/index.php/site/static/page/securitytips">Security Tips</a></li>
-                                                        <li><a href="#">Upgrade</a></li>
+                                                        <?php if (!isset(Yii::app()->session['user']) && Yii::app()->session['user'] == '') { ?>
+                                                                <li><?php echo CHtml::link('Upgrade', array('site/index', '#' => 'upgrade')); ?>/li>
+                                                                <?php } ?>
                                                         <li><a href="<?= Yii::app()->baseUrl ?>/index.php/featuredstory">Success Story</a></li>
                                                 </ul>
                                         </div> <!-- end of explore  -->

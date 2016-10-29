@@ -96,7 +96,7 @@
                                                         </div>
                                                         <div class="col-sm-8 col-xs-8 zeros">
                                                                 <div class="form-group">
-                                                                        <?php echo $form->textField($model, 'bride_password', array('class' => 'ui_apps', 'placeholder' => 'Bride Password')); ?>
+                                                                        <?php echo $form->passwordField($model, 'bride_password', array('class' => 'ui_apps', 'placeholder' => 'Bride Password')); ?>
                                                                         <?php echo $form->error($model, 'bride_password'); ?>
                                                                 </div>
                                                         </div>
@@ -126,7 +126,7 @@
                                                         </div>
                                                         <div class="col-sm-8 col-xs-8 zeros">
                                                                 <div class="form-group">
-                                                                        <?php echo $form->textField($model, 'groom_password', array('class' => 'ui_apps', 'placeholder' => 'Groom Password')); ?>
+                                                                        <?php echo $form->passwordField($model, 'groom_password', array('class' => 'ui_apps', 'placeholder' => 'Groom Password')); ?>
                                                                         <?php echo $form->error($model, 'groom_password'); ?>
                                                                 </div>
                                                         </div>
@@ -141,7 +141,7 @@
                                                         </div>
                                                         <div class="col-sm-8 col-xs-8 zeros">
                                                                 <div class="form-group">
-                                                                        <?php echo $form->textField($model, 'couple_password', array('class' => 'ui_apps', 'placeholder' => 'Couple Password')); ?>
+                                                                        <?php echo $form->passwordField($model, 'couple_password', array('class' => 'ui_apps', 'placeholder' => 'Couple Password')); ?>
                                                                         <?php echo $form->error($model, 'couple_password'); ?>
                                                                 </div>
                                                         </div>
@@ -156,7 +156,7 @@
                                                         </div>
                                                         <div class="col-sm-8 col-xs-8 zeros">
                                                                 <div class="form-group">
-                                                                        <?php echo $form->textField($model, 'confirm_password', array('class' => 'ui_apps', 'placeholder' => 'Confirm Password')); ?>
+                                                                        <?php echo $form->passwordField($model, 'confirm_password', array('class' => 'ui_apps', 'placeholder' => 'Confirm Password')); ?>
                                                                         <?php echo $form->error($model, 'confirm_password'); ?>
                                                                 </div>
                                                         </div>

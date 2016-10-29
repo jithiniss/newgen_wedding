@@ -124,7 +124,7 @@ class UserDetails extends CActiveRecord {
                         'tooLong' => Yii::t("translation", "password is too long."), 'on' => 'userFirstStep'),
                     // The following rule is used by search().
                     // @todo Please remove those attributes that should not be searched.
-                    array('id,phone_setings,profile_privacy,display_name, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, plan_id, cb, ub, doc, dou,email_verification,oauth_provider,oauth_uid,mobile_verify', 'safe', 'on' => 'search'),
+                    array('id,phone_setings,profile_privacy,display_name, user_id, email, password, contact_number, profile_for, first_name, last_name, gender, dob_day, dob_month, dob_year, dob, religion, caste, sub_caste, nakshatra, suddha_jadhagam, regional_site, marital_status, mothertongue, country, state, city, zip_code, home_town, house_name, height, weight, skin_tone, body_type, health_info, blood_group, disablity, smoke, drink, diet, education_level, education_field, working_with, working_as, annual_income, mobile_number, father_status, mother_status, num_of_married_brother, num_of_unmarried_brother, num_of_married_sister, num_of_unmarried_sister,land_phone, family_type, family_value, affluence_level, grow_up_in, about_me, photo, mob_num_verification, id_proof, register_step, status, last_login, created_by, profile_approval, image_approval, plan_id, cb, ub, doc, dou,email_verification,oauth_provider,oauth_uid,mobile_verify', 'safe', 'on' => 'search'),
                 );
         }
 
@@ -294,6 +294,7 @@ class UserDetails extends CActiveRecord {
                     'profile_privacy' => 'Profile_privacy',
                     'oauth_provider' => 'Oauth Provider',
                     'oauth_uid' => 'Oauth Uid',
+                    'land_phone' => 'Land Phone',
                 );
         }
 
@@ -386,6 +387,7 @@ class UserDetails extends CActiveRecord {
                 $criteria->compare('email_verification', $this->email_verification);
                 $criteria->compare('oauth_provider', $this->oauth_provider, true);
                 $criteria->compare('oauth_uid', $this->oauth_uid, true);
+                $criteria->compare('land_phone', $this->oauth_uid, true);
 
 
                 return new CActiveDataProvider($this, array

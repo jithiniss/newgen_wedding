@@ -26,14 +26,14 @@
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6 mob-file zeros">
                                                                 <div class="form-group">
-                                                                        <input type="text" class="ui_source"  required placeholder="Email address" name="email">
+                                                                        <input type="email" class="ui_source"  required placeholder="Email address" name="email">
                                                                 </div>
                                                         </div>
                                                 </div>
                                                 <div class="common">
                                                         <div class="col-sm-6 col-xs-6 mob-file zeros">
                                                                 <div class="form-group">
-                                                                        <input type="text" class="ui_source"  required placeholder="Contact Number" name="phones">
+                                                                        <input type="text" required="true" class="ui_source"  required placeholder="Contact Number" name="phones">
                                                                 </div>
                                                         </div>
                                                         <div class="col-sm-6 col-xs-6 mob-file zeros">
@@ -66,7 +66,7 @@
                                         <?php // echo $banner->small_content; ?>
                                                                                 </div>-->
                                         <div class="add-right">
-                                                <p>Lorem ipsum dolor sit amet, consectetur </p>
+                                                <p>Newgen wedding matrimony, </p>
                                                 <p>adipisicing elit, sed do </p>
                                                 <p>eiusmod tempor incidid</p>
                                         </div>

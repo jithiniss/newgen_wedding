@@ -93,6 +93,7 @@ class ChatController extends Controller {
         }
 
         public function actionChating($partnerid) {
+                date_default_timezone_set("Asia/Kolkata");
                 if ($partnerid != "") {
                         $partner = UserDetails::model()->findByAttributes(array('user_id' => $partnerid))->id;
                         $chat = ChatBox::model()->findAll(array('order' => 'date ASC', 'condition' => "(sender = " . Yii::app()->session['user']['id'] . " AND reciever = " . $partner . " AND status = 1 ) OR (sender = " . $partner . " AND reciever = " . Yii::app()->session['user']['id'] . " AND status = 1)"));
@@ -104,14 +105,15 @@ class ChatController extends Controller {
         }
 
         public function actionChatoperation() {
+                date_default_timezone_set("Asia/Kolkata");
                 $model = new ChatBox;
                 $model->sender = $_POST['sender'];
                 $model->reciever = $_POST['reciever'];
                 $model->message = $_POST['message'];
+                $model->date = date('Y-m-d H:i:s');
                 $model->status = 1;
                 if ($model->save()) {
                         $chat = ChatBox::model()->findAllByAttributes(array('id' => $model->id));
-
                         echo $this->renderPartial('_chat_detail', array('chats' => $chat, 'partner' => $model->reciever));
                 }
         }

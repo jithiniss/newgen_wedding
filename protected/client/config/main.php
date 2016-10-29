@@ -7,9 +7,11 @@
 $admin = dirname(dirname(__FILE__));
 $frontend = dirname($admin);
 Yii::setPathOfAlias('admin', $admin);
+Yii::setPathOfAlias('client', $client);
 Yii::setPathOfAlias('booster', dirname(__FILE__) . '/../extensions/yiibooster');
 Yii::setPathOfAlias('bootstrap', dirname(__FILE__) . '/../extensions/bootstrap');
 Yii::setPathOfAlias('phpthumb', dirname(__FILE__) . '/../extensions/EPhpThumb/EPhpThumb');
+//Yii::setPathOfAlias('NavaJcrop', dirname(__FILE__) . '/../extensions/NavaJcrop');
 //Yii::setPathOfAlias('infiniteScroll', dirname(__FILE__) . '/../extensions/yiiinfiniteScroll');
 return array(
     'basePath' => $frontend,
@@ -25,7 +27,9 @@ return array(
         'application.components.*',
         'admin.extensions.easyimage.EasyImage',
         'application.client.extensions.yiiinfiniteScroll.YiinfiniteScroller',
+        'application.client.extensions.NavaJcrop.ImageJcrop',
         'application.client.extensions.yii-mail.*',
+//        'client.extensions.NavaJcrop.ImageJcrop',
     ),
     'modulePath' => $admin . '/modules/',
     'modules' => array(

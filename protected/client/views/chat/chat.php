@@ -16,7 +16,14 @@
                                                                 <a href="<?= Yii::app()->baseUrl ?>/index.php/chat/chating/partnerid/<?php echo $model->user_id; ?>">
                                                                         <img  src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $model->id . '/profile/' . $model->photo; ?>">
                                                                         <h5><?php echo $model->first_name . ' ' . $model->last_name; ?></h5>
-                                                                        <p style="color: red">Active 10  min Ago (Offline)  <?php //echo $this->time_elapsed_string($chat->date);  ?></p>
+                                                                        <?php
+                                                                        $today = time() - strtotime($model->dou);
+                                                                        ?>
+                                                                        <?php if ($model->login_status == 1 && $today < 3655) { ?>
+                                                                                <p style="color:blueviolet;">Online</p>
+                                                                        <?php } else { ?>
+                                                                                <p style="color: red">Last seen : <?php echo date("dS F Y,h:i A", strtotime(date($model->last_login))); ?></p>
+                                                                        <?php } ?>
                                                                 </a>
                                                         </div>
                                                 </div>

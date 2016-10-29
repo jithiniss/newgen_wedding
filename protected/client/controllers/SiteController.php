@@ -26,7 +26,6 @@ class SiteController extends Controller {
          */
         public function actionIndex() {
                 if (isset(Yii::app()->session['user']) && Yii::app()->session['user'] != '') {
-
                         $this->redirect(array('//Myaccount/Index'));
                 } else if (isset(Yii::app()->session['vendor']) && Yii::app()->session['vendor'] != '') {
                         $this->redirect(array('//vendor/home'));
@@ -82,7 +81,8 @@ class SiteController extends Controller {
                                                         }
                                                 }
                                                 $user_login->last_login = date('Y-m-d H:i:s');
-                                                $user_login->save();
+                                                $user_login->login_status = 1;
+                                                $user_login->save(false);
                                                 Yii::app()->session['user'] = $user_login;
 
                                                 Yii::app()->session['plan'] = $plan;
@@ -199,6 +199,9 @@ class SiteController extends Controller {
         }
 
         public function actionLogout() {
+                $user_details = UserDetails::model()->findByPk(Yii::app()->session['user']['id']);
+                $user_details->login_status = 0;
+                $user_details->save(false);
                 unset(Yii::app()->session['user']);
                 $_SESSION['user'] = '';
                 include_once("facebook_config.php");
@@ -266,7 +269,7 @@ class SiteController extends Controller {
                         $model->religion = $_POST['religion'];
                         $model->mothertongue = $_POST['mothertongue'];
                         $model->doc = date('Y-m-d');
-                        if ($_POST['gender'] == 2) {
+                        if ($_POST['gender'] === 2) {
                                 $model->gender = "1";
                         } else {
                                 $model->gender = "2";

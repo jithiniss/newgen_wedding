@@ -109,19 +109,30 @@
                                                                                                                                 <li data-target="#lightbox" data-slide-to="3"></li>-->
                                                                                 </ol>
                                                                                 <div class="carousel-inner">
-                                                                                        <?php for ($i = 0; $i < sizeof($album); $i++) { ?>
-                                                                                                <div class="item <?php if ($i == 0) { ?>active<?php } ?>">
-                                                                                                        <img class='album_img' src="<?php echo Yii::app()->request->baseUrl . '/uploads/user/1000/' . $user_details->id . '/album/' . $album[$i]->photo_name; ?>" alt="First slide">
-                                                                                                </div>
-                                                                                        <?php } ?>
+                                                                                        <?php
+                                                                                        if (empty($album)) {
+
+                                                                                                echo '<div style="margin-left:178px;">No Photos Found !!!!!</div>';
+                                                                                        } else {
+
+
+                                                                                                for ($i = 0; $i < sizeof($album); $i++) {
+                                                                                                        ?>
+                                                                                                        <div class="item <?php if ($i == 0) { ?>active<?php } ?>">
+                                                                                                                <img class='album_img' src="<?php echo Yii::app()->request->baseUrl . '/uploads/user/1000/' . $user_details->id . '/album/' . $album[$i]->photo_name; ?>" alt="First slide">
+                                                                                                        </div>
+                                                                                                        <?php
+                                                                                                }
+                                                                                        }
+                                                                                        ?>
                                                                                         <!--                                        <div class="item">
-                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                            ?>/images/3.jpg" alt="Second slide">
+                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                                                                        ?>/images/3.jpg" alt="Second slide">
                                                                                                                                 </div>
                                                                                                                                 <div class="item">
-                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                            ?>/images/2.jpg" alt="Third slide">
+                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                                                                        ?>/images/2.jpg" alt="Third slide">
                                                                                                                                 </div>
                                                                                                                                 <div class="item">
-                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                            ?>/images/1.jpg" alt="Third slide">
+                                                                                                                                    <img src="<?php // echo Yii::app()->request->baseUrl;                                                                                                        ?>/images/1.jpg" alt="Third slide">
                                                                                                                                 </div>-->
                                                                                 </div><!-- /.carousel-inner -->
                                                                                 <a class="left carousel-control" href="#lightbox" role="button" data-slide="prev">
@@ -213,7 +224,7 @@
                                                                                                 <?php if ($similar_profile->gender == 1) { ?>
                                                                                                         <?php if ($similar_profile->photo_visibility == 1) { ?>
                                                                                                                 <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $similar_profile->user_id; ?>">
-                                                                                                                        <img class = "img-responsive sim" src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $similar_profile->id . '/profile/' . $similar_profile->photo; ?>"><br>
+                                                                                                                        <img class = "img-responsive sim" src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder1 . '/' . $similar_profile->id . '/profile/' . $similar_profile->photo; ?>"><br>
                                                                                                                 </a>
                                                                                                         <?php }if ($similar_profile->photo_visibility == 2) { ?>
                                                                                                                 <div class="profile mynewgenz ">
@@ -233,7 +244,7 @@
                                                                                                         ?>
                                                                                                         <?php if ($similar_profile->photo_visibility == 1) { ?>
                                                                                                                 <a style="text-decoration: none" href="<?php echo Yii::app()->request->baseUrl; ?>/index.php/Partner/Partnerdetails/userid/<?php echo $similar_profile->user_id; ?>">
-                                                                                                                        <img class = "sim" src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder . '/' . $similar_profile->id . '/profile/' . $similar_profile->photo; ?>"><br>
+                                                                                                                        <img class = "sim" src = "<?php echo Yii::app()->baseUrl . '/uploads/user/' . $folder1 . '/' . $similar_profile->id . '/profile/' . $similar_profile->photo; ?>"><br>
                                                                                                                 </a>
                                                                                                         <?php }if ($similar_profile->photo_visibility == 2) { ?>
                                                                                                                 <div class="profile mynewgenz ">
@@ -383,11 +394,11 @@
                                                         </div>
                                                         <div class="skin">
                                                                 <h4><?php
-                                                                        if ($user_details->drink == 0) {
+                                                                        if ($user_details->drink == 1) {
                                                                                 echo 'No';
-                                                                        } else if ($user_details->drink == 1) {
-                                                                                echo 'Yes';
                                                                         } else if ($user_details->drink == 2) {
+                                                                                echo 'Yes';
+                                                                        } else if ($user_details->drink == 3) {
                                                                                 echo 'Occasionally';
                                                                         }
                                                                         ?></h4>
@@ -401,11 +412,11 @@
                                                         </div>
                                                         <div class="skin">
                                                                 <h4><?php
-                                                                        if ($user_details->smoke == 0) {
+                                                                        if ($user_details->smoke == 1) {
                                                                                 echo 'No';
-                                                                        } else if ($user_details->smoke == 1) {
-                                                                                echo 'Yes';
                                                                         } else if ($user_details->smoke == 2) {
+                                                                                echo 'Yes';
+                                                                        } else if ($user_details->smoke == 3) {
                                                                                 echo 'Occasionally';
                                                                         }
                                                                         ?></h4>
@@ -445,7 +456,21 @@
                                         </div>
                                         <div class="preference">
                                                 <h6>Her Family</h6>
-                                                <h4>Her parents are retired.Ours is a middle class family with moderate values. She personally has a liberal approach to life. She has 1 brother (unmarried).</h4>
+                                                <h4>Her Family type is <?php echo MasterFamilyType::model()->findByPk($user_details->family_type)->family_type; ?>.Ours family with moderate values. Personally has a liberal approach to life.Has  <?php
+                                                        if ($user_details->num_of_unmarried_brother !== 0) {
+                                                                echo $user_details->num_of_unmarried_brother . ' brother (unmarried),';
+                                                        }
+                                                        if ($user_details->num_of_married_brother !== 0) {
+                                                                echo $user_details->num_of_married_brother . ' brother (married),';
+                                                        }
+                                                        if ($user_details->num_of_married_sister !== 0) {
+                                                                echo $user_details->num_of_married_sister . ' sister  (married),';
+                                                        }
+                                                        if ($user_details->num_of_married_sister !== 0) {
+                                                                echo $user_details->num_of_married_sister . ' sister  (unmarried)';
+                                                        }
+                                                        ?>.</h4>
+
                                         </div>
 
                                         <div class="preference">
@@ -455,7 +480,8 @@
                                                         <li><i class="fa love fa-mars-stroke-v"></i><?php echo MasterWorkingAs::model()->findByPk($user_details->working_as)->working_as; ?></li>
                                                         <li><i class="fa love fa-inr"></i><?php
                                                                 if ($user_details->annual_income != 0) {
-                                                                        echo $user_details->annual_income;
+                                                                        echo MasterAnnualIncome::model()->findByPk($user_details->annual_income)->income_from;
+//                                                                        echo $user_details->annual->annual_income;
                                                                 } else {
                                                                         echo "Doesn't wish to specify her income";
                                                                 }
@@ -663,7 +689,7 @@
 
 
 
-                                                                                                                                                                                                                <!--                                                                                <img class="her" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p1.jpg">--><br>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <!--                                                                                <img class="her" src="<?php echo Yii::app()->request->baseUrl; ?>/images/p1.jpg">--><br>
                                                                 <span class="lift-1"> Her Preferences</span>
                                                                 </th>
                                                                 <th>
@@ -805,11 +831,11 @@
                                                                         <tr>
                                                                                 <td>Smoke </td>
                                                                                 <td><?php
-                                                                                        if ($partner_details->smoke == 0) {
+                                                                                        if ($partner_details->smoke == 1) {
                                                                                                 echo 'No';
-                                                                                        } else if ($partner_details->smoke == 1) {
-                                                                                                echo 'Yes';
                                                                                         } else if ($partner_details->smoke == 2) {
+                                                                                                echo 'Yes';
+                                                                                        } else if ($partner_details->smoke == 3) {
                                                                                                 echo 'Occasionally';
                                                                                         }
                                                                                         ?></td>
@@ -830,11 +856,11 @@
                                                                         <tr>
                                                                                 <td>Drink </td>
                                                                                 <td><?php
-                                                                                        if ($partner_details->drink == 0) {
+                                                                                        if ($partner_details->drink == 1) {
                                                                                                 echo 'No';
-                                                                                        } else if ($partner_details->drink == 1) {
-                                                                                                echo 'Yes';
                                                                                         } else if ($partner_details->drink == 2) {
+                                                                                                echo 'Yes';
+                                                                                        } else if ($partner_details->drink == 3) {
                                                                                                 echo 'Occasionally';
                                                                                         }
                                                                                         ?></td>

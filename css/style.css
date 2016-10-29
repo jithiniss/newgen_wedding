@@ -1733,7 +1733,7 @@ span.us {
         padding-left: 15px;
         padding-top: 20px;
         margin-bottom: 16px;
-            padding-bottom: 10px;
+        padding-bottom: 10px;
 }
 img.sends {
         max-width: 85px;
@@ -4447,8 +4447,8 @@ i.fa.email.fa-facebook {
         outline: 0;
 }
 .modal-content {
-
         top: 200px;
+        /*padding-bottom: 200px;*/
 }
 .content {
         margin: 0 auto;
@@ -7154,6 +7154,7 @@ span.call {
                 padding-right: 23px;
                 color: #fff;
                 font-size: 19px;
+                text-decoration: none;
         }
 
         .modal ul li.link-2 a {
@@ -7164,6 +7165,7 @@ span.call {
                 padding-right: 23px;
                 color: #fff;
                 font-size: 19px;
+                text-decoration: none;
         }
         @-moz-document url-prefix() {
                 .modal ul li.link-1 a {

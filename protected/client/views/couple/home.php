@@ -18,7 +18,6 @@
                                         <?php if (Yii::app()->user->hasFlash('success')): ?>
                                                 <div class="alert alert-success">
                                                         <strong>Success!</strong> <?php echo Yii::app()->user->getFlash('success'); ?>
-
                                                 </div>
                                         <?php endif; ?>
                                         <a href="#" style="text-decoration:none;" class="connect-86" id="post_id">Add Post</a>
@@ -45,7 +44,7 @@
                                                                                         $folder = Yii::app()->Upload->folderName(0, 1000, $profile_pic->id);
                                                                                         ?>
                                                                                         <img  class="center-block couple" src = "<?php echo Yii::app()->baseUrl . '/uploads/couple/' . $folder . '/' . $profile_pic->id . '/profile/' . $userPic[0] . '_31_49' . '.' . $userPic[1]; ?>">
-                                                                                        <!--<img class="center-block line" src="<?php // echo Yii::app()->request->baseUrl;                                                                                                                                                                                                                                                                                                                                                                                                                                                                            ?>/uploads/couple/1000/<?= $model->id; ?>/profile/' . $userPic[0] . '_' . $width . '_' . $height . '.' . $userPic[1];">-->
+                                                                                        <!--<img class="center-block line" src="<?php // echo Yii::app()->request->baseUrl;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       ?>/uploads/couple/1000/<?= $model->id; ?>/profile/' . $userPic[0] . '_' . $width . '_' . $height . '.' . $userPic[1];">-->
                                                                                 <?php } else {
                                                                                         ?>
                                                                                         <img class="center-block line" src="<?php echo Yii::app()->request->baseUrl; ?>/images/demo-female.jpg">
@@ -58,7 +57,7 @@
                                                                         <div class="couple_text">
                                                                                 <b><?php echo $profile_pic->couple_name; ?></b> added new post
                                                                                 <div class="couple_text_date">
-                                                                                        <?php echo date(" dS F Y, H:i", strtotime($post->doc)); ?>
+                                                                                        <?php echo date(" dS F Y, H:i A", strtotime($post->doc)); ?>
                                                                                 </div>
                                                                         </div>
 
@@ -157,6 +156,7 @@
                                                                                         <div id="post_content<?php echo $post->id ?>">
                                                                                                 <?php
                                                                                                 $comment_list = CoupleUploadReport::model()->findAllByAttributes(array('couple_upload_id' => $post->id), array('order' => 'id desc'));
+//                                                                                                $comment_list = CoupleUploadReport::model()->find(['condition' => '(couple_upload_id="' . $post->id . '" && comment_id !="")'], ['order' => 'id desc']);
                                                                                                 $comments = CoupleUploadReport::model()->findAllByAttributes(array('couple_upload_id' => $post->id), array('limit' => 3, 'order' => 'id desc'));
                                                                                                 $this->renderPartial('_coment_content', array('comments' => $comments, 'comment_list' => $comment_list));
                                                                                                 ?>
